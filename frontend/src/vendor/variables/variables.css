@@ -1,5 +1,23 @@
 :root {
   --White: #FFF;
-  --Black-900: #1A1B22;
   --Blue-Main: #1D6BF3;
+  --Blue: #5A9BFF;
+  --Blue-BG: #F1F6FF;
+  --Red: #FF0200;
+  --Black-900: #1A1B22;
+  --Black-500: #797981;
+  --Black-300: #B5B5B7;
+  --Black-100: #DDE0E4;
+  --Grey: #F9FAFB;
+  --Green: #87CC9E;
+  --Green-light: #C2E5CE;
+  --Purple: #7F67D2;
+  --Purple-light: #CCC2ED;
+  --Orange: #FFCE92;
+  --Orange-light: #FFE1BD;
+  --Rose: #FFDDE5;
+  --Yellow: #FFF9D3;
+  --Pink: #FFBFFD;
+  --Brown: #A99175;
+  --Blue-light: #ACCCFF;
 }
