@@ -1,18 +1,20 @@
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import './Candidate.css';
+import Resume from '../../components/Header/Header';
 
 function Candidate() {
-  const { id } = useParams();
+  // const { id } = useParams();
 
   return (
     <main>
-      <h1 className="title">
+      {/* <h1 className="title">
         Candidate
       </h1>
       <p>
         {id}
-      </p>
+      </p> */}
+      <Resume />
     </main>
   );
 }

@@ -11,7 +11,7 @@
 @import url(./vendor/variables/variables.css);
 
 body {
-  font-family: 'YS Text', sans-serif;
+  font-family: 'YS Text', 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1;
   font-weight: 400;
@@ -24,12 +24,44 @@ body {
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 
+  max-width: 1280px;
   min-width: 320px;
   min-height: 100vh;
 
-  margin: 0;
-  display: flex;
-  place-items: center;
+  margin: 0 auto;
 
   background-color: var(--Blue-Main);
+
+  h1 {
+    font-family: 'YS Display', sans-serif;
+    font-weight: 500;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--White);
+    margin: 0;
+    padding: 0;
+    transition: opacity linear .4s;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
+
+.link_active {
+  color: var(--Black-900);
+}
+
+// *,
+// *::before,
+// *::after {
+//   outline: 2px solid red;
+// }
