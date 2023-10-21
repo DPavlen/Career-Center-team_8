@@ -7,7 +7,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
-    // 'plugin:react/jsx-runtime',
     'airbnb',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
@@ -20,6 +19,8 @@ module.exports = {
     ],
     'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx', 'tsx'] }],
     // 'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
 }
