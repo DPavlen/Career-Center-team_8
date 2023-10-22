@@ -1,0 +1,57 @@
+@import '../../vendor/fonts/fonts.scss';
+%flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  padding: 40px;
+  margin-bottom: 40px;
+
+  &__info {
+    @extend %flex-row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__profession {
+    font-family: $familyText;
+    font-size: 30px;
+    margin: 0;
+  }
+
+  &__candidate-info {
+    @extend %flex-row;
+    font-size: 20px;
+    font-family: $familyText;
+  }
+
+  &__city {
+    color: grey;
+    font-family: $familyText;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+
+  &__level {
+    font-family: $familyText;
+    border-radius: 3px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: var(--Purple);
+    display: inline-block;
+    margin: 0;
+  }
+
+  &__experience {
+    font-family: $familyText;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__interaction {
+    @extend %flex-row;
+    justify-content: space-between;
+  }
+
+}
