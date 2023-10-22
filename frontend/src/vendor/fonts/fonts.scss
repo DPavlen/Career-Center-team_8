@@ -1,0 +1,48 @@
+$familyDisplay: 'YS Display';
+$familyText: 'YS Text';
+$display: swap;
+$style: normal;
+
+/* YS Display */
+
+@font-face {
+  font-family: $familyDisplay;
+  font-weight: 400;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Display-Regular.woff2') format('woff2'),
+    url('./YS/YS-Display-Regular.woff') format('woff'),
+    url('./YS/YS-Display-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: $familyDisplay;
+  font-weight: 500;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Display-Medium.woff2') format('woff2'),
+    url('./YS/YS-Display-Medium.woff') format('woff'),
+    url('./YS/YS-Display-Medium.ttf') format('truetype');
+}
+
+/* YS Text */
+
+@font-face {
+  font-family: $familyText;
+  font-weight: 400;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Text-Regular.woff2') format('woff2'),
+    url('./YS/YS-Text-Regular.woff') format('woff'),
+    url('./YS/YS-Text-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: $familyText;
+  font-weight: 500;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Text-Medium.woff2') format('woff2'),
+    url('./YS/YS-Text-Medium.woff') format('woff'),
+    url('./YS/YS-Text-Medium.ttf') format('truetype');
+}
