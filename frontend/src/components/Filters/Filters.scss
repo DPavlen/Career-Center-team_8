@@ -1,0 +1,22 @@
+.filters {
+  margin-top: 10px;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__label {
+    margin-right: 30px;
+    font-size: 20px;
+    font-family: 'YS Text', 'Arial', sans-serif;
+  }
+
+  &__paragraph {
+    font-size: 25px;
+    font-family: 'YS Text', 'Arial', sans-serif;
+    text-align: start;
+  }
+}
