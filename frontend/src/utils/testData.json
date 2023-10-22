@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Иван Иванов",
+    "city": "Москва",
+    "experience": 2,
+    "profession": "Front-end разработчик",
+    "level": "Junior",
+    "contact_info": {
+      "email": "ivanov@example.com",
+      "phone": "+7 900 123 4567"
+    },
+    "age": 23,
+    "tech_stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ]
+  },
+  {
+    "name": "Петр Петров",
+    "city": "Санкт-Петербург",
+    "experience": 3,
+    "profession": "Front-end разработчик",
+    "level": "Middle",
+    "contact_info": {
+      "email": "petrov@example.com",
+      "phone": "+7 900 765 4321"
+    },
+    "age": 30,
+    "tech_stack": [
+      "React",
+      "Redux",
+      "TypeScript"
+    ]
+  },
+  {
+    "name": "Анна Сидорова",
+    "city": "Новосибирск",
+    "experience": 5,
+    "profession": "Front-end разработчик",
+    "level": "Senior",
+    "contact_info": {
+      "email": "sidorova@example.com",
+      "phone": "+7 900 123 7890"
+    },
+    "age": 29,
+    "tech_stack": [
+      "Vue.js",
+      "Node.js",
+      "Webpack"
+    ]
+  },
+  {
+    "name": "Сергей Михайлов",
+    "city": "Казань",
+    "experience": 1,
+    "profession": "Front-end разработчик",
+    "level": "Junior",
+    "contact_info": {
+      "email": "mikhailov@example.com",
+      "phone": "+7 900 456 7890"
+    },
+    "age": 22,
+    "tech_stack": [
+      "Angular",
+      "TypeScript",
+      "RxJS"
+    ]
+  },
+  {
+    "name": "Елена Волкова",
+    "city": "Екатеринбург",
+    "experience": 4,
+    "profession": "Front-end разработчик",
+    "level": "Middle",
+    "contact_info": {
+      "email": "volkova@example.com",
+      "phone": "+7 900 789 0123"
+    },
+    "age": 28,
+    "tech_stack": [
+      "SASS",
+      "Pug",
+      "Gulp"
+    ]
+  },
+  {
+    "name": "Олег Кузнецов",
+    "city": "Омск",
+    "experience": 6,
+    "profession": "Front-end разработчик",
+    "level": "Senior",
+    "contact_info": {
+      "email": "kuznetsov@example.com",
+      "phone": "+7 900 321 6549"
+    },
+    "age": 35,
+    "tech_stack": [
+      "JavaScript",
+      "React",
+      "Node.js"
+    ]
+  },
+  {
+    "name": "Наталья Романова",
+    "city": "Самара",
+    "experience": 2,
+    "profession": "Front-end разработчик",
+    "level": "Junior",
+    "contact_info": {
+      "email": "romanova@example.com",
+      "phone": "+7 900 234 5678"
+    },
+    "age": 24,
+    "tech_stack": [
+      "HTML",
+      "CSS",
+      "Bootstrap"
+    ]
+  },
+  {
+    "name": "Дмитрий Степанов",
+    "city": "Томск",
+    "experience": 5,
+    "profession": "Front-end разработчик",
+    "level": "Middle",
+    "contact_info": {
+      "email": "stepanov@example.com",
+      "phone": "+7 900 567 8901"
+    },
+    "age": 32,
+    "tech_stack": [
+      "Vue.js",
+      "Vuex",
+      "Nuxt.js"
+    ]
+  },
+  {
+    "name": "Татьяна Лебедева",
+    "city": "Уфа",
+    "experience": 3,
+    "profession": "Front-end разработчик",
+    "level": "Middle",
+    "contact_info": {
+      "email": "lebedeva@example.com",
+      "phone": "+7 900 345 6789"
+    },
+    "age": 27,
+    "tech_stack": [
+      "JavaScript",
+      "JQuery",
+      "Webpack"
+    ]
+  },
+  {
+    "name": "Алексей Федоров",
+    "city": "Пермь",
+    "experience": 7,
+    "profession": "Front-end разработчик",
+    "level": "Senior",
+    "contact_info": {
+      "email": "fedorov@example.com",
+      "phone": "+7 900 678 9012"
+    },
+    "age": 40,
+    "tech_stack": [
+      "React",
+      "Redux",
+      "Express"
+    ]
+  }
+]
