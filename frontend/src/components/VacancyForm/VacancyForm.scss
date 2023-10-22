@@ -1,0 +1,19 @@
+.vacancy-form {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 30px;
+    font-family: 'YS Text', 'Arial', sans-serif;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+
+}
