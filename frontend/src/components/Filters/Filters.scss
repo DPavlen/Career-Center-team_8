@@ -1,3 +1,5 @@
+@import '../../vendor/fonts/fonts.scss';
+
 .filters {
   margin-top: 10px;
 
@@ -11,12 +13,12 @@
   &__label {
     margin-right: 30px;
     font-size: 20px;
-    font-family: 'YS Text', 'Arial', sans-serif;
+    font-family: $familyText;
   }
 
   &__paragraph {
     font-size: 25px;
-    font-family: 'YS Text', 'Arial', sans-serif;
+    font-family: $familyText;
     text-align: start;
   }
 }

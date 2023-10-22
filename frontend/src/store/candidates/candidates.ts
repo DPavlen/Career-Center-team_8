@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit';
 
-interface Candidates {
+export interface ICandidate {
   photo: string;
   name: string;
   city: string;
@@ -15,11 +15,12 @@ interface Candidates {
   };
   age: number;
   tech_stack: string[];
+  id: number;
 }
 
 interface InitialState {
   total: number,
-  candidates: Candidates[],
+  candidates: ICandidate[],
 }
 
 const initialState: InitialState = {
