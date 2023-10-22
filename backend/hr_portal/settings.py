@@ -15,7 +15,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "candidates.app.CandidatesConfig",
+    "candidates.apps.CandidatesConfig",
     "users.apps.UsersConfig",
     "api.apps.ApiConfig"
 ]
