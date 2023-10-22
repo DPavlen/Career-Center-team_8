@@ -1,6 +1,6 @@
 import './VacanciesCards.scss';
 import { useSelector } from 'react-redux';
-import VacancyCard from '../Card/VacancyCard';
+import VacancyCard from '../VacancyCard/VacancyCard';
 import type { RootState } from '../../store/store';
 import { ICandidate } from '../../store/candidates/candidates';
 

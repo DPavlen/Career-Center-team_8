@@ -1,6 +1,5 @@
-import VacancyForm from '../../components/VacancyForm/VacancyForm';
 import './Main.css';
-
+import VacancyList from '../../components/VacancyList/VacancyList';
 function Main() {
   return (
     <main>
@@ -8,7 +7,7 @@ function Main() {
         Хакатон Карьерный трекер х Практикум октябрь’23
       </h1>
       <p>Группа №8</p>
-      <VacancyForm />
+      <VacancyList />
     </main>
   );
 }

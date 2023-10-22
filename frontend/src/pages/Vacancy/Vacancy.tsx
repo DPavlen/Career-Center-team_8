@@ -1,4 +1,5 @@
 import './Vacancy.css';
+import VacancyForm from '../../components/VacancyForm/VacancyForm';
 
 function Vacancy() {
   return (
@@ -6,6 +7,7 @@ function Vacancy() {
       <h1 className="title">
         Vacancy
       </h1>
+      <VacancyForm />
     </main>
   );
 }
