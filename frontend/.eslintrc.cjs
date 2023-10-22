@@ -22,5 +22,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'react/jsx-props-no-spreading': 'off'
   },
 }
