@@ -2,7 +2,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-%kj+6qdcr&c@gt^9j-w(%4_7e*72f6ua9sk@f1os(qyu47vy8+"
+SECRET_KEY = (
+    "django-insecure-%kj+6qdcr&c@gt^9j-w(%4_7e*72f6ua9sk@f1os(qyu47vy8+"
+)
 
 DEBUG = True
 
@@ -17,7 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "candidates.apps.CandidatesConfig",
     "users.apps.UsersConfig",
-    "api.apps.ApiConfig"
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 LANGUAGE_CODE = "en-us"
 
