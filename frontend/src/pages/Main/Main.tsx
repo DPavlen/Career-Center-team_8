@@ -1,5 +1,6 @@
 import './Main.css';
 import VacancyList from '../../components/VacancyList/VacancyList';
+
 function Main() {
   return (
     <main>
