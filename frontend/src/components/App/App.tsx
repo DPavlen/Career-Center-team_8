@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addCandidates } from '../../store/candidates/candidates';
 
 import './App.scss';
 
@@ -9,7 +12,18 @@ import Candidate from '../../pages/Candidate/Candidate';
 import Callbacks from '../../pages/Callbacks/Callbacks';
 import Header from '../Header/Header';
 
+import tesData from '../../utils/testData.json';
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addCandidates({ candidates: tesData }));
+
+    return undefined;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="app">
       <Header />
