@@ -27,7 +27,6 @@
 .card {
   padding: 20px 26px 24px 12px;
   border-top: 1px solid var(--Black-100);
-  max-width: 804px;
   display: grid;
   grid-template-columns: 20px 1fr 32px;
 
@@ -72,13 +71,7 @@
   &__experience {
     @extend %flex-row;
     align-items: center;
-    column-gap: 20px;
     margin-top: 20px;
-  }
-
-  &__card-experience {
-    @extend %font-description;
-    color: var(--Grey-stroke);
   }
 
   &__candidate-name {
@@ -104,12 +97,29 @@
     padding: 4px 8px 4px 8px;
     background-color: rgba(204, 194, 237, 0.50);
     width: fit-content;
+    margin-right: 20px;
+  }
+
+  &__card-experience {
+    @extend %font-description;
+    color: var(--Grey-stroke);
   }
 
   &__period {
     @extend %font-description;
     color: var(--Black-900);
     padding-left: 8px;
+  }
+
+  &__status {
+    @extend %font-description;
+    color: var(--Grey-stroke);
+    margin-left: 212px;
+  }
+
+  &__vacancy {
+    @extend %font-description;
+    color: var(--Black-900);
   }
 
 }
