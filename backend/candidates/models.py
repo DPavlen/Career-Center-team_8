@@ -48,6 +48,9 @@ class Course(models.Model):
         unique=True,
         max_length=255,
     )
+    spec_id = models.PositiveIntegerField(
+        "ID Специальности",
+    )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
@@ -92,7 +95,7 @@ class Level(models.Model):
         ordering = ["name"]
 
 
-class Hard(models.Model):
+class HardCands(models.Model):
     """Модель хард скилла.
 
     Описывается следующими полями:
@@ -103,12 +106,11 @@ class Hard(models.Model):
 
     name = models.CharField(
         "Название",
-        unique=True,
         max_length=255,
     )
     slug = models.SlugField(
         "Уникальный слаг",
-        unique=True,
+        unique=False,
         max_length=255,
     )
 
@@ -191,12 +193,12 @@ class EmploymentType(models.Model):
     name = models.CharField(
         "Тип занятости",
         unique=True,
-        max_length=10,
+        max_length=20,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=10,
+        max_length=20,
     )
 
     def __str__(self):
@@ -220,12 +222,12 @@ class WorkSchedule(models.Model):
     name = models.CharField(
         "График работы",
         unique=True,
-        max_length=10,
+        max_length=20,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=10,
+        max_length=20,
     )
 
     def __str__(self):
@@ -260,7 +262,16 @@ class Candidate(models.Model):
     employment_type - тип занятости
     work_schedule - график работы
     """
-
+    class Activity(models.TextChoices):
+        ACTIVE = 'AC', ('Активный')
+        ON_HOLD = 'OH', ('В ожидании')
+        NOT_ACTIVE = 'NA', ('Не доступен')
+        
+    
+    last_name = models.CharField(
+        "Фамилия",
+        max_length=25,
+    )
     first_name = models.CharField(
         "Имя",
         max_length=20,
@@ -269,11 +280,12 @@ class Candidate(models.Model):
         "Отчество",
         max_length=25,
     )
-    last_name = models.CharField(
-        "Фамилия",
-        max_length=25,
+    image = models.ImageField(
+        "Фото", 
+        upload_to="candidates/images/", 
+        null=True, 
+        default=None,
     )
-    image = models.ImageField("Фото", null=True, default=None)
     sex = models.CharField(
         "Пол",
         max_length=10,
@@ -284,7 +296,7 @@ class Candidate(models.Model):
     )
     contacts_phone = models.CharField(
         "Телефон",
-        max_length=15,
+        max_length=20,
     )
     contacts_email = models.EmailField(
         "Почта",
@@ -292,8 +304,19 @@ class Candidate(models.Model):
         unique=True,
     )
     contacts_other = models.CharField(
-        "Друой контакт",
+        "Другой контакт",
         max_length=150,
+        blank=True,
+    )
+    activity = models.CharField(
+        max_length=2,
+        choices=Activity.choices,
+        default=Activity.NOT_ACTIVE,
+    )
+    location =  models.CharField(
+        "Местонахождение",
+        max_length=150,
+        blank=True,
     )
     specialization = models.ManyToManyField(
         Specialization,
@@ -311,7 +334,7 @@ class Candidate(models.Model):
         verbose_name="Уровень",
     )
     hards = models.ManyToManyField(
-        Hard,
+        HardCands,
         related_name="candidates",
         verbose_name="Хард скиллы",
     )
@@ -342,7 +365,7 @@ class Candidate(models.Model):
         ordering = ["last_name"]
 
     def __str__(self):
-        return self.name
+        return self.last_name
 
 
 class Contact(models.Model):

@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "candidates.apps.CandidatesConfig",
+    "vacancies.apps.VacanciesConfig",
     "api.apps.ApiConfig",
     "core",
 ]

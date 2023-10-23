@@ -5,7 +5,7 @@ from .models import (
     Specialization,
     Course,
     Level,
-    Hard,
+    HardCands,
     Soft,
     Experience,
     EmploymentType,
@@ -26,7 +26,7 @@ class SpecializationAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ("pk", "name", "slug")
+    list_display = ("pk", "spec_id", "name", "slug")
     list_display_links = ("name",)
     search_fields = ("name",)
     empty_value_display = "-пусто-"
@@ -40,8 +40,8 @@ class LevelAdmin(admin.ModelAdmin):
     empty_value_display = "-пусто-"
 
 
-@admin.register(Hard)
-class HardAdmin(admin.ModelAdmin):
+@admin.register(HardCands)
+class HardCandsAdmin(admin.ModelAdmin):
     list_display = ("pk", "name", "slug")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -103,7 +103,6 @@ class CandidateAdmin(admin.ModelAdmin):
 
     def tracks(self, obj):
         return obj.favorited
-
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
