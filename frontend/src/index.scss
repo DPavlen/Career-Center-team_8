@@ -24,17 +24,19 @@ body {
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 
-  max-width: 1280px;
+  // max-width: 1280px;
   min-width: 320px;
   min-height: 100vh;
 
   margin: 0 auto;
 
-  // background-color: var(--Blue-Main);
-
-   h1 {
+  h1 {
     font-family: 'YS Display', sans-serif;
     font-weight: 500;
+  }
+
+  main {
+    grid-column: 2 / 3;
   }
 
   a {

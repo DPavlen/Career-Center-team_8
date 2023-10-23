@@ -1,0 +1,30 @@
+.navigation {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__link {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    color: var(--Black-300);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &_active {
+      color: var(--White);
+    }
+  }
+
+  &__icon {
+    width: 24px;
+  }
+}
