@@ -12,6 +12,8 @@ interface VacancyCardProps {
   card : ICandidate;
 }
 
+// стили переименовать, статус ???
+
 function VacancyCard({ card } : VacancyCardProps) {
   const [checked, setChecked] = useState(false);
 
@@ -42,6 +44,13 @@ function VacancyCard({ card } : VacancyCardProps) {
                 {card.experience}
                 {' '}
                 месяцев
+              </span>
+            </p>
+            <p className="card__status">
+              Статус:
+              {' '}
+              <span className="card__vacancy">
+                вакансия отправлена
               </span>
             </p>
           </div>

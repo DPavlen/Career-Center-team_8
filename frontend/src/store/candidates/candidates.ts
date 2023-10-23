@@ -18,7 +18,7 @@ export interface ICandidate {
   id: number;
 }
 
-interface InitialState {
+export interface InitialState {
   total: number,
   candidates: ICandidate[],
 }
