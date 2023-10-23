@@ -10,7 +10,7 @@ import Vacancy from '../../pages/Vacancy/Vacancy';
 import Candidates from '../../pages/Candidates/Candidates';
 import Candidate from '../../pages/Candidate/Candidate';
 import Callbacks from '../../pages/Callbacks/Callbacks';
-import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
 
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Sidebar />
       <Routes>
         <Route
           path="/"
