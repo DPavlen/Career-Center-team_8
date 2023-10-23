@@ -1,57 +1,115 @@
 @import '../../vendor/fonts/fonts.scss';
+
 %flex-row {
   display: flex;
   flex-direction: row;
 }
 
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+%font-text {
+  font-family: $familyText;
+  color: var(--Black-900);
+  margin: 0;
+}
+
+%font-description {
+  font-family: $familyText;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.23;
+  margin: 0;
+}
+
 .card {
-  padding: 40px;
-  margin-bottom: 40px;
+  padding: 20px 26px 24px 12px;
+  border-top: 1px solid var(--Black-100);
+  max-width: 804px;
+  display: grid;
+  grid-template-columns: 20px 1fr 32px;
+
+  &:hover &__checkbox, &_checked &__checkbox {
+    display: inherit !important;
+  }
+
+  &_checked {
+    background-color: var(--Blue-BG);
+  }
+
+  &__checkbox {
+    display: none !important;
+  }
 
   &__info {
     @extend %flex-row;
-    align-items: center;
-    justify-content: space-between;
+  }
+
+  &__avatar {
+    margin-left: 16px;
+    margin-right: 12px;
   }
 
   &__profession {
-    font-family: $familyText;
-    font-size: 30px;
-    margin: 0;
+    @extend %font-text;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+    padding-top: 4px;
+  }
+
+  &__description {
+    @extend %flex-column;
   }
 
   &__candidate-info {
     @extend %flex-row;
-    font-size: 20px;
-    font-family: $familyText;
-  }
-
-  &__city {
-    color: grey;
-    font-family: $familyText;
-    font-size: 20px;
-    padding-left: 20px;
-  }
-
-  &__level {
-    font-family: $familyText;
-    border-radius: 3px;
-    font-size: 20px;
-    padding: 10px;
-    background-color: var(--Purple);
-    display: inline-block;
-    margin: 0;
+    column-gap: 12px;
   }
 
   &__experience {
-    font-family: $familyText;
-    font-size: 20px;
-    padding-bottom: 20px;
+    @extend %flex-row;
+    align-items: center;
+    column-gap: 20px;
+    margin-top: 20px;
   }
 
-  &__interaction {
-    @extend %flex-row;
-    justify-content: space-between;
+  &__card-experience {
+    @extend %font-description;
+    color: var(--Grey-stroke);
+  }
+
+  &__candidate-name {
+    @extend %font-text;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+  }
+
+  &__city {
+    font-family: $familyText;
+    color: var(--Black-500);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    margin: 0;
+  }
+
+  &__level {
+    @extend %font-description;
+    color: var(--Purple);
+    border-radius: 6px;
+    padding: 4px 8px 4px 8px;
+    background-color: rgba(204, 194, 237, 0.50);
+    width: fit-content;
+  }
+
+  &__period {
+    @extend %font-description;
+    color: var(--Black-900);
+    padding-left: 8px;
   }
 
 }

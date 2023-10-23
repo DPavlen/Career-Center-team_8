@@ -1,57 +1,70 @@
-import Card from '@mui/material/Card';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
-import download from '../../assets/icons/download.svg';
-import eye from '../../assets/icons/eye.svg';
-import like from '../../assets/icons/Like.svg';
 import './VacancyCard.scss';
+import { Checkbox } from '@mui/material';
+import { useState } from 'react';
 import { ICandidate } from '../../store/candidates/candidates';
+import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
+import checkbox from '../../assets/icons/checkbox.svg';
+import like from '../../assets/icons/Like.svg';
+import likeFilled from '../../assets/icons/Like filled.svg';
 
 interface VacancyCardProps {
   card : ICandidate;
 }
 
 function VacancyCard({ card } : VacancyCardProps) {
+  const [checked, setChecked] = useState(false);
+
   return (
-    <Card className="card" sx={{ maxWidth: 1200 }}>
+    <article className={`card ${checked ? 'card_checked' : ''}`}>
+      <Checkbox
+        disableRipple
+        sx={{
+          padding: 0, paddingTop: '17px', height: 'fit-content', width: 20,
+        }}
+        icon={<img alt="checkbox-field" src={checkbox} />}
+        checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
+      />
       <div className="card__info">
-        <div>
-          <h2 className="card__profession">{card.profession}</h2>
+        <Avatar className="card__avatar" alt="Аватар пользователя" src={card.photo} sx={{ width: 54, height: 54 }} aria-label="recipe" />
+        <div className="card__description">
           <div className="card__candidate-info">
             <p className="card__candidate-name">{card.name}</p>
             <p className="card__city">{card.city}</p>
           </div>
-        </div>
-        <Avatar alt="Аватар пользователя" src={card.photo} sx={{ width: 180, height: 180 }} aria-label="recipe" />
-      </div>
-      <p className="card__level">{card.level}</p>
-      <p className="card__experience">
-        Опыт работы:
-        {' '}
-        {card.experience}
-        {' '}
-        года/лет
-      </p>
-      <div className="card__interaction">
-        <Stack spacing={30} direction="row">
-          <Button size="large" variant="contained">Отправить приглашение</Button>
-          <Button size="large" variant="outlined">Показать контакты</Button>
-        </Stack>
-        <div>
-          <IconButton color="primary">
-            <img alt="Скачать резюме" src={download} />
-          </IconButton>
-          <IconButton color="primary">
-            <img alt="Посмотреть резюме" src={eye} />
-          </IconButton>
-          <IconButton color="primary">
-            <img alt="Добавить в избранное" src={like} />
-          </IconButton>
+          <h2 className="card__profession">{card.profession}</h2>
+          <div className="card__experience">
+            <p className="card__level">{card.level}</p>
+            <p className="card__card-experience">
+              Опыт работы:
+              {' '}
+              <span className="card__period">
+                {card.experience}
+                {' '}
+                месяцев
+              </span>
+            </p>
+          </div>
         </div>
       </div>
-    </Card>
+      <Checkbox
+        className="card__checkbox"
+        disableRipple
+        sx={{
+          padding: '6px',
+          backgroundColor: 'var(--Blue-BG)',
+          height: 'fit-content',
+          width: '32px',
+          borderRadius: '6px',
+        }}
+        icon={<img alt="checkbox-field" src={like} />}
+        checkedIcon={<img alt="checkbox-field" src={likeFilled} />}
+        checked={checked}
+        onChange={(e) => {
+          setChecked(e.target.checked);
+        }}
+      />
+    </article>
   );
 }
 
