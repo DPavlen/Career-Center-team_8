@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "candidates.apps.CandidatesConfig",
+    "vacancies.apps.VacanciesConfig",
     "users.apps.UsersConfig",
     "api.apps.ApiConfig",
 ]
