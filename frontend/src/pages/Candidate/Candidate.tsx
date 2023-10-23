@@ -1,7 +1,7 @@
 // import { useParams } from 'react-router-dom';
 
 import './Candidate.css';
-import Resume from '../../components/Header/Header';
+import Resume from '../../components/Navigation/Navigation';
 
 function Candidate() {
   // const { id } = useParams();
