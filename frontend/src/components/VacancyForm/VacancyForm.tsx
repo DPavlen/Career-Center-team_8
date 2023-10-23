@@ -8,8 +8,8 @@ function VacancyForm() {
       <h1 className="vacancy-form__title">Поиск кандидатов</h1>
       <Filters />
       <div className="vacancy-form__buttons">
-        <Button variant="contained" color="success">Подобрать кандидатов</Button>
-        <Button variant="contained" color="success">Отклики</Button>
+        <Button href="/candidates" variant="contained" color="success">Подобрать кандидатов</Button>
+        <Button href="/callbacks" variant="contained" color="success">Отклики</Button>
       </div>
     </div>
   );

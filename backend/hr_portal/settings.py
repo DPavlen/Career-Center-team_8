@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "candidates.apps.CandidatesConfig",
     "vacancies.apps.VacanciesConfig",
     "api.apps.ApiConfig",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,37 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "users.User"
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+}
 
-LANGUAGE_CODE = "en-us"
+DJOSER = {
+    "SERIALIZERS": {
+        "user_create": "users.serializers.MyUserCreateSerializer",
+        "user": "users.serializers.MyUserCreateSerializer",
+        "current_user": "users.serializers.MyUserCreateSerializer",
+        "token": "djoser.serializers.TokenSerializer",
+        "set_password": "djoser.serializers.SetPasswordSerializer",
+    },
+    "PERMISSIONS": {
+        "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],
+        "user_list": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
+    },
+    # Параметр отображения в сериализаторе и Djoser(Не скрытый)
+    "HIDE_USERS": False,
+}
+
+
+# Переопределенный Юзер
+AUTH_USER_MODEL = "users.MyUser"
+
+LANGUAGE_CODE = "en-ru"
 
 TIME_ZONE = "UTC"
 

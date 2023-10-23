@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "photo": "https://i.pravatar.cc/150?img=1",
     "name": "Иван Иванов",
     "city": "Москва",
@@ -18,6 +19,7 @@
     ]
   },
   {
+    "id": 2,
     "photo": "https://i.pravatar.cc/150?img=2",
     "name": "Петр Петров",
     "city": "Санкт-Петербург",
@@ -36,6 +38,7 @@
     ]
   },
   {
+    "id": 3,
     "photo": "https://i.pravatar.cc/150?img=3",
     "name": "Анна Сидорова",
     "city": "Новосибирск",
@@ -54,6 +57,7 @@
     ]
   },
   {
+    "id": 4,
     "photo": "https://i.pravatar.cc/150?img=4",
     "name": "Сергей Михайлов",
     "city": "Казань",
@@ -72,6 +76,7 @@
     ]
   },
   {
+    "id": 5,
     "photo": "https://i.pravatar.cc/150?img=5",
     "name": "Елена Волкова",
     "city": "Екатеринбург",
@@ -90,6 +95,7 @@
     ]
   },
   {
+    "id": 6,
     "photo": "https://i.pravatar.cc/150?img=6",
     "name": "Олег Кузнецов",
     "city": "Омск",
@@ -108,6 +114,7 @@
     ]
   },
   {
+    "id": 7,
     "photo": "https://i.pravatar.cc/150?img=7",
     "name": "Наталья Романова",
     "city": "Самара",
@@ -126,6 +133,7 @@
     ]
   },
   {
+    "id": 8,
     "photo": "https://i.pravatar.cc/150?img=8",
     "name": "Дмитрий Степанов",
     "city": "Томск",
@@ -144,6 +152,7 @@
     ]
   },
   {
+    "id": 9,
     "photo": "https://i.pravatar.cc/150?img=9",
     "name": "Татьяна Лебедева",
     "city": "Уфа",
@@ -162,6 +171,7 @@
     ]
   },
   {
+    "id": 10,
     "photo": "https://i.pravatar.cc/150?img=10",
     "name": "Алексей Федоров",
     "city": "Пермь",

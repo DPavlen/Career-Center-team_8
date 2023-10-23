@@ -1,11 +1,12 @@
+import Filters from '../../components/Filters/Filters';
+import VacanciesCards from '../../components/VacanciesCards/VacanciesCards';
 import './Candidates.css';
 
 function Candidates() {
   return (
     <main>
-      <h1 className="title">
-        Candidates
-      </h1>
+      <Filters />
+      <VacanciesCards />
     </main>
   );
 }
