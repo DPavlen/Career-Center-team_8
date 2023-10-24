@@ -3,30 +3,31 @@ import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
 import { ICandidate } from '../../store/candidates/candidates';
-import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
-import checkbox from '../../assets/icons/checkbox.svg';
+// import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
+// import checkbox from '../../assets/icons/checkbox.svg';
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
 
 interface VacancyCardProps {
   card : ICandidate;
+  liked : boolean;
 }
 
 // стили переименовать, статус ???
 
-function VacancyCard({ card } : VacancyCardProps) {
-  const [checked, setChecked] = useState(false);
+function VacancyCard({ card, liked = false } : VacancyCardProps) {
+  const [checked, setChecked] = useState(liked);
 
   return (
     <article className={`card ${checked ? 'card_checked' : ''}`}>
-      <Checkbox
+      {/* <Checkbox
         disableRipple
         sx={{
           padding: 0, paddingTop: '17px', height: 'fit-content', width: 20,
         }}
         icon={<img alt="checkbox-field" src={checkbox} />}
         checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
-      />
+      /> */}
       <div className="card__info">
         <Avatar className="card__avatar" alt="Аватар пользователя" src={card.photo} sx={{ width: 53, height: 53, marginRight: '11px' }} aria-label="recipe" />
         <div className="card__description">

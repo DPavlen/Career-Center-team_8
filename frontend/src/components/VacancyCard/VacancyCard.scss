@@ -24,7 +24,7 @@
   padding: 20px 26px 22px 12px;
   border-top: 1px solid var(--Black-100);
   display: grid;
-  grid-template-columns: 20px 1fr 178px;
+  grid-template-columns: /* 20px  */1fr 178px;
 
   &:hover &__checkbox, &_checked &__checkbox {
     opacity: 1;
