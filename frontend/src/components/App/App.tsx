@@ -13,12 +13,21 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
+import mainApi from '../../utils/MainApi';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(addCandidates({ candidates: tesData }));
+
+    mainApi.signIn('admin23', 'sansan1234')
+      .then((token) => {
+        console.log(token);
+        mainApi.getUser(token.auth_token)
+          .then((user) => console.log(user));
+      })
+      .catch((err) => console.log(err));
 
     return undefined;
   // eslint-disable-next-line react-hooks/exhaustive-deps

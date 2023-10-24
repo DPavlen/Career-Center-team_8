@@ -40,7 +40,7 @@ class MainApi {
 
   public async getUser(token: string): Promise<never | Data> {
     const res = await fetch(
-      `${this.baseUrl}/users/me`,
+      `${this.baseUrl}/users/me/`,
       {
         method: 'GET',
         credentials: 'include' as RequestCredentials,
