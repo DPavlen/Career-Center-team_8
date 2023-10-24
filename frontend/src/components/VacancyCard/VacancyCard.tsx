@@ -12,8 +12,6 @@ interface VacancyCardProps {
   card : ICandidate;
 }
 
-// стили переименовать, статус ???
-
 function VacancyCard({ card } : VacancyCardProps) {
   const [checked, setChecked] = useState(false);
 
