@@ -1,13 +1,19 @@
 import './Filters.scss';
-import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import settings from '../../assets/icons/settings.svg';
-import Filter from '../Filter/Filter';
 import professions from '../../utils/testProfessionArea.json';
+import skillsData from '../../utils/testSkills.json';
 import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
+import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 
 function Filters() {
   const [profession, setProfession] = useState<string | null>(null);
+  const [course, setCourse] = useState<number[]>([]);
+  const [skills, setSkills] = useState<number[]>([]);
+  const [experience, setExpirience] = useState<number[]>([]);
+  const [level, setLevel] = useState<number[]>([]);
+  const [busyType, setBusyType] = useState<number[]>([]);
+  const [workingType, setWorkingType] = useState<number[]>([]);
 
   return (
     <form className="filters">
@@ -22,41 +28,12 @@ function Filters() {
         withBorder={false}
         defaultExpanded
       />
-      <Filter text="Курс Практикума">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="Навыки">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="Опыт работы">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="Уровень">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="Геопозиция">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="Тип занятости">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
-      <Filter text="График работы">
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Typography>
-      </Filter>
+      <CheckboxGroupFilter title="Курс Практикума" value={course} data={professions} onChange={setCourse} />
+      <CheckboxGroupFilter title="Навыки" withSearch value={skills} data={skillsData} onChange={setSkills} />
+      <CheckboxGroupFilter title="Опыт работы" value={experience} data={professions} onChange={setExpirience} />
+      <CheckboxGroupFilter title="Уровень" value={level} data={professions} onChange={setLevel} />
+      <CheckboxGroupFilter title="Тип занятости" value={busyType} data={professions} onChange={setBusyType} />
+      <CheckboxGroupFilter title="График работы" value={workingType} data={professions} onChange={setWorkingType} />
       <div className="filters__separator" />
     </form>
   );
