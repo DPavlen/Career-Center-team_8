@@ -1,0 +1,17 @@
+.checkbox-search {
+  width: 340px;
+  margin: 0 24px 12px 24px;
+  border-radius: 6px;
+  border: 1px solid var(--Black-100);
+  padding: 12px;
+  font-size: 14px;
+
+  &::placeholder {
+    color: var(--Black-100);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+

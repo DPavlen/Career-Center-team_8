@@ -10,6 +10,7 @@ function Filters() {
   const [profession, setProfession] = useState<string | null>(null);
   const [course, setCourse] = useState<number[]>([]);
   const [skills, setSkills] = useState<number[]>([]);
+  const [location, setLocation] = useState<number[]>([]);
   const [experience, setExpirience] = useState<number[]>([]);
   const [level, setLevel] = useState<number[]>([]);
   const [busyType, setBusyType] = useState<number[]>([]);
@@ -32,6 +33,7 @@ function Filters() {
       <CheckboxGroupFilter title="Навыки" withSearch value={skills} data={skillsData} onChange={setSkills} />
       <CheckboxGroupFilter title="Опыт работы" value={experience} data={professions} onChange={setExpirience} />
       <CheckboxGroupFilter title="Уровень" value={level} data={professions} onChange={setLevel} />
+      <CheckboxGroupFilter title="Геопозиция" withSearch value={location} data={skillsData} onChange={setLocation} />
       <CheckboxGroupFilter title="Тип занятости" value={busyType} data={professions} onChange={setBusyType} />
       <CheckboxGroupFilter title="График работы" value={workingType} data={professions} onChange={setWorkingType} />
       <div className="filters__separator" />
