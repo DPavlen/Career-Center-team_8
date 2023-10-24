@@ -13,7 +13,6 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
-import Filters from '../Filters/Filters';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,7 +49,6 @@ function App() {
           element={(<Favorites />)}
         />
       </Routes>
-      <Filters />
     </div>
   );
 }
