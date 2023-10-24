@@ -40,7 +40,6 @@ function AppliedFilters() {
               onDelete={handleDelete}
               sx={{
                 height: '28px',
-                borderRadius: '8px',
                 lineHeight: 1.2,
                 backgroundColor: '#DDE0E4',
                 '&:hover': {

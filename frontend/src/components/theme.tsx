@@ -19,6 +19,15 @@ const theme = createTheme({
   typography: {
     fontFamily: "'YS Text', 'Roboto', sans-serif",
   },
+  components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+        },
+      },
+    },
+  },
 });
 
 export default theme;
