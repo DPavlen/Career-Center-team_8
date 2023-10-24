@@ -28,7 +28,7 @@ function VacancyCard({ card } : VacancyCardProps) {
         checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
       />
       <div className="card__info">
-        <Avatar className="card__avatar" alt="Аватар пользователя" src={card.photo} sx={{ width: 54, height: 54 }} aria-label="recipe" />
+        <Avatar className="card__avatar" alt="Аватар пользователя" src={card.photo} sx={{ width: 53, height: 53, marginRight: '11px' }} aria-label="recipe" />
         <div className="card__description">
           <div className="card__candidate-info">
             <p className="card__candidate-name">{card.name}</p>
@@ -37,7 +37,7 @@ function VacancyCard({ card } : VacancyCardProps) {
           <h2 className="card__profession">{card.profession}</h2>
           <div className="card__experience">
             <p className="card__level">{card.level}</p>
-            <p className="card__card-experience">
+            <p className="card__attempt">
               Опыт работы:
               {' '}
               <span className="card__period">
@@ -46,33 +46,35 @@ function VacancyCard({ card } : VacancyCardProps) {
                 месяцев
               </span>
             </p>
-            <p className="card__status">
-              Статус:
-              {' '}
-              <span className="card__vacancy">
-                вакансия отправлена
-              </span>
-            </p>
           </div>
         </div>
       </div>
-      <Checkbox
-        className="card__checkbox"
-        disableRipple
-        sx={{
-          padding: '6px',
-          backgroundColor: 'var(--Blue-BG)',
-          height: 'fit-content',
-          width: '32px',
-          borderRadius: '6px',
-        }}
-        icon={<img alt="checkbox-field" src={like} />}
-        checkedIcon={<img alt="checkbox-field" src={likeFilled} />}
-        checked={checked}
-        onChange={(e) => {
-          setChecked(e.target.checked);
-        }}
-      />
+      <div className="card__favorite">
+        <Checkbox
+          className="card__checkbox"
+          disableRipple
+          sx={{
+            padding: '6px',
+            backgroundColor: 'var(--Blue-BG)',
+            height: 'fit-content',
+            width: '32px',
+            borderRadius: '6px',
+          }}
+          icon={<img alt="checkbox-field" src={like} />}
+          checkedIcon={<img alt="checkbox-field" src={likeFilled} />}
+          checked={checked}
+          onChange={(e) => {
+            setChecked(e.target.checked);
+          }}
+        />
+        <p className="card__status">
+          Статус:
+          {' '}
+          <span className="card__vacancy">
+            вакансия отправлена
+          </span>
+        </p>
+      </div>
     </article>
   );
 }
