@@ -22,7 +22,9 @@ function Filter({
         border: 'none',
         boxShadow: 'none',
         '&.Mui-expanded': { margin: 0, '&:before': { opacity: 1 } },
-        '&:before': { display: withBorder ? 'inherit' : 'none', left: '24px', right: '24px' },
+        '&:before': {
+          display: withBorder ? 'inherit' : 'none', left: '24px', right: '24px', height: '0.5px',
+        },
       }}
     >
       <AccordionSummary
@@ -32,6 +34,10 @@ function Filter({
           paddingRight: '24px',
           minHeight: 'inherit !important',
           '& .MuiAccordionSummary-content': {
+            marginTop: '25px',
+            marginBottom: '16px',
+          },
+          '& .MuiAccordionSummary-content.Mui-expanded': {
             marginTop: '25px',
             marginBottom: '16px',
           },

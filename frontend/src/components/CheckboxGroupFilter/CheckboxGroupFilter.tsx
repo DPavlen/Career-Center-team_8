@@ -41,18 +41,21 @@ function CheckboxGroupFilter({
 
   return (
     <Filter text={title} {...filterProps}>
-      { withSearch ? <input className="checkbox__search" value={search} onChange={(e) => setSearch(e.target.value)} /> : null}
-      <Scrollbar maxHeight={ withSearch ? '192px' : '240px'}>
+      { withSearch ? <input className="checkbox-search" placeholder="Найти навык" value={search} onChange={(e) => setSearch(e.target.value)} /> : null}
+      <Scrollbar maxHeight={withSearch ? '192px' : '240px'}>
         {filtred.map((p) => (
           <FormControlLabel
             key={p.id}
-            sx={{ display: 'block' }}
+            sx={{ display: 'block', margin: 0 }}
             control={(
               <Checkbox
                 checked={value.some((v) => v === p.id)}
                 onChange={() => onValueChange(p.id)}
                 icon={<img alt="checkbox-field" src={checkbox} />}
                 checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
+                sx={{
+                  padding: 0, width: '24px', height: '24px', margin: '12px 12px 12px 24px',
+                }}
               />
                   )}
             label={p.value}
