@@ -38,7 +38,7 @@ function Navigation() {
             className={({ isActive }) => checkLinkState(isActive)}
           >
             <img src={Lenta} alt="Иконка ленты" className="navigation__icon" />
-            Отклики
+            Избранное
           </NavLink>
         </li>
       </ul>
