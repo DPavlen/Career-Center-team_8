@@ -2,11 +2,11 @@
   {
     "id": 1,
     "photo": "https://i.pravatar.cc/150?img=1",
-    "name": "Иван Иванов",
-    "city": "Москва",
-    "experience": 2,
-    "profession": "Front-end разработчик",
-    "level": "Junior",
+    "name": "Березовсконогузадерищенский Александр ",
+    "city": "Санкт-Петербург",
+    "experience": 8,
+    "profession": "UI/UX дизайнер",
+    "level": "Senior",
     "contact_info": {
       "email": "ivanov@example.com",
       "phone": "+7 900 123 4567"
