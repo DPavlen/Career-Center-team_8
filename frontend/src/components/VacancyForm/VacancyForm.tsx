@@ -9,7 +9,7 @@ function VacancyForm() {
       <Filters />
       <div className="vacancy-form__buttons">
         <Button href="/candidates" variant="contained" color="success">Подобрать кандидатов</Button>
-        <Button href="/callbacks" variant="contained" color="success">Отклики</Button>
+        <Button href="/favorites" variant="contained" color="success">Отклики</Button>
       </div>
     </div>
   );

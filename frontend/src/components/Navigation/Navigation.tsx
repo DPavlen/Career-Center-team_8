@@ -34,7 +34,7 @@ function Navigation() {
         </li>
         <li>
           <NavLink
-            to="/callbacks"
+            to="/favorites"
             className={({ isActive }) => checkLinkState(isActive)}
           >
             <img src={Lenta} alt="Иконка ленты" className="navigation__icon" />
