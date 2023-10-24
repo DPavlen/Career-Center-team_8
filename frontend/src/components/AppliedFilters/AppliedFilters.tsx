@@ -5,7 +5,7 @@ import React from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
-import mockFilters from '../../utils/mockFilters';
+import mockFilters from '../../utils/mockData';
 
 function AppliedFilters() {
   const handleDelete = () => null;

@@ -25,15 +25,12 @@ const mockFilters = [
   { key: 23, label: 'React' },
   { key: 24, label: 'vite' },
 ];
-/* const mockFiltersR = [
-  { key: 0, label: 'Angular' },
-  { key: 1, label: 'git' },
-  { key: 2, label: 'HTML' },
-  { key: 3, label: 'React' },
-  { key: 4, label: 'vite' },
-  { key: 5, label: 'Angular' },
-  { key: 6, label: 'git' },
-  { key: 7, label: 'HTML' },
-]; */
+export const mockSpecialties = [
+  { key: 0, label: 'Программирование' },
+  { key: 1, label: 'Дизайн' },
+  { key: 2, label: 'Анализ данных' },
+  { key: 3, label: 'Маркетинг' },
+  { key: 4, label: 'Менеджмент' },
+];
 
 export default mockFilters;
