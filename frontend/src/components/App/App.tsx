@@ -9,7 +9,7 @@ import Main from '../../pages/Main/Main';
 import Vacancy from '../../pages/Vacancy/Vacancy';
 import Candidates from '../../pages/Candidates/Candidates';
 import Candidate from '../../pages/Candidate/Candidate';
-import Callbacks from '../../pages/Callbacks/Callbacks';
+import Favorites from '../../pages/Favorites/Favorites';
 import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
@@ -45,8 +45,8 @@ function App() {
           element={(<Candidate />)}
         />
         <Route
-          path="/callbacks"
-          element={(<Callbacks />)}
+          path="/favorites"
+          element={(<Favorites />)}
         />
       </Routes>
     </div>
