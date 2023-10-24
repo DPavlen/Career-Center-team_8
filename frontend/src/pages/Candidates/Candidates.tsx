@@ -1,21 +1,12 @@
-import Typography from '@mui/material/Typography';
+import './Candidates.css';
+
 import AppliedFilters from '../../components/AppliedFilters/AppliedFilters';
 import VacanciesCards from '../../components/VacanciesCards/VacanciesCards';
-import './Candidates.css';
 
 function Candidates() {
   return (
     <main style={{ paddingLeft: '32px' }}>
-      <Typography
-        variant="h3"
-        sx={{
-          color: 'black',
-          mt: 4,
-          mb: 4,
-        }}
-      >
-        Кандидаты
-      </Typography>
+      <h1 className="title">Кандидаты</h1>
       <AppliedFilters />
       <VacanciesCards />
     </main>

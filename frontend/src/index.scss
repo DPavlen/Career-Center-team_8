@@ -30,9 +30,12 @@ body {
 
   margin: 0 auto;
 
-  h1 {
-    font-family: 'YS Display', sans-serif;
+  .title {
+    font-family: 'YS Display', 'Roboto', sans-serif;
+    font-size: 34px;
     font-weight: 500;
+    line-height: 1.17;
+    color: var(--Black-900);
   }
 
   main {
