@@ -12,8 +12,9 @@
 .cards {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
-  padding-left: 32px;
+  margin-top: 10px;
+  // margin-top: 60px;
+  // padding-left: 32px;
   max-width: 804px;
 
   &__info {
