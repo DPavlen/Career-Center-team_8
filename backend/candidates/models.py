@@ -1,8 +1,7 @@
 from django.db import models
-from django.core.validators import MinValueValidator
-from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-User = get_user_model()
+from users.models import MyUser
 
 
 class Specialization(models.Model):
@@ -239,6 +238,99 @@ class WorkSchedule(models.Model):
         ordering = ["name"]
 
 
+class ExperienceDetailed(models.Model):
+    """Модель Опыта работы детальный для кандидата."""
+
+    name = models.CharField(
+        "Опыта работы детальный",
+        unique=True,
+        max_length=255,   
+    )
+    date_start = models.IntegerField(
+        "Дата начала работы",
+        validators=[MinValueValidator(1000), 
+                    MaxValueValidator(9999)],
+    )
+    date_expiration = models.IntegerField(
+        "Дата окончания работы",
+        validators=[MinValueValidator(1000), 
+                    MaxValueValidator(9999)],
+    )
+    post = models.CharField(
+        "Должность", 
+        max_length=255,
+    )
+    responsibilities = models.TextField(
+        "Обязанности на рабочем месте"
+    )
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = "Опыт работы детальный"
+        verbose_name_plural = "Опыт работы детальный"
+        ordering = ["name"]
+
+
+class Education(models.Model):
+    """Модель Образование для кандидата."""
+    class Level(models.TextChoices):
+        """Уровень образования."""
+        HIGHER = 'H', ('Высшее')
+        MASTER = 'M', ('Магистр')
+        BACHELOR = 'B', ('Бакалавр')
+        UNFINISHED_HIGHER = 'UNH', ('Неоконченное высшее')
+        CANDIDATE_SCIENS = 'PhD', ('Кандидат наук')
+        DOCTOR_SCIENS = 'Ph.D', ('Доктор наук')
+        NOT_SELECTED = 'Не выбрано', ('Не выбрано')
+
+    name = models.CharField(
+        "Образование детально",
+        unique=True,
+        max_length=255,   
+    )
+    level = models.CharField(
+         "Уровень образования",
+        max_length=20,
+        choices=Level.choices,
+        default=Level.HIGHER,
+    )
+    date_start = models.IntegerField(
+        "Дата начала учебы",
+        validators=[MinValueValidator(1000), 
+                    MaxValueValidator(9999)],
+
+    )
+    date_expiration = models.IntegerField(
+        "Дата окончания учебы",
+        validators=[MinValueValidator(1000), 
+                    MaxValueValidator(9999)],
+    )
+    name_university = models.CharField(
+        "Учебное заведение", 
+        max_length=255,
+        unique=True,
+    )
+    faculty = models.CharField(
+        "Факультет", 
+        max_length=255,
+        unique=True,
+    )
+    specialization = models.CharField(
+        "Специализация", 
+        max_length=255,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = "Образование"
+        verbose_name_plural = "Образования"
+        ordering = ["name"]
+
 class Candidate(models.Model):
     """Модель для резюме кандидатов.
 
@@ -253,6 +345,7 @@ class Candidate(models.Model):
     contacts_phone - телефон
     contacts_email - почта
     contacts_other - другой контакт
+    activity - статус соискателя
     specialization - Направление специальности
     course - курс ЯП
     level - уровень кандидата
@@ -261,12 +354,21 @@ class Candidate(models.Model):
     experience - опыт работы
     employment_type - тип занятости
     work_schedule - график работы
+    detailed_experience - детальный опыт работы
+    about_me - обо мне
+    education - образование 
     """
     class Activity(models.TextChoices):
+        """Статус соискателя."""
         ACTIVE = 'AC', ('Активный')
         ON_HOLD = 'OH', ('В ожидании')
         NOT_ACTIVE = 'NA', ('Не доступен')
-        
+    
+    class Sex(models.TextChoices):
+        """Выбор пола соискателя."""
+        MALE = 'М', ('Мужской')
+        FEMALE = 'Ж', ('Женский')
+        NOT_SELECTED = 'Не выбран', ('Не выбран')
     
     last_name = models.CharField(
         "Фамилия",
@@ -287,12 +389,15 @@ class Candidate(models.Model):
         default=None,
     )
     sex = models.CharField(
-        "Пол",
+        "Пол кандидата",
         max_length=10,
+        choices=Sex.choices,
+        default=Sex.NOT_SELECTED
     )
     age = models.PositiveIntegerField(
         "Возраст",
-        validators=[MinValueValidator(18)],
+        validators=[MinValueValidator(18), 
+                    MaxValueValidator(90)],
     )
     contacts_phone = models.CharField(
         "Телефон",
@@ -358,6 +463,19 @@ class Candidate(models.Model):
         related_name="candidates",
         verbose_name="График работы",
     )
+    detailed_experience = models.ManyToManyField(
+        ExperienceDetailed,
+        related_name="candidates",
+        verbose_name="Детальный опыт работы",
+    )
+    about_me = models.TextField(
+        "Обо мне",
+    )
+    education = models.ManyToManyField(
+        Education,
+        related_name="candidates",
+        verbose_name="Образование",
+    )
 
     class Meta:
         verbose_name = "Кандидат"
@@ -378,7 +496,7 @@ class Contact(models.Model):
     """
 
     user = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         related_name="contact",
     )
@@ -406,7 +524,7 @@ class Track(models.Model):
     """
 
     user = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         related_name="tracks",
     )

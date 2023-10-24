@@ -13,6 +13,8 @@ from .models import (
     Candidate,
     Contact,
     Track,
+    ExperienceDetailed,
+    Education,
 )
 
 
@@ -82,7 +84,7 @@ class WorkScheduleAdmin(admin.ModelAdmin):
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ("pk", "last_name", "first_name", "tracks")
+    list_display = ("pk", "last_name", "first_name", "activity", "tracks")
     list_display_links = ("last_name",)
     search_fields = (
         "last_name",
@@ -95,8 +97,8 @@ class CandidateAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         queryset = (
-            queryset.prefetch_related("last_name")
-            .prefetch_related("specialization", "course")
+            queryset.prefetch_related("detailed_experience").
+            prefetch_related("specialization", "course")
             .annotate(favorited=Count("tracks"))
         )
         return queryset
@@ -117,7 +119,8 @@ class ContactAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = (
-            super().get_queryset(request).select_related("user", "candidate")
+            super().get_queryset(request).
+            select_related("user", "candidate")
         )
         return queryset
 
@@ -137,3 +140,20 @@ class TrackAdmin(admin.ModelAdmin):
         queryset = super().get_queryset(request)
         queryset = queryset.select_related("user", "candidate")
         return queryset
+
+
+@admin.register(ExperienceDetailed)
+class ExperienceDetailedAdmin(admin.ModelAdmin):
+    list_display = ("pk", "name", "post", "responsibilities")
+    list_display_links = ("name",)
+    search_fields = ("name",)
+    empty_value_display = "-пусто-"
+
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ("pk", "name", 
+                    "name_university", "specialization")
+    list_display_links = ("name", "name_university",)
+    search_fields = ("name",)
+    empty_value_display = "-пусто-"

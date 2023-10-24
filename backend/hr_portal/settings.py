@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "vacancies.apps.VacanciesConfig",
     "api.apps.ApiConfig",
     "core",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
