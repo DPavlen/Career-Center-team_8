@@ -5,7 +5,7 @@ import React from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
-import mockFilters from '../../utils/mockFilters';
+import mockFilters from '../../utils/mockData';
 
 function AppliedFilters() {
   const handleDelete = () => null;
@@ -40,7 +40,6 @@ function AppliedFilters() {
               onDelete={handleDelete}
               sx={{
                 height: '28px',
-                borderRadius: '8px',
                 lineHeight: 1.2,
                 backgroundColor: '#DDE0E4',
                 '&:hover': {
