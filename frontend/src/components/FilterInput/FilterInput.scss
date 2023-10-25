@@ -1,0 +1,21 @@
+.search-input {
+  width: 340px;
+  margin: 0 24px 12px 24px;
+  border-radius: 6px;
+  border: 1px solid var(--Black-100);
+  padding: 12px 12px 12px 38px;
+  font-size: 14px;
+  background-image: url(../../assets/icons/search.svg);
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 13px 12px;
+  color: var(--Black-500);
+
+  &::placeholder {
+    color: var(--Black-100);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}

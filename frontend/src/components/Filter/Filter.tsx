@@ -3,21 +3,28 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Accordion from '@mui/material/Accordion';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import arrowDown from '../../assets/icons/arrow_down.svg';
+import { RootState } from '../../store/store';
+import { selectFilter } from '../../store/selectedFilter/selectedFilter';
 
 export interface IFilterProps {
   text: string;
   children: React.ReactNode;
   withBorder?: boolean;
-  defaultExpanded?: boolean;
+  panel: string;
 }
 
 function Filter({
-  text, children, withBorder = true, defaultExpanded = false,
+  text, children, withBorder = true, panel,
 }: IFilterProps) {
+  const selectedFilter = useSelector((state:RootState) => state.selectedFilter.selectedFilter);
+  const dispatch = useDispatch();
+
   return (
     <Accordion
-      defaultExpanded={defaultExpanded}
+      expanded={panel === selectedFilter}
+      onChange={(_, exp) => dispatch(selectFilter(exp ? panel : null))}
       sx={{
         border: 'none',
         boxShadow: 'none',
@@ -52,7 +59,6 @@ function Filter({
 
 Filter.defaultProps = {
   withBorder: true,
-  defaultExpanded: false,
 };
 
 export default Filter;
