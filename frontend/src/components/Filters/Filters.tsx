@@ -1,16 +1,53 @@
 import './Filters.scss';
+import Button from '@mui/material/Button';
+import { useDispatch, useSelector } from 'react-redux';
 import settings from '../../assets/icons/settings.svg';
 import professions from '../../utils/testProfessionArea.json';
 import skillsData from '../../utils/testSkills.json';
 import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
+import deleteIcon from '../../assets/icons/delete.svg';
+import { initialState, resetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+import { RootState } from '../../store/store';
 
 function Filters() {
+  const dispatch = useDispatch();
+  // eslint-disable-next-line max-len
+  const selectedAmount: number = useSelector((state: RootState) => Object.entries(state.vacanciesFilter)
+    .filter(([key, value]) => {
+      const storedValue = initialState[key as keyof RootState['vacanciesFilter']];
+
+      if (Array.isArray(value) && Array.isArray(storedValue)) {
+        return value.length !== storedValue.length || value.some((v) => !storedValue.includes(v));
+      }
+
+      return value !== storedValue;
+    }).length);
+
   return (
     <form className="filters">
       <div className="filters__header">
-        <img className="filters__img" alt="settings" src={settings} />
-        <h2 className="filters__title">Фильтры</h2>
+        <div className="filters__headline">
+          <img className="filters__img" alt="settings" src={settings} />
+          <h2 className="filters__title">
+            Фильтр
+            {' '}
+            <span className="filters__count">{selectedAmount || null}</span>
+          </h2>
+        </div>
+        <Button
+          startIcon={<img alt="delete-icon" src={deleteIcon} />}
+          sx={{
+            textTransform: 'none',
+            textColor: 'var(--Blue-main)',
+            fontSize: '13px',
+            padding: 0,
+            fontWeight: '400',
+          }}
+          onClick={() => dispatch(resetFilter())}
+        >
+          Сбросить
+        </Button>
       </div>
       <RadioGroupFilter
         panel="panel1"

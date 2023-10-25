@@ -35,18 +35,18 @@ function Filter({
       }}
     >
       <AccordionSummary
-        expandIcon={<img alt="checkbox-field" src={arrowDown} />}
+        expandIcon={<img alt="checkbox-field" src={arrowDown} className="filter__icon" />}
         sx={{
           paddingLeft: '24px',
           paddingRight: '24px',
           minHeight: 'inherit !important',
           '& .MuiAccordionSummary-content': {
-            marginTop: '25px',
-            marginBottom: '16px',
+            marginTop: '26px',
+            marginBottom: '17.5px',
           },
           '& .MuiAccordionSummary-content.Mui-expanded': {
-            marginTop: '25px',
-            marginBottom: '16px',
+            marginTop: '26px',
+            marginBottom: '17.5px',
           },
         }}
       >

@@ -13,7 +13,7 @@ interface InitialState {
   workingType: number[];
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   profession: null,
   course: [],
   skills: [],
@@ -35,9 +35,16 @@ const vacanciesFilterSlice = createSlice({
         store[filter] = filterValue as number[] & string;
       });
     },
+    resetFilter: (store) => {
+      Object.entries(initialState).forEach(([key, filterValue]) => {
+        const filter: keyof InitialState = key as keyof InitialState;
+
+        store[filter] = filterValue as number[] & string;
+      });
+    },
   },
 });
 
-export const { setFilter } = vacanciesFilterSlice.actions;
+export const { setFilter, resetFilter } = vacanciesFilterSlice.actions;
 
 export default vacanciesFilterSlice.reducer;

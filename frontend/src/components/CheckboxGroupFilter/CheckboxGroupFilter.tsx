@@ -59,13 +59,17 @@ function CheckboxGroupFilter({
         {filtred.map((p) => (
           <FormControlLabel
             key={p.id}
-            sx={{ display: 'block', margin: 0 }}
+            sx={{
+              display: 'block',
+              margin: 0,
+              '& .MuiFormControlLabel-label': { fontSize: '16px' },
+            }}
             control={(
               <Checkbox
                 checked={value.some((v) => v === p.value)}
                 onChange={() => onValueChange(p.value)}
-                icon={<img alt="checkbox-field" src={checkbox} />}
-                checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
+                icon={<img alt="checkbox-field" src={checkbox} className="checkbox-image" />}
+                checkedIcon={<img alt="checkbox-field" className="checkbox-image" src={checkboxChecked} />}
                 sx={{
                   padding: 0, width: '24px', height: '24px', margin: '12px 12px 12px 24px',
                 }}
