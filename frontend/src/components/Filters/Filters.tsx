@@ -10,7 +10,7 @@ function Filters() {
     <form className="filters">
       <div className="filters__header">
         <img className="filters__img" alt="settings" src={settings} />
-        <h1 className="filters__title">Фильтры</h1>
+        <h2 className="filters__title">Фильтры</h2>
       </div>
       <RadioGroupFilter
         panel="panel1"
