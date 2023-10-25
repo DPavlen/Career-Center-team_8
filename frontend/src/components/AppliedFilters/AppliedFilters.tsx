@@ -7,10 +7,12 @@ import Icon from '@mui/material/Icon';
 // import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import closeIcon from '../../assets/icons/close.svg';
-import mockFilters from '../../utils/mockData';
-// import { RootState } from '../../store/store';
+// import mockFilters from '../../utils/mockData';
+import { RootState } from '../../store/store';
+// import { InitialState } from '../../store/vacanciesFilter/vacanciesFilter';
+
 function AppliedFilters() {
   const handleDelete = () => null;
   const stackRef = React.useRef<HTMLDivElement>(null);
@@ -19,11 +21,10 @@ function AppliedFilters() {
   const [stackHeight, setStackHeight] = React.useState(0);
   const [isMultipleLines, setisMultipleLines] = React.useState(false);
 
-  /*
-  //Код Ростислава
+  /*  Код Ростислава */
 
   interface Filters {
-    [key: string]: string | string[];
+    [key: string]: string | string[] | null;
   }
 
   const [appliedFilters, setAppliedFilters] = React.useState<string[] | null>(null);
@@ -49,8 +50,7 @@ function AppliedFilters() {
 
   React.useEffect(() => setAppliedFilters(extractValues(filters)), [filters]);
 
-  //код Ростислава конец
-  */
+  /* код Ростислава конец */
 
   const handleShowButtons = () => {
     setIsShow(!isShow);
@@ -118,10 +118,12 @@ function AppliedFilters() {
         >
           {/* Chip чекать высоту Stack */}
           {/* <Chip label={stackHeight} /> */}
-          {mockFilters.map((filter) => (
+          {/* {mockFilters.map((filter) => ( */}
+          {appliedFilters !== null && appliedFilters.map((filter, index) => (
             <Chip
-              key={filter.key}
-              label={filter.label}
+              // key={Math.floor(Math.random() * 999)}
+              key={index}
+              label={filter}
               // Иконка слишком большая, попробовать сделать через svg file из assets
               deleteIcon={
                 (
