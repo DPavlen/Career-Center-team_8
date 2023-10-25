@@ -68,6 +68,14 @@ class CandidateSerializer(serializers.ModelSerializer):
     # id = IntegerField(read_only=True)
     experience_detailed = SerializerMethodField()
     education = SerializerMethodField()
+    course = SerializerMethodField()
+    level = SerializerMethodField()
+    hards = SerializerMethodField()
+    softs = SerializerMethodField()
+    experience = SerializerMethodField()
+    employment_type = SerializerMethodField()
+    work_schedule = SerializerMethodField()
+
     # image = Base64ImageField()
     class Meta:
         model = Candidate
@@ -99,8 +107,7 @@ class CandidateSerializer(serializers.ModelSerializer):
 
     def get_experience_detailed(self, obj):
         """Получаем список детального опыта работы для кандидата."""
-        candidate = obj
-        experience_detailed= candidate.experience_detailed.values(
+        experience_detailed= obj.experience_detailed.values(
             "id",
             "name",
             "date_start",
@@ -114,8 +121,7 @@ class CandidateSerializer(serializers.ModelSerializer):
 
     def get_education(self, obj):
         """Получаем список данных об образовани для кандидата."""
-        candidate = obj
-        education= candidate.education.values(
+        education= obj.education.values(
            "id",
             "name",
             "level",
@@ -126,3 +132,31 @@ class CandidateSerializer(serializers.ModelSerializer):
             "specialization",
         )
         return education
+    
+    def get_course(self, obj):
+        """Получаем список всех курсов Яндекса."""
+        return obj.course.values()
+    
+    def get_level(self, obj):
+        """Получаем список всех уровней(грейдов)."""
+        return obj.level.values()
+    
+    def get_hards(self, obj):
+        """Получаем список всех хард-скилов(ключевые навыки)."""
+        return obj.hards.values()
+    
+    def get_softs(self, obj):
+        """Получаем список soft skills(мягкие навыки)."""
+        return obj.softs.values()
+    
+    def get_experience(self, obj):
+        """Получаем список опыта работы(в годах)."""
+        return obj.experience.values()
+    
+    def get_employment_type(self, obj):
+        """Получаем список типа занятости."""
+        return obj.employment_type.values()
+    
+    def get_work_schedule(self, obj):
+        """Получаем список графика работы."""
+        return obj.work_schedule.values()
