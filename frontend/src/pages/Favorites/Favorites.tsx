@@ -4,7 +4,7 @@ import './Favorites.scss';
 import { Typography } from '@mui/material';
 import Specialty from '../../components/Specialty/Specialty';
 import { mockSpecialties } from '../../utils/mockData';
-// import VacancySend from '../../components/VacancySend/VacancySend';
+// import VacancySibtitle from '../../components/VacancySibtitle/VacancySibtitle';
 
 function Favorites() {
 /*   const [count, setCount] = useState(0);

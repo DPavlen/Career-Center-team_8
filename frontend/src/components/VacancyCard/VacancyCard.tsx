@@ -13,8 +13,6 @@ interface VacancyCardProps {
   liked : boolean;
 }
 
-// стили переименовать, статус ???
-
 function VacancyCard({ card, liked = false } : VacancyCardProps) {
   const [checked, setChecked] = useState(liked);
 
@@ -68,13 +66,13 @@ function VacancyCard({ card, liked = false } : VacancyCardProps) {
             setChecked(e.target.checked);
           }}
         />
-        <p className="card__status">
+        {/* <p className="card__status">
           Статус:
           {' '}
           <span className="card__vacancy">
             вакансия отправлена
           </span>
-        </p>
+        </p> */}
       </div>
     </article>
   );
