@@ -2,11 +2,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import candidatesSlice from './candidates/candidates';
 import searchConfigSlice from './searchConfig/searchConfig';
+import selectedFilterSlice from './selectedFilter/selectedFilter';
+import vacanciesFilterSlice from './vacanciesFilter/vacanciesFilter';
 
 export const store = configureStore({
   reducer: {
     foundCandidates: candidatesSlice,
     searchConfig: searchConfigSlice,
+    selectedFilter: selectedFilterSlice,
+    vacanciesFilter: vacanciesFilterSlice,
   },
 });
 

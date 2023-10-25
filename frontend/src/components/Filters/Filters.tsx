@@ -1,5 +1,4 @@
 import './Filters.scss';
-import { useState } from 'react';
 import settings from '../../assets/icons/settings.svg';
 import professions from '../../utils/testProfessionArea.json';
 import skillsData from '../../utils/testSkills.json';
@@ -7,15 +6,6 @@ import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 
 function Filters() {
-  const [profession, setProfession] = useState<string | null>(null);
-  const [course, setCourse] = useState<number[]>([]);
-  const [skills, setSkills] = useState<number[]>([]);
-  const [location, setLocation] = useState<number[]>([]);
-  const [experience, setExpirience] = useState<number[]>([]);
-  const [level, setLevel] = useState<number[]>([]);
-  const [busyType, setBusyType] = useState<number[]>([]);
-  const [workingType, setWorkingType] = useState<number[]>([]);
-
   return (
     <form className="filters">
       <div className="filters__header">
@@ -23,19 +13,57 @@ function Filters() {
         <h1 className="filters__title">Фильтры</h1>
       </div>
       <RadioGroupFilter
-        value={profession}
-        onChange={setProfession}
+        panel="panel1"
+        filter="profession"
         data={professions}
         withBorder={false}
-        defaultExpanded
       />
-      <CheckboxGroupFilter title="Курс Практикума" value={course} data={professions} onChange={setCourse} />
-      <CheckboxGroupFilter title="Навыки" withSearch value={skills} data={skillsData} onChange={setSkills} />
-      <CheckboxGroupFilter title="Опыт работы" value={experience} data={professions} onChange={setExpirience} />
-      <CheckboxGroupFilter title="Уровень" value={level} data={professions} onChange={setLevel} />
-      <CheckboxGroupFilter title="Геопозиция" withSearch value={location} data={skillsData} onChange={setLocation} />
-      <CheckboxGroupFilter title="Тип занятости" value={busyType} data={professions} onChange={setBusyType} />
-      <CheckboxGroupFilter title="График работы" value={workingType} data={professions} onChange={setWorkingType} />
+      <CheckboxGroupFilter
+        filter="course"
+        panel="panel2"
+        title="Курс Практикума"
+        data={professions}
+      />
+      <CheckboxGroupFilter
+        filter="skills"
+        panel="panel3"
+        title="Навыки"
+        placeholder="Введите навык"
+        withSearch
+        data={skillsData}
+      />
+      <CheckboxGroupFilter
+        filter="experience"
+        panel="panel4"
+        title="Опыт работы"
+        data={professions}
+      />
+      <CheckboxGroupFilter
+        filter="level"
+        panel="panel5"
+        title="Уровень"
+        data={professions}
+      />
+      <CheckboxGroupFilter
+        filter="location"
+        panel="panel6"
+        title="Геопозиция"
+        placeholder="Введите геопозицию"
+        withSearch
+        data={skillsData}
+      />
+      <CheckboxGroupFilter
+        filter="busyType"
+        panel="panel7"
+        title="Тип занятости"
+        data={professions}
+      />
+      <CheckboxGroupFilter
+        filter="workingType"
+        panel="panel8"
+        title="График работы"
+        data={professions}
+      />
       <div className="filters__separator" />
     </form>
   );

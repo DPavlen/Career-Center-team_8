@@ -1,10 +1,14 @@
 import './CheckboxGroupFilter.scss';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Filter, { IFilterProps } from '../Filter/Filter';
 import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 import checkbox from '../../assets/icons/checkbox.svg';
 import Scrollbar from '../Scrollbar/Scrollbar';
+import FilterInput from '../FilterInput/FilterInput';
+import { RootState } from '../../store/store';
+import { setFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 
 interface IOption {
   id: number;
@@ -12,36 +16,44 @@ interface IOption {
 }
 
 interface ICheckboxFilterProps extends Partial<IFilterProps> {
-  value: number[];
   data: IOption[];
-  // eslint-disable-next-line no-unused-vars
-  onChange(id: number[]): void;
+  filter: keyof RootState['vacanciesFilter'];
   title: string;
+  placeholder?: string;
   withSearch?: boolean;
+  panel: string;
 }
 
 function CheckboxGroupFilter({
-  value, data, onChange, withSearch, title, ...filterProps
+  data, withSearch, title, placeholder, panel, filter, ...filterProps
 }: ICheckboxFilterProps) {
+  const value = useSelector((state: RootState) => state.vacanciesFilter[filter] as number[]);
+  const dispatch = useDispatch();
   const [search, setSearch] = useState<string>('');
   const [filtred, setFiltred] = useState<IOption[]>([]);
 
   const onValueChange = useCallback((checked: number) => {
     if (value.some((d) => d === checked)) {
-      onChange(value.filter((d) => d !== checked));
+      dispatch(setFilter({
+        [filter]: value.filter((d) => d !== checked),
+      }));
       return;
     }
 
-    onChange([...value, checked]);
-  }, [value, onChange]);
+    dispatch(setFilter({
+      [filter]: [...value, checked],
+    }));
+  }, [value, dispatch, filter]);
 
   useEffect(() => {
     setFiltred(data.filter((d) => d.value.toLowerCase().includes(search.toLowerCase())));
   }, [search, data]);
 
   return (
-    <Filter text={title} {...filterProps}>
-      { withSearch ? <input className="checkbox-search" placeholder="Найти навык" value={search} onChange={(e) => setSearch(e.target.value)} /> : null}
+    <Filter text={title} {...filterProps} panel={panel}>
+      { withSearch
+        ? <FilterInput placeholder={placeholder} search={search} setSearch={setSearch} />
+        : null}
       <Scrollbar maxHeight={withSearch ? '192px' : '240px'}>
         {filtred.map((p) => (
           <FormControlLabel
@@ -68,6 +80,7 @@ function CheckboxGroupFilter({
 
 CheckboxGroupFilter.defaultProps = {
   withSearch: false,
+  placeholder: '',
 };
 
 export default CheckboxGroupFilter;
