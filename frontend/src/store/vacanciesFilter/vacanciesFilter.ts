@@ -4,13 +4,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface InitialState {
   profession: string | null;
-  course: number[];
-  skills: number[];
-  location: number[];
-  experience: number[];
-  level: number[];
-  busyType: number[];
-  workingType: number[];
+  course: string[];
+  skills: string[];
+  location: string[];
+  experience: string[];
+  level: string[];
+  busyType: string[];
+  workingType: string[];
 }
 
 export const initialState: InitialState = {
@@ -32,14 +32,14 @@ const vacanciesFilterSlice = createSlice({
       Object.entries(payload).forEach(([key, filterValue]) => {
         const filter: keyof InitialState = key as keyof InitialState;
 
-        store[filter] = filterValue as number[] & string;
+        store[filter] = filterValue as string[] & string;
       });
     },
     resetFilter: (store) => {
       Object.entries(initialState).forEach(([key, filterValue]) => {
         const filter: keyof InitialState = key as keyof InitialState;
 
-        store[filter] = filterValue as number[] & string;
+        store[filter] = filterValue as string[] & string;
       });
     },
   },
