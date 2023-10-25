@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from .models import (
-    Hard, HardsInVacancy, Vacancy
-)
+from .models import Hard, HardsInVacancy, Vacancy
+
 
 @admin.register(Hard)
 class HardAdmin(admin.ModelAdmin):
