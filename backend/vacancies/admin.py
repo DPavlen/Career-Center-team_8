@@ -14,7 +14,7 @@ class HardAdmin(admin.ModelAdmin):
 
 @admin.register(Vacancy)
 class VacancyAdmin(admin.ModelAdmin):
-    list_display = ("pk", "name", "author", "description")
+    list_display = ("pk", "name", "author", "responsibilities")
     list_display_links = ("name",)
     search_fields = (
         "author__username",
