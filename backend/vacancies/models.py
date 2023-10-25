@@ -107,7 +107,6 @@ class Vacancy(CreatedModel):
     )
     salary = models.PositiveIntegerField(
         "Заработная плата",
-        max_length=6,
         blank=True,
     )
     responsibilities = models.TextField(
@@ -122,7 +121,7 @@ class Vacancy(CreatedModel):
     conditions = models.TextField(
         "Условия",
     )
-    stages = optional = models.TextField(
+    stages = models.TextField(
         "Этапы отбора",
     )
     location = models.CharField(
