@@ -33,8 +33,7 @@ function CheckboxGroupFilter({
   const [filtred, setFiltred] = useState<IOption[]>([]);
 
   // eslint-disable-next-line no-shadow
-  const onValueChange = useCallback((checked: number | string, name: string) => {
-    console.log(value);
+  const onValueChange = useCallback((name: string) => {
     if (value.some((d) => d === name)) {
       dispatch(setFilter({
         [filter]: value.filter((d) => d !== name),
@@ -64,7 +63,7 @@ function CheckboxGroupFilter({
             control={(
               <Checkbox
                 checked={value.some((v) => v === p.value)}
-                onChange={() => onValueChange(p.id, p.value)}
+                onChange={() => onValueChange(p.value)}
                 icon={<img alt="checkbox-field" src={checkbox} />}
                 checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
                 sx={{
