@@ -336,7 +336,7 @@ class Candidate(models.Model):
 
     Описывается следующими полями:
 
-    fist_name - Имя соискателя
+    first_name - Имя соискателя
     middle_name - Отчество соискателя
     last_name - Фамилия соискателя
     image - Фото соискателя.

@@ -97,7 +97,7 @@ class CandidateAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         queryset = (
-            queryset.prefetch_related("detailed_experience").
+            queryset.
             prefetch_related("specialization", "course")
             .annotate(favorited=Count("tracks"))
         )
