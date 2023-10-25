@@ -1,15 +1,17 @@
-from django.db import models
-from django.contrib.auth import get_user_model
 from candidates.models import (
-    Specialization,
-    Soft,
     EmploymentType,
     Experience,
-    WorkSchedule,
     Level,
+    Soft,
+    Specialization,
+    WorkSchedule,
 )
 
-User = get_user_model()
+from django.contrib.auth import get_user_model
+from django.db import models
+
+from core.models import CreatedModel
+from users.models import MyUser
 
 
 class Hard(models.Model):
@@ -40,19 +42,19 @@ class Hard(models.Model):
         unique=True,
         max_length=255,
     )
-    develop =  models.PositiveIntegerField(
+    develop = models.PositiveIntegerField(
         "Навык разработчика",
     )
-    data_sc =  models.PositiveIntegerField(
+    data_sc = models.PositiveIntegerField(
         "Навык Data Science",
     )
-    design =  models.PositiveIntegerField(
+    design = models.PositiveIntegerField(
         "Навык дизайнера",
     )
-    manager =  models.PositiveIntegerField(
+    manager = models.PositiveIntegerField(
         "Навык менеджера",
     )
-    marketing =  models.PositiveIntegerField(
+    marketing = models.PositiveIntegerField(
         "Навык маркетолога",
     )
 
@@ -65,12 +67,20 @@ class Hard(models.Model):
         ordering = ["name"]
 
 
-class Vacancy(models.Model):
+class Vacancy(CreatedModel):
     """Модель для вакансии от HR.
 
     Описывается следующими полями:
     author - HR добвивший вакансию
-    name - наименование вакансии
+    name - наименование вакансии (Должность)
+    company - нанимающаяя компания
+    salary - запралата
+    responsibilities - обязанности
+    requirements - обязательный требования
+    optional - необязательные требования
+    conditions - условия
+    stages - этапы отбора
+    location - местро проживания
     specialization - Направление специальности
     level - уровень кандидата
     hards - хард скилы
@@ -78,19 +88,47 @@ class Vacancy(models.Model):
     experience - опыт работы
     employment_type - тип занятости
     work_schedule - график работы
-    description - описание вакансии
     """
 
     author = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         verbose_name="Автор вакансии",
         related_name="vacancies",
     )
     name = models.CharField(
-        "Название",
+        "Название/Должность",
         unique=True,
         max_length=255,
+    )
+    company = models.CharField(
+        "Компания",
+        max_length=255,
+    )
+    salary = models.PositiveIntegerField(
+        "Заработная плата",
+        max_length=6,
+        blank=True,
+    )
+    responsibilities = models.TextField(
+        "Обязанности",
+    )
+    requirements = models.TextField(
+        "Обязательные требования",
+    )
+    optional = models.TextField(
+        "Необязательные требования",
+    )
+    conditions = models.TextField(
+        "Условия",
+    )
+    stages = optional = models.TextField(
+        "Этапы отбора",
+    )
+    location = models.CharField(
+        "Местонахождение",
+        max_length=150,
+        blank=True,
     )
     specialization = models.ManyToManyField(
         Specialization,
@@ -127,18 +165,15 @@ class Vacancy(models.Model):
         related_name="vacancies",
         verbose_name="График работы",
     )
-    description = models.CharField(
-        "Описание",
-        max_length=2000,
-    )
 
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
-        ordering = ["name"]
+        ordering = ["-pub_date"]
 
     def __str__(self):
         return self.name
+
 
 class HardsInVacancy(models.Model):
     """Модель хардов в вакансии.
@@ -168,6 +203,7 @@ class HardsInVacancy(models.Model):
         verbose_name = "Харды в вакансии"
         verbose_name_plural = "Харды в вакансиях"
 
+
 class EmploymentTypeInVacancy(models.Model):
     """Модель типа занятости в вакансии.
 
@@ -196,6 +232,7 @@ class EmploymentTypeInVacancy(models.Model):
         verbose_name = "Типы в вакансии"
         verbose_name_plural = "Типы в вакансиях"
 
+
 class WorkScheduleInVacancy(models.Model):
     """Модель графика работы в вакансии.
 
@@ -222,4 +259,4 @@ class WorkScheduleInVacancy(models.Model):
 
     class Meta:
         verbose_name = "Графики в вакансии"
-        verbose_name_plural = "Графики в вакансиях"        
+        verbose_name_plural = "Графики в вакансиях"
