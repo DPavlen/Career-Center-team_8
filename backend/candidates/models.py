@@ -251,7 +251,7 @@ class ExperienceDetailed(models.Model):
         validators=[MinValueValidator(1000), 
                     MaxValueValidator(9999)],
     )
-    date_expiration = models.IntegerField(
+    date_end = models.IntegerField(
         "Дата окончания работы",
         validators=[MinValueValidator(1000), 
                     MaxValueValidator(9999)],
@@ -302,7 +302,7 @@ class Education(models.Model):
                     MaxValueValidator(9999)],
 
     )
-    date_expiration = models.IntegerField(
+    date_graduation = models.IntegerField(
         "Дата окончания учебы",
         validators=[MinValueValidator(1000), 
                     MaxValueValidator(9999)],
@@ -354,7 +354,7 @@ class Candidate(models.Model):
     experience - опыт работы
     employment_type - тип занятости
     work_schedule - график работы
-    detailed_experience - детальный опыт работы
+    experience_detailed - детальный опыт работы
     about_me - обо мне
     education - образование 
     """
@@ -463,7 +463,7 @@ class Candidate(models.Model):
         related_name="candidates",
         verbose_name="График работы",
     )
-    detailed_experience = models.ManyToManyField(
+    experience_detailed = models.ManyToManyField(
         ExperienceDetailed,
         related_name="candidates",
         verbose_name="Детальный опыт работы",
@@ -484,6 +484,27 @@ class Candidate(models.Model):
 
     def __str__(self):
         return self.last_name
+
+
+class DetailInCandidate(models.Model):
+    """Детали опыта работы | Опыт у кандидата.
+    Определение количества опыта работы.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    experience_detailed = models.ForeignKey(
+        ExperienceDetailed,
+        on_delete=models.CASCADE,
+        verbose_name="Детальный опыт работы"
+    )
+    # amount = models.SmallIntegerField(
+    #     verbose_name="Количество мест работы",
+    #     default=0,
+    # )
 
 
 class Contact(models.Model):
