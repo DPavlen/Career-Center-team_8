@@ -27,21 +27,23 @@ interface ICheckboxFilterProps extends Partial<IFilterProps> {
 function CheckboxGroupFilter({
   data, withSearch, title, placeholder, panel, filter, ...filterProps
 }: ICheckboxFilterProps) {
-  const value = useSelector((state: RootState) => state.vacanciesFilter[filter] as number[]);
+  const value = useSelector((state: RootState) => state.vacanciesFilter[filter] as string[]);
   const dispatch = useDispatch();
   const [search, setSearch] = useState<string>('');
   const [filtred, setFiltred] = useState<IOption[]>([]);
 
-  const onValueChange = useCallback((checked: number) => {
-    if (value.some((d) => d === checked)) {
+  // eslint-disable-next-line no-shadow
+  const onValueChange = useCallback((checked: number | string, name: string) => {
+    console.log(value);
+    if (value.some((d) => d === name)) {
       dispatch(setFilter({
-        [filter]: value.filter((d) => d !== checked),
+        [filter]: value.filter((d) => d !== name),
       }));
       return;
     }
 
     dispatch(setFilter({
-      [filter]: [...value, checked],
+      [filter]: [...value, name],
     }));
   }, [value, dispatch, filter]);
 
@@ -61,8 +63,8 @@ function CheckboxGroupFilter({
             sx={{ display: 'block', margin: 0 }}
             control={(
               <Checkbox
-                checked={value.some((v) => v === p.id)}
-                onChange={() => onValueChange(p.id)}
+                checked={value.some((v) => v === p.value)}
+                onChange={() => onValueChange(p.id, p.value)}
                 icon={<img alt="checkbox-field" src={checkbox} />}
                 checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
                 sx={{
