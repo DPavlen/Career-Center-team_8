@@ -1,7 +1,7 @@
 @import '../../vendor/fonts/fonts.scss';
 
 .filters {
-  margin-top: 90px;
+  margin-top: 112px;
   height: fit-content;
   margin-right: 32px;
   border: 1px solid var(--Black-300);
@@ -10,12 +10,17 @@
   width: 388px;
 
  &__header {
-  padding-top: 24px;
-  padding-bottom: 16px;
-  padding-left: 24px;
+  padding: 24px 24px 16px 24px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+ }
+
+ &__headline {
+  display: flex;
+  align-items: center;
+  box-sizing: content-box;
  }
 
   &__img {
@@ -31,6 +36,15 @@
     line-height: 1.33;
     color: var(--Black-900);
     margin: 0;
+  }
+
+  &__count {
+    font-size: 24px;
+    font-family: $familyDisplay;
+    color: var(--Black-500);
+    font-weight: 500;
+    margin: 0;
+    padding-left: 3px;
   }
 
   &__separator {

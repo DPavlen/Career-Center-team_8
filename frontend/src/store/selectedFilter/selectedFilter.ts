@@ -7,11 +7,11 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  selectedFilter: 'panel1',
+  selectedFilter: 'panel2',
 };
 
 const selectedFilterSlice = createSlice({
-  name: 'select-category',
+  name: 'select-filter',
   initialState,
   reducers: {
     selectFilter: (store, { payload }: PayloadAction<string | null>) => {
