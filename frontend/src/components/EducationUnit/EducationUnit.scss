@@ -1,0 +1,48 @@
+.tech_stack__container {
+  background: #Fff;
+  width: 284px;
+  flex-wrap: wrap;
+  display: flex;
+  margin: 20px 0 40px 0;
+
+  .tech_chip {
+    padding: 4px 12px 4px 12px;
+    background: #EBEDF0;
+    border-radius: 6px;
+    margin: 0 8px 8px 0;
+  }
+}
+
+.courses_container {
+  display: block;
+  width: 284px;
+  margin: 28px 0 40px 0;
+
+  :first-child {
+    margin-bottom: 16px;
+  }
+}
+.direction {
+  margin: 0  0 16px 0;
+}
+
+.cources {
+  display: block;
+  margin: 0 0 8px 0;
+  // margin-blo
+}
+
+
+.education {
+  margin-bottom: 16px;
+  &__container {
+    display: inline-block;
+    width: 284px;
+
+
+    .edu {
+      display: inline-block;
+      width: 284px;
+    }
+  }
+}

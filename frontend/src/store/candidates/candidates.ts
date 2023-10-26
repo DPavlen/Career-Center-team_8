@@ -10,6 +10,7 @@ export interface ICandidate {
   profession: string;
   courses: string[];
   level: string;
+  education: string;
   job_part: string;
   job_type: string[];
   contact_info: {
@@ -24,7 +25,7 @@ export interface ICandidate {
 
 export interface InitialState {
   total: number,
-  candidates: ICandidate[],
+  candidates: Partial<ICandidate[]>,
 }
 
 const initialState: InitialState = {
@@ -36,10 +37,11 @@ const initialState: InitialState = {
     city: 'Санкт-Петербург',
     experience: 8,
     profession: 'UI/UX дизайнер',
-    courses: ['Дизайн разработка'],
+    courses: ['Дизайн разработка', 'UI/UX Дизайн'],
     job_part: 'Полная',
     job_type: ['Офис', 'Удаленка'],
     level: 'Senior',
+    education: 'Российский государственный аграрный университет, Москва ИМЭ им. В. П. Горячкина, Агроинженерия',
     contact_info: {
       email: 'ivanov@example.com',
       phone: '+7 900 123 4567',
@@ -51,6 +53,17 @@ const initialState: InitialState = {
       'CSS',
       'JavaScript',
       'Typescript',
+      'Webpack',
+      'Python',
+      'vite',
+      'SCSS',
+      'Java',
+      'Node.js',
+      'Webpack',
+      'Python',
+      'vite',
+      'SCSS',
+      'Java',
     ],
   }],
 };
@@ -60,8 +73,8 @@ const candidatesSlice = createSlice({
   initialState,
   reducers: {
     addCandidates: (store, { payload }) => {
-      store.candidates = payload.candidates;
-      store.total = payload.candidates.length;
+      store.candidates = store.candidates.concat(payload.candidates);
+      store.total += payload.candidates.length;
     },
     addMoreCandidates: (store, { payload }) => {
       store.candidates = store.candidates.concat(payload.candidates);

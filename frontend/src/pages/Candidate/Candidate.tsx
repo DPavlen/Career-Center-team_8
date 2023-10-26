@@ -15,7 +15,7 @@ function Candidate() {
       <p>
         {id}
       </p> */}
-      <Navigation />
+      {/* <Navigation /> */}
       <Resume />
     </main>
   );
