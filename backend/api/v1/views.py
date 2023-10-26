@@ -7,7 +7,8 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from api.v1.serializers import (
     ExperienceDetailedSerializer,
     EducationSerializer,
-    CandidateSerializer
+    CandidateSerializer,
+    ShortCandidateSerializer
     )
 from candidates.models import (
     ExperienceDetailed,
@@ -31,6 +32,15 @@ class EducationViewSet(ModelViewSet):
 
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
+    # permission_classes = [IsAuthenticated]
+    pagination_class = None
+
+
+class ShortCandidateViewSet(ModelViewSet):
+    """View для отображения сокращенной информации о кандидатах."""
+
+    queryset = Candidate.objects.all()
+    serializer_class = ShortCandidateSerializer
     # permission_classes = [IsAuthenticated]
     pagination_class = None
 

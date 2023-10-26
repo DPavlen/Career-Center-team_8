@@ -5,15 +5,17 @@ from users.views import CustomUserViewSet
 from api.v1.views import (
     ExperienceDetailedViewSet,
     EducationViewSet,
-    CandidateViewSet)
+    CandidateViewSet,
+    ShortCandidateViewSet)
 
 
-app_name = "api"
+app_name = "api.v1"
 
 
 router = routers.DefaultRouter()
 
 router.register("users", CustomUserViewSet, "users")
+router.register("short_candidate", ShortCandidateViewSet, "short_candidate")
 router.register("candidate", CandidateViewSet, "candidate")
 router.register("experience_detailed", 
                 ExperienceDetailedViewSet, "experience_detailed")
