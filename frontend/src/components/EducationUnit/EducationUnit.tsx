@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { v4 as uuid } from 'uuid';
 import { RootState } from '../../store/store';
 import './EducationUnit.scss';
 
@@ -15,7 +16,7 @@ function Education() {
       <div className="courses_container">
         <h3>Курс</h3>
         {candidate.courses && candidate.courses.map((course) => (
-          <div className="courses">
+          <div key={uuid()} className="courses">
             {course}
           </div>
         ))}
@@ -23,7 +24,7 @@ function Education() {
       <h3>Навыки</h3>
       <div className="tech_stack__container">
         {candidate.tech_stack.map((tech) => (
-          <span className="tech_chip">{tech}</span>
+          <span key={uuid()} className="tech_chip">{tech}</span>
         ))}
       </div>
       <h3 className="education">Образование</h3>
