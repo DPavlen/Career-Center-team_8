@@ -9,7 +9,7 @@ import CandidateHeader from '../CandidateHeader/CandidateHeader';
 import { RootState } from '../../store/store';
 
 function CandidateInfo() {
-  const candidate = useSelector((state: RootState) => state.candidateInfo.candidates[0]);
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
   return (
     <>
       <CandidateHeader />
@@ -17,11 +17,11 @@ function CandidateInfo() {
         <div
           className="candidate-info__avatar"
           style={{
-            backgroundImage: `url(${candidate.photo})`,
+            backgroundImage: `url(${candidate?.image})`,
           }}
         />
         <div className="candidate-info__container">
-          <h2 className="candidate-info__title">{candidate.profession}</h2>
+          <h2 className="candidate-info__title">{candidate?.specialization}</h2>
           <div className="candidate-info__wrapper">
             <div>
               <p className="candidate-info__description">
@@ -38,27 +38,27 @@ function CandidateInfo() {
               </p>
             </div>
             <div>
-              <p className="candidate-info__span-accent">{candidate.level}</p>
-              <p className="candidate-info__span-accent">{candidate.experience}</p>
-              <p className="candidate-info__span-accent">{candidate.job_part}</p>
-              <p className="candidate-info__span-accent">{candidate.job_type.join(', ')}</p>
+              <p className="candidate-info__span-accent">{candidate?.level?.[0]?.name || null}</p>
+              <p className="candidate-info__span-accent">{candidate?.experience?.[0]?.name || null}</p>
+              <p className="candidate-info__span-accent">{candidate?.employment_type?.[0]?.name || null}</p>
+              <p className="candidate-info__span-accent">{candidate?.work_schedule?.[0]?.name || null}</p>
             </div>
             <div>
               <div className="candidate-info__icon-container">
                 <img alt="Иконка геопозиции" src={location} className="candidate-info__icon" />
-                <span className="candidate-info__span-accent">{candidate.city}</span>
+                <span className="candidate-info__span-accent">{candidate?.location}</span>
               </div>
               <div className="candidate-info__icon-container">
                 <img alt="Иконка телефона" src={phone} className="candidate-info__icon" />
-                <span className="candidate-info__span-accent">{candidate.contact_info.phone}</span>
+                <span className="candidate-info__span-accent">{candidate?.contacts_phone}</span>
               </div>
               <div className="candidate-info__icon-container">
                 <img alt="Иконка email" src={email} className="candidate-info__icon" />
-                <span className="candidate-info__span-accent">{candidate.contact_info.email}</span>
+                <span className="candidate-info__span-accent">{candidate?.contacts_email}</span>
               </div>
               <div className="candidate-info__icon-container">
                 <img alt="Иконка telegram" src={telegram} className="candidate-info__icon" />
-                <span className="candidate-info__span-accent">{candidate.contact_info.telegram}</span>
+                <span className="candidate-info__span-accent">{candidate?.contacts_other}</span>
               </div>
             </div>
           </div>

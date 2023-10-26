@@ -15,7 +15,7 @@ function CandidateHeader() {
     navigate(-1);
   }
 
-  const candidate = useSelector((state: RootState) => state.candidateInfo.candidates[0]);
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
 
   return (
     <header className="candidate-header">
@@ -29,7 +29,13 @@ function CandidateHeader() {
       >
         <img alt="Иконка вернуться" src={iconBack} />
       </IconButton>
-      <h1 className="candidate-header__title">{candidate.name}</h1>
+      <h1 className="candidate-header__title">
+        <span>{candidate?.last_name}</span>
+        {' '}
+        <span>{candidate?.first_name}</span>
+        {' '}
+        <span>{candidate?.middle_name}</span>
+      </h1>
       <Checkbox
         sx={{
           height: 'fit-content',
