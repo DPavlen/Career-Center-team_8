@@ -7,9 +7,12 @@
     "experience": 8,
     "profession": "UI/UX дизайнер",
     "level": "Senior",
+    "job_part": "Полная",
+    "job_type": ["Офис", "Удаленка"],
     "contact_info": {
       "email": "ivanov@example.com",
-      "phone": "+7 900 123 4567"
+      "phone": "+7 900 123 4567",
+      "telegram": "ivanovtelega12345"
     },
     "age": 23,
     "tech_stack": [
@@ -28,7 +31,8 @@
     "level": "Middle",
     "contact_info": {
       "email": "petrov@example.com",
-      "phone": "+7 900 765 4321"
+      "phone": "+7 900 765 4321",
+      "telegram": "ivanovtelega12345"
     },
     "age": 30,
     "tech_stack": [
@@ -47,7 +51,8 @@
     "level": "Senior",
     "contact_info": {
       "email": "sidorova@example.com",
-      "phone": "+7 900 123 7890"
+      "phone": "+7 900 123 7890",
+      "telegram": "ivanovtelega12345"
     },
     "age": 29,
     "tech_stack": [
@@ -66,7 +71,8 @@
     "level": "Junior",
     "contact_info": {
       "email": "mikhailov@example.com",
-      "phone": "+7 900 456 7890"
+      "phone": "+7 900 456 7890",
+      "telegram": "ivanovtelega12345"
     },
     "age": 22,
     "tech_stack": [
@@ -85,7 +91,8 @@
     "level": "Middle",
     "contact_info": {
       "email": "volkova@example.com",
-      "phone": "+7 900 789 0123"
+      "phone": "+7 900 789 0123",
+      "telegram": "ivanovtelega12345"
     },
     "age": 28,
     "tech_stack": [
@@ -104,7 +111,8 @@
     "level": "Senior",
     "contact_info": {
       "email": "kuznetsov@example.com",
-      "phone": "+7 900 321 6549"
+      "phone": "+7 900 321 6549",
+      "telegram": "ivanovtelega12345"
     },
     "age": 35,
     "tech_stack": [
@@ -123,7 +131,8 @@
     "level": "Junior",
     "contact_info": {
       "email": "romanova@example.com",
-      "phone": "+7 900 234 5678"
+      "phone": "+7 900 234 5678",
+      "telegram": "ivanovtelega12345"
     },
     "age": 24,
     "tech_stack": [
@@ -142,7 +151,8 @@
     "level": "Middle",
     "contact_info": {
       "email": "stepanov@example.com",
-      "phone": "+7 900 567 8901"
+      "phone": "+7 900 567 8901",
+      "telegram": "ivanovtelega12345"
     },
     "age": 32,
     "tech_stack": [
@@ -161,7 +171,8 @@
     "level": "Middle",
     "contact_info": {
       "email": "lebedeva@example.com",
-      "phone": "+7 900 345 6789"
+      "phone": "+7 900 345 6789",
+      "telegram": "ivanovtelega12345"
     },
     "age": 27,
     "tech_stack": [
@@ -180,7 +191,8 @@
     "level": "Senior",
     "contact_info": {
       "email": "fedorov@example.com",
-      "phone": "+7 900 678 9012"
+      "phone": "+7 900 678 9012",
+      "telegram": "ivanovtelega12345"
     },
     "age": 40,
     "tech_stack": [

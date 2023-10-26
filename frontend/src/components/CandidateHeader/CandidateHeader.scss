@@ -1,0 +1,23 @@
+@import '../../vendor/fonts/fonts.scss';
+
+.candidate-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 32px;
+
+  &__title {
+    font-size: 34px;
+    font-family: $familyDisplay;
+    font-weight: 500;
+    line-height: 1.17;
+    color: var(--Black-900);
+    margin: 0;
+    padding-left: 72px;
+    padding-right: 20px;
+  }
+
+  &__like {
+    width: 100%;
+  }
+}
