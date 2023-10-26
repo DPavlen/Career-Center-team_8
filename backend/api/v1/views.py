@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 
-from api.serializers import (
+from api.v1.serializers import (
     ExperienceDetailedSerializer,
     EducationSerializer,
     CandidateSerializer
