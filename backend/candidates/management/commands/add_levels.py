@@ -6,8 +6,15 @@ from candidates.models import Level
 
 
 class Command(BaseCommand):
+    """Загрузка 'Уровень кандидата' в базу из csv файла, 
+    который располагается в директории /data/... ."""
     def handle(self, *args, **kwargs):
-        with open("data/levels.csv", encoding="utf-8-sig") as f:
-            reader = csv.reader(f)
-            for row in reader:
-                Level.objects.get_or_create(name=row[0], slug=row[1])
+        try:
+            with open("data/levels.csv", encoding="utf-8-sig") as f:
+                reader = csv.reader(f)
+                for name, slug in reader:
+                    Level.objects.get_or_create(name=name, slug=slug)
+        except Exception:
+            raise ("Ошибка при загрузке файла уровень кандидата:") 
+        return ("Загрузка 'Уровень кандидата' произошла успешно!"
+                " Обработка файла levels.csv завершена.")

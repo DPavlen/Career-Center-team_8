@@ -9,10 +9,12 @@ class Command(BaseCommand):
         call_command("add_courses")
         call_command("add_employ")
         call_command("add_exp")
+        call_command("add_specs")
         call_command("add_hards_cand")
         call_command("add_hards")
         call_command("add_levels")
         call_command("add_schedule")
         call_command("add_softs")
-        call_command("add_specs")
+        call_command("add_education")
+        call_command("add_exp_detail")
     
