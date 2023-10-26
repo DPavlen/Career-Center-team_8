@@ -2,6 +2,8 @@ import './CandidateHeader.scss';
 import IconButton from '@mui/material/IconButton';
 import { Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import iconBack from '../../assets/icons/ic_back.svg';
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
@@ -12,6 +14,8 @@ function CandidateHeader() {
   function goBack() {
     navigate(-1);
   }
+
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidates[0]);
 
   return (
     <header className="candidate-header">
@@ -25,7 +29,7 @@ function CandidateHeader() {
       >
         <img alt="Иконка вернуться" src={iconBack} />
       </IconButton>
-      <h1 className="candidate-header__title">Иванов Иван Иванович</h1>
+      <h1 className="candidate-header__title">{candidate.name}</h1>
       <Checkbox
         sx={{
           height: 'fit-content',

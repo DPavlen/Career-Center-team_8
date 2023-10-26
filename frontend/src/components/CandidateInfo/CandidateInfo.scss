@@ -47,6 +47,9 @@
     color: var(--Black-900);
     margin: 0;
     padding-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__icon-container {

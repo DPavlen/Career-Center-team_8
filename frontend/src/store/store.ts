@@ -11,6 +11,7 @@ export const store = configureStore({
     searchConfig: searchConfigSlice,
     selectedFilter: selectedFilterSlice,
     vacanciesFilter: vacanciesFilterSlice,
+    candidateInfo: candidatesSlice,
   },
 });
 
