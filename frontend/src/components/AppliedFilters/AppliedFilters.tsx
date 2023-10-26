@@ -67,7 +67,7 @@ function AppliedFilters() {
     setAppliedFilters(extractValues(filters));
   }, [extractValues, filters]);
 
-  if (appliedFilters) {
+  if (appliedFilters.length > 0) {
     return (
       <Box sx={{ position: 'relative', width: '99%' }}>
         <Collapse
