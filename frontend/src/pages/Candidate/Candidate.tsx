@@ -1,22 +1,17 @@
-// import { useParams } from 'react-router-dom';
-
 import './Candidate.css';
-// simport Navigation from '../../components/Navigation/Navigation';
-import Resume from '../../components/Resume/Resume';
+
+import CandidateHeader from '../../components/CandidateHeader/CandidateHeader';
+import CandidateInfo from '../../components/CandidateInfo/CandidateInfo';
+import Education from '../../components/EducationUnit/EducationUnit';
+import Experience from '../../components/Experience/Experience';
 
 function Candidate() {
-  // const { id } = useParams();
-
   return (
-    <main>
-      {/* <h1 className="title">
-        Candidate
-      </h1>
-      <p>
-        {id}
-      </p> */}
-      {/* <Navigation /> */}
-      <Resume />
+    <main className="candidate">
+      <CandidateHeader />
+      <CandidateInfo />
+      <Education />
+      <Experience />
     </main>
   );
 }

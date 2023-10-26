@@ -7,7 +7,7 @@ import { RootState } from '../../store/store';
 function Experience() {
   const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
 
-  function createDateString(yearStart: number, yearEnd: number): string {
+  function createDateString(yearStart: number, yearEnd?: number): string {
     if (yearEnd) {
       return `C ${yearStart} по ${yearEnd} год`;
     }

@@ -1,10 +1,13 @@
-import './CandidateHeader.scss';
-import IconButton from '@mui/material/IconButton';
-import { Checkbox } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
+
+import './CandidateHeader.scss';
+
+import { Checkbox } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+
 import iconBack from '../../assets/icons/ic_back.svg';
+import { RootState } from '../../store/store';
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
 
@@ -25,6 +28,9 @@ function CandidateHeader() {
           height: 'fit-content',
           width: '24px',
           marginLeft: '40px',
+          position: 'absolute',
+          top: 0,
+          left: '-150px',
         }}
       >
         <img alt="Иконка вернуться" src={iconBack} />
