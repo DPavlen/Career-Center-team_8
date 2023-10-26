@@ -1,17 +1,19 @@
+import {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import './AppliedFilters.scss';
+
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import React, { useCallback } from 'react';
-import Icon from '@mui/material/Icon';
-// import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
-import { useDispatch, useSelector } from 'react-redux';
+import Icon from '@mui/material/Icon';
 import closeIcon from '../../assets/icons/close.svg';
-// import mockFilters from '../../utils/mockData';
+
 import { RootState } from '../../store/store';
-// import { InitialState } from '../../store/vacanciesFilter/vacanciesFilter';
 import { resetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 
 type Filters = RootState['vacanciesFilter'];
@@ -22,13 +24,12 @@ interface AppliedFilter {
 }
 
 function AppliedFilters() {
-  const stackRef = React.useRef<HTMLDivElement>(null);
-  const [isShow, setIsShow] = React.useState(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [appliedFilters, setAppliedFilters] = useState<AppliedFilter[]>([]);
+  const [isOverflow, setOverflow] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const [stackHeight, setStackHeight] = React.useState(0);
-  const [isMultipleLines, setisMultipleLines] = React.useState(false);
 
-  const [appliedFilters, setAppliedFilters] = React.useState<AppliedFilter[]>([]);
+  const stackRef = useRef<HTMLDivElement | null>(null);
 
   const filters: Filters = useSelector((state: RootState) => state.vacanciesFilter);
 
@@ -56,107 +57,100 @@ function AppliedFilters() {
     return result;
   }, []);
 
-  React.useEffect(() => setAppliedFilters(extractValues(filters)), [filters]);
-
-  /* код Ростислава конец */
-
-  const handleShowButtons = () => {
+  function handleShowAllChips() {
     setIsShow(!isShow);
-  };
-  React.useEffect(() => {
-    // const stackHeight = stackRef.current?.clientHeight;
-    setStackHeight(stackRef.current!.clientHeight);
-  }, []);
+  }
 
-  const btnShow = () => (
-    <Button
-      sx={{
-        textTransform: 'none',
-        height: 28,
-        position: 'absolute',
-        top: 0,
-        right: 32,
-      }}
-      onClick={handleShowButtons}
-    >
-      Показать всё
-    </Button>
-  );
-  const btnHide = () => (
-    <Button
-      sx={{ textTransform: 'none', height: 28 }}
-      onClick={handleShowButtons}
-    >
-      Скрыть
-    </Button>
-  );
-  const btns = () => (
-    (!isShow) ? (btnShow()) : (btnHide())
-  );
-  React.useEffect(() => {
-    if (stackHeight > 40) {
-      // collapseRef.current!.style!.gridTemplateColumns = '1fr 28px';
-      setisMultipleLines(true);
-    } else setisMultipleLines(false);
-  }, [stackHeight]);
+  useEffect(() => {
+    if (stackRef.current) setOverflow(stackRef.current.offsetHeight > 28);
 
-  return (
-    <Box sx={{
-      position: 'relative',
-      paddingRight: '32px',
-      /* width: 804 */
-    }}
-    >
-      <Collapse
-        in={isShow}
-        collapsedSize={34}
-        // ref={collapseRef}
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: !isShow ? '1fr 96px' : '1fr',
-          // gridTemplateColumns: '1fr',
-        }}
-      >
-        <Stack
-          spacing={1.5}
-          useFlexGap
-          flexWrap="wrap"
-          direction="row"
-          ref={stackRef}
+    setAppliedFilters(extractValues(filters));
+  }, [filters]);
+
+  if (appliedFilters) {
+    return (
+      <Box sx={{ position: 'relative', width: '99%' }}>
+        <Collapse
+          in={isShow}
+          collapsedSize={34}
         >
-          {/* Chip чекать высоту Stack */}
-          {/* <Chip label={stackHeight} /> */}
-          {/* {mockFilters.map((filter) => ( */}
-          {appliedFilters.map((filter) => (
-            <Chip
-              key={`${filter.filterKey}_${filter.filterValue}`}
-              label={filter.filterValue}
-              deleteIcon={
-              (
-                <Icon className="xmark_icon" sx={{ width: '10px', height: '10px' }}>
-                  <img src={closeIcon} alt="delete svg" />
-                </Icon>
-              )
-            }
-              onDelete={
-                () => dispatch(resetFilter({ key: filter.filterKey, value: filter.filterValue }))
-              }
-              sx={{
-                height: '28px',
-                lineHeight: 1.2,
-                backgroundColor: '#DDE0E4',
-                '&:hover': {
-                  backgroundColor: '#EBEDF0',
-                },
-              }}
-            />
-          ))}
-          {isMultipleLines ? btns() : null}
-        </Stack>
-        {/* {btnShow()} */}
-      </Collapse>
-    </Box>
-  );
+          <Stack
+            spacing={1.5}
+            useFlexGap
+            flexWrap="wrap"
+            direction="row"
+            ref={stackRef}
+            sx={{
+              width: '90%',
+            }}
+          >
+            {appliedFilters.map((filter) => (
+              <Chip
+                key={`${filter.filterKey}_${filter.filterValue}`}
+                label={filter.filterValue}
+                deleteIcon={
+                  (
+                    <Icon
+                      sx={{
+                        width: '10px',
+                        height: '10px',
+                        cursor: 'pointer',
+                        margin: 0,
+                        '& img': {
+                          margin: 0,
+                        },
+                      }}
+                    >
+                      <img src={closeIcon} alt="delete svg" />
+                    </Icon>
+                  )
+                }
+                onDelete={
+                  () => dispatch(resetFilter({ key: filter.filterKey, value: filter.filterValue }))
+                }
+                sx={{
+                  height: '28px',
+                  lineHeight: 1.2,
+                  backgroundColor: '#DDE0E4',
+                  display: 'flex',
+                  margin: 0,
+                  '&:hover': {
+                    backgroundColor: '#EBEDF0',
+                  },
+                }}
+              />
+            ))}
+            {isOverflow
+              && (
+                !isShow
+                  ? (
+                    <Button
+                      sx={{
+                        textTransform: 'none',
+                        height: 28,
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                      }}
+                      onClick={() => handleShowAllChips()}
+                    >
+                      Показать всё
+                    </Button>
+                  )
+                  : (
+                    <Button
+                      sx={{ textTransform: 'none', height: 28 }}
+                      onClick={() => handleShowAllChips()}
+                    >
+                      Скрыть
+                    </Button>
+                  )
+              )}
+          </Stack>
+        </Collapse>
+      </Box>
+    );
+  }
 }
 
 export default AppliedFilters;
