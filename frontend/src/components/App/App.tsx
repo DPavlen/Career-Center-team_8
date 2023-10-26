@@ -15,6 +15,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
 import testResume from '../../utils/testResume.json';
+import Login from '../../pages/Login/Login';
 // import mainApi from '../../utils/MainApi';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     //   .catch((err) => console.log(err));
 
     return undefined;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -59,6 +60,10 @@ function App() {
         <Route
           path="/favorites"
           element={(<Favorites />)}
+        />
+        <Route
+          path="/login"
+          element={(<Login />)}
         />
       </Routes>
     </div>
