@@ -1,7 +1,18 @@
 .cards {
-  display: flex;
-  flex-direction: column;
-  margin-top: 32px;
-  min-width: 804px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   margin-right: 28px;
+}
+
+@media screen and (min-width: 1752px) {
+  .cards {
+    grid-template-columns: repeat(2, min-content);
+    gap: 12px;
+  }
+}
+
+@media screen and (min-width: 2316px) {
+  .cards {
+    grid-template-columns: repeat(3, min-content);
+  }
 }

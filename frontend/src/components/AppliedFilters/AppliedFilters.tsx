@@ -65,7 +65,7 @@ function AppliedFilters() {
     if (stackRef.current) setOverflow(stackRef.current.offsetHeight > 28);
 
     setAppliedFilters(extractValues(filters));
-  }, [filters]);
+  }, [extractValues, filters]);
 
   if (appliedFilters) {
     return (

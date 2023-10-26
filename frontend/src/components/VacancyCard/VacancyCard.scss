@@ -26,9 +26,19 @@
   border-radius: 12px;
   display: grid;
   grid-template-columns: 1fr 32px;
+  width: 804px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 1752px) {
+    & {
+      max-width: 552px;
+      margin-bottom: 0;
+    }
+  }
 
   &:hover {
     cursor: pointer;
+    border: 1px solid var(--Black-500);
   }
 
   &:hover &__checkbox, &_checked &__checkbox {

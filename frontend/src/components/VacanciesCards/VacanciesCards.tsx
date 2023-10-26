@@ -9,12 +9,14 @@ function VacanciesCards() {
   const candidates = useSelector((state:RootState) => state.foundCandidates.candidates);
 
   return (
-    <section className="cards">
+    <>
       <VacancySibtitle />
-      {candidates.map((card : ICandidate) => (
-        <VacancyCard key={card.id} card={card} liked={false} />
-      ))}
-    </section>
+      <section className="cards">
+        {candidates.map((card : ICandidate) => (
+          <VacancyCard key={card.id} card={card} liked={false} />
+        ))}
+      </section>
+    </>
   );
 }
 
