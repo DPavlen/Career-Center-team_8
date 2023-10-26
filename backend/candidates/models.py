@@ -263,6 +263,11 @@ class ExperienceDetailed(models.Model):
     responsibilities = models.TextField(
         "Обязанности на рабочем месте"
     )
+    slug = models.SlugField(
+        "Уникальный слаг",
+        unique=True,
+        max_length=20,
+    )
 
     def __str__(self):
         return self.name
@@ -275,14 +280,14 @@ class ExperienceDetailed(models.Model):
 
 class Education(models.Model):
     """Модель Образование для кандидата."""
-    class Level(models.TextChoices):
+    class EducationLevel(models.TextChoices):
         """Уровень образования."""
-        HIGHER = 'H', ('Высшее')
-        MASTER = 'M', ('Магистр')
-        BACHELOR = 'B', ('Бакалавр')
-        UNFINISHED_HIGHER = 'UNH', ('Неоконченное высшее')
-        CANDIDATE_SCIENS = 'PhD', ('Кандидат наук')
-        DOCTOR_SCIENS = 'Ph.D', ('Доктор наук')
+        HIGHER = 'Высшее', ('Высшее')
+        MASTER = 'Магистр', ('Магистр')
+        BACHELOR = 'Бакалавр', ('Бакалавр')
+        UNFINISHED_HIGHER = 'Неоконченное', ('Неоконченное высшее')
+        CANDIDATE_SCIENS = 'Кандидат', ('Кандидат наук')
+        DOCTOR_SCIENS = 'Доктор наук', ('Доктор наук')
         NOT_SELECTED = 'Не выбрано', ('Не выбрано')
 
     name = models.CharField(
@@ -290,11 +295,11 @@ class Education(models.Model):
         unique=True,
         max_length=255,   
     )
-    level = models.CharField(
+    education_level = models.CharField(
          "Уровень образования",
         max_length=20,
-        choices=Level.choices,
-        default=Level.HIGHER,
+        choices=EducationLevel.choices,
+        default=EducationLevel.HIGHER,
     )
     date_start = models.IntegerField(
         "Дата начала учебы",
@@ -322,9 +327,14 @@ class Education(models.Model):
         max_length=255,
         unique=True,
     )
+    slug = models.SlugField(
+        "Уникальный слаг",
+        unique=True,
+        max_length=20,
+    )
 
     def __str__(self):
-        return self.name
+        return f"Образование: {self.education_level}"
     
     class Meta:
         verbose_name = "Образование"
@@ -421,7 +431,7 @@ class Candidate(models.Model):
     location =  models.CharField(
         "Местонахождение",
         max_length=150,
-        blank=True,
+        # blank=True,
     )
     specialization = models.ManyToManyField(
         Specialization,

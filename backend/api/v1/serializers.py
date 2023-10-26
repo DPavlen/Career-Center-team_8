@@ -52,7 +52,7 @@ class EducationSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
-            "level",
+            "education_level",
             "date_start",
             "date_graduation",
             "name_university",
@@ -62,9 +62,49 @@ class EducationSerializer(serializers.ModelSerializer):
         read_only_fields = ("__all__",)
 
 
+class ShortCandidateSerializer(serializers.ModelSerializer):
+    """Сериализатор для получения краткой
+    информации о кандидате на главной странице.
+    Необходимые поля: фото, фио, город, должность, уровень, опыт)."""
+    # id = IntegerField(read_only=True)
+    experience_detailed = SerializerMethodField()
+    level = SerializerMethodField()
+    experience = SerializerMethodField()
+    # image = Base64ImageField()
+    
+    class Meta:
+        model = Candidate
+        fields = (
+            "id",
+            "image",
+            "last_name",
+            "first_name",
+            "middle_name",
+            "location",
+            "experience_detailed",
+            "level",
+            "experience",
+        )
+
+    def get_experience_detailed(self, obj):
+        """Получаем из детального опыта - должность."""
+        experience_detailed= obj.experience_detailed.values(
+            "post",
+        )
+        return experience_detailed
+    
+    def get_level(self, obj):
+        """Получаем список всех уровней(грейдов)."""
+        return obj.level.values()
+    
+    def get_experience(self, obj):
+        """Получаем опыт работы(в годах)."""
+        return obj.experience.values()
+
+
 class CandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения полной 
-    информации о кандидате."""
+    информации о кандидате(подробная страница кандидата)."""
     # id = IntegerField(read_only=True)
     experience_detailed = SerializerMethodField()
     education = SerializerMethodField()
@@ -124,7 +164,7 @@ class CandidateSerializer(serializers.ModelSerializer):
         education= obj.education.values(
            "id",
             "name",
-            "level",
+            "education_level",
             "date_start",
             "date_graduation",
             "name_university",
