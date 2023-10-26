@@ -2,15 +2,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InitialState {
-  profession: string | null;
-  course: string[];
-  skills: string[];
-  location: string[];
-  experience: string[];
-  level: string[];
-  busyType: string[];
-  workingType: string[];
+export interface InitialState {
+  [key: string]: string | string[] | null;
 }
 
 export const initialState: InitialState = {
