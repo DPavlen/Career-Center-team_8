@@ -246,6 +246,10 @@ class ExperienceDetailed(models.Model):
         unique=True,
         max_length=255,   
     )
+    post = models.CharField(
+        "Должность", 
+        max_length=255,
+    )
     date_start = models.IntegerField(
         "Дата начала работы",
         validators=[MinValueValidator(1000), 
@@ -255,10 +259,6 @@ class ExperienceDetailed(models.Model):
         "Дата окончания работы",
         validators=[MinValueValidator(1000), 
                     MaxValueValidator(9999)],
-    )
-    post = models.CharField(
-        "Должность", 
-        max_length=255,
     )
     responsibilities = models.TextField(
         "Обязанности на рабочем месте"

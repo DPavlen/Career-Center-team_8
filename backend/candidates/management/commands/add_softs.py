@@ -14,9 +14,7 @@ class Command(BaseCommand):
                 reader = csv.reader(f)
                 for name, slug in reader:
                     Soft.objects.get_or_create(name=name, slug=slug)
-                # for row in reader:
-                #     Soft.objects.get_or_create(name=row[0], slug=row[1])
-                print("Загрузка 'Cофт Cкиллов' произошла успешно!")
         except Exception:
             raise ("Ошибка при загрузке софт скиллов:") 
-        return "Обработка файла softs.csv завершена."
+        return ("Загрузка 'Cофт Cкиллов' произошла успешно!"
+                " Обработка файла softs.csv завершена.")

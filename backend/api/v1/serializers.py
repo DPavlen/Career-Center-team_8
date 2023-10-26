@@ -25,6 +25,7 @@ class ExperienceDetailedSerializer(serializers.ModelSerializer):
             "date_end",
             "post",
             "responsibilities",
+            "slug"
         )
         read_only_fields = ("__all__",)
 
@@ -58,6 +59,7 @@ class EducationSerializer(serializers.ModelSerializer):
             "name_university",
             "faculty",
             "specialization",
+            "slug",
         )
         read_only_fields = ("__all__",)
 
@@ -154,6 +156,7 @@ class CandidateSerializer(serializers.ModelSerializer):
             "date_end",
             "post",
             "responsibilities",
+            "slug",
             # amount=F("detailincandidate__amount"),
         )
         return experience_detailed
@@ -170,6 +173,7 @@ class CandidateSerializer(serializers.ModelSerializer):
             "name_university",
             "faculty",
             "specialization",
+            "slug",
         )
         return education
     
