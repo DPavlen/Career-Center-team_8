@@ -1,7 +1,7 @@
 // import { useParams } from 'react-router-dom';
 
 import './Candidate.css';
-import Navigation from '../../components/Navigation/Navigation';
+// simport Navigation from '../../components/Navigation/Navigation';
 import Resume from '../../components/Resume/Resume';
 
 function Candidate() {
@@ -15,7 +15,7 @@ function Candidate() {
       <p>
         {id}
       </p> */}
-      <Navigation />
+      {/* <Navigation /> */}
       <Resume />
     </main>
   );
