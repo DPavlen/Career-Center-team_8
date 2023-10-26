@@ -1,4 +1,5 @@
 import Avatar from '@mui/material/Avatar';
+import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
@@ -9,16 +10,17 @@ import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
 
 interface VacancyCardProps {
-  card : ICandidate;
-  liked : boolean;
+  card: ICandidate;
+  liked: boolean;
 }
 
-function VacancyCard({ card, liked = false } : VacancyCardProps) {
+function VacancyCard({ card, liked = false }: VacancyCardProps) {
   const [checked, setChecked] = useState(liked);
 
   return (
     <article className={`card ${checked ? 'card_checked' : ''}`}>
-      {/* <Checkbox
+      <Link to={`./${card.id}`} target="_blank">
+        {/* <Checkbox
         disableRipple
         sx={{
           padding: 0, paddingTop: '17px', height: 'fit-content', width: 20,
@@ -26,36 +28,37 @@ function VacancyCard({ card, liked = false } : VacancyCardProps) {
         icon={<img alt="checkbox-field" src={checkbox} />}
         checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
       /> */}
-      <div className="card__info">
-        <Avatar
-          className="card__avatar"
-          alt="Аватар пользователя"
-          src={card.photo}
-          sx={{
-            width: 53, height: 53, marginRight: '11px', marginLeft: 0,
-          }}
-          aria-label="recipe"
-        />
-        <div className="card__description">
-          <div className="card__candidate-info">
-            <p className="card__candidate-name">{card.name}</p>
-            <p className="card__city">{card.city}</p>
-          </div>
-          <h2 className="card__profession">{card.profession}</h2>
-          <div className="card__experience">
-            <p className="card__level">{card.level}</p>
-            <p className="card__attempt">
-              Опыт работы:
-              {' '}
-              <span className="card__period">
-                {card.experience}
+        <div className="card__info">
+          <Avatar
+            className="card__avatar"
+            alt="Аватар пользователя"
+            src={card.photo}
+            sx={{
+              width: 53, height: 53, marginRight: '11px', marginLeft: 0,
+            }}
+            aria-label="recipe"
+          />
+          <div className="card__description">
+            <div className="card__candidate-info">
+              <p className="card__candidate-name">{card.name}</p>
+              <p className="card__city">{card.city}</p>
+            </div>
+            <h2 className="card__profession">{card.profession}</h2>
+            <div className="card__experience">
+              <p className="card__level">{card.level}</p>
+              <p className="card__attempt">
+                Опыт работы:
                 {' '}
-                месяцев
-              </span>
-            </p>
+                <span className="card__period">
+                  {card.experience}
+                  {' '}
+                  месяцев
+                </span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="card__favorite">
         <Checkbox
           className="card__checkbox"
