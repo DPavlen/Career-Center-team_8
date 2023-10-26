@@ -1,7 +1,8 @@
 // import { useParams } from 'react-router-dom';
 
 import './Candidate.css';
-import Resume from '../../components/Navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
+import Resume from '../../components/Resume/Resume';
 
 function Candidate() {
   // const { id } = useParams();
@@ -14,6 +15,7 @@ function Candidate() {
       <p>
         {id}
       </p> */}
+      <Navigation />
       <Resume />
     </main>
   );
