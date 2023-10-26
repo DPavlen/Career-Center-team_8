@@ -35,7 +35,17 @@ const vacanciesFilterSlice = createSlice({
         store[filter] = filterValue as string[] & string;
       });
     },
-    resetFilter: (store) => {
+    // eslint-disable-next-line max-len
+    resetFilter: (store, { payload }: PayloadAction<{key: keyof InitialState, value?: string }>) => {
+      const storeValue = store[payload.key];
+      if (Array.isArray(storeValue)) {
+        store[payload.key] = storeValue.filter((v) => v !== payload.value) as string[] & string;
+        return;
+      }
+
+      store[payload.key] = initialState[payload.key] as string[] & string;
+    },
+    resetAllFilters: (store) => {
       Object.entries(initialState).forEach(([key, filterValue]) => {
         const filter: keyof InitialState = key as keyof InitialState;
 
@@ -45,6 +55,6 @@ const vacanciesFilterSlice = createSlice({
   },
 });
 
-export const { setFilter, resetFilter } = vacanciesFilterSlice.actions;
+export const { setFilter, resetFilter, resetAllFilters } = vacanciesFilterSlice.actions;
 
 export default vacanciesFilterSlice.reducer;

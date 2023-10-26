@@ -27,7 +27,15 @@ function VacancyCard({ card, liked = false } : VacancyCardProps) {
         checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
       /> */}
       <div className="card__info">
-        <Avatar className="card__avatar" alt="Аватар пользователя" src={card.photo} sx={{ width: 53, height: 53, marginRight: '11px' }} aria-label="recipe" />
+        <Avatar
+          className="card__avatar"
+          alt="Аватар пользователя"
+          src={card.photo}
+          sx={{
+            width: 53, height: 53, marginRight: '11px', marginLeft: 0,
+          }}
+          aria-label="recipe"
+        />
         <div className="card__description">
           <div className="card__candidate-info">
             <p className="card__candidate-name">{card.name}</p>

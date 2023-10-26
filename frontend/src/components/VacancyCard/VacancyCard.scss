@@ -21,13 +21,26 @@
 }
 
 .card {
-  padding: 20px 26px 22px 12px;
-  border-top: 1px solid var(--Black-100);
+  padding: 20px 26px 22px 20px;
+  border: 1px solid var(--Black-100);
+  border-radius: 12px;
   display: grid;
-  grid-template-columns: /* 20px  */1fr 178px;
+  grid-template-columns: 1fr 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:hover &__checkbox, &_checked &__checkbox {
     opacity: 1;
+  }
+
+  &:hover &__candidate-name, &_checked &__candidate-name {
+    color: var(--Blue-Main);
+  }
+
+  &:hover &__profession, &_checked &__profession {
+    color: var(--Blue-Main);
   }
 
   &_checked {

@@ -2,51 +2,59 @@ import './AppliedFilters.scss';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import React from 'react';
+import React, { useCallback } from 'react';
 import Icon from '@mui/material/Icon';
 // import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from '../../assets/icons/close.svg';
 // import mockFilters from '../../utils/mockData';
 import { RootState } from '../../store/store';
 // import { InitialState } from '../../store/vacanciesFilter/vacanciesFilter';
+import { resetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+
+type Filters = RootState['vacanciesFilter'];
+
+interface AppliedFilter {
+  filterKey: keyof Filters;
+  filterValue: string;
+}
 
 function AppliedFilters() {
-  const handleDelete = () => null;
   const stackRef = React.useRef<HTMLDivElement>(null);
-  // const collapseRef = React.useRef<HTMLDivElement>(null);
   const [isShow, setIsShow] = React.useState(false);
+  const dispatch = useDispatch();
   const [stackHeight, setStackHeight] = React.useState(0);
   const [isMultipleLines, setisMultipleLines] = React.useState(false);
 
-  /*  Код Ростислава */
-
-  interface Filters {
-    [key: string]: string | string[] | null;
-  }
-
-  const [appliedFilters, setAppliedFilters] = React.useState<string[] | null>(null);
+  const [appliedFilters, setAppliedFilters] = React.useState<AppliedFilter[]>([]);
 
   const filters: Filters = useSelector((state: RootState) => state.vacanciesFilter);
 
-  function extractValues(saveFilters: Filters): string[] | null {
-    let result: string[] = [];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in saveFilters) {
-      if (typeof saveFilters[key] === 'object') {
-        result = result.concat(saveFilters[key] as string[]);
-      } else if (saveFilters[key] !== null) {
-        result.push(saveFilters[key] as string);
-      }
-    }
-    if (result[0] !== null) {
-      return result;
-    }
+  const extractValues = useCallback((savedFilters: Filters): AppliedFilter[] => {
+    let result: AppliedFilter[] = [];
 
-    return null;
-  }
+    Object.entries(savedFilters).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        result = [...result, ...value.map((v): AppliedFilter => ({
+          filterKey: key as keyof Filters,
+          filterValue: v,
+        }))];
+
+        return;
+      }
+
+      if (value) {
+        result.push({
+          filterKey: key as keyof Filters,
+          filterValue: value,
+        });
+      }
+    });
+
+    return result;
+  }, []);
 
   React.useEffect(() => setAppliedFilters(extractValues(filters)), [filters]);
 
@@ -119,20 +127,20 @@ function AppliedFilters() {
           {/* Chip чекать высоту Stack */}
           {/* <Chip label={stackHeight} /> */}
           {/* {mockFilters.map((filter) => ( */}
-          {appliedFilters !== null && appliedFilters.map((filter, index) => (
+          {appliedFilters.map((filter) => (
             <Chip
-              // key={Math.floor(Math.random() * 999)}
-              key={index}
-              label={filter}
-              // Иконка слишком большая, попробовать сделать через svg file из assets
+              key={`${filter.filterKey}_${filter.filterValue}`}
+              label={filter.filterValue}
               deleteIcon={
-                (
-                  <Icon className="xmark_icon" sx={{ width: '10px', height: '10px' }}>
-                    <img src={closeIcon} alt="delete svg" />
-                  </Icon>
-                )
+              (
+                <Icon className="xmark_icon" sx={{ width: '10px', height: '10px' }}>
+                  <img src={closeIcon} alt="delete svg" />
+                </Icon>
+              )
+            }
+              onDelete={
+                () => dispatch(resetFilter({ key: filter.filterKey, value: filter.filterValue }))
               }
-              onDelete={handleDelete}
               sx={{
                 height: '28px',
                 lineHeight: 1.2,

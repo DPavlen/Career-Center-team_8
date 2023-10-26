@@ -7,7 +7,7 @@ import skillsData from '../../utils/testSkills.json';
 import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 import deleteIcon from '../../assets/icons/delete.svg';
-import { initialState, resetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+import { initialState, resetAllFilters } from '../../store/vacanciesFilter/vacanciesFilter';
 import { RootState } from '../../store/store';
 
 function Filters() {
@@ -44,7 +44,7 @@ function Filters() {
             padding: 0,
             fontWeight: '400',
           }}
-          onClick={() => dispatch(resetFilter())}
+          onClick={() => dispatch(resetAllFilters())}
         >
           Сбросить
         </Button>

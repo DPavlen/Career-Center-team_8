@@ -6,6 +6,7 @@ import phone from '../../assets/icons/phone.svg';
 import email from '../../assets/icons/email.svg';
 import telegram from '../../assets/icons/telegram.svg';
 import CandidateHeader from '../CandidateHeader/CandidateHeader';
+import avatar from '../../assets/candidatePhoto.png';
 import { RootState } from '../../store/store';
 
 function CandidateInfo() {
@@ -17,9 +18,15 @@ function CandidateInfo() {
         <div
           className="candidate-info__avatar"
           style={{
-            backgroundImage: `url(${candidate?.image})`,
+            backgroundImage: `url(${avatar})`,
           }}
         />
+        {/* <div
+          className="candidate-info__avatar"
+          style={{
+            backgroundImage: `url(${candidate?.image})`,
+          }}
+        /> */}
         <div className="candidate-info__container">
           <h2 className="candidate-info__title">{candidate?.specialization}</h2>
           <div className="candidate-info__wrapper">
