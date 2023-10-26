@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from users.views import CustomUserViewSet
-from api.views import (
+from api.v1.views import (
     ExperienceDetailedViewSet,
     EducationViewSet,
     CandidateViewSet)
@@ -20,7 +20,7 @@ router.register("experience_detailed",
 router.register("education", EducationViewSet, "education")
 
 urlpatterns = [
-    path("", include(router.urls)),
-    path("", include("djoser.urls")),
+    path("v1/", include(router.urls)),
+    path("v1/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
 ]

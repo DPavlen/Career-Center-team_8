@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addCandidates } from '../../store/candidates/candidates';
+import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
 
 import './App.scss';
 
@@ -13,21 +14,23 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Sidebar from '../Sidebar/Sidebar';
 
 import tesData from '../../utils/testData.json';
-import mainApi from '../../utils/MainApi';
+import testResume from '../../utils/testResume.json';
+// import mainApi from '../../utils/MainApi';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(addCandidates({ candidates: tesData }));
+    dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
 
-    mainApi.signIn('admin23', 'sansan1234')
-      .then((token) => {
-        console.log(token);
-        mainApi.getUser(token.auth_token)
-          .then((user) => console.log(user));
-      })
-      .catch((err) => console.log(err));
+    // mainApi.signIn('admin23', 'sansan1234')
+    //   .then((token) => {
+    //     console.log(token);
+    //     mainApi.getUser(token.auth_token)
+    //       .then((user) => console.log(user));
+    //   })
+    //   .catch((err) => console.log(err));
 
     return undefined;
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     "djoser",
     "candidates.apps.CandidatesConfig",
     "vacancies.apps.VacanciesConfig",
-    "api.apps.ApiConfig",
+    "api.v1.apps.ApiConfig",
     "core",
     "corsheaders",
 ]

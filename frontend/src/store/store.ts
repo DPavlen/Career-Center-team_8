@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { configureStore } from '@reduxjs/toolkit';
 import candidatesSlice from './candidates/candidates';
+import candidateInfoSlice from './candidateInfo/candidateInfo';
 import searchConfigSlice from './searchConfig/searchConfig';
 import selectedFilterSlice from './selectedFilter/selectedFilter';
 import vacanciesFilterSlice from './vacanciesFilter/vacanciesFilter';
@@ -8,6 +9,7 @@ import vacanciesFilterSlice from './vacanciesFilter/vacanciesFilter';
 export const store = configureStore({
   reducer: {
     foundCandidates: candidatesSlice,
+    candidateInfo: candidateInfoSlice,
     searchConfig: searchConfigSlice,
     selectedFilter: selectedFilterSlice,
     vacanciesFilter: vacanciesFilterSlice,
