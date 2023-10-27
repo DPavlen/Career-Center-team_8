@@ -18,7 +18,7 @@ class MainApi {
     return Promise.reject(JSON.parse(error));
   }
 
-  private setOptions(body: Data) {
+  private setPostOptions(body: Data) {
     return {
       method: 'POST',
       credentials: 'include' as RequestCredentials,
@@ -29,10 +29,20 @@ class MainApi {
     };
   }
 
+  private setGetOptions(token: string) {
+    return {
+      method: 'GET',
+      credentials: 'include' as RequestCredentials,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+  }
+
   public async signIn(username: string, password: string): Promise<never | Data> {
     const res = await fetch(
-      `${this.baseUrl}/auth/token/login`,
-      this.setOptions({ username, password }),
+      `${this.baseUrl}/auth/token/login/`,
+      this.setPostOptions({ username, password }),
     );
 
     return this.getResponseData(res);
@@ -40,14 +50,8 @@ class MainApi {
 
   public async getUser(token: string): Promise<never | Data> {
     const res = await fetch(
-      `${this.baseUrl}/users/me/`,
-      {
-        method: 'GET',
-        credentials: 'include' as RequestCredentials,
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      },
+      `${this.baseUrl}/v1/users/me/`,
+      this.setGetOptions(token),
     );
 
     return this.getResponseData(res);
@@ -67,8 +71,35 @@ class MainApi {
 
     return this.getResponseData(res);
   }
+
+  public async getCandidates(token: string): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidate/`,
+      this.setGetOptions(token),
+    );
+
+    return this.getResponseData(res);
+  }
+
+  public async getCandidateExperience(token: string): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/experience_detailed/`,
+      this.setGetOptions(token),
+    );
+
+    return this.getResponseData(res);
+  }
+
+  public async getCandidateEducation(token: string): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/education/`,
+      this.setGetOptions(token),
+    );
+
+    return this.getResponseData(res);
+  }
 }
 
-const mainApi = new MainApi('http://127.0.0.1:8000/api');
+const mainApi = new MainApi('http://84.201.133.88:8000/api');
 
 export default mainApi;
