@@ -1,47 +1,59 @@
-.background_container {
+.login {
   background: var(--Black-900);
-}
+  background-image: url(../../assets/background.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.form-container {
-  margin: 0 auto;
-  width: 400px;
-  height: 382px;
-  background: var(--White);
-  position: absolute;
-  top: 160px;
-  left: 520px;
-  border-radius: 16px;
-}
-
-.login-form {
-  text-align: center;
-  h2 {
-    margin: 40px 0 24px 0;
+  &__container {
+    width: 400px;
+    height: 382px;
+    background: var(--White);
+    border-radius: 16px;
+    padding: 40px 40px;
   }
-  h4 {
-    margin: 0 0 24px 0;
+
+  &__title {
+    font-family: 'YS Display';
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.14;
+    padding-bottom: 24px;
+    margin: 0;
+  }
+
+  &__account {
+    font-family: 'YS Text';
+    text-align: center;
+    font-size: 16px;
     font-weight: 400;
-  }
-  * {
-    margin: 0 auto
+    line-height: 1.37;
+    padding-bottom: 24px;
+    margin: 0;
   }
 
-  input {
-    text-align: start;
-    width: 320px;
-    height: 46px;
-    gap: 4px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__input {
+    width: 100%;
     border: 1px solid var(--Black-100);
     border-radius: 6px;
-    padding-left: 10px;
-  }
+    padding: 12px;
 
-  .submit-button {
-    width: 320px;
-    height: 52px;
+    &::placeholder {
+      font-size: 16px;
+      line-height: 1.37;
+      color: var(--Black-500);
+    }
   }
 }
 
-.input_password {
-  margin: 20px 0 36px 0;
-}

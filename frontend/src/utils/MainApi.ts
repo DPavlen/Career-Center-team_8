@@ -74,7 +74,7 @@ class MainApi {
 
   public async getCandidates(token: string): Promise<never | Data> {
     const res = await fetch(
-      `${this.baseUrl}/v1/candidate/`,
+      `${this.baseUrl}/v1/candidates/`,
       this.setGetOptions(token),
     );
 
