@@ -5,3 +5,13 @@
 img {
   object-fit: cover;
 }
+
+.chips-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .chips-item {
+    margin: 0 8px 8px 0;
+  }
+}

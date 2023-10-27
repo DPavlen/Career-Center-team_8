@@ -4,6 +4,7 @@ import { Chip } from '@mui/material';
 // import closeIcon from '../../assets/icons/xmark.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import type { HardSkill } from '../../store/candidateInfo/candidateInfo';
+import './Chips.scss';
 
 type TChipsProps = {
   data: HardSkill[];
@@ -22,9 +23,9 @@ function Chips({ ...props }: TChipsProps) {
     xmark,
   } = props;
   return (
-    <ul className={listStyle}>
+    <ul className={`${listStyle} chips-list`}>
       {data.map((item) => (
-        <li key={uuid()} className={itemStyle}>
+        <li key={uuid()} className={`${itemStyle} chips-item`}>
           {xmark ? (
             <Chip
               label={item.name}
