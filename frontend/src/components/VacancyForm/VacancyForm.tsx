@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import iconBack from '../../assets/icons/ic_back.svg';
 import './VacancyForm.scss';
 import VacancyInput from '../VacancyInput/VacancyInput';
+import AppliedFilters from '../AppliedFilters/AppliedFilters';
 
 function VacancyForm() {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ function VacancyForm() {
         <div className="vacancy-form__filter">
           <h2 className="vacancy-form__description">Фильтры*</h2>
           <p className="vacancy-form__choose-filter">Выберите не менее одного параметра в разделе &quot;Фильтр&quot; справа</p>
+          <AppliedFilters />
         </div>
       </form>
       <div>
@@ -65,6 +67,7 @@ function VacancyForm() {
             fontSize: '16px',
             textColor: 'var(--White)',
             marginBottom: '100px',
+            marginTop: '24px',
             '&.Mui-disabled': { backgroundColor: 'var(--Black-300)', color: 'var(--White)' },
           }}
           variant="contained"
@@ -83,6 +86,7 @@ function VacancyForm() {
             color: 'var(--Blue-Main)',
             marginLeft: '8px',
             marginBottom: '100px',
+            marginTop: '24px',
           }}
           variant="outlined"
         >
