@@ -1,0 +1,11 @@
+.vacancy-list {
+  margin-left: 32px;
+  margin-top: 32px;
+  max-width: 911px;
+}
+
+@media screen and (min-width: 1542px) {
+  .vacancy-list {
+    max-width: 1012px;
+  }
+}
