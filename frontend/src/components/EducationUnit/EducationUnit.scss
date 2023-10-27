@@ -2,13 +2,27 @@
   width: 284px;
 }
 
-.tech_stack__container {
-  background: #Fff;
-  flex-wrap: wrap;
+.direction {
+  margin: 0 0 16px 0;
+}
+
+.courses_list {
+  display: block;
+  // padding: 16px 0 40px 0;
+  margin: 16px 0 40px 0;
+
+  * {
+    margin-bottom: 8px;
+  }
+}
+
+.hards_chip_list {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: 20px 0 40px 0;
 
-  .tech_chip {
+  .hards_chip {
     padding: 4px 12px 4px 12px;
     background: #EBEDF0;
     border-radius: 6px;
@@ -16,32 +30,6 @@
   }
 }
 
-.courses_container {
-  display: block;
-  margin: 28px 0 40px 0;
-
-  :first-child {
-    margin-bottom: 16px;
-  }
-}
-.direction {
-  margin: 0  0 16px 0;
-}
-
-.cources {
-  display: block;
-  margin: 0 0 8px 0;
-}
-
-
-.education {
+.education_container {
   margin-bottom: 16px;
-  &__container {
-    display: inline-block;
-
-
-    .edu {
-      display: inline-block;
-    }
-  }
 }
