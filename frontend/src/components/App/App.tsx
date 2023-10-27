@@ -163,7 +163,12 @@ function App() {
         />
         <Route
           path="/create-vacancy"
-          element={(<CreateVacancy />)}
+          element={(
+            <>
+              <Sidebar onLogOut={() => logOut()} />
+              <CreateVacancy />
+            </>
+          )}
         />
       </Routes>
     </div>
