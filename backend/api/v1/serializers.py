@@ -76,7 +76,7 @@ class ShortCandidateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Candidate
-        fields = (
+        fields = [
             "id",
             "image",
             "last_name",
@@ -86,7 +86,7 @@ class ShortCandidateSerializer(serializers.ModelSerializer):
             "experience_detailed",
             "level",
             "experience",
-        )
+        ]
 
     def get_experience_detailed(self, obj):
         """Получаем из детального опыта - должность."""
@@ -96,12 +96,12 @@ class ShortCandidateSerializer(serializers.ModelSerializer):
         return experience_detailed
     
     def get_level(self, obj):
-        """Получаем список всех уровней(грейдов)."""
-        return obj.level.values()
-    
+        """Получаем уровень(грейд) кандидата."""
+        return obj.level.name
+
     def get_experience(self, obj):
         """Получаем опыт работы(в годах)."""
-        return obj.experience.values()
+        return obj.experience.name
 
 
 class CandidateSerializer(serializers.ModelSerializer):
@@ -110,6 +110,7 @@ class CandidateSerializer(serializers.ModelSerializer):
     # id = IntegerField(read_only=True)
     experience_detailed = SerializerMethodField()
     education = SerializerMethodField()
+    specialization = SerializerMethodField()        
     course = SerializerMethodField()
     level = SerializerMethodField()
     hards = SerializerMethodField()
@@ -182,8 +183,12 @@ class CandidateSerializer(serializers.ModelSerializer):
         return obj.course.values()
     
     def get_level(self, obj):
-        """Получаем список всех уровней(грейдов)."""
-        return obj.level.values()
+        """Получаем уровень(грейд) кандидата."""
+        return obj.level.name
+    
+    def get_specialization(self, obj):
+        """Получаем специализацию кандидата."""
+        return obj.specialization.name
     
     def get_hards(self, obj):
         """Получаем список всех хард-скилов(ключевые навыки)."""
@@ -194,8 +199,8 @@ class CandidateSerializer(serializers.ModelSerializer):
         return obj.softs.values()
     
     def get_experience(self, obj):
-        """Получаем список опыта работы(в годах)."""
-        return obj.experience.values()
+        """Получаем опыт работы(в годах)."""
+        return obj.experience.name
     
     def get_employment_type(self, obj):
         """Получаем список типа занятости."""

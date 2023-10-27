@@ -397,6 +397,8 @@ class Candidate(models.Model):
         upload_to="candidates/images/", 
         null=True, 
         default=None,
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     sex = models.CharField(
         "Пол кандидата",
@@ -433,50 +435,71 @@ class Candidate(models.Model):
         max_length=150,
         # blank=True,
     )
-    specialization = models.ManyToManyField(
+    specialization = models.ForeignKey(
         Specialization,
         related_name="candidates",
+        on_delete=models.CASCADE,
         verbose_name="Специализация",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     course = models.ManyToManyField(
         Course,
         related_name="candidates",
         verbose_name="Курс",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
-    level = models.ManyToManyField(
+    level = models.ForeignKey(
         Level,
         related_name="candidates",
+        on_delete=models.CASCADE,
         verbose_name="Уровень",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     hards = models.ManyToManyField(
         HardCands,
         related_name="candidates",
         verbose_name="Хард скиллы",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     softs = models.ManyToManyField(
         Soft,
         related_name="candidates",
         verbose_name="Soft скиллы",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
-    experience = models.ManyToManyField(
+    experience = models.ForeignKey(
         Experience,
         related_name="candidates",
+        on_delete=models.CASCADE,
         verbose_name="Опыт работы",
+         # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     employment_type = models.ManyToManyField(
         EmploymentType,
         related_name="candidates",
         verbose_name="Тип занятости",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     work_schedule = models.ManyToManyField(
         WorkSchedule,
         related_name="candidates",
         verbose_name="График работы",
+         # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     experience_detailed = models.ManyToManyField(
         ExperienceDetailed,
         related_name="candidates",
         verbose_name="Детальный опыт работы",
+         # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
     about_me = models.TextField(
         "Обо мне",
@@ -485,6 +508,8 @@ class Candidate(models.Model):
         Education,
         related_name="candidates",
         verbose_name="Образование",
+        # Поставлено необязательно для корректной загрузки
+        blank=True,
     )
 
     class Meta:
