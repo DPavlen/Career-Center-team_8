@@ -2,70 +2,102 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface ICandidate {
-  photo: string;
-  name: string;
-  city: string;
-  experience: number;
-  profession: string;
-  level: string;
-  education: string;
-  courses: string[];
-  job_part: string;
-  job_type: string[];
-  contact_info: {
-    email: string;
-    phone: string;
-    telegram: string;
-  };
-  age: number;
-  tech_stack: string[];
+interface ExperienceDetailed {
   id: number;
+  name: string;
+  date_start: number;
+  date_end: number;
+  post: string;
+  responsibilities: string;
+}
+
+interface Education {
+  id: number;
+  name: string;
+  education_level: string;
+  date_start: number;
+  date_graduation: number;
+  name_university: string;
+  faculty: string;
+  specialization: string;
+}
+
+interface Course {
+  id: number;
+  name: string;
+  spec_id: number;
+  slug: string;
+}
+
+interface Level {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface HardSkill {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface SoftSkill {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface Experience {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface EmploymentType {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface WorkSchedule {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface ICandidate {
+  id: number;
+  last_name: string;
+  first_name: string;
+  middle_name: string;
+  experience_detailed: ExperienceDetailed[];
+  education: Education[];
+  image: string;
+  sex: string;
+  age: number;
+  contacts_phone: string;
+  contacts_email: string;
+  contacts_other: string;
+  activity: string;
+  location: string;
+  specialization: number[];
+  course: Course[];
+  level: Level[];
+  hards: HardSkill[];
+  softs: SoftSkill[];
+  experience: Experience[];
+  employment_type: EmploymentType[];
+  work_schedule: WorkSchedule[];
 }
 
 export interface InitialState {
   total: number,
-  candidates: Partial<ICandidate[]>,
+  candidates: Partial<ICandidate[]> | null,
 }
 
 const initialState: InitialState = {
   total: 0,
-  candidates: [{
-    id: 1,
-    photo: 'https://i.pravatar.cc/150?img=1',
-    name: 'Березовсконогузадерищенский Александр',
-    city: 'Санкт-Петербург',
-    experience: 8,
-    profession: 'UI/UX дизайнер',
-    courses: ['Дизайн разработка', 'UI/UX Дизайн'],
-    job_part: 'Полная',
-    job_type: ['Офис', 'Удаленка'],
-    level: 'Senior',
-    education: 'Российский государственный аграрный университет, Москва ИМЭ им. В. П. Горячкина, Агроинженерия',
-    contact_info: {
-      email: 'ivanov@example.com',
-      phone: '+7 900 123 4567',
-      telegram: 'ivanovtelega12345',
-    },
-    age: 23,
-    tech_stack: [
-      'HTML',
-      'CSS',
-      'JavaScript',
-      'Typescript',
-      'Webpack',
-      'Python',
-      'vite',
-      'SCSS',
-      'Java',
-      'Node.js',
-      'Webpack',
-      'Python',
-      'vite',
-      'SCSS',
-      'Java',
-    ],
-  }],
+  candidates: null,
 };
 
 const candidatesSlice = createSlice({
@@ -73,16 +105,20 @@ const candidatesSlice = createSlice({
   initialState,
   reducers: {
     addCandidates: (store, { payload }) => {
-      store.candidates = store.candidates.concat(payload.candidates);
-      store.total += payload.candidates.length;
+      store.candidates = payload.candidates;
+      store.total = payload.candidates.length;
     },
     addMoreCandidates: (store, { payload }) => {
-      store.candidates = store.candidates.concat(payload.candidates);
+      // store.candidates = store.candidates.concat(payload.candidates);
       store.total += payload.candidates.length;
+    },
+    clearCandidates: (store) => {
+      store.candidates = null;
+      store.total = 0;
     },
   },
 });
 
-export const { addCandidates, addMoreCandidates } = candidatesSlice.actions;
+export const { addCandidates, addMoreCandidates, clearCandidates } = candidatesSlice.actions;
 
 export default candidatesSlice.reducer;

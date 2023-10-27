@@ -5,6 +5,7 @@ import candidateInfoSlice from './candidateInfo/candidateInfo';
 import searchConfigSlice from './searchConfig/searchConfig';
 import selectedFilterSlice from './selectedFilter/selectedFilter';
 import vacanciesFilterSlice from './vacanciesFilter/vacanciesFilter';
+import userSlice from './user/user';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     searchConfig: searchConfigSlice,
     selectedFilter: selectedFilterSlice,
     vacanciesFilter: vacanciesFilterSlice,
+    user: userSlice,
   },
 });
 
