@@ -11,6 +11,7 @@ function Vacancy() {
           Вакансии
         </h1>
         <Button
+          href="/create-vacancy"
           startIcon={<img alt="plus-icon" src={plus} />}
           sx={{
             borderRadius: '6px',

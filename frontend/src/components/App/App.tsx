@@ -18,6 +18,8 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 
 import testResume from '../../utils/testResume.json';
+import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
+// import mainApi from '../../utils/MainApi';
 
 function App() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -114,6 +116,10 @@ function App() {
         <Route
           path="/login"
           element={(<Login />)}
+        />
+        <Route
+          path="/create-vacancy"
+          element={(<CreateVacancy />)}
         />
       </Routes>
     </div>

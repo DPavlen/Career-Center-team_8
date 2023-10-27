@@ -1,11 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import './CandidateHeader.scss';
-
 import { Checkbox } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-
 import iconBack from '../../assets/icons/ic_back.svg';
 import { RootState } from '../../store/store';
 import like from '../../assets/icons/Like.svg';
