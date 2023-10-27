@@ -6,28 +6,28 @@ from rest_framework.relations import PrimaryKeyRelatedField
 from drf_extra_fields.fields import Base64ImageField
 
 from candidates.models import (
-    ExperienceDetailed,
-    DetailInCandidate,
-    Education,
-    Candidate,)
+    # ExperienceDetailed,
+    # DetailInCandidate,
+    # Education,
+    Candidate)
 
 
-class ExperienceDetailedSerializer(serializers.ModelSerializer):
-    """Сериализатор для получения 
-    детального опыта работы кандидата."""
+# class ExperienceDetailedSerializer(serializers.ModelSerializer):
+#     """Сериализатор для получения 
+#     детального опыта работы кандидата."""
 
-    class Meta:
-        model = ExperienceDetailed
-        fields = (
-            "id",
-            "name",
-            "date_start",
-            "date_end",
-            "post",
-            "responsibilities",
-            "slug"
-        )
-        read_only_fields = ("__all__",)
+#     class Meta:
+#         model = ExperienceDetailed
+#         fields = (
+#             "id",
+#             "name",
+#             "date_start",
+#             "date_end",
+#             "post",
+#             "responsibilities",
+#             "slug"
+#         )
+#         read_only_fields = ("__all__",)
 
 
 # class DetailInCandidateSerializer(serializers.ModelSerializer):
@@ -44,24 +44,24 @@ class ExperienceDetailedSerializer(serializers.ModelSerializer):
 #         )
 
 
-class EducationSerializer(serializers.ModelSerializer):
-    """Сериализатор для получения информации об 
-    образовании кандидата."""
+# class EducationSerializer(serializers.ModelSerializer):
+#     """Сериализатор для получения информации об 
+#     образовании кандидата."""
 
-    class Meta:
-        model = Education
-        fields = (
-            "id",
-            "name",
-            "education_level",
-            "date_start",
-            "date_graduation",
-            "name_university",
-            "faculty",
-            "specialization",
-            "slug",
-        )
-        read_only_fields = ("__all__",)
+#     class Meta:
+#         model = Education
+#         fields = (
+#             "id",
+#             "name",
+#             "education_level",
+#             "date_start",
+#             "date_graduation",
+#             "name_university",
+#             "faculty",
+#             "specialization",
+#             "slug",
+#         )
+#         read_only_fields = ("__all__",)
 
 
 class ShortCandidateSerializer(serializers.ModelSerializer):
@@ -72,7 +72,7 @@ class ShortCandidateSerializer(serializers.ModelSerializer):
     experience_detailed = SerializerMethodField()
     level = SerializerMethodField()
     experience = SerializerMethodField()
-    # image = Base64ImageField()
+    image = Base64ImageField()
     
     class Meta:
         model = Candidate
@@ -117,8 +117,8 @@ class CandidateSerializer(serializers.ModelSerializer):
     experience = SerializerMethodField()
     employment_type = SerializerMethodField()
     work_schedule = SerializerMethodField()
+    image = Base64ImageField()
 
-    # image = Base64ImageField()
     class Meta:
         model = Candidate
         fields = (
