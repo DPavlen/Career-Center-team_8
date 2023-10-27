@@ -1,9 +1,12 @@
 import './Vacancy.scss';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import plus from '../../assets/icons/plus.svg';
 import VacancyList from '../../components/VacancyList/VacancyList';
 
 function Vacancy() {
+  const navigate = useNavigate();
+
   return (
     <main>
       <header className="vacancy">
@@ -11,7 +14,7 @@ function Vacancy() {
           Вакансии
         </h1>
         <Button
-          href="/create-vacancy"
+          onClick={() => navigate('/create-vacancy')}
           startIcon={<img alt="plus-icon" src={plus} />}
           sx={{
             borderRadius: '6px',

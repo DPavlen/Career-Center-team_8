@@ -1,13 +1,18 @@
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import iconBack from '../../assets/icons/ic_back.svg';
 import './VacancyForm.scss';
 import VacancyInput from '../VacancyInput/VacancyInput';
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
+import { RootState } from '../../store/store';
+import { createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 
 function VacancyForm() {
   const navigate = useNavigate();
+  const filterValue = useSelector((state: RootState) => state.createVacancyFilter);
+  const dispatch = useDispatch();
 
   function goBack() {
     navigate(-1);
@@ -52,12 +57,15 @@ function VacancyForm() {
         <div className="vacancy-form__filter">
           <h2 className="vacancy-form__description">Фильтры*</h2>
           <p className="vacancy-form__choose-filter">Выберите не менее одного параметра в разделе &quot;Фильтр&quot; справа</p>
-          <AppliedFilters />
+          <AppliedFilters
+            filterValue={filterValue}
+            onResetFilter={(filter) => dispatch(createVacancyResetFilter(filter))}
+          />
         </div>
       </form>
       <div>
         <Button
-          href="/create-vacancy"
+          onClick={() => navigate('/create-vacancy')}
           sx={{
             borderRadius: '6px',
             textTransform: 'none',

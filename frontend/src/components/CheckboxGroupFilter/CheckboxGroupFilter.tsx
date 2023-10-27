@@ -1,14 +1,12 @@
 import './CheckboxGroupFilter.scss';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Filter, { IFilterProps } from '../Filter/Filter';
 import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 import checkbox from '../../assets/icons/checkbox.svg';
 import Scrollbar from '../Scrollbar/Scrollbar';
 import FilterInput from '../FilterInput/FilterInput';
-import { RootState } from '../../store/store';
-import { setFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+import { IFilter } from '../../store/filter';
 
 interface IOption {
   id: number;
@@ -17,41 +15,45 @@ interface IOption {
 
 interface ICheckboxFilterProps extends Partial<IFilterProps> {
   data: IOption[];
-  filter: keyof RootState['vacanciesFilter'];
+  filter: keyof IFilter;
+  filterValue: IFilter;
+  // eslint-disable-next-line no-unused-vars
+  onSetFilter: (filter: Partial<IFilter>) => void;
   title: string;
   placeholder?: string;
   withSearch?: boolean;
-  panel: string;
 }
 
 function CheckboxGroupFilter({
-  data, withSearch, title, placeholder, panel, filter, ...filterProps
+  data, withSearch, title, placeholder, filter, filterValue, onSetFilter, ...filterProps
 }: ICheckboxFilterProps) {
-  const value = useSelector((state: RootState) => state.vacanciesFilter[filter] as string[]);
-  const dispatch = useDispatch();
+  const [value, setValue] = useState<string[]>([]);
+  useEffect(() => {
+    setValue(filterValue[filter] as string[]);
+  }, [filter, filterValue]);
   const [search, setSearch] = useState<string>('');
   const [filtred, setFiltred] = useState<IOption[]>([]);
 
   // eslint-disable-next-line no-shadow
   const onValueChange = useCallback((name: string) => {
     if (value.some((d) => d === name)) {
-      dispatch(setFilter({
+      onSetFilter({
         [filter]: value.filter((d) => d !== name),
-      }));
+      });
       return;
     }
 
-    dispatch(setFilter({
+    onSetFilter({
       [filter]: [...value, name],
-    }));
-  }, [value, dispatch, filter]);
+    });
+  }, [value, onSetFilter, filter]);
 
   useEffect(() => {
     setFiltred(data.filter((d) => d.value.toLowerCase().includes(search.toLowerCase())));
   }, [search, data]);
 
   return (
-    <Filter text={title} {...filterProps} panel={panel}>
+    <Filter text={title} {...filterProps} filter={filter}>
       { withSearch
         ? <FilterInput placeholder={placeholder} search={search} setSearch={setSearch} />
         : null}

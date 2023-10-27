@@ -1,20 +1,21 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IFilter } from '../filter';
 
 interface InitialState {
-  selectedFilter: string | null
+  selectedFilter: keyof IFilter | null
 }
 
 const initialState: InitialState = {
-  selectedFilter: 'panel2',
+  selectedFilter: 'profession',
 };
 
 const selectedFilterSlice = createSlice({
   name: 'select-filter',
   initialState,
   reducers: {
-    selectFilter: (store, { payload }: PayloadAction<string | null>) => {
+    selectFilter: (store, { payload }: PayloadAction<keyof IFilter | null>) => {
       store.selectedFilter = payload;
     },
   },
