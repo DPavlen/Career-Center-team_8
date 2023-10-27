@@ -52,7 +52,7 @@ const theme = createTheme({
           fontSize: '16px',
           color: 'var(--White)',
           textTransform: 'none',
-          background: 'var(--Blue, #5A9BFF)',
+          // background: 'var(--Blue, #5A9BFF)',
         },
       },
     },
