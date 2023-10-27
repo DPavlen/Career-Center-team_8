@@ -128,3 +128,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Временная настройка для работы без Dockera!
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
