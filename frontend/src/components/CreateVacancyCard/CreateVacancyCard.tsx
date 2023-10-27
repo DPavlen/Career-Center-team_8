@@ -41,8 +41,8 @@ function CreateVacancyCard() {
           >
             Показать специалистов
           </Button>
-          <div className="vacancy-card__delete">
             <Button
+            className="vacancy-card__delete"
               sx={{
                 textTransform: 'none',
                 color: 'var(--Black-500)',
@@ -57,7 +57,6 @@ function CreateVacancyCard() {
             >
               Удалить вакансию
             </Button>
-          </div>
         </div>
       </div>
     </article>
