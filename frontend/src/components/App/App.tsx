@@ -91,7 +91,11 @@ function App() {
 
           navigate(path, { replace: true });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+
+          navigate('/login', { replace: true });
+        });
     } else {
       navigate('/login', { replace: true });
     }
