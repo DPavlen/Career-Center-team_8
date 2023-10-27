@@ -5,8 +5,8 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 
 from api.v1.serializers import (
-    ExperienceDetailedSerializer,
-    EducationSerializer,
+    # ExperienceDetailedSerializer,
+    # EducationSerializer,
     CandidateSerializer,
     ShortCandidateSerializer
     )
@@ -18,22 +18,22 @@ from candidates.models import (
 
 
 
-class ExperienceDetailedViewSet(ModelViewSet):
-    """View для отображения детального опыта работы кандидата."""
+# class ExperienceDetailedViewSet(ModelViewSet):
+#     """View для отображения детального опыта работы кандидата."""
 
-    queryset = ExperienceDetailed.objects.all()
-    serializer_class = ExperienceDetailedSerializer
-    # permission_classes = [IsAuthenticated]
-    pagination_class = None
+#     queryset = ExperienceDetailed.objects.all()
+#     serializer_class = ExperienceDetailedSerializer
+#     # permission_classes = [IsAuthenticated]
+#     pagination_class = None
 
 
-class EducationViewSet(ModelViewSet):
-    """View для отображения информации об образовании кандидата."""
+# class EducationViewSet(ModelViewSet):
+#     """View для отображения информации об образовании кандидата."""
 
-    queryset = Education.objects.all()
-    serializer_class = EducationSerializer
-    # permission_classes = [IsAuthenticated]
-    pagination_class = None
+#     queryset = Education.objects.all()
+#     serializer_class = EducationSerializer
+#     # permission_classes = [IsAuthenticated]
+#     pagination_class = None
 
 
 class ShortCandidateViewSet(ModelViewSet):
