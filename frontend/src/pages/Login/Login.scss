@@ -1,0 +1,47 @@
+.background_container {
+  background: var(--Black-900);
+}
+
+.form-container {
+  margin: 0 auto;
+  width: 400px;
+  height: 382px;
+  background: var(--White);
+  position: absolute;
+  top: 160px;
+  left: 520px;
+  border-radius: 16px;
+}
+
+.login-form {
+  text-align: center;
+  h2 {
+    margin: 40px 0 24px 0;
+  }
+  h4 {
+    margin: 0 0 24px 0;
+    font-weight: 400;
+  }
+  * {
+    margin: 0 auto
+  }
+
+  input {
+    text-align: start;
+    width: 320px;
+    height: 46px;
+    gap: 4px;
+    border: 1px solid var(--Black-100);
+    border-radius: 6px;
+    padding-left: 10px;
+  }
+
+  .submit-button {
+    width: 320px;
+    height: 52px;
+  }
+}
+
+.input_password {
+  margin: 20px 0 36px 0;
+}

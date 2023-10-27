@@ -14,10 +14,8 @@ class Command(BaseCommand):
                 reader = csv.reader(f)
                 for name, slug in reader:
                     WorkSchedule.objects.update_or_create(name=name, slug=slug)
-            # for row in reader:
-            #     WorkSchedule.objects.get_or_create(name=row[0], slug=row[1])
-            print("Загрузка 'График работы' произошла успешно!")
         except Exception:
             raise ("Ошибка при загрузке 'График работы':") 
-        return "Обработка файла schedule.csv завершена."
+        return ("Загрузка 'График работы' произошла успешно!"
+                " Обработка файла schedule.csv завершена.")
 

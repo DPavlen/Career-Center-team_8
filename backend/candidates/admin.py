@@ -28,6 +28,7 @@ class SpecializationAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
+    """Вывести Название специальности."""
     list_display = ("pk", "spec_id", "name", "slug")
     list_display_links = ("name",)
     search_fields = ("name",)

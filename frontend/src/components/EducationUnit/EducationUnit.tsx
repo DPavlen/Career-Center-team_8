@@ -14,26 +14,33 @@ function Education() {
       {/* <span>
         {candidate?.profession}
       </span> */}
-      <div className="courses_container">
-        <h3>Курс</h3>
-        {/* {candidate.courses && candidate.courses.map((course) => (
-          <div key={uuid()} className="courses">
-            {course}
-          </div>
-        ))} */}
-      </div>
-      <h3>Навыки</h3>
-      <div className="tech_stack__container">
-        {candidate?.hards.map((hard) => (
-          <span key={uuid()} className="tech_chip">{hard.name}</span>
+
+      <h3>Курс</h3>
+      <ul className="courses_list">
+        {candidate?.course.map((course) => (
+          <li key={uuid()} className="courses">
+            <span>{course.name}</span>
+          </li>
         ))}
-      </div>
-      <h3 className="education">Образование</h3>
-      <div className="education__container">
-        <span className="edu">
-          {candidate?.education[0].name_university}
-        </span>
-      </div>
+      </ul>
+
+      <h3>Навыки</h3>
+      <ul className="hards_chip_list">
+        {candidate?.hards.map((hard) => (
+          <li key={uuid()} className="hards_chip">
+            <span>{hard.name}</span>
+          </li>
+        ))}
+      </ul>
+
+      <h3>Образование</h3>
+      <ul className="education__container">
+        {candidate?.education.map((education) => (
+          <li key={uuid()} className="education">
+            <span>{education.name_university}</span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

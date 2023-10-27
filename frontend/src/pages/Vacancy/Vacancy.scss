@@ -1,0 +1,26 @@
+@import '../../vendor/fonts/fonts.scss';
+
+.vacancy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 940px;
+  margin-top: 48px;
+
+  &__title {
+    font-size: 34px;
+    font-family: $familyDisplay;
+    font-weight: 500;
+    line-height: 1.17;
+    color: var(--Black-900);
+    margin: 0;
+    padding-left: 32px;
+  }
+}
+
+@media screen and (min-width: 1542px) {
+  .vacancy {
+    max-width: 1045px;
+  }
+}
