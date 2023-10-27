@@ -32,7 +32,7 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
           <Avatar
             className="card__avatar"
             alt="Аватар пользователя"
-            src={card.photo}
+            src={card.image}
             sx={{
               width: 53, height: 53, marginRight: '11px', marginLeft: 0,
             }}
@@ -40,19 +40,19 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
           />
           <div className="card__description">
             <div className="card__candidate-info">
-              <p className="card__candidate-name">{card.name}</p>
-              <p className="card__city">{card.city}</p>
+              <p className="card__candidate-name">{`${card?.first_name} ${card?.last_name}`}</p>
+              <p className="card__city">{card?.location}</p>
             </div>
-            <h2 className="card__profession">{card.profession}</h2>
+            <h2 className="card__profession">{card?.location.split(', ')}</h2>
             <div className="card__experience">
-              <p className="card__level">{card.level}</p>
+              <p className="card__level">{card?.level[0].name}</p>
               <p className="card__attempt">
                 Опыт работы:
                 {' '}
                 <span className="card__period">
-                  {card.experience}
-                  {' '}
-                  месяцев
+                  {card.experience[0].name}
+                  {/* {' '}
+                  месяцев */}
                 </span>
               </p>
             </div>
