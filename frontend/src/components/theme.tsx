@@ -50,7 +50,7 @@ const theme = createTheme({
           fontWeight: 400,
           borderRadius: '6px',
           fontSize: '16px',
-          color: 'var(--White)',
+          // color: 'var(--White)',
           textTransform: 'none',
           // background: 'var(--Blue, #5A9BFF)',
         },

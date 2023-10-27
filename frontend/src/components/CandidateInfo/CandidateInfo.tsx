@@ -31,26 +31,26 @@ function CandidateInfo() {
       <div className="candidate-info__container">
         <h2 className="candidate-info__title">{candidate?.specialization}</h2>
         <div className="candidate-info__wrapper">
-          <div>
-            <p className="candidate-info__description">
+          <ul>
+            <li className="candidate-info__description">
               Уровень
-            </p>
-            <p className="candidate-info__description">
+            </li>
+            <li className="candidate-info__description">
               Опыт
-            </p>
-            <p className="candidate-info__description">
+            </li>
+            <li className="candidate-info__description">
               Занятость
-            </p>
-            <p className="candidate-info__description">
+            </li>
+            <li className="candidate-info__description">
               Тип работы
-            </p>
-          </div>
-          <div>
-            <p className="candidate-info__span-accent">{candidate?.level?.[0]?.name || null}</p>
-            <p className="candidate-info__span-accent">{candidate?.experience?.[0]?.name || null}</p>
-            <p className="candidate-info__span-accent">{candidate?.employment_type?.[0]?.name || null}</p>
-            <p className="candidate-info__span-accent">{candidate?.work_schedule?.[0]?.name || null}</p>
-          </div>
+            </li>
+          </ul>
+          <ul>
+            <li className="candidate-info__span-accent">{candidate?.level?.[0]?.name || null}</li>
+            <li className="candidate-info__span-accent">{candidate?.experience?.[0]?.name || null}</li>
+            <li className="candidate-info__span-accent">{candidate?.employment_type?.[0]?.name || null}</li>
+            <li className="candidate-info__span-accent">{candidate?.work_schedule?.[0]?.name || null}</li>
+          </ul>
           <div>
             <div className="candidate-info__icon-container">
               <img alt="Иконка геопозиции" src={location} className="candidate-info__icon" />

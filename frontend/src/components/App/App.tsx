@@ -16,6 +16,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import tesData from '../../utils/testData.json';
 import testResume from '../../utils/testResume.json';
 import Login from '../../pages/Login/Login';
+import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
 // import mainApi from '../../utils/MainApi';
 
 function App() {
@@ -64,6 +65,10 @@ function App() {
         <Route
           path="/login"
           element={(<Login />)}
+        />
+        <Route
+          path="/create-vacancy"
+          element={(<CreateVacancy />)}
         />
       </Routes>
     </div>

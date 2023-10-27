@@ -4,7 +4,7 @@ import './VacancyList.scss';
 function VacancyList() {
   return (
     <section className="vacancy-list">
-      {/* <p className="vacance-list__title">
+      {/* <p className="vacancy-list__title">
       Добавьте вакансию, проставьте ключевые теги и мы подберем подходящих специалистов
       </p> */}
       <CreateVacancyCard />

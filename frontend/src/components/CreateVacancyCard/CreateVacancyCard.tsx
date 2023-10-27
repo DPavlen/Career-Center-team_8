@@ -41,22 +41,22 @@ function CreateVacancyCard() {
           >
             Показать специалистов
           </Button>
-            <Button
+          <Button
             className="vacancy-card__delete"
-              sx={{
-                textTransform: 'none',
-                color: 'var(--Black-500)',
-                fontSize: '14px',
-                padding: 0,
-                paddingLeft: '26px',
-                fontWeight: '500',
-                '&:hover': {
-                  color: 'var(--Blue-Main)',
-                },
-              }}
-            >
-              Удалить вакансию
-            </Button>
+            sx={{
+              textTransform: 'none',
+              color: 'var(--Black-500)',
+              fontSize: '14px',
+              padding: 0,
+              paddingLeft: '26px',
+              fontWeight: '500',
+              '&:hover': {
+                color: 'var(--Blue-Main)',
+              },
+            }}
+          >
+            Удалить вакансию
+          </Button>
         </div>
       </div>
     </article>
