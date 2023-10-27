@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
 import './EducationUnit.scss';
-
 import { RootState } from '../../store/store';
+import Chips from '../Chips/Chips';
 
 function Education() {
   const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
@@ -16,6 +16,7 @@ function Education() {
       </span> */}
 
       <h3>Курс</h3>
+
       <ul className="courses_list">
         {candidate?.course.map((course) => (
           <li key={uuid()} className="courses">
@@ -25,13 +26,14 @@ function Education() {
       </ul>
 
       <h3>Навыки</h3>
-      <ul className="hards_chip_list">
-        {candidate?.hards.map((hard) => (
-          <li key={uuid()} className="hards_chip">
-            <span>{hard.name}</span>
-          </li>
-        ))}
-      </ul>
+      {candidate && (
+        <Chips
+          data={candidate.hards}
+          listStyle="hards_chip_list"
+          itemStyle="hards_chip"
+          xmark
+        />
+      )}
 
       <h3>Образование</h3>
       <ul className="education__container">
