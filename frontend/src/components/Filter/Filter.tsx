@@ -7,24 +7,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import arrowDown from '../../assets/icons/arrow_down.svg';
 import { RootState } from '../../store/store';
 import { selectFilter } from '../../store/selectedFilter/selectedFilter';
+import { IFilter } from '../../store/filter';
 
 export interface IFilterProps {
   text: string;
   children: React.ReactNode;
   withBorder?: boolean;
-  panel: string;
+  filter: keyof IFilter;
 }
 
 function Filter({
-  text, children, withBorder = true, panel,
+  text, children, withBorder = true, filter,
 }: IFilterProps) {
   const selectedFilter = useSelector((state:RootState) => state.selectedFilter.selectedFilter);
   const dispatch = useDispatch();
 
   return (
     <Accordion
-      expanded={panel === selectedFilter}
-      onChange={(_, exp) => dispatch(selectFilter(exp ? panel : null))}
+      expanded={filter === selectedFilter}
+      onChange={(_, exp) => dispatch(selectFilter(exp ? filter : null))}
       sx={{
         border: 'none',
         boxShadow: 'none',

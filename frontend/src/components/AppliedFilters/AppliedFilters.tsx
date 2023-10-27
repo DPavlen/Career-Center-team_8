@@ -1,7 +1,6 @@
 import {
   useState, useEffect, useRef, useCallback,
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import './AppliedFilters.scss';
 
@@ -13,34 +12,40 @@ import Collapse from '@mui/material/Collapse';
 import Icon from '@mui/material/Icon';
 import closeIcon from '../../assets/icons/close.svg';
 
-import { RootState } from '../../store/store';
-import { resetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
-
-type Filters = RootState['vacanciesFilter'];
+import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
+import { IFilter } from '../../store/filter';
 
 interface AppliedFilter {
-  filterKey: keyof Filters;
-  filterValue: string;
+  key: keyof IFilter;
+  value: string;
 }
 
-function AppliedFilters() {
+interface IAppliedFiltersProps {
+  filterValue: IFilter,
+  // eslint-disable-next-line no-unused-vars
+  onResetFilter: (filter: AppliedFilter) => void,
+}
+
+function AppliedFilters({ filterValue, onResetFilter }: IAppliedFiltersProps) {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [appliedFilters, setAppliedFilters] = useState<AppliedFilter[]>([]);
   const [isOverflow, setOverflow] = useState<boolean>(false);
-  const dispatch = useDispatch();
 
   const stackRef = useRef<HTMLDivElement | null>(null);
 
-  const filters: Filters = useSelector((state: RootState) => state.vacanciesFilter);
+  const [filters, setFilters] = useState<IFilter>(initialState);
+  useEffect(() => {
+    setFilters(filterValue);
+  }, [filterValue]);
 
-  const extractValues = useCallback((savedFilters: Filters): AppliedFilter[] => {
+  const extractValues = useCallback((savedFilters: IFilter): AppliedFilter[] => {
     let result: AppliedFilter[] = [];
 
     Object.entries(savedFilters).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         result = [...result, ...value.map((v): AppliedFilter => ({
-          filterKey: key as keyof Filters,
-          filterValue: v,
+          key: key as keyof IFilter,
+          value: v,
         }))];
 
         return;
@@ -48,8 +53,8 @@ function AppliedFilters() {
 
       if (value) {
         result.push({
-          filterKey: key as keyof Filters,
-          filterValue: value,
+          key: key as keyof IFilter,
+          value,
         });
       }
     });
@@ -86,8 +91,8 @@ function AppliedFilters() {
           >
             {appliedFilters.map((filter) => (
               <Chip
-                key={`${filter.filterKey}_${filter.filterValue}`}
-                label={filter.filterValue}
+                key={`${filter.key}_${filter.value}`}
+                label={filter.value}
                 deleteIcon={
                   (
                     <Icon
@@ -106,7 +111,7 @@ function AppliedFilters() {
                   )
                 }
                 onDelete={
-                  () => dispatch(resetFilter({ key: filter.filterKey, value: filter.filterValue }))
+                  () => onResetFilter({ key: filter.key, value: filter.value })
                 }
                 sx={{
                   height: '28px',

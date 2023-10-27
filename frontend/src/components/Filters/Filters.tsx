@@ -1,28 +1,39 @@
 import './Filters.scss';
 import Button from '@mui/material/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import settings from '../../assets/icons/settings.svg';
 import professions from '../../utils/testProfessionArea.json';
 import skillsData from '../../utils/testSkills.json';
 import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 import deleteIcon from '../../assets/icons/delete.svg';
-import { initialState, resetAllFilters } from '../../store/vacanciesFilter/vacanciesFilter';
-import { RootState } from '../../store/store';
+import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
+import { IFilter } from '../../store/filter';
 
-function Filters() {
-  const dispatch = useDispatch();
-  // eslint-disable-next-line max-len
-  const selectedAmount: number = useSelector((state: RootState) => Object.entries(state.vacanciesFilter)
-    .filter(([key, value]) => {
-      const storedValue = initialState[key as keyof RootState['vacanciesFilter']];
+interface IFiltersProps {
+  filterValue: IFilter;
+  onResetAllFilters: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSetFilter: (filter: Partial<IFilter>) => void;
+}
 
-      if (Array.isArray(value) && Array.isArray(storedValue)) {
-        return value.length !== storedValue.length || value.some((v) => !storedValue.includes(v));
-      }
+function Filters({ filterValue, onResetAllFilters, onSetFilter }: IFiltersProps) {
+  const [selectedAmount, setSelectedAmount] = useState(0);
 
-      return value !== storedValue;
-    }).length);
+  // мы заранее не знаем к какому слайсу будет подключен нащ компонент,
+  // поэтому принимаем текущее значение в сторе через пропсы
+  useEffect(() => {
+    setSelectedAmount(Object.entries(filterValue)
+      .filter(([key, value]) => {
+        const storedValue = initialState[key as keyof IFilter];
+
+        if (Array.isArray(value) && Array.isArray(storedValue)) {
+          return value.length !== storedValue.length || value.some((v) => !storedValue.includes(v));
+        }
+
+        return value !== storedValue;
+      }).length);
+  }, [filterValue]);
 
   return (
     <form className="filters">
@@ -44,26 +55,29 @@ function Filters() {
             padding: 0,
             fontWeight: '400',
           }}
-          onClick={() => dispatch(resetAllFilters())}
+          onClick={() => onResetAllFilters()}
         >
           Сбросить
         </Button>
       </div>
       <RadioGroupFilter
-        panel="panel1"
         filter="profession"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         data={professions}
         withBorder={false}
       />
       <CheckboxGroupFilter
         filter="course"
-        panel="panel2"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Курс Практикума"
         data={professions}
       />
       <CheckboxGroupFilter
         filter="skills"
-        panel="panel3"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Навыки"
         placeholder="Введите навык"
         withSearch
@@ -71,19 +85,22 @@ function Filters() {
       />
       <CheckboxGroupFilter
         filter="experience"
-        panel="panel4"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Опыт работы"
         data={professions}
       />
       <CheckboxGroupFilter
         filter="level"
-        panel="panel5"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Уровень"
         data={professions}
       />
       <CheckboxGroupFilter
         filter="location"
-        panel="panel6"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Геопозиция"
         placeholder="Введите геопозицию"
         withSearch
@@ -91,13 +108,15 @@ function Filters() {
       />
       <CheckboxGroupFilter
         filter="busyType"
-        panel="panel7"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="Тип занятости"
         data={professions}
       />
       <CheckboxGroupFilter
         filter="workingType"
-        panel="panel8"
+        filterValue={filterValue}
+        onSetFilter={onSetFilter}
         title="График работы"
         data={professions}
       />

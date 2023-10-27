@@ -1,11 +1,10 @@
 import './RadioGroupFilter.scss';
 import { RadioGroup, FormControlLabel, Radio } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Filter, { IFilterProps } from '../Filter/Filter';
 import radioSelect from '../../assets/icons/radiobuttonSelect.svg';
 import radio from '../../assets/icons/radiobutton.svg';
-import { RootState } from '../../store/store';
-import { setFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+import { IFilter } from '../../store/filter';
 
 interface IOption {
   id: number;
@@ -14,23 +13,27 @@ interface IOption {
 
 interface IRadioFilterProps extends Partial<IFilterProps> {
   data: IOption[];
-  panel: string;
-  filter: keyof RootState['vacanciesFilter'];
+  filter: keyof IFilter;
+  filterValue: IFilter;
+  // eslint-disable-next-line no-unused-vars
+  onSetFilter: (filter: Partial<IFilter>) => void;
 }
 
 function RadioGroupFilter({
-  filter, data, panel, ...filterProps
+  filter, filterValue, onSetFilter, data, ...filterProps
 }: IRadioFilterProps) {
-  const value = useSelector((state: RootState) => state.vacanciesFilter[filter]);
-  const dispatch = useDispatch();
+  const [value, setValue] = useState<IFilter[keyof IFilter]>(null);
+  useEffect(() => {
+    setValue(filterValue[filter]);
+  }, [filter, filterValue]);
 
   return (
-    <Filter panel={panel} text="Направление" {...filterProps}>
+    <Filter filter={filter} text="Направление" {...filterProps}>
       <RadioGroup
         value={value}
-        onChange={(e) => dispatch(setFilter({
+        onChange={(e) => onSetFilter({
           [filter]: e.target.value,
-        }))}
+        })}
       >
         {data.map((option : IOption) => (
           <FormControlLabel
