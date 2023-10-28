@@ -45,13 +45,22 @@ class CandidatesFilter(FilterSet):
         to_field_name="slug",
         queryset=EmploymentType.objects.all(),
     )
-    hards_cands = filters.ModelMultipleChoiceFilter(
-        field_name = "hards_cands__slug",
-        to_field_name="slug",
-        queryset = Candidate.objects.all().hards.distinct()
-    )
+    # hards_cands = filters.ModelMultipleChoiceFilter(
+    #     field_name = "hards_cands__slug",
+    #     to_field_name="slug",
+    #     queryset = Candidate.objects.all().hards.distinct()
+    # )
+    is_favorited = filters.BooleanFilter(method="is_tracked_filter")
 
 
     class Meta:
         model = Candidate
-        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "hards_cands")
+        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "hards_cands", "is_tracked")
+
+    def is_tracked(self, queryset, name, value):
+        user = self.request.user
+        if value and not user.is_anonymous:
+            return queryset.filter(tracks__user=user)
+        return queryset
+
+
