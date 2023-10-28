@@ -57,7 +57,7 @@ class CandidatesFilter(FilterSet):
         model = Candidate
         fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "is_tracked")
 
-    def is_tracked(self, queryset, name, value):
+    def is_tracked_filter(self, queryset, name, value):
         user = self.request.user
         if value and not user.is_anonymous:
             return queryset.filter(tracks__user=user)
