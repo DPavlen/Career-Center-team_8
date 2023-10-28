@@ -4,6 +4,7 @@ import candidatesSlice from './candidates/candidates';
 import candidateInfoSlice from './candidateInfo/candidateInfo';
 import searchConfigSlice from './searchConfig/searchConfig';
 import selectedFilterSlice from './selectedFilter/selectedFilter';
+import savedVacanciesSlice from './savedVacancies/savedVacancies';
 import { vacanciesFilterSlice, createVacancyFilterSlice } from './vacanciesFilter/vacanciesFilter';
 import userSlice from './user/user';
 
@@ -15,6 +16,7 @@ export const store = configureStore({
     selectedFilter: selectedFilterSlice,
     vacanciesFilter: vacanciesFilterSlice.reducer,
     createVacancyFilter: createVacancyFilterSlice.reducer,
+    savedVacancies: savedVacanciesSlice,
     user: userSlice,
   },
 });
