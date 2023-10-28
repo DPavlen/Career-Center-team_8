@@ -60,3 +60,35 @@ class CandidateViewSet(ModelViewSet):
     serializer_class = CandidateSerializer
     # permission_classes = [IsAuthenticated]
     pagination_class = None
+
+    @action(
+        detail=True,
+        methods=("post", "delete"),
+        permission_classes=(IsAuthenticated,),
+    )
+    def track(self, request, pk):
+        if request.method == "POST":
+            candidate = get_object_or_404(Candidate, id=pk)
+            obj, created = Track.objects.get_or_create(
+                user=request.user, candidate=candidate
+            )
+            if created:
+                serializer = CandidateSerializer(candidate)
+                return Response(
+                    serializer.data, status=status.HTTP_201_CREATED
+                )
+            return Response(
+                {"Ошибка": "Кандидат уже отслеживается"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        obj = Track.objects.filter(
+            user=request.user, candidate__id=pk
+        ).delete()
+
+        if obj[0] > 0:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"Ошибка": "Кандидата нет в отслеживаемых"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
