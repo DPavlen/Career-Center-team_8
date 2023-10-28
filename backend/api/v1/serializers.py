@@ -9,7 +9,8 @@ from candidates.models import (
     # ExperienceDetailed,
     # DetailInCandidate,
     # Education,
-    Candidate)
+    Candidate,
+    Track)
 
 
 # class ExperienceDetailedSerializer(serializers.ModelSerializer):
@@ -119,6 +120,7 @@ class CandidateSerializer(serializers.ModelSerializer):
     employment_type = SerializerMethodField()
     work_schedule = SerializerMethodField()
     image = Base64ImageField()
+    is_tracked = SerializerMethodField()
 
     class Meta:
         model = Candidate
@@ -144,7 +146,8 @@ class CandidateSerializer(serializers.ModelSerializer):
             "softs",
             "experience",
             "employment_type",
-            "work_schedule"
+            "work_schedule",
+            "is_tracked"
         )
 
 
@@ -209,3 +212,11 @@ class CandidateSerializer(serializers.ModelSerializer):
     def get_work_schedule(self, obj):
         """Получаем список графика работы."""
         return obj.work_schedule.values()
+    
+    def get_is_tracked(self, obj):
+        return (
+            self.context["request"].user.is_authenticated
+            and Track.objects.filter(
+                user=self.context["request"].user, candidate=obj
+            ).exists()
+        )
