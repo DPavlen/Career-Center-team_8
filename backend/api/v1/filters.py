@@ -15,6 +15,7 @@ class HardsCandsFilter(FilterSet):
 
 
 class CandidatesFilter(FilterSet):
+
     specialization = filters.ModelChoiceFilter(
         field_name="specialization__slug",
         to_field_name="slug",
@@ -45,17 +46,16 @@ class CandidatesFilter(FilterSet):
         to_field_name="slug",
         queryset=EmploymentType.objects.all(),
     )
+    is_tracked = filters.BooleanFilter(method="is_tracked_filter")
     # hards_cands = filters.ModelMultipleChoiceFilter(
     #     field_name = "hards_cands__slug",
     #     to_field_name="slug",
     #     queryset = Candidate.objects.all().hards.distinct()
     # )
-    is_favorited = filters.BooleanFilter(method="is_tracked_filter")
-
 
     class Meta:
         model = Candidate
-        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "hards_cands", "is_tracked")
+        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "is_tracked")
 
     def is_tracked(self, queryset, name, value):
         user = self.request.user
