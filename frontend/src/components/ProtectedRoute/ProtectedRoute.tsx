@@ -14,7 +14,7 @@ function ProtectedRouteElement(
   }: ProtectedRouteElementProps,
 ) {
   return (
-    isLoggedIn
+    !isLoggedIn
       ? React.cloneElement(element, props)
       : <Navigate to="/" replace />
   );

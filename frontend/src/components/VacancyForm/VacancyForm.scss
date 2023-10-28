@@ -44,3 +44,20 @@
 
 
 }
+
+.vacancy-form__content {
+  input {
+    display: block;
+    height: 46px;
+    border-radius: 6px;
+    border: 1px solid var(--Black-100, #DDE0E4);
+    margin-bottom: 28px;
+    padding: 12px;
+  }
+}
+
+.vacancy-form__salary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+}
