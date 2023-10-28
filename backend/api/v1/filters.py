@@ -17,7 +17,7 @@ class HardsCandsFilter(FilterSet):
 class CandidatesFilter(FilterSet):
 
     specialization = filters.ModelChoiceFilter(
-        field_name="specialization__slug",
+        field_name="specialization",
         to_field_name="slug",
         queryset=Specialization.objects.all(),
     )

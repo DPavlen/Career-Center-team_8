@@ -21,7 +21,7 @@ from candidates.models import (
     Candidate,
     Track
     )
-#from .filters import CandidatesFilter
+from .filters import CandidatesFilter
 
 
 # class ExperienceDetailedViewSet(ModelViewSet):
