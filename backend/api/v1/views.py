@@ -16,7 +16,7 @@ from candidates.models import (
     Education,
     Candidate,
     )
-
+from .filters import CandidatesFilter
 
 
 # class ExperienceDetailedViewSet(ModelViewSet):
@@ -42,6 +42,8 @@ class ShortCandidateViewSet(ModelViewSet):
 
     queryset = Candidate.objects.all()
     serializer_class = ShortCandidateSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = CandidatesFilter
     # permission_classes = [IsAuthenticated]
     pagination_class = None
 
