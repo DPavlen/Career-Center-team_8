@@ -181,6 +181,7 @@ class ShortCandidateSerializer(CandidateSerializer):
     experience_detailed = SerializerMethodField()
     level = SerializerMethodField()
     experience = SerializerMethodField()
+    image = Base64ImageField()
 
     class Meta:
         model = Candidate
