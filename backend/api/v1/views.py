@@ -36,7 +36,7 @@ from candidates.models import (
     HardCands
     )
 from .filters import CandidatesFilter
-from core.services import candidate_resume_pdf
+# from core.services import candidate_resume_pdf
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
@@ -120,18 +120,18 @@ class CandidateViewSet(ModelViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
     
-    @action(
-        detail=False,
-        methods=("post", "delete"),
-        permission_classes=(IsAuthenticated,),
-    )
-    @staticmethod
-    def download_shopping_cart(self, request):
-        """
-        API endpoint для скачивания резюме кандидата в формате PDF.
-        GET:
-        Скачивание резюме кандидата в формате PDF.
-        Returns:
-        Response: PDF-файл резюме кандидата.
-        """
-        return candidate_resume_pdf(request.user)
+    # @action(
+    #     detail=False,
+    #     methods=("post", "delete"),
+    #     permission_classes=(IsAuthenticated,),
+    # )
+    # @staticmethod
+    # def download_shopping_cart(self, request):
+    #     """
+    #     API endpoint для скачивания резюме кандидата в формате PDF.
+    #     GET:
+    #     Скачивание резюме кандидата в формате PDF.
+    #     Returns:
+    #     Response: PDF-файл резюме кандидата.
+    #     """
+    #     return candidate_resume_pdf(request.user)
