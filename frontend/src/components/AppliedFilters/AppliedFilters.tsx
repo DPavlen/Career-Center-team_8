@@ -22,12 +22,13 @@ interface AppliedFilter {
 
 interface IAppliedFiltersProps {
   filterValue: IFilter,
+  alwaysShow?: boolean;
   // eslint-disable-next-line no-unused-vars
   onResetFilter: (filter: AppliedFilter) => void,
 }
 
-function AppliedFilters({ filterValue, onResetFilter }: IAppliedFiltersProps) {
-  const [isShow, setIsShow] = useState<boolean>(false);
+function AppliedFilters({ filterValue, alwaysShow, onResetFilter }: IAppliedFiltersProps) {
+  const [isShow, setIsShow] = useState<boolean>(!!alwaysShow);
   const [appliedFilters, setAppliedFilters] = useState<AppliedFilter[]>([]);
   const [isOverflow, setOverflow] = useState<boolean>(false);
 
@@ -125,7 +126,7 @@ function AppliedFilters({ filterValue, onResetFilter }: IAppliedFiltersProps) {
                 }}
               />
             ))}
-            {isOverflow
+            {isOverflow && !alwaysShow
               && (
                 !isShow
                   ? (
@@ -157,5 +158,9 @@ function AppliedFilters({ filterValue, onResetFilter }: IAppliedFiltersProps) {
     );
   }
 }
+
+AppliedFilters.defaultProps = {
+  alwaysShow: false,
+};
 
 export default AppliedFilters;

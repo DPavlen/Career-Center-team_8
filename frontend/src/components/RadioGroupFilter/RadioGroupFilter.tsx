@@ -28,7 +28,7 @@ function RadioGroupFilter({
   }, [filter, filterValue]);
 
   return (
-    <Filter filter={filter} text="Направление" {...filterProps}>
+    <Filter filter={filter} text="Направление*" {...filterProps}>
       <RadioGroup
         value={value}
         onChange={(e) => onSetFilter({
