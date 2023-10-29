@@ -45,14 +45,12 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
             </div>
             <h2 className="card__profession">{card?.location.split(', ')}</h2>
             <div className="card__experience">
-              <p className="card__level">{card?.level[0].name}</p>
+              <p className="card__level">{card?.level}</p>
               <p className="card__attempt">
                 Опыт работы:
                 {' '}
                 <span className="card__period">
-                  {card.experience[0].name}
-                  {/* {' '}
-                  месяцев */}
+                  {card.experience}
                 </span>
               </p>
             </div>
