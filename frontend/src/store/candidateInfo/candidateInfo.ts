@@ -93,18 +93,20 @@ export interface WorkSchedule {
   candidateInfo: Partial<ICandidate> | null;
 } */
 
-const initialState: Partial<ICandidate> | null = null;
+const initialState: { candidate: Partial<ICandidate> | null } = {
+  candidate: null,
+};
 
 const candidateInfoSlice = createSlice({
   name: 'candidate',
   initialState,
   reducers: {
     addCandidateInfo: (
-      state: Partial<ICandidate> | null,
-      action: PayloadAction<Partial<ICandidate>>,
+      state: { candidate: Partial<ICandidate> | null },
+      { payload }: PayloadAction<Partial<ICandidate>>,
     ) => {
       // eslint-disable-next-line no-param-reassign
-      state = action.payload;
+      state.candidate = payload;
     },
   },
 });

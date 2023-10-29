@@ -15,7 +15,7 @@ function CandidateHeader() {
     navigate('/');
   }
 
-  const candidate = useSelector((state: RootState) => state.candidateInfo);
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidate);
 
   return (
     <header className="candidate-header">

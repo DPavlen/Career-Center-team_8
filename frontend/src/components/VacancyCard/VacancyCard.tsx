@@ -2,7 +2,7 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { ICandidate } from '../../store/candidates/candidates';
 // import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
@@ -18,14 +18,15 @@ interface VacancyCardProps {
 
 function VacancyCard({ card, liked = false }: VacancyCardProps) {
   const [checked, setChecked] = useState(liked);
+  const cardRef = useRef(null);
   const dispatch = useDispatch();
   const handlerCardClick = () => {
-    // console.log(`передается: ${JSON.stringify(card)}`);
     dispatch(addCandidateInfo(card));
+    // navigate(`/candidates/${card.id}`);
   };
   return (
     <article className={`card ${checked ? 'card_checked' : ''}`}>
-      <Link to={`/candidates/${card.id}`} onClick={handlerCardClick} target="_blank">
+      <Link to={`/candidates/${card.id}`} onClick={handlerCardClick}>
         {/* <Checkbox
         disableRipple
         sx={{
@@ -34,7 +35,7 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
         icon={<img alt="checkbox-field" src={checkbox} />}
         checkedIcon={<img alt="checkbox-field" src={checkboxChecked} />}
       /> */}
-        <div className="card__info">
+        <div ref={cardRef} className="card__info">
           <Avatar
             className="card__avatar"
             alt="Аватар пользователя"
@@ -51,12 +52,12 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
             </div>
             <h2 className="card__profession">{card?.location.split(', ')}</h2>
             <div className="card__experience">
-              <p className="card__level">{card?.level[0].name}</p>
+              <p className="card__level">{card?.level}</p>
               <p className="card__attempt">
                 Опыт работы:
                 {' '}
                 <span className="card__period">
-                  {card.experience[0].name}
+                  {card.experience}
                   {/* {' '}
                   месяцев */}
                 </span>

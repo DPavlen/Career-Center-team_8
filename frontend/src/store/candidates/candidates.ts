@@ -29,11 +29,11 @@ interface Course {
   slug: string;
 }
 
-interface Level {
+/* interface Level {
   id: number;
   name: string;
   slug: string;
-}
+} */
 
 interface HardSkill {
   id: number;
@@ -47,11 +47,11 @@ interface SoftSkill {
   slug: string;
 }
 
-interface Experience {
+/* interface Experience {
   id: number;
   name: string;
   slug: string;
-}
+} */
 
 interface EmploymentType {
   id: number;
@@ -80,12 +80,12 @@ export interface ICandidate {
   contacts_other: string;
   activity: string;
   location: string;
-  specialization: number[];
+  specialization: string;
   course: Course[];
-  level: Level[];
+  level: string;
   hards: HardSkill[];
   softs: SoftSkill[];
-  experience: Experience[];
+  experience: string;
   employment_type: EmploymentType[];
   work_schedule: WorkSchedule[];
 }

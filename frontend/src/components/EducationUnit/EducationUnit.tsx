@@ -6,14 +6,14 @@ import { RootState } from '../../store/store';
 import Chips from '../Chips/Chips';
 
 function Education() {
-  const candidate = useSelector((state: RootState) => state.candidateInfo);
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidate);
 
   return (
     <section className="tech_info">
       <h3 className="direction">Направление</h3>
-      {/* <span>
-        {candidate?.profession}
-      </span> */}
+      <span>
+        {candidate?.specialization}
+      </span>
 
       <h3>Курс</h3>
 
@@ -35,7 +35,7 @@ function Education() {
           data={candidate.hards}
           listStyle="hards_chip_list"
           itemStyle="hards_chip"
-          xmark
+          xmark={false}
         />
       )}
 

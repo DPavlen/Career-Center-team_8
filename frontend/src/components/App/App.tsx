@@ -22,7 +22,7 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-import testResume from '../../utils/testResume.json';
+// import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
 // import mainApi from '../../utils/MainApi';
 
@@ -74,7 +74,7 @@ function App() {
   }
 
   useEffect(() => {
-    dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
+    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
 
     const token = localStorage.getItem('token');
 
