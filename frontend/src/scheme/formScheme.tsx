@@ -2,7 +2,7 @@
 import * as yup from 'yup';
 
 // eslint-disable-next-line import/prefer-default-export
-export const vacancyFormSchema = yup.object().shape({
+export const vacancyFormScheme = yup.object().shape({
   job_title: yup
     .string()
     .min(5, 'Минимальное количество символов 5')
@@ -33,6 +33,22 @@ export const vacancyFormSchema = yup.object().shape({
     .string(),
   filters:
    yup.object().shape({
-
-   }).test([true], 'Выберите не менее одного параметра в разделе "Фильтр" справа'),
+     specialization: yup
+       .string()
+       .required('Обязательный фильтр'),
+     course: yup
+       .array(yup.string()),
+     hards: yup
+       .array(yup.string()),
+     experience: yup
+       .array(yup.string()),
+     level: yup
+       .array(yup.string()),
+     location: yup
+       .array(yup.string()),
+     employmentType: yup
+       .array(yup.string()),
+     workSchedule: yup
+       .array(yup.string()),
+   }),
 });

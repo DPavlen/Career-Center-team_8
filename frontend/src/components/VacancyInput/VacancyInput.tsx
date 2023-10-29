@@ -7,7 +7,7 @@ interface VacancyInputProps {
   value: string | number;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string | number) => void;
-  errorMessage: string;
+  errorMessage: string | undefined;
 }
 
 function VacancyInput({
@@ -33,7 +33,7 @@ function VacancyInput({
     <>
       <textarea
         rows={1}
-        className="vacancy-input"
+        className={`vacancy-input ${errorMessage ? 'vacancy-input_error' : ''}`}
         wrap="hard"
         placeholder={placeholder}
         onChange={onTextareaChange}
@@ -44,7 +44,7 @@ function VacancyInput({
           resize: 'none',
         }}
       />
-      <p className="vacancy-input__input-error">{errorMessage}</p>
+      { errorMessage ? <p className="vacancy-input__input-error">{errorMessage}</p> : null }
     </>
   );
 }

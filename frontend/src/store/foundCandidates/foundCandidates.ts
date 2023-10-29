@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit';
-import { IFilter } from '../filter';
+import { IFiltersOptions } from '../filter';
 
 interface ExperienceDetailed {
   id: number;
@@ -82,7 +82,7 @@ export interface ICandidate {
 export interface InitialState {
   total: number,
   candidates: Partial<ICandidate[]> | null,
-  filtersOptions: IFilter,
+  filtersOptions: IFiltersOptions,
 }
 
 const initialState: InitialState = {

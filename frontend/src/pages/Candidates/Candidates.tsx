@@ -10,11 +10,11 @@ import Filters from '../../components/Filters/Filters';
 
 import { RootState } from '../../store/store';
 import { vacanciesFilterResetAllFilters, vacanciesFilterResetFilter, vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
-import { IFilter } from '../../store/filter';
+import { IFiltersOptions } from '../../store/filter';
 
 function Candidates() {
   const filterValue = useSelector((state: RootState) => state.vacanciesFilter);
-  const filtersOptions: IFilter = useSelector(
+  const filtersOptions: IFiltersOptions = useSelector(
     (state: RootState) => state.foundCandidates.filtersOptions,
   );
 
