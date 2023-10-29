@@ -17,11 +17,15 @@
 
   &_error {
     border: 1px solid red;
+    margin-bottom: 0;
   }
 
   &__input-error {
-    padding-top: 10px;
     color: red;
-    font-size: 14px;
+    padding-top: 5px;
+    line-height: 1.42;
+    font-size: 12px;
+    margin: 0;
+    margin-bottom: 28px;
   }
 }

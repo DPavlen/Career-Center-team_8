@@ -31,24 +31,4 @@ export const vacancyFormScheme = yup.object().shape({
     .string(),
   selection_stages: yup
     .string(),
-  filters:
-   yup.object().shape({
-     specialization: yup
-       .string()
-       .required('Обязательный фильтр'),
-     course: yup
-       .array(yup.string()),
-     hards: yup
-       .array(yup.string()),
-     experience: yup
-       .array(yup.string()),
-     level: yup
-       .array(yup.string()),
-     location: yup
-       .array(yup.string()),
-     employmentType: yup
-       .array(yup.string()),
-     workSchedule: yup
-       .array(yup.string()),
-   }),
 });

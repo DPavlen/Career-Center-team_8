@@ -43,7 +43,7 @@ function VacancyForm() {
 
   function resetForm() {
     localStorage.removeItem('CREATE_VACANCY_FORM');
-    navigate('/');
+    navigate('/vacancies');
     dispatch(createVacancyResetAllFilters());
   }
 
