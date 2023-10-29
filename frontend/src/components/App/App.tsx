@@ -32,14 +32,14 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function setfailedToFetch(error: Error): void {
+  function setfailedToFetch(error: { detail : string}): void {
     console.log(error);
 
-    if (error.message.includes('Failed to fetch')) {
+    if (error.detail.includes('Failed to fetch')) {
       return alert('Ошибка при получении данных: Возможны проблемы с сетью или сервер может быть недоступен.');
     }
 
-    return alert(error.message);
+    return alert(error.detail);
   }
 
   function searchCandidates(): void {

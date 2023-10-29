@@ -51,8 +51,6 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
                 {' '}
                 <span className="card__period">
                   {card.experience[0].name}
-                  {/* {' '}
-                  месяцев */}
                 </span>
               </p>
             </div>
