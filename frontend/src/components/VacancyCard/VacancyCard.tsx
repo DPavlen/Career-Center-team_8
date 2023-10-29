@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ICandidate } from '../../store/candidates/candidates';
 // import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 // import checkbox from '../../assets/icons/checkbox.svg';
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
+import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
 
 interface VacancyCardProps {
   card: ICandidate;
@@ -16,10 +18,14 @@ interface VacancyCardProps {
 
 function VacancyCard({ card, liked = false }: VacancyCardProps) {
   const [checked, setChecked] = useState(liked);
-
+  const dispatch = useDispatch();
+  const handlerCardClick = () => {
+    // console.log(`передается: ${JSON.stringify(card)}`);
+    dispatch(addCandidateInfo(card));
+  };
   return (
     <article className={`card ${checked ? 'card_checked' : ''}`}>
-      <Link to={`./${card.id}`} target="_blank">
+      <Link to={`/candidates/${card.id}`} onClick={handlerCardClick} target="_blank">
         {/* <Checkbox
         disableRipple
         sx={{

@@ -5,7 +5,7 @@ import './Experience.scss';
 import { RootState } from '../../store/store';
 
 function Experience() {
-  const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
+  const candidate = useSelector((state: RootState) => state.candidateInfo);
 
   function createDateString(yearStart: number, yearEnd?: number): string {
     if (yearEnd) {
@@ -19,7 +19,9 @@ function Experience() {
     <section className="experience">
       <h2 className="experience__title">Опыт работы</h2>
       <ul className="experience__list">
-        {candidate?.experience_detailed.map((detail) => (
+        {candidate
+        && candidate.experience_detailed
+        && candidate.experience_detailed.map((detail) => (
           <li className="experience__detail">
             <h3 className="experience__date">{createDateString(detail.date_start, detail.date_end)}</h3>
             <p className="experience__name">{detail.name}</p>

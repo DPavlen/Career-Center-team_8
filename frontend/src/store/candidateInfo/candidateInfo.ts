@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ICandidate } from '../candidates/candidates';
 
 export interface Experience {
   id: number;
@@ -63,7 +64,7 @@ export interface WorkSchedule {
   slug: string;
 }
 
-export interface Candidate {
+/* export interface Candidate {
   id: number;
   last_name: string;
   first_name: string;
@@ -78,7 +79,7 @@ export interface Candidate {
   contacts_other: string;
   activity: string;
   location: string;
-  specialization: number[];
+  specialization: string;
   course: Course[];
   level: SkillLevel[];
   hards: HardSkill[];
@@ -86,23 +87,24 @@ export interface Candidate {
   experience: ExperienceLevel[];
   employment_type: EmploymentType[];
   work_schedule: WorkSchedule[];
-}
+} */
 
-interface InitialState {
-  candidateInfo: Candidate | null;
-}
+/* interface InitialState {
+  candidateInfo: Partial<ICandidate> | null;
+} */
 
-const initialState: InitialState = {
-  candidateInfo: null,
-};
+const initialState: Partial<ICandidate> | null = null;
 
 const candidateInfoSlice = createSlice({
-  name: 'candidates',
+  name: 'candidate',
   initialState,
   reducers: {
-    addCandidateInfo: (store, { payload }) => {
+    addCandidateInfo: (
+      state: Partial<ICandidate> | null,
+      action: PayloadAction<Partial<ICandidate>>,
+    ) => {
       // eslint-disable-next-line no-param-reassign
-      store.candidateInfo = payload.candidateInfo;
+      state = action.payload;
     },
   },
 });

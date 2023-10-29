@@ -13,7 +13,7 @@ import avatar from '../../assets/candidatePhoto.png';
 import { RootState } from '../../store/store';
 
 function CandidateInfo() {
-  const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
+  const candidate = useSelector((state: RootState) => state.candidateInfo);
   return (
     <section className="candidate-info">
       <div

@@ -19,11 +19,11 @@ function VacancyForm() {
   const { register, reset, handleSubmit } = useForm<TSavedVacancies>();
   const submit: SubmitHandler<TSavedVacancies> = (data) => {
     dispatch(addVacancy(data));
-    navigate('/');
+    navigate('/vacancies');
   };
 
   function goBack() {
-    navigate(-1);
+    navigate('/vacancies');
   }
 
   return (

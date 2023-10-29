@@ -108,7 +108,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route
-          path="/"
+          path="/vacancies"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
@@ -120,7 +120,7 @@ function App() {
           )}
         />
         <Route
-          path="/candidates"
+          path="/"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
