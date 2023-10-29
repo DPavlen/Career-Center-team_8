@@ -6,7 +6,7 @@ import {
   Controller, FormProvider, Resolver, SubmitHandler, useForm,
 } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import iconBack from '../../assets/icons/ic_back.svg';
 import './VacancyForm.scss';
 import VacancyInput from '../VacancyInput/VacancyInput';
@@ -38,22 +38,50 @@ function VacancyForm() {
   });
 
   const {
-    control, handleSubmit, watch, formState: { errors },
+    control, handleSubmit, watch, formState: { errors }, setError, clearErrors,
   } = methods;
 
-  function resetForm() {
+  const [filterCheckedOnce, setFitlersCheckedOnce] = useState<boolean>(false);
+
+  const resetForm = useCallback(() => {
     localStorage.removeItem('CREATE_VACANCY_FORM');
     navigate('/vacancies');
     dispatch(createVacancyResetAllFilters());
-  }
+  }, [dispatch, navigate]);
 
-  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters'>> = (data) => {
-    dispatch(addVacancy({
-      ...data,
-      filters: filterValue,
-    }));
-    resetForm();
+  const validateFilter = useCallback(() => {
+    if (filterValue.specialization) {
+      clearErrors('root');
+      return true;
+    }
+
+    setError('root', { message: 'filters error', type: 'custom' });
+    return false;
+  }, [filterValue, setError, clearErrors]);
+
+  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters'>> = async (data) => {
+    setFitlersCheckedOnce(true);
+    const filterValidation: boolean = await validateFilter();
+
+    if (filterValidation) {
+      dispatch(addVacancy({
+        ...data,
+        filters: filterValue,
+      }));
+      resetForm();
+    }
   };
+
+  const invalidSubmit = async () => {
+    setFitlersCheckedOnce(true);
+    await validateFilter();
+  };
+
+  useEffect(() => {
+    if (filterCheckedOnce) {
+      validateFilter();
+    }
+  }, [filterValue, validateFilter]);
 
   function goBack() {
     navigate('/vacancies');
@@ -132,7 +160,7 @@ function VacancyForm() {
           name="optional_requirements"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <VacancyInput value={value || ''} errorMessage={errors.required_requirements?.message} onChange={onChange} placeholder="Необязательные навыки и требования, которые будут преимуществом" />
+            <VacancyInput value={value || ''} errorMessage={errors.optional_requirements?.message} onChange={onChange} placeholder="Необязательные навыки и требования, которые будут преимуществом" />
           )}
         />
         <label className="vacancy-form__description">Обязанности*</label>
@@ -163,17 +191,18 @@ function VacancyForm() {
         />
         <div className="vacancy-form__filter">
           <h2 className="vacancy-form__description">Фильтры*</h2>
-          <p className="vacancy-form__choose-filter">
+          <p className={`vacancy-form__choose-filter ${errors.root ? 'vacancy-form__choose-filter_error' : ''}`}>
             Выберите не менее одного параметра в разделе &quot;Фильтр&quot; справа
           </p>
           <AppliedFilters
             filterValue={filterValue}
+            alwaysShow
             onResetFilter={(filter) => dispatch(createVacancyResetFilter(filter))}
           />
         </div>
         <div>
           <Button
-            onClick={handleSubmit(submit)}
+            onClick={handleSubmit(submit, invalidSubmit)}
             sx={{
               borderRadius: '6px',
               textTransform: 'none',
