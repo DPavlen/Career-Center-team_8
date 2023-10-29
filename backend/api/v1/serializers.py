@@ -81,6 +81,11 @@ class HardCandsSerializer(serializers.ModelSerializer):
         model = HardCands 
         fields = ("id", "name", "slug")
 
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Candidate 
+        fields = ("location",)
+
 class CandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения полной 
     информации о кандидате(подробная страница кандидата)."""
