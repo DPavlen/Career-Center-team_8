@@ -1,6 +1,8 @@
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Controller, FormProvider, SubmitHandler, useForm,
 } from 'react-hook-form';
@@ -14,10 +16,7 @@ import { RootState } from '../../store/store';
 import { createVacancyResetAllFilters, createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 import { addVacancy } from '../../store/savedVacancies/savedVacancies';
 import type { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
-
-// interface VacancyFormProps {
-//   onResetFilter: (filter: AppliedFilter) => void,
-// }
+import { vacancyFormSchema } from '../../shema/formShema';
 
 function VacancyForm() {
   const navigate = useNavigate();
@@ -36,10 +35,11 @@ function VacancyForm() {
       responsibilities: '',
       conditions: '',
     },
+    resolver: yupResolver(vacancyFormSchema),
   });
 
   const {
-    control, handleSubmit, watch,
+    control, handleSubmit, watch, formState: { errors },
   } = methods;
 
   function resetForm() {
