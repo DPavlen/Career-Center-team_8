@@ -54,6 +54,11 @@ class CandidatesFilter(FilterSet):
         queryset = HardCands.objects.all(),
     )
 
+    location = filters.ModelMultipleChoiceFilter(
+        field_name = "location",
+        to_field_name="location",
+        queryset = Candidate.objects.all().distinct().order_by(),
+    )
     class Meta:
         model = Candidate
         fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked")
