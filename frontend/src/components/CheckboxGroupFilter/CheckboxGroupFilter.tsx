@@ -1,20 +1,20 @@
-import './CheckboxGroupFilter.scss';
-import { FormControlLabel, Checkbox } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import Filter, { IFilterProps } from '../Filter/Filter';
+import { v4 as uuid } from 'uuid';
+
+import './CheckboxGroupFilter.scss';
+
+import { FormControlLabel, Checkbox } from '@mui/material';
+
 import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 import checkbox from '../../assets/icons/checkbox.svg';
+
 import Scrollbar from '../Scrollbar/Scrollbar';
 import FilterInput from '../FilterInput/FilterInput';
+import Filter, { IFilterProps } from '../Filter/Filter';
 import { IFilter } from '../../store/filter';
 
-interface IOption {
-  id: number;
-  value: string;
-}
-
 interface ICheckboxFilterProps extends Partial<IFilterProps> {
-  data: IOption[];
+  data: string[];
   filter: keyof IFilter;
   filterValue: IFilter;
   // eslint-disable-next-line no-unused-vars
@@ -28,11 +28,9 @@ function CheckboxGroupFilter({
   data, withSearch, title, placeholder, filter, filterValue, onSetFilter, ...filterProps
 }: ICheckboxFilterProps) {
   const [value, setValue] = useState<string[]>([]);
-  useEffect(() => {
-    setValue(filterValue[filter] as string[]);
-  }, [filter, filterValue]);
+
   const [search, setSearch] = useState<string>('');
-  const [filtred, setFiltred] = useState<IOption[]>([]);
+  // const [filtered, setFiltered] = useState<IOption[]>([]);
 
   // eslint-disable-next-line no-shadow
   const onValueChange = useCallback((name: string) => {
@@ -49,8 +47,8 @@ function CheckboxGroupFilter({
   }, [value, onSetFilter, filter]);
 
   useEffect(() => {
-    setFiltred(data.filter((d) => d.value.toLowerCase().includes(search.toLowerCase())));
-  }, [search, data]);
+    setValue(filterValue[filter] as string[]);
+  }, [filter, filterValue]);
 
   return (
     <Filter text={title} {...filterProps} filter={filter}>
@@ -58,9 +56,9 @@ function CheckboxGroupFilter({
         ? <FilterInput placeholder={placeholder} search={search} setSearch={setSearch} />
         : null}
       <Scrollbar maxHeight={withSearch ? '192px' : '240px'}>
-        {filtred.map((p) => (
+        {data.map((p) => (
           <FormControlLabel
-            key={p.id}
+            key={uuid()}
             sx={{
               display: 'block',
               margin: 0,
@@ -68,8 +66,8 @@ function CheckboxGroupFilter({
             }}
             control={(
               <Checkbox
-                checked={value.some((v) => v === p.value)}
-                onChange={() => onValueChange(p.value)}
+                checked={value.some((v) => v === p)}
+                onChange={() => onValueChange(p)}
                 icon={<img alt="checkbox-field" src={checkbox} className="checkbox-image" />}
                 checkedIcon={<img alt="checkbox-field" className="checkbox-image" src={checkboxChecked} />}
                 sx={{
@@ -77,7 +75,7 @@ function CheckboxGroupFilter({
                 }}
               />
                   )}
-            label={p.value}
+            label={p}
           />
         ))}
       </Scrollbar>
