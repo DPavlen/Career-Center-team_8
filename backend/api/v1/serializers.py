@@ -162,6 +162,15 @@ class CandidateSerializer(serializers.ModelSerializer):
     def get_work_schedule(self, obj):
         """Получаем список графика работы."""
         return obj.work_schedule.values()
+    
+    def get_is_tracked(self, obj):
+        return (
+            self.context["request"].user.is_authenticated
+            and Track.objects.filter(
+                user=self.context["request"].user, candidate=obj
+            ).exists()
+        )
+
 
 
 
@@ -201,13 +210,3 @@ class ShortCandidateSerializer(CandidateSerializer):
     def get_experience(self, obj):
         """Получаем опыт работы(в годах)."""
         return obj.experience.name
-
-    
-    def get_is_tracked(self, obj):
-        return (
-            self.context["request"].user.is_authenticated
-            and Track.objects.filter(
-                user=self.context["request"].user, candidate=obj
-            ).exists()
-        )
-
