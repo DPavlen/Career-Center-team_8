@@ -1,6 +1,7 @@
 import './DynamicVacancyCard.scss';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import deleteIcon from '../../assets/icons/delete-grey.svg';
 import DynamicVacancyInfo from '../DynamicVacancyInfo/DynamicVacancyInfo';
 import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
 
@@ -26,7 +27,7 @@ function DynamicVacancyCard(props: VacancyCardProps) {
               color: 'var(--Blue)',
               width: 'fit-content',
               padding: 0,
-              marginBottom: '16px',
+              marginBottom: '20px',
             }}
             onClick={() => setIsShow(true)}
           >
@@ -62,6 +63,9 @@ function DynamicVacancyCard(props: VacancyCardProps) {
                 color: 'var(--Blue-Main)',
               },
             }}
+            startIcon={
+              <img src={deleteIcon} alt="иконка мусорки" />
+            }
           >
             Удалить вакансию
           </Button>
