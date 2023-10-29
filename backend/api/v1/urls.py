@@ -5,8 +5,15 @@ from users.views import CustomUserViewSet
 from api.v1.views import (
     # ExperienceDetailedViewSet,
     # EducationViewSet,
+    SpecializationViewSet,
+    CourseViewSet,
+    LevelViewSet,
+    ExperienceViewSet,
+    EmploymentTypeViewSet,
+    WorkScheduleViewSet,
     CandidateViewSet,
-    ShortCandidateViewSet
+    ShortCandidateViewSet,
+    HardCandsViewSet
     )
 
 
@@ -18,6 +25,14 @@ router = routers.DefaultRouter()
 router.register("users", CustomUserViewSet, "users")
 router.register("short_candidates", ShortCandidateViewSet, "short_candidates")
 router.register("candidates", CandidateViewSet, "candidates")
+router.register("specialization_id", SpecializationViewSet)
+router.register("course", CourseViewSet)
+router.register("level_id", LevelViewSet)
+router.register("experience_id", ExperienceViewSet)
+router.register("employment_type", EmploymentTypeViewSet)
+router.register("work_schedule", WorkScheduleViewSet)
+router.register("hards_in_cands", HardCandsViewSet)
+
 # router.register("experience_detailed", 
 #                 ExperienceDetailedViewSet, "experience_detailed")
 # router.register("education", EducationViewSet, "education")

@@ -1,17 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './VacancyInput.scss';
 
 interface VacancyInputProps {
   // eslint-disable-next-line react/require-default-props
   placeholder?: string,
+  value: string | number;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value: string | number) => void;
 }
 
-function VacancyInput({ placeholder } : VacancyInputProps) {
+function VacancyInput({ value, onChange, placeholder } : VacancyInputProps) {
   const MIN_TEXTAREA_HEIGHT = 47;
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const [value, setValue] = useState<string>('');
-  const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setValue(event.target.value);
+
+  // eslint-disable-next-line max-len
+  const onTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => onChange(event.target.value);
 
   useEffect(() => {
     if (textareaRef?.current) {
@@ -28,7 +32,7 @@ function VacancyInput({ placeholder } : VacancyInputProps) {
       className="vacancy-input"
       wrap="hard"
       placeholder={placeholder}
-      onChange={onChange}
+      onChange={onTextareaChange}
       value={value}
       ref={textareaRef}
       style={{

@@ -1,6 +1,6 @@
 from django_filters.rest_framework import FilterSet, filters
 
-from candidates.models import Specialization, Candidate, Course, Level, Experience, WorkSchedule, EmploymentType 
+from candidates.models import Specialization, Candidate, Course, Level, Experience, WorkSchedule, EmploymentType, HardCands 
 
 
 class HardsCandsFilter(FilterSet):
@@ -10,28 +10,27 @@ class HardsCandsFilter(FilterSet):
         return queryset.filter(name__istartswith=value)
 
     class Meta:
-        model = Candidate
+        model = HardCands
         fields = ("name",)
 
 
 class CandidatesFilter(FilterSet):
-
-    specialization = filters.ModelChoiceFilter(
-        field_name="specialization",
+    specialization_id = filters.ModelMultipleChoiceFilter(
+        field_name="specialization__slug",
         to_field_name="slug",
         queryset=Specialization.objects.all(),
     )
-    course = filters.ModelChoiceFilter(
+    course = filters.ModelMultipleChoiceFilter(
         field_name="course__slug",
         to_field_name="slug",
         queryset=Course.objects.all(),
     )
-    level = filters.ModelChoiceFilter(
+    level_id = filters.ModelMultipleChoiceFilter(
         field_name="level__slug",
         to_field_name="slug",
         queryset=Level.objects.all(),
     )
-    experience = filters.ModelChoiceFilter(
+    experience_id = filters.ModelMultipleChoiceFilter(
         field_name="experience__slug",
         to_field_name="slug",
         queryset=Experience.objects.all(),
@@ -39,23 +38,25 @@ class CandidatesFilter(FilterSet):
     work_schedule = filters.ModelMultipleChoiceFilter(
         field_name="work_schedule__slug",
         to_field_name="slug",
-        queryset=WorkSchedule.objects.all(),
+        queryset=WorkSchedule.objects.all()
     )
     employment_type = filters.ModelMultipleChoiceFilter(
         field_name="employment_type__slug",
         to_field_name="slug",
         queryset=EmploymentType.objects.all(),
     )
+
     is_tracked = filters.BooleanFilter(method="is_tracked_filter")
-    # hards_cands = filters.ModelMultipleChoiceFilter(
-    #     field_name = "hards_cands__slug",
-    #     to_field_name="slug",
-    #     queryset = Candidate.objects.all().hards.distinct()
-    # )
+
+    hards = filters.ModelMultipleChoiceFilter(
+        field_name = "hards__slug",
+        to_field_name="slug",
+        queryset = HardCands.objects.all(),
+    )
 
     class Meta:
         model = Candidate
-        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "is_tracked")
+        fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked")
 
     def is_tracked_filter(self, queryset, name, value):
         user = self.request.user

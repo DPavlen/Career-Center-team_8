@@ -13,34 +13,59 @@ from api.v1.serializers import (
     # ExperienceDetailedSerializer,
     # EducationSerializer,
     CandidateSerializer,
-    ShortCandidateSerializer
+    ShortCandidateSerializer,
+    SpecializationSerializer,
+    CourseSerializer,
+    LevelSerializer,
+    ExperienceSerializer,
+    WorkScheduleSerializer,
+    EmploymentTypeSerializer,
+    HardCandsSerializer
     )
 from candidates.models import (
     ExperienceDetailed,
     Education,
+    Specialization,
     Candidate,
-    Track
+    Course,
+    Level,
+    Experience,
+    WorkSchedule,
+    EmploymentType,
+    Track,
+    HardCands
     )
 from .filters import CandidatesFilter
+from core.services import candidate_resume_pdf
 
 
-# class ExperienceDetailedViewSet(ModelViewSet):
-#     """View для отображения детального опыта работы кандидата."""
+class SpecializationViewSet(ReadOnlyModelViewSet):
+    queryset=Specialization.objects.all()
+    serializer_class = SpecializationSerializer
 
-#     queryset = ExperienceDetailed.objects.all()
-#     serializer_class = ExperienceDetailedSerializer
-#     # permission_classes = [IsAuthenticated]
-#     pagination_class = None
+class CourseViewSet(ReadOnlyModelViewSet):
+    queryset=Course.objects.all()
+    serializer_class = CourseSerializer
 
+class LevelViewSet(ReadOnlyModelViewSet):
+    queryset=Level.objects.all()
+    serializer_class = LevelSerializer
 
-# class EducationViewSet(ModelViewSet):
-#     """View для отображения информации об образовании кандидата."""
+class ExperienceViewSet(ReadOnlyModelViewSet):
+    queryset=Experience.objects.all()
+    serializer_class = ExperienceSerializer
 
-#     queryset = Education.objects.all()
-#     serializer_class = EducationSerializer
-#     # permission_classes = [IsAuthenticated]
-#     pagination_class = None
+class WorkScheduleViewSet(ReadOnlyModelViewSet):
+    queryset=WorkSchedule.objects.all()
+    serializer_class = WorkScheduleSerializer
 
+class EmploymentTypeViewSet(ReadOnlyModelViewSet):
+    queryset=EmploymentType.objects.all()
+    serializer_class = EmploymentTypeSerializer
+
+class HardCandsViewSet(ReadOnlyModelViewSet):
+    queryset=HardCands.objects.all()
+    serializer_class = HardCandsSerializer
 
 class ShortCandidateViewSet(ModelViewSet):
     """View для отображения сокращенной информации о кандидатах."""
@@ -58,6 +83,8 @@ class CandidateViewSet(ModelViewSet):
 
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = CandidatesFilter
     # permission_classes = [IsAuthenticated]
     pagination_class = None
 
@@ -92,3 +119,19 @@ class CandidateViewSet(ModelViewSet):
             {"Ошибка": "Кандидата нет в отслеживаемых"},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    
+    @action(
+        detail=False,
+        methods=("post", "delete"),
+        permission_classes=(IsAuthenticated,),
+    )
+    @staticmethod
+    def download_shopping_cart(self, request):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(request.user)

@@ -10,100 +10,50 @@ from candidates.models import (
     # DetailInCandidate,
     # Education,
     Candidate,
+    Specialization,
+    Course,
+    Level,
+    Experience,
+    WorkSchedule,
+    EmploymentType,
+    HardCands, 
     Track)
 
 
-# class ExperienceDetailedSerializer(serializers.ModelSerializer):
-#     """Сериализатор для получения 
-#     детального опыта работы кандидата."""
-
-#     class Meta:
-#         model = ExperienceDetailed
-#         fields = (
-#             "id",
-#             "name",
-#             "date_start",
-#             "date_end",
-#             "post",
-#             "responsibilities",
-#             "slug"
-#         )
-#         read_only_fields = ("__all__",)
-
-
-# class DetailInCandidateSerializer(serializers.ModelSerializer):
-#     """Сериализатор для получения детального 
-#     опыта работы у кандидата. Их может быть несколько."""
-
-#     id = IntegerField(write_only=True)
-
-#     class Meta:
-#         model = DetailInCandidate
-#         fields = (
-#             "id",
-#             "amount",
-#         )
-
-
-# class EducationSerializer(serializers.ModelSerializer):
-#     """Сериализатор для получения информации об 
-#     образовании кандидата."""
-
-#     class Meta:
-#         model = Education
-#         fields = (
-#             "id",
-#             "name",
-#             "education_level",
-#             "date_start",
-#             "date_graduation",
-#             "name_university",
-#             "faculty",
-#             "specialization",
-#             "slug",
-#         )
-#         read_only_fields = ("__all__",)
-
-
-class ShortCandidateSerializer(serializers.ModelSerializer):
-    """Сериализатор для получения краткой
-    информации о кандидате на главной странице.
-    Необходимые поля: фото, фио, город, должность, уровень, опыт)."""
-    # id = IntegerField(read_only=True)
-    experience_detailed = SerializerMethodField()
-    level = SerializerMethodField()
-    experience = SerializerMethodField()
-    image = Base64ImageField()
-    
+class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Candidate
-        fields = [
-            "id",
-            "image",
-            "last_name",
-            "first_name",
-            "middle_name",
-            "location",
-            "experience_detailed",
-            "level",
-            "experience",
-        ]
+        model = Specialization 
+        fields = ("id", "name", "slug")
 
-    def get_experience_detailed(self, obj):
-        """Получаем из детального опыта - должность."""
-        experience_detailed= obj.experience_detailed.values(
-            "post",
-        )
-        return experience_detailed
-    
-    def get_level(self, obj):
-        """Получаем уровень(грейд) кандидата."""
-        return obj.level.name
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course 
+        fields = ("id", "name", "slug")
 
-    def get_experience(self, obj):
-        """Получаем опыт работы(в годах)."""
-        return obj.experience.name
+class LevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Level 
+        fields = ("id", "name", "slug")
 
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience 
+        fields = ("id", "name", "slug")
+
+class WorkScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkSchedule 
+        fields = ("id", "name", "slug")
+
+class EmploymentTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmploymentType 
+        fields = ("id", "name", "slug")
+
+class HardCandsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HardCands 
+        fields = ("id", "name", "slug")
 
 class CandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения полной 
@@ -220,3 +170,44 @@ class CandidateSerializer(serializers.ModelSerializer):
                 user=self.context["request"].user, candidate=obj
             ).exists()
         )
+
+
+
+
+class ShortCandidateSerializer(CandidateSerializer):
+    """Сериализатор для получения краткой
+    информации о кандидате на главной странице.
+    Необходимые поля: фото, фио, город, должность, уровень, опыт)."""
+    experience_detailed = SerializerMethodField()
+    level = SerializerMethodField()
+    experience = SerializerMethodField()
+    image = Base64ImageField()
+
+    class Meta:
+        model = Candidate
+        fields = [
+            "id",
+            "image",
+            "last_name",
+            "first_name",
+            "middle_name",
+            "location",
+            "experience_detailed",
+            "level",
+            "experience",
+        ]
+
+    def get_experience_detailed(self, obj):
+        """Получаем из детального опыта - должность."""
+        experience_detailed= obj.experience_detailed.values(
+            "post",
+        )
+        return experience_detailed
+    
+    def get_level(self, obj):
+        """Получаем уровень(грейд) кандидата."""
+        return obj.level.name
+
+    def get_experience(self, obj):
+        """Получаем опыт работы(в годах)."""
+        return obj.experience.name

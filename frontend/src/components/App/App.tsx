@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser, clearUser } from '../../store/user/user';
-import { addCandidates, clearCandidates } from '../../store/candidates/candidates';
+import { addCandidates, clearCandidates } from '../../store/foundCandidates/foundCandidates';
 import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
 
 import './App.scss';
@@ -24,7 +24,6 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 // import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
-// import mainApi from '../../utils/MainApi';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -33,12 +32,23 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  function setfailedToFetch(error: { detail : string}): void {
+    console.log(error);
+
+    if (error.detail.includes('Failed to fetch')) {
+      return alert('Ошибка при получении данных: Возможны проблемы с сетью или сервер может быть недоступен.');
+    }
+
+    return alert(error.detail);
+  }
+
   function searchCandidates(): void {
     const token = localStorage.getItem('token');
 
     if (token) {
       mainApi.getCandidates(token)
-        .then((candidates) => dispatch(addCandidates({ candidates })));
+        .then((candidates) => dispatch(addCandidates({ candidates })))
+        .catch((err) => setfailedToFetch(err));
     }
   }
 
@@ -57,20 +67,29 @@ function App() {
 
             navigate('/', { replace: true });
           })
-          .catch((err) => console.log(err));
+          .catch((err) => setfailedToFetch(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setfailedToFetch(err));
   }
 
   function logOut(): void {
-    localStorage.clear();
+    const token = localStorage.getItem('token');
+
+    setIsLoggedIn(false);
 
     dispatch(clearUser());
     dispatch(clearCandidates());
 
-    setIsLoggedIn(false);
+    if (token) {
+      mainApi.logOut(token)
+        .then(() => {
+        })
+        .catch((err) => setfailedToFetch(err));
+    }
 
     navigate('/login', { replace: true });
+
+    localStorage.clear();
   }
 
   useEffect(() => {
@@ -92,7 +111,7 @@ function App() {
           navigate(path, { replace: true });
         })
         .catch((err) => {
-          console.log(err);
+          setfailedToFetch(err);
 
           navigate('/login', { replace: true });
         });
