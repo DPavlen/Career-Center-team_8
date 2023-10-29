@@ -34,17 +34,17 @@ from candidates.models import (
        
 # )
 
-# class UserSerializer(UserSerializer):
+class UserSerializer(UserSerializer):
 
-#     class Meta:
-#         model = MyUser
-#         fields = (
-#             "email",
-#             "id",
-#             "username",
-#             "first_name",
-#             "last_name",
-#         )
+    class Meta:
+        model = MyUser
+        fields = (
+            "email",
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+        )
 
 class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -195,12 +195,11 @@ class CandidateSerializer(serializers.ModelSerializer):
         return obj.work_schedule.values()
     
     def get_is_tracked(self, obj):
-        return (
-            self.context["request"].user.is_authenticated
-            and Track.objects.filter(
-                user=self.context["request"].user, candidate=obj
-            ).exists()
-        )
+        request = self.context.get("request")
+        print(request)
+        if request is None or request.user.is_anonymous:
+            return False
+        return Track.objects.filter(user=request.user, candidate=obj).exists()
 
 
 
