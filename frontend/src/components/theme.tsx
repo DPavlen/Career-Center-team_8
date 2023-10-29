@@ -24,14 +24,17 @@ const theme = createTheme({
       fontWeight: 500,
       margin: '40px 0 32px 0',
     },
+    h2: {
+      fontWeight: 500,
+    },
+    h3: {
+      fontWeight: 500,
+    },
     subtitle1: {
       fontFamily: 'YS Text',
       fontSize: '14px',
       fontWeight: 400,
       color: 'var(--Black-500)',
-    },
-    h3: {
-      fontWeight: 500,
     },
   },
   components: {
