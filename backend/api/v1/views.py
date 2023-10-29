@@ -13,12 +13,24 @@ from api.v1.serializers import (
     # ExperienceDetailedSerializer,
     # EducationSerializer,
     CandidateSerializer,
-    ShortCandidateSerializer
+    ShortCandidateSerializer,
+    SpecializationSerializer,
+    CourseSerializer,
+    LevelSerializer,
+    ExperienceSerializer,
+    WorkScheduleSerializer,
+    EmploymentTypeSerializer
     )
 from candidates.models import (
     ExperienceDetailed,
     Education,
+    Specialization,
     Candidate,
+    Course,
+    Level,
+    Experience,
+    WorkSchedule,
+    EmploymentType,
     Track
     )
 from .filters import CandidatesFilter
@@ -41,6 +53,30 @@ from .filters import CandidatesFilter
 #     # permission_classes = [IsAuthenticated]
 #     pagination_class = None
 
+class SpecializationViewSet(ReadOnlyModelViewSet):
+    queryset=Specialization.objects.all()
+    serializer_class = SpecializationSerializer
+
+class CourseViewSet(ReadOnlyModelViewSet):
+    queryset=Course.objects.all()
+    serializer_class = CourseSerializer
+
+class LevelViewSet(ReadOnlyModelViewSet):
+    queryset=Level.objects.all()
+    serializer_class = LevelSerializer
+
+class ExperienceViewSet(ReadOnlyModelViewSet):
+    queryset=Experience.objects.all()
+    serializer_class = ExperienceSerializer
+
+class WorkScheduleViewSet(ReadOnlyModelViewSet):
+    queryset=WorkSchedule.objects.all()
+    serializer_class = WorkScheduleSerializer
+
+class EmploymentTypeViewSet(ReadOnlyModelViewSet):
+    queryset=EmploymentType.objects.all()
+    serializer_class = EmploymentTypeSerializer
+
 
 class ShortCandidateViewSet(ModelViewSet):
     """View для отображения сокращенной информации о кандидатах."""
@@ -58,6 +94,8 @@ class CandidateViewSet(ModelViewSet):
 
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = CandidatesFilter
     # permission_classes = [IsAuthenticated]
     pagination_class = None
 
