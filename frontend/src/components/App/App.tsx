@@ -73,14 +73,23 @@ function App() {
   }
 
   function logOut(): void {
-    localStorage.clear();
+    const token = localStorage.getItem('token');
+
+    setIsLoggedIn(false);
 
     dispatch(clearUser());
     dispatch(clearCandidates());
 
-    setIsLoggedIn(false);
+    if (token) {
+      mainApi.logOut(token)
+        .then(() => {
+        })
+        .catch((err) => setfailedToFetch(err));
+    }
 
     navigate('/login', { replace: true });
+
+    localStorage.clear();
   }
 
   useEffect(() => {
