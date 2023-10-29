@@ -90,7 +90,7 @@ class CandidateViewSet(ModelViewSet):
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    # permission_classes = [IsAuthenticated]
+    # permission_classes = (IsAuthenticated,)
     pagination_class = None
 
     @action(
@@ -105,8 +105,9 @@ class CandidateViewSet(ModelViewSet):
                 user=request.user, candidate=candidate
             )
             if created:
-                serializer = CandidateSerializer(candidate)
+                serializer = ShortCandidateSerializer(candidate)
                 return Response(
+                    
                     serializer.data, status=status.HTTP_201_CREATED
                 )
             return Response(
