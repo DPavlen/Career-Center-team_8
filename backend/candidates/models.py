@@ -373,7 +373,7 @@ class Candidate(models.Model):
         ACTIVE = 'AC', ('Активный')
         ON_HOLD = 'OH', ('В ожидании')
         NOT_ACTIVE = 'NA', ('Не доступен')
-    
+
     class Sex(models.TextChoices):
         """Выбор пола соискателя."""
         MALE = 'М', ('Мужской')
@@ -429,11 +429,15 @@ class Candidate(models.Model):
         max_length=2,
         choices=Activity.choices,
         default=Activity.NOT_ACTIVE,
+        verbose_name="Статус соискателя",
     )
     location =  models.CharField(
         "Местонахождение",
         max_length=150,
         # blank=True,
+    )
+    about_me = models.TextField(
+        "Обо мне",
     )
     specialization = models.ForeignKey(
         Specialization,
@@ -501,9 +505,9 @@ class Candidate(models.Model):
          # Поставлено необязательно для корректной загрузки
         blank=True,
     )
-    about_me = models.TextField(
-        "Обо мне",
-    )
+    # about_me = models.TextField(
+    #     "Обо мне",
+    # )
     education = models.ManyToManyField(
         Education,
         related_name="candidates",
