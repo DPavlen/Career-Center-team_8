@@ -99,7 +99,7 @@ class CandidateViewSet(ModelViewSet):
 
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
     # permission_classes = [IsAuthenticated]
     pagination_class = None

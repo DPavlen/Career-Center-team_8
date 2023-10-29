@@ -15,22 +15,22 @@ class HardsCandsFilter(FilterSet):
 
 
 class CandidatesFilter(FilterSet):
-    specialization = filters.ModelChoiceFilter(
+    specialization_id = filters.ModelMultipleChoiceFilter(
         field_name="specialization__slug",
         to_field_name="slug",
         queryset=Specialization.objects.all(),
     )
-    course = filters.ModelChoiceFilter(
+    course = filters.ModelMultipleChoiceFilter(
         field_name="course__slug",
         to_field_name="slug",
         queryset=Course.objects.all(),
     )
-    level = filters.ModelChoiceFilter(
+    level_id = filters.ModelMultipleChoiceFilter(
         field_name="level__slug",
         to_field_name="slug",
         queryset=Level.objects.all(),
     )
-    experience = filters.ModelChoiceFilter(
+    experience_id = filters.ModelMultipleChoiceFilter(
         field_name="experience__slug",
         to_field_name="slug",
         queryset=Experience.objects.all(),
@@ -45,16 +45,18 @@ class CandidatesFilter(FilterSet):
         to_field_name="slug",
         queryset=EmploymentType.objects.all(),
     )
+
     is_tracked = filters.BooleanFilter(method="is_tracked_filter")
-    hards_cands = filters.ModelMultipleChoiceFilter(
-        field_name = "hards_cands__slug",
+
+    hards = filters.ModelMultipleChoiceFilter(
+        field_name = "hards__slug",
         to_field_name="slug",
         queryset = HardCands.objects.all(),
     )
 
     class Meta:
         model = Candidate
-        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "hards_cands", "is_tracked")
+        fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked")
 
     def is_tracked_filter(self, queryset, name, value):
         user = self.request.user
