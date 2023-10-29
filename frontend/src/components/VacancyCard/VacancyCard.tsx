@@ -2,9 +2,9 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { useState, useRef } from 'react';
 import { ICandidate } from '../../store/foundCandidates/foundCandidates';
-import { useDispatch } from 'react-redux';
 // import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 // import checkbox from '../../assets/icons/checkbox.svg';
 import like from '../../assets/icons/Like.svg';
@@ -58,11 +58,6 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
                 {' '}
                 <span className="card__period">
                   {card.experience}
-<<<<<<< HEAD
-                  {/* {' '}
-                  месяцев */}
-=======
->>>>>>> develop
                 </span>
               </p>
             </div>
