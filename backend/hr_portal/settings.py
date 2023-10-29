@@ -8,7 +8,7 @@ SECRET_KEY = (
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["84.201.133.88", "localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "rest_framework",
     "rest_framework.authtoken",
+    "django_filters",
     "djoser",
     "candidates.apps.CandidatesConfig",
     "vacancies.apps.VacanciesConfig",

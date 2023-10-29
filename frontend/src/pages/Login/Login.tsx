@@ -47,6 +47,8 @@ function Login({ logIn }: LoginProps) {
             sx={{
               height: '52px',
               marginTop: '16px',
+              color: 'var(--White)',
+              fontWeight: 500,
             }}
           >
             Войти

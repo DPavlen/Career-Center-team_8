@@ -81,6 +81,15 @@ class MainApi {
     return this.getResponseData(res);
   }
 
+  public async getShortCandidates(token: string): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/short_candidates/`,
+      this.setGetOptions(token),
+    );
+
+    return this.getResponseData(res);
+  }
+
   public async getCandidateExperience(token: string): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/experience_detailed/`,
