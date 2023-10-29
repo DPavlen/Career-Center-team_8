@@ -1,30 +1,71 @@
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller, FormProvider, SubmitHandler, useForm,
+} from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import iconBack from '../../assets/icons/ic_back.svg';
 import './VacancyForm.scss';
-// import VacancyInput from '../VacancyInput/VacancyInput';
+import VacancyInput from '../VacancyInput/VacancyInput';
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
 import { RootState } from '../../store/store';
-import { createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
+import { createVacancyResetAllFilters, createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 import { addVacancy } from '../../store/savedVacancies/savedVacancies';
 import type { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
+
+// interface VacancyFormProps {
+//   onResetFilter: (filter: AppliedFilter) => void,
+// }
 
 function VacancyForm() {
   const navigate = useNavigate();
   const filterValue = useSelector((state: RootState) => state.createVacancyFilter);
   const dispatch = useDispatch();
-  const { register, reset, handleSubmit } = useForm<TSavedVacancies>();
-  const submit: SubmitHandler<TSavedVacancies> = (data) => {
-    dispatch(addVacancy(data));
+
+  const initialData = localStorage.getItem('CREATE_VACANCY_FORM');
+
+  const methods = useForm<TSavedVacancies>({
+    defaultValues: initialData ? JSON.parse(initialData) : {
+      // eslint-disable-next-line camelcase
+      job_title: '',
+      company: '',
+      // eslint-disable-next-line camelcase
+      required_requirements: '',
+      responsibilities: '',
+      conditions: '',
+    },
+  });
+
+  const {
+    control, handleSubmit, watch,
+  } = methods;
+
+  function resetForm() {
+    localStorage.removeItem('CREATE_VACANCY_FORM');
     navigate('/');
+    dispatch(createVacancyResetAllFilters());
+  }
+
+  const submit: SubmitHandler<TSavedVacancies> = (data) => {
+    dispatch(addVacancy({
+      ...data,
+      filters: filterValue,
+    }));
+    resetForm();
   };
 
   function goBack() {
     navigate(-1);
   }
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      localStorage.setItem('CREATE_VACANCY_FORM', JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <main className="vacancy-form">
@@ -42,80 +83,84 @@ function VacancyForm() {
           Новая вакансия
         </h1>
       </div>
-      {/* <form className="vacancy-form__content">
+      <FormProvider {...methods}>
         <label className="vacancy-form__description">Должность*</label>
-        <VacancyInput placeholder="Название должности" />
+        <Controller
+          name="job_title"
+          control={control}
+          rules={{ required: true }}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Дизайнер интерфейсов" />
+          )}
+        />
         <label className="vacancy-form__description">Компания*</label>
-        <VacancyInput placeholder="Название компании" />
+        <Controller
+          name="company"
+          control={control}
+          rules={{ required: true }}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Название компании" />
+          )}
+        />
         <label className="vacancy-form__description">Уровень дохода</label>
         <div className="vacancy-form__salary">
-          <VacancyInput placeholder="От" />
-          <VacancyInput placeholder="До" />
-        </div>
-        <label className="vacancy-form__description">Обязательные требования*</label>
-        <VacancyInput placeholder="Обязательные требования, которыми должен владеть кандидат" />
-        <label className="vacancy-form__description">Необязательные требования</label>
-        <VacancyInput
-        placeholder="Необязательные навыки и требования, которые являются преимуществом"
-        />
-        <label className="vacancy-form__description">Обязанности*</label>
-        <VacancyInput placeholder="Обязанности кандидата" />
-        <label className="vacancy-form__description">Условия*</label>
-        <VacancyInput placeholder="График, тип работы, соц пакет" />
-        <label className="vacancy-form__description">Этапы отбора</label>
-        <VacancyInput placeholder="Собеседования, тестовые, VCV" />
-        <div className="vacancy-form__filter">
-          <h2 className="vacancy-form__description">Фильтры*</h2>
-          <p className="vacancy-form__choose-filter">
-          Выберите не менее одного параметра в разделе &quot;Фильтр&quot; справа
-          </p>
-          <AppliedFilters
-            filterValue={filterValue}
-            onResetFilter={(filter) => dispatch(createVacancyResetFilter(filter))}
+          <Controller
+            name="salary_from"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <VacancyInput value={value} onChange={onChange} placeholder="от 40000" />
+            )}
+          />
+          <Controller
+            name="salary_to"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <VacancyInput value={value} onChange={onChange} placeholder="до 60000" />
+            )}
           />
         </div>
-      </form> */}
-
-      <form className="vacancy-form__content" onSubmit={handleSubmit(submit)}>
-        <label className="vacancy-form__description">Должность*</label>
-        <input
-          placeholder="Название должности"
-          {...register('job_title', { required: true })}
-        />
-        <label className="vacancy-form__description">Компания*</label>
-        <input
-          placeholder="Название компании"
-          {...register('company', { required: true })}
-        />
-        <label className="vacancy-form__description">Уровень дохода</label>
-        <div className="vacancy-form__salary">
-          <input placeholder="От" {...register('salary_from')} />
-          <input placeholder="До" {...register('salary_to')} />
-        </div>
         <label className="vacancy-form__description">Обязательные требования*</label>
-        <input
-          placeholder="Обязательные требования, которыми должен владеть кандидат. перечисление через зяпятую"
-          {...register('required_requirements', { required: true })}
+        <Controller
+          name="required_requirements"
+          rules={{ required: true }}
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Обязательные требования, которыми должен обладать кандидат" />
+          )}
         />
         <label className="vacancy-form__description">Необязательные требования</label>
-        <input
-          placeholder="Необязательные навыки и требования, которые являются преимуществом. перечисление через зяпятую"
-          {...register('optional_requirements')}
+        <Controller
+          name="optional_requirements"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Необязательные навыки и требования, которые будут преимуществом" />
+          )}
         />
         <label className="vacancy-form__description">Обязанности*</label>
-        <input
-          placeholder="Обязанности кандидата. перечисление через зяпятую"
-          {...register('responsibilities', { required: true })}
+        <Controller
+          name="responsibilities"
+          rules={{ required: true }}
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Обязанности кандидата" />
+          )}
         />
         <label className="vacancy-form__description">Условия*</label>
-        <input
-          placeholder="График, тип работы, соц пакет. перечисление через зяпятую"
-          {...register('conditions', { required: true })}
+        <Controller
+          name="conditions"
+          rules={{ required: true }}
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="График, тип работы, соц пакет" />
+          )}
         />
         <label className="vacancy-form__description">Этапы отбора</label>
-        <input
-          placeholder="Собеседования, тестовые, VCV. перечисление через зяпятую"
-          {...register('selection_stages')}
+        <Controller
+          name="selection_stages"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <VacancyInput value={value} onChange={onChange} placeholder="Собеседования, тестовые, VCV" />
+          )}
         />
         <div className="vacancy-form__filter">
           <h2 className="vacancy-form__description">Фильтры*</h2>
@@ -128,29 +173,26 @@ function VacancyForm() {
           />
         </div>
         <div>
-
           <Button
-            // onClick={}
-            type="submit"
+            onClick={handleSubmit(submit)}
             sx={{
               borderRadius: '6px',
               textTransform: 'none',
-              backgroundColor: 'var(--Blue-Main)',
+              backgroundColor: 'var(--Blue)',
               width: 242,
               height: 52,
               fontSize: '16px',
-              textColor: 'var(--White)',
+              color: 'var(--White)',
               marginBottom: '100px',
               marginTop: '24px',
               '&.Mui-disabled': { backgroundColor: 'var(--Black-300)', color: 'var(--White)' },
             }}
             variant="contained"
-          // disabled
           >
             Создать вакансию
           </Button>
           <Button
-            onClick={() => reset()}
+            onClick={() => resetForm()}
             sx={{
               borderRadius: '6px',
               textTransform: 'none',
@@ -167,7 +209,7 @@ function VacancyForm() {
             Отменить
           </Button>
         </div>
-      </form>
+      </FormProvider>
     </main>
   );
 }

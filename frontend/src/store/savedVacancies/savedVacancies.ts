@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IFilter } from '../filter';
 
 // type TSalary = [number | null, number | null];
 
@@ -12,7 +13,7 @@ export type TSavedVacancies = {
   responsibilities: string;
   conditions: string;
   selection_stages: string;
-  filters: string[];
+  filters: IFilter;
 }
 const initialState: TSavedVacancies[] | [] = [];
 
@@ -23,7 +24,10 @@ const savedVacanciesSlice = createSlice({
     addVacancy: (
       store: TSavedVacancies[],
       { payload }: PayloadAction<TSavedVacancies>,
-    ) => store.concat(payload),
+    ) => {
+      console.log(payload);
+      return store.concat(payload);
+    },
   },
 });
 
