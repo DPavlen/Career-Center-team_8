@@ -36,24 +36,8 @@ from candidates.models import (
     HardCands
     )
 from .filters import CandidatesFilter
+from core.services import candidate_resume_pdf
 
-
-# class ExperienceDetailedViewSet(ModelViewSet):
-#     """View для отображения детального опыта работы кандидата."""
-
-#     queryset = ExperienceDetailed.objects.all()
-#     serializer_class = ExperienceDetailedSerializer
-#     # permission_classes = [IsAuthenticated]
-#     pagination_class = None
-
-
-# class EducationViewSet(ModelViewSet):
-#     """View для отображения информации об образовании кандидата."""
-
-#     queryset = Education.objects.all()
-#     serializer_class = EducationSerializer
-#     # permission_classes = [IsAuthenticated]
-#     pagination_class = None
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
     queryset=Specialization.objects.all()
@@ -135,3 +119,19 @@ class CandidateViewSet(ModelViewSet):
             {"Ошибка": "Кандидата нет в отслеживаемых"},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    
+    @action(
+        detail=False,
+        methods=("post", "delete"),
+        permission_classes=(IsAuthenticated,),
+    )
+    @staticmethod
+    def download_shopping_cart(self, request):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(request.user)
