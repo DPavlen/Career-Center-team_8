@@ -57,7 +57,7 @@ class CandidatesFilter(FilterSet):
     location = filters.ModelMultipleChoiceFilter(
         field_name = "location",
         to_field_name="location",
-        queryset = Candidate.objects.all().distinct("location").order_by(),
+        queryset = Candidate.objects.distinct("location").order_by(),
     )
     class Meta:
         model = Candidate
