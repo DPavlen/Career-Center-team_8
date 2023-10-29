@@ -490,6 +490,7 @@ class Candidate(models.Model):
         verbose_name="Тип занятости",
         # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidated.EmploymentTypeInCandidate",
     )
     work_schedule = models.ManyToManyField(
         WorkSchedule,
@@ -497,6 +498,7 @@ class Candidate(models.Model):
         verbose_name="График работы",
          # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidated.WorkScheduleInCandidate",
     )
     experience_detailed = models.ManyToManyField(
         ExperienceDetailed,
@@ -504,16 +506,15 @@ class Candidate(models.Model):
         verbose_name="Детальный опыт работы",
          # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidated.ExperienceDetailedInCandidate",
     )
-    # about_me = models.TextField(
-    #     "Обо мне",
-    # )
     education = models.ManyToManyField(
         Education,
         related_name="candidates",
         verbose_name="Образование",
         # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidated.EducationInCandidate",
     )
 
     class Meta:
@@ -525,9 +526,8 @@ class Candidate(models.Model):
         return self.last_name
 
 
-class DetailInCandidate(models.Model):
+class ExperienceDetailedInCandidate(models.Model):
     """Детали опыта работы | Опыт у кандидата.
-    Определение количества опыта работы.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -540,10 +540,101 @@ class DetailInCandidate(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Детальный опыт работы"
     )
-    # amount = models.SmallIntegerField(
-    #     verbose_name="Количество мест работы",
-    #     default=0,
-    # )
+
+
+class EducationInCandidate(models.Model):
+    """Детали образования | Образование у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    education = models.ForeignKey(
+        Education,
+        on_delete=models.CASCADE,
+        verbose_name="Образование кандидата"
+    )
+
+
+class WorkScheduleInCandidate(models.Model):
+    """Детали график работы | график работы у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    work_schedule = models.ForeignKey(
+        WorkSchedule,
+        on_delete=models.CASCADE,
+        verbose_name="График работы у кандидата."
+    )
+
+class EmploymentTypeInCandidate(models.Model):
+    """Детали типа занятости | Тип занятости у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    employment_type = models.ForeignKey(
+        EmploymentType,
+        on_delete=models.CASCADE,
+        verbose_name="Тип занятости кандидата."
+    )
+
+
+class SoftsInCandidate(models.Model):
+    """Детали софт скилы |софт скилы у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    softs = models.ForeignKey(
+        Soft,
+        on_delete=models.CASCADE,
+        verbose_name="Cофт скилы кандидата."
+    )
+
+
+class HardsInCandidate(models.Model):
+    """Детали Хард скилы| Хард скилы у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    hards = models.ForeignKey(
+        HardCands,
+        on_delete=models.CASCADE,
+        verbose_name="Хард скилы кандидата."
+    )
+
+
+class CourseInCandidate(models.Model):
+    """Детали курс ЯП| курс ЯП у кандидата.
+    """
+    candidate = models.ForeignKey(
+        Candidate,
+        on_delete=models.CASCADE,
+        related_name="detail_in_candidate",
+        verbose_name="Кандидат",
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курсы ЯП кандидата."
+    )
 
 
 class Contact(models.Model):
