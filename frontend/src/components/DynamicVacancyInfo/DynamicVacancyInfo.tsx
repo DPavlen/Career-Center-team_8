@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import { v4 as uuid } from 'uuid';
 import { useEffect, useState } from 'react';
 import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
 import './DynamicVacancyInfo.scss';
@@ -43,7 +44,7 @@ function DynamicVacancyInfo({ hide, data }: VacancyInfoProps) {
     <section className="vacancy-info">
       <div className="vacancy-info__chips">
         {chips.map((chip) => (
-          <span className="vacancy-info__skills">{chip}</span>
+          <span key={uuid()} className="vacancy-info__skills">{chip}</span>
         ))}
       </div>
       {(data.salary_from || data.salary_to) && (
