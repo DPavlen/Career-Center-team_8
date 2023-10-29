@@ -1,4 +1,7 @@
 /* eslint-disable no-undef */
+
+import { IFilter } from '../store/filter';
+
 /* eslint-disable class-methods-use-this */
 interface Data {
   [key: string]: string;
@@ -102,6 +105,49 @@ class MainApi {
   public async getCandidateEducation(token: string): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/education/`,
+      this.setGetOptions(token),
+    );
+
+    return this.getResponseData(res);
+  }
+
+  public async getFilterCandidates(token: string, filterValue: IFilter): Promise<never | Data> {
+    const filterTags: string[] = [];
+
+    if (filterValue.specialization) {
+      filterTags.push(`specialization_id=${filterValue.specialization}`);
+    }
+
+    if (filterValue.course) {
+      filterValue.course.forEach((item) => filterTags.push(`course=${item}`));
+    }
+
+    if (filterValue.hards) {
+      filterValue.hards.forEach((item) => filterTags.push(`hards=${item}`));
+    }
+
+    if (filterValue.experience) {
+      filterValue.experience.forEach((item) => filterTags.push(`experience_id=${item}`));
+    }
+
+    if (filterValue.level) {
+      filterValue.level.forEach((item) => filterTags.push(`level_id=${item}`));
+    }
+
+    if (filterValue.location) {
+      filterValue.location.forEach((item) => filterTags.push(`location=${item}`));
+    }
+
+    if (filterValue.employmentType) {
+      filterValue.employmentType.forEach((item) => filterTags.push(`employment_type=${item}`));
+    }
+
+    if (filterValue.workSchedule) {
+      filterValue.workSchedule.forEach((item) => filterTags.push(`work_schedule=${item}`));
+    }
+
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/?${filterTags.join('&')}`,
       this.setGetOptions(token),
     );
 

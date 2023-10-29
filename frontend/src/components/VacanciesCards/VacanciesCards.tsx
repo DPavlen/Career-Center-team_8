@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import VacancyCard from '../VacancyCard/VacancyCard';
 import type { RootState } from '../../store/store';
 import VacancySibtitle from '../VacancySubtitle/VacancySubtitle';
+// import { useEffect } from 'react';
 
 function VacanciesCards() {
   const candidates = useSelector((state: RootState) => state.foundCandidates.candidates);

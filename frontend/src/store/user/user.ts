@@ -27,8 +27,6 @@ const userSlice = createSlice({
     clearUser: (store) => {
       // eslint-disable-next-line no-param-reassign
       store.user = null;
-
-      console.log(store.user);
     },
   },
 });
