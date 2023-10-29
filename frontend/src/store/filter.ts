@@ -1,10 +1,10 @@
 export interface IFilter {
-  profession: string | null;
-  course: string[];
-  skills: string[],
-  location: string[],
+  specialization: string[] | null,
+  course: string[],
+  hards: string[],
   experience: string[],
   level: string[],
-  busyType: string[],
-  workingType: string[],
+  location: string[],
+  employmentType: string[],
+  workSchedule: string[],
 }

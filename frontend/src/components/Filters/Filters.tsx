@@ -1,23 +1,32 @@
-import './Filters.scss';
-import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
+
+import './Filters.scss';
+
+import Button from '@mui/material/Button';
+
+import { IFilter } from '../../store/filter';
+import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
+
 import settings from '../../assets/icons/settings.svg';
-import professions from '../../utils/testProfessionArea.json';
-import skillsData from '../../utils/testSkills.json';
+import deleteIcon from '../../assets/icons/delete.svg';
+
 import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
-import deleteIcon from '../../assets/icons/delete.svg';
-import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
-import { IFilter } from '../../store/filter';
 
 interface IFiltersProps {
+  filtersOptions: IFilter;
   filterValue: IFilter;
   onResetAllFilters: () => void;
   // eslint-disable-next-line no-unused-vars
   onSetFilter: (filter: Partial<IFilter>) => void;
 }
 
-function Filters({ filterValue, onResetAllFilters, onSetFilter }: IFiltersProps) {
+function Filters({
+  filtersOptions,
+  filterValue,
+  onResetAllFilters,
+  onSetFilter,
+}: IFiltersProps) {
   const [selectedAmount, setSelectedAmount] = useState(0);
 
   // мы заранее не знаем к какому слайсу будет подключен нащ компонент,
@@ -60,66 +69,82 @@ function Filters({ filterValue, onResetAllFilters, onSetFilter }: IFiltersProps)
           Сбросить
         </Button>
       </div>
-      <RadioGroupFilter
-        filter="profession"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        data={professions}
-        withBorder={false}
-      />
-      <CheckboxGroupFilter
-        filter="course"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Курс Практикума"
-        data={professions}
-      />
-      <CheckboxGroupFilter
-        filter="skills"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Навыки"
-        placeholder="Введите навык"
-        withSearch
-        data={skillsData}
-      />
-      <CheckboxGroupFilter
-        filter="experience"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Опыт работы"
-        data={professions}
-      />
-      <CheckboxGroupFilter
-        filter="level"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Уровень"
-        data={professions}
-      />
-      <CheckboxGroupFilter
-        filter="location"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Геопозиция"
-        placeholder="Введите геопозицию"
-        withSearch
-        data={skillsData}
-      />
-      <CheckboxGroupFilter
-        filter="busyType"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="Тип занятости"
-        data={professions}
-      />
-      <CheckboxGroupFilter
-        filter="workingType"
-        filterValue={filterValue}
-        onSetFilter={onSetFilter}
-        title="График работы"
-        data={professions}
-      />
+      {filtersOptions.specialization !== null && (
+        <RadioGroupFilter
+          filter="specialization"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          data={filtersOptions.specialization}
+          withBorder={false}
+        />
+      )}
+      {filtersOptions.course.length > 0 && (
+        <CheckboxGroupFilter
+          filter="course"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Курс Практикума"
+          data={filtersOptions.course}
+        />
+      )}
+      {filtersOptions.hards.length > 0 && (
+        <CheckboxGroupFilter
+          filter="hards"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Навыки"
+          placeholder="Введите навык"
+          withSearch
+          data={filtersOptions.hards}
+        />
+      )}
+      {filtersOptions.experience.length > 0 && (
+        <CheckboxGroupFilter
+          filter="experience"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Опыт работы"
+          data={filtersOptions.experience}
+        />
+      )}
+      {filtersOptions.level.length > 0 && (
+        <CheckboxGroupFilter
+          filter="level"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Уровень"
+          data={filtersOptions.level}
+        />
+      )}
+      {filtersOptions.location.length > 0 && (
+        <CheckboxGroupFilter
+          filter="location"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Геопозиция"
+          placeholder="Введите геопозицию"
+          withSearch
+          data={filtersOptions.location}
+        />
+      )}
+      {filtersOptions.employmentType.length > 0 && (
+        <CheckboxGroupFilter
+          filter="employmentType"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="Тип занятости"
+          data={filtersOptions.employmentType}
+        />
+      )}
+      {filtersOptions.workSchedule.length > 0 && (
+        <CheckboxGroupFilter
+          filter="workSchedule"
+          filterValue={filterValue}
+          onSetFilter={onSetFilter}
+          title="График работы"
+          data={filtersOptions.workSchedule}
+        />
+      )}
       <div className="filters__separator" />
     </form>
   );

@@ -8,7 +8,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  selectedFilter: 'profession',
+  selectedFilter: 'specialization',
 };
 
 const selectedFilterSlice = createSlice({

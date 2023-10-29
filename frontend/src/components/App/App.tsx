@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser, clearUser } from '../../store/user/user';
-import { addCandidates, clearCandidates } from '../../store/candidates/candidates';
+import { addCandidates, clearCandidates } from '../../store/foundCandidates/foundCandidates';
 import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
 
 import './App.scss';
