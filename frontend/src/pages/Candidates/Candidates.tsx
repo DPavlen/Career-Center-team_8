@@ -10,11 +10,13 @@ import Filters from '../../components/Filters/Filters';
 
 import { RootState } from '../../store/store';
 import { vacanciesFilterResetAllFilters, vacanciesFilterResetFilter, vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
-import { AllFilters } from '../../store/candidates/candidates';
+import { IFilter } from '../../store/filter';
 
 function Candidates() {
   const filterValue = useSelector((state: RootState) => state.vacanciesFilter);
-  const filters: AllFilters = useSelector((state: RootState) => state.foundCandidates.allFilters);
+  const filtersOptions: IFilter = useSelector(
+    (state: RootState) => state.foundCandidates.filtersOptions,
+  );
 
   const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ function Candidates() {
         <VacanciesCards />
       </div>
       <Filters
-        filters={filters}
+        filtersOptions={filtersOptions}
         filterValue={filterValue}
         onResetAllFilters={() => dispatch(vacanciesFilterResetAllFilters())}
         onSetFilter={(filter) => dispatch(vacanciesFilterSetFilter(filter))}

@@ -30,7 +30,7 @@ function CheckboxGroupFilter({
   const [value, setValue] = useState<string[]>([]);
 
   const [search, setSearch] = useState<string>('');
-  // const [filtered, setFiltered] = useState<IOption[]>([]);
+  const [filtered, setFiltered] = useState<string[]>([]);
 
   // eslint-disable-next-line no-shadow
   const onValueChange = useCallback((name: string) => {
@@ -47,6 +47,10 @@ function CheckboxGroupFilter({
   }, [value, onSetFilter, filter]);
 
   useEffect(() => {
+    setFiltered(data.filter((d) => d.toLowerCase().includes(search.toLowerCase())));
+  }, [search, data]);
+
+  useEffect(() => {
     setValue(filterValue[filter] as string[]);
   }, [filter, filterValue]);
 
@@ -56,7 +60,7 @@ function CheckboxGroupFilter({
         ? <FilterInput placeholder={placeholder} search={search} setSearch={setSearch} />
         : null}
       <Scrollbar maxHeight={withSearch ? '192px' : '240px'}>
-        {data.map((p) => (
+        {filtered.map((p) => (
           <FormControlLabel
             key={uuid()}
             sx={{

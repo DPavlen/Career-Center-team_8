@@ -5,7 +5,6 @@ import './Filters.scss';
 import Button from '@mui/material/Button';
 
 import { IFilter } from '../../store/filter';
-import { AllFilters } from '../../store/candidates/candidates';
 import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
 
 import settings from '../../assets/icons/settings.svg';
@@ -15,7 +14,7 @@ import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 
 interface IFiltersProps {
-  filters: AllFilters;
+  filtersOptions: IFilter;
   filterValue: IFilter;
   onResetAllFilters: () => void;
   // eslint-disable-next-line no-unused-vars
@@ -23,7 +22,7 @@ interface IFiltersProps {
 }
 
 function Filters({
-  filters,
+  filtersOptions,
   filterValue,
   onResetAllFilters,
   onSetFilter,
@@ -70,54 +69,54 @@ function Filters({
           Сбросить
         </Button>
       </div>
-      {filters.experience.length > 0 && (
+      {filtersOptions.specialization !== null && (
         <RadioGroupFilter
-          filter="profession"
+          filter="specialization"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
-          data={filters.specialization}
+          data={filtersOptions.specialization}
           withBorder={false}
         />
       )}
-      {filters.course.length > 0 && (
+      {filtersOptions.course.length > 0 && (
         <CheckboxGroupFilter
           filter="course"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Курс Практикума"
-          data={filters.course}
+          data={filtersOptions.course}
         />
       )}
-      {filters.hards.length > 0 && (
+      {filtersOptions.hards.length > 0 && (
         <CheckboxGroupFilter
-          filter="skills"
+          filter="hards"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Навыки"
           placeholder="Введите навык"
           withSearch
-          data={filters.hards}
+          data={filtersOptions.hards}
         />
       )}
-      {filters.experience.length > 0 && (
+      {filtersOptions.experience.length > 0 && (
         <CheckboxGroupFilter
           filter="experience"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Опыт работы"
-          data={filters.experience}
+          data={filtersOptions.experience}
         />
       )}
-      {filters.level.length > 0 && (
+      {filtersOptions.level.length > 0 && (
         <CheckboxGroupFilter
           filter="level"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Уровень"
-          data={filters.level}
+          data={filtersOptions.level}
         />
       )}
-      {filters.location.length > 0 && (
+      {filtersOptions.location.length > 0 && (
         <CheckboxGroupFilter
           filter="location"
           filterValue={filterValue}
@@ -125,25 +124,25 @@ function Filters({
           title="Геопозиция"
           placeholder="Введите геопозицию"
           withSearch
-          data={filters.location}
+          data={filtersOptions.location}
         />
       )}
-      {filters.employmentType.length > 0 && (
+      {filtersOptions.employmentType.length > 0 && (
         <CheckboxGroupFilter
-          filter="busyType"
+          filter="employmentType"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Тип занятости"
-          data={filters.employmentType}
+          data={filtersOptions.employmentType}
         />
       )}
-      {filters.workSchedule.length > 0 && (
+      {filtersOptions.workSchedule.length > 0 && (
         <CheckboxGroupFilter
-          filter="workingType"
+          filter="workSchedule"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="График работы"
-          data={filters.workSchedule}
+          data={filtersOptions.workSchedule}
         />
       )}
       <div className="filters__separator" />

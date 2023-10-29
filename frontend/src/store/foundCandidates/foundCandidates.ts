@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit';
+import { IFilter } from '../filter';
 
 interface ExperienceDetailed {
   id: number;
@@ -78,27 +79,16 @@ export interface ICandidate {
   work_schedule: WorkSchedule[];
 }
 
-export interface AllFilters {
-  specialization: string[],
-  course: string[]
-  hards: string[]
-  experience: string[],
-  level: string[],
-  location: string[],
-  employmentType: string[],
-  workSchedule: string[],
-}
-
 export interface InitialState {
   total: number,
   candidates: Partial<ICandidate[]> | null,
-  allFilters: AllFilters,
+  filtersOptions: IFilter,
 }
 
 const initialState: InitialState = {
   total: 0,
   candidates: null,
-  allFilters: {
+  filtersOptions: {
     specialization: [],
     course: [],
     hards: [],
@@ -110,8 +100,8 @@ const initialState: InitialState = {
   },
 };
 
-const candidatesSlice = createSlice({
-  name: 'candidates',
+const foundCandidatesSlice = createSlice({
+  name: 'found-candidates',
   initialState,
   reducers: {
     addCandidates: (store, { payload }) => {
@@ -120,43 +110,45 @@ const candidatesSlice = createSlice({
 
       payload.candidates.forEach((candidate: ICandidate) => {
         candidate.course.forEach((courseItem) => {
-          if (!store.allFilters.course.includes(courseItem.name)) {
-            store.allFilters.course.push(courseItem.name);
+          if (!store.filtersOptions.course.includes(courseItem.name)) {
+            store.filtersOptions.course.push(courseItem.name);
           }
         });
 
         candidate.hards.forEach((hard) => {
-          if (!store.allFilters.hards.includes(hard.name)) {
-            store.allFilters.hards.push(hard.name);
+          if (!store.filtersOptions.hards.includes(hard.name)) {
+            store.filtersOptions.hards.push(hard.name);
           }
         });
 
         candidate.employment_type.forEach((type) => {
-          if (!store.allFilters.employmentType.includes(type.name)) {
-            store.allFilters.employmentType.push(type.name);
+          if (!store.filtersOptions.employmentType.includes(type.name)) {
+            store.filtersOptions.employmentType.push(type.name);
           }
         });
 
         candidate.work_schedule.forEach((type) => {
-          if (!store.allFilters.workSchedule.includes(type.name)) {
-            store.allFilters.workSchedule.push(type.name);
+          if (!store.filtersOptions.workSchedule.includes(type.name)) {
+            store.filtersOptions.workSchedule.push(type.name);
           }
         });
 
-        if (!store.allFilters.specialization.includes(candidate.specialization)) {
-          store.allFilters.specialization.push(candidate.specialization);
+        if (store.filtersOptions.specialization === null) {
+          store.filtersOptions.specialization = [candidate.specialization];
+        } else if (!store.filtersOptions.specialization.includes(candidate.specialization)) {
+          store.filtersOptions.specialization.push(candidate.specialization);
         }
 
-        if (!store.allFilters.experience.includes(candidate.experience)) {
-          store.allFilters.experience.push(candidate.experience);
+        if (!store.filtersOptions.experience.includes(candidate.experience)) {
+          store.filtersOptions.experience.push(candidate.experience);
         }
 
-        if (!store.allFilters.level.includes(candidate.level)) {
-          store.allFilters.level.push(candidate.level);
+        if (!store.filtersOptions.level.includes(candidate.level)) {
+          store.filtersOptions.level.push(candidate.level);
         }
 
-        if (!store.allFilters.location.includes(candidate.location)) {
-          store.allFilters.location.push(candidate.location);
+        if (!store.filtersOptions.location.includes(candidate.location)) {
+          store.filtersOptions.location.push(candidate.location);
         }
       });
     },
@@ -167,6 +159,6 @@ const candidatesSlice = createSlice({
   },
 });
 
-export const { addCandidates, clearCandidates } = candidatesSlice.actions;
+export const { addCandidates, clearCandidates } = foundCandidatesSlice.actions;
 
-export default candidatesSlice.reducer;
+export default foundCandidatesSlice.reducer;

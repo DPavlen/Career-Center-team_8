@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
-import { ICandidate } from '../../store/candidates/candidates';
+import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 // import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 // import checkbox from '../../assets/icons/checkbox.svg';
 import like from '../../assets/icons/Like.svg';
