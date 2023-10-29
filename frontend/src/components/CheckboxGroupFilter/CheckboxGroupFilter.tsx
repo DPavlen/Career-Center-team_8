@@ -66,6 +66,7 @@ function CheckboxGroupFilter({
             sx={{
               display: 'block',
               margin: 0,
+              paddingLeft: '24px',
               '& .MuiFormControlLabel-label': { fontSize: '16px' },
             }}
             control={(
@@ -75,7 +76,7 @@ function CheckboxGroupFilter({
                 icon={<img alt="checkbox-field" src={checkbox} className="checkbox-image" />}
                 checkedIcon={<img alt="checkbox-field" className="checkbox-image" src={checkboxChecked} />}
                 sx={{
-                  padding: 0, width: '24px', height: '24px', margin: '12px 12px 12px 24px',
+                  padding: 0, width: '24px', height: '24px', margin: '12px 12px 12px 0',
                 }}
               />
                   )}

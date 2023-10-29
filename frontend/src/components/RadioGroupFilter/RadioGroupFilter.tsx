@@ -43,7 +43,7 @@ function RadioGroupFilter({
               <Radio
                 icon={<img alt="radio-field" src={radio} />}
                 checkedIcon={<img alt="radio-field" src={radioSelect} />}
-                sx={{ padding: 0, margin: '12px 12px 12px 24px', '&:hover': { backgroundColor: 'white' } }}
+                sx={{ padding: 0, margin: '12px 12px 12px 0px', '&:hover': { backgroundColor: 'white' } }}
               />
               )}
             label={option}
