@@ -12,7 +12,8 @@ from api.v1.views import (
     EmploymentTypeViewSet,
     WorkScheduleViewSet,
     CandidateViewSet,
-    ShortCandidateViewSet
+    ShortCandidateViewSet,
+    HardCandsViewSet
     )
 
 
@@ -30,6 +31,7 @@ router.register("level", LevelViewSet)
 router.register("experience", ExperienceViewSet)
 router.register("employment_type", EmploymentTypeViewSet)
 router.register("work_schedule", WorkScheduleViewSet)
+router.register("hards_in_cands", HardCandsViewSet)
 
 # router.register("experience_detailed", 
 #                 ExperienceDetailedViewSet, "experience_detailed")

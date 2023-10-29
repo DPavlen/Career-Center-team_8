@@ -101,6 +101,11 @@ class EmploymentTypeSerializer(serializers.ModelSerializer):
         model = EmploymentType 
         fields = ("id", "name", "slug")
 
+class HardCandsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HardCands 
+        fields = ("id", "name", "slug")
+
 
 class ShortCandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения краткой

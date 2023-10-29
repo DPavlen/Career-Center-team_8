@@ -19,7 +19,8 @@ from api.v1.serializers import (
     LevelSerializer,
     ExperienceSerializer,
     WorkScheduleSerializer,
-    EmploymentTypeSerializer
+    EmploymentTypeSerializer,
+    HardCandsSerializer
     )
 from candidates.models import (
     ExperienceDetailed,
@@ -31,7 +32,8 @@ from candidates.models import (
     Experience,
     WorkSchedule,
     EmploymentType,
-    Track
+    Track,
+    HardCands
     )
 from .filters import CandidatesFilter
 
@@ -77,6 +79,9 @@ class EmploymentTypeViewSet(ReadOnlyModelViewSet):
     queryset=EmploymentType.objects.all()
     serializer_class = EmploymentTypeSerializer
 
+class HardCandsViewSet(ReadOnlyModelViewSet):
+    queryset=HardCands.objects.all()
+    serializer_class = HardCandsSerializer
 
 class ShortCandidateViewSet(ModelViewSet):
     """View для отображения сокращенной информации о кандидатах."""
