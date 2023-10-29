@@ -22,7 +22,7 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-import testResume from '../../utils/testResume.json';
+// import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
   }
 
   useEffect(() => {
-    dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
+    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
 
     const token = localStorage.getItem('token');
 
@@ -127,7 +127,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route
-          path="/"
+          path="/vacancies"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
@@ -139,7 +139,7 @@ function App() {
           )}
         />
         <Route
-          path="/candidates"
+          path="/"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />

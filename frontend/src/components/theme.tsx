@@ -30,6 +30,9 @@ const theme = createTheme({
       fontWeight: 400,
       color: 'var(--Black-500)',
     },
+    h3: {
+      fontWeight: 500,
+    },
   },
   components: {
     MuiChip: {

@@ -57,7 +57,7 @@ function VacancyForm() {
   };
 
   function goBack() {
-    navigate(-1);
+    navigate('/vacancies');
   }
 
   useEffect(() => {
