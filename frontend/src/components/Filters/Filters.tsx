@@ -4,7 +4,7 @@ import './Filters.scss';
 
 import Button from '@mui/material/Button';
 
-import { IFilter } from '../../store/filter';
+import { IFilter, IFiltersOptions } from '../../store/filter';
 import { initialState } from '../../store/vacanciesFilter/vacanciesFilter';
 
 import settings from '../../assets/icons/settings.svg';
@@ -14,7 +14,7 @@ import RadioGroupFilter from '../RadioGroupFilter/RadioGroupFilter';
 import CheckboxGroupFilter from '../CheckboxGroupFilter/CheckboxGroupFilter';
 
 interface IFiltersProps {
-  filtersOptions: IFilter;
+  filtersOptions: IFiltersOptions;
   filterValue: IFilter;
   onResetAllFilters: () => void;
   // eslint-disable-next-line no-unused-vars
@@ -69,7 +69,7 @@ function Filters({
           Сбросить
         </Button>
       </div>
-      {filtersOptions.specialization !== null && (
+      {filtersOptions?.specialization && (
         <RadioGroupFilter
           filter="specialization"
           filterValue={filterValue}
@@ -78,7 +78,7 @@ function Filters({
           withBorder={false}
         />
       )}
-      {filtersOptions.course.length > 0 && (
+      {filtersOptions?.course.length > 0 && (
         <CheckboxGroupFilter
           filter="course"
           filterValue={filterValue}
@@ -87,7 +87,7 @@ function Filters({
           data={filtersOptions.course}
         />
       )}
-      {filtersOptions.hards.length > 0 && (
+      {filtersOptions?.hards.length > 0 && (
         <CheckboxGroupFilter
           filter="hards"
           filterValue={filterValue}
@@ -98,7 +98,7 @@ function Filters({
           data={filtersOptions.hards}
         />
       )}
-      {filtersOptions.experience.length > 0 && (
+      {filtersOptions?.experience.length > 0 && (
         <CheckboxGroupFilter
           filter="experience"
           filterValue={filterValue}
@@ -107,7 +107,7 @@ function Filters({
           data={filtersOptions.experience}
         />
       )}
-      {filtersOptions.level.length > 0 && (
+      {filtersOptions?.level.length > 0 && (
         <CheckboxGroupFilter
           filter="level"
           filterValue={filterValue}
@@ -116,7 +116,7 @@ function Filters({
           data={filtersOptions.level}
         />
       )}
-      {filtersOptions.location.length > 0 && (
+      {filtersOptions?.location.length > 0 && (
         <CheckboxGroupFilter
           filter="location"
           filterValue={filterValue}
@@ -127,7 +127,7 @@ function Filters({
           data={filtersOptions.location}
         />
       )}
-      {filtersOptions.employmentType.length > 0 && (
+      {filtersOptions?.employmentType.length > 0 && (
         <CheckboxGroupFilter
           filter="employmentType"
           filterValue={filterValue}
@@ -136,7 +136,7 @@ function Filters({
           data={filtersOptions.employmentType}
         />
       )}
-      {filtersOptions.workSchedule.length > 0 && (
+      {filtersOptions?.workSchedule.length > 0 && (
         <CheckboxGroupFilter
           filter="workSchedule"
           filterValue={filterValue}

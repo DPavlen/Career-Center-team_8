@@ -7,9 +7,12 @@ interface VacancyInputProps {
   value: string | number;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string | number) => void;
+  errorMessage: string | undefined;
 }
 
-function VacancyInput({ value, onChange, placeholder } : VacancyInputProps) {
+function VacancyInput({
+  value, onChange, placeholder, errorMessage,
+} : VacancyInputProps) {
   const MIN_TEXTAREA_HEIGHT = 47;
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -27,19 +30,22 @@ function VacancyInput({ value, onChange, placeholder } : VacancyInputProps) {
   }, [value]);
 
   return (
-    <textarea
-      rows={1}
-      className="vacancy-input"
-      wrap="hard"
-      placeholder={placeholder}
-      onChange={onTextareaChange}
-      value={value}
-      ref={textareaRef}
-      style={{
-        minHeight: MIN_TEXTAREA_HEIGHT,
-        resize: 'none',
-      }}
-    />
+    <>
+      <textarea
+        rows={1}
+        className={`vacancy-input ${errorMessage ? 'vacancy-input_error' : ''}`}
+        wrap="hard"
+        placeholder={placeholder}
+        onChange={onTextareaChange}
+        value={value}
+        ref={textareaRef}
+        style={{
+          minHeight: MIN_TEXTAREA_HEIGHT,
+          resize: 'none',
+        }}
+      />
+      { errorMessage ? <p className="vacancy-input__input-error">{errorMessage}</p> : null }
+    </>
   );
 }
 

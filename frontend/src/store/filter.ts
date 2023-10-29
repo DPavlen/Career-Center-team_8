@@ -1,5 +1,5 @@
 export interface IFilter {
-  specialization: string[] | null,
+  specialization: string | null,
   course: string[],
   hards: string[],
   experience: string[],
@@ -8,3 +8,5 @@ export interface IFilter {
   employmentType: string[],
   workSchedule: string[],
 }
+
+export type IFiltersOptions = Record<keyof IFilter, string[]>;
