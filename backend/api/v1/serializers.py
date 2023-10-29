@@ -10,6 +10,13 @@ from candidates.models import (
     # DetailInCandidate,
     # Education,
     Candidate,
+    Specialization,
+    Course,
+    Level,
+    Experience,
+    WorkSchedule,
+    EmploymentType,
+    HardCands, 
     Track)
 
 
@@ -63,6 +70,41 @@ from candidates.models import (
 #             "slug",
 #         )
 #         read_only_fields = ("__all__",)
+
+class SpecializationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Specialization 
+        fields = ("id", "name", "slug")
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course 
+        fields = ("id", "name", "slug")
+
+class LevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Level 
+        fields = ("id", "name", "slug")
+
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience 
+        fields = ("id", "name", "slug")
+
+class WorkScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkSchedule 
+        fields = ("id", "name", "slug")
+
+class EmploymentTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmploymentType 
+        fields = ("id", "name", "slug")
+
+class HardCandsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HardCands 
+        fields = ("id", "name", "slug")
 
 
 class ShortCandidateSerializer(serializers.ModelSerializer):

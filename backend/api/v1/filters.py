@@ -1,6 +1,6 @@
 from django_filters.rest_framework import FilterSet, filters
 
-from candidates.models import Specialization, Candidate, Course, Level, Experience, WorkSchedule, EmploymentType 
+from candidates.models import Specialization, Candidate, Course, Level, Experience, WorkSchedule, EmploymentType, HardCands 
 
 
 class HardsCandsFilter(FilterSet):
@@ -10,14 +10,13 @@ class HardsCandsFilter(FilterSet):
         return queryset.filter(name__istartswith=value)
 
     class Meta:
-        model = Candidate
+        model = HardCands
         fields = ("name",)
 
 
 class CandidatesFilter(FilterSet):
-
     specialization = filters.ModelChoiceFilter(
-        field_name="specialization",
+        field_name="specialization__slug",
         to_field_name="slug",
         queryset=Specialization.objects.all(),
     )
@@ -39,7 +38,7 @@ class CandidatesFilter(FilterSet):
     work_schedule = filters.ModelMultipleChoiceFilter(
         field_name="work_schedule__slug",
         to_field_name="slug",
-        queryset=WorkSchedule.objects.all(),
+        queryset=WorkSchedule.objects.all()
     )
     employment_type = filters.ModelMultipleChoiceFilter(
         field_name="employment_type__slug",
@@ -47,15 +46,15 @@ class CandidatesFilter(FilterSet):
         queryset=EmploymentType.objects.all(),
     )
     is_tracked = filters.BooleanFilter(method="is_tracked_filter")
-    # hards_cands = filters.ModelMultipleChoiceFilter(
-    #     field_name = "hards_cands__slug",
-    #     to_field_name="slug",
-    #     queryset = Candidate.objects.all().hards.distinct()
-    # )
+    hards_cands = filters.ModelMultipleChoiceFilter(
+        field_name = "hards_cands__slug",
+        to_field_name="slug",
+        queryset = HardCands.objects.all(),
+    )
 
     class Meta:
         model = Candidate
-        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "is_tracked")
+        fields = ("specialization", "course", "level", "experience", "work_schedule", "employment_type", "hards_cands", "is_tracked")
 
     def is_tracked_filter(self, queryset, name, value):
         user = self.request.user
