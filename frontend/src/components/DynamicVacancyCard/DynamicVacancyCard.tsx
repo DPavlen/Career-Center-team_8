@@ -1,9 +1,14 @@
-import './DynamicVacancyCard.scss';
-import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import './DynamicVacancyCard.scss';
+
+import Button from '@mui/material/Button';
 import deleteIcon from '../../assets/icons/delete-grey.svg';
 import DynamicVacancyInfo from '../DynamicVacancyInfo/DynamicVacancyInfo';
 import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
+import { vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 
 type VacancyCardProps = {
   data: TSavedVacancies;
@@ -12,6 +17,15 @@ type VacancyCardProps = {
 function DynamicVacancyCard(props: VacancyCardProps) {
   const { data } = props;
   const [isShow, setIsShow] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function showCandidates() {
+    dispatch(vacanciesFilterSetFilter(data.filters));
+
+    navigate('/', { replace: true });
+  }
 
   return (
     <article className="vacancy-card">
@@ -47,6 +61,7 @@ function DynamicVacancyCard(props: VacancyCardProps) {
               color: 'var(--White)',
             }}
             variant="contained"
+            onClick={() => showCandidates()}
           >
             Показать специалистов
           </Button>
