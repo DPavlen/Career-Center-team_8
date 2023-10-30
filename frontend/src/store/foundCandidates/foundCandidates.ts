@@ -105,52 +105,55 @@ const foundCandidatesSlice = createSlice({
   initialState,
   reducers: {
     addCandidates: (store, { payload }) => {
-      store.candidates = payload.candidates;
-      store.total = payload.candidates.length;
+      if (payload.candidates) {
+        store.candidates = payload.candidates;
+        store.total = payload.candidates.length;
 
-      payload.candidates.forEach((candidate: ICandidate) => {
-        candidate.course.forEach((courseItem) => {
-          if (!store.filtersOptions.course.includes(courseItem.name)) {
-            store.filtersOptions.course.push(courseItem.name);
+        payload.candidates.forEach((candidate: ICandidate) => {
+          candidate.course.forEach((courseItem) => {
+            if (!store.filtersOptions.course.includes(courseItem.name)) {
+              store.filtersOptions.course.push(courseItem.name);
+            }
+          });
+          candidate.hards.forEach((hard) => {
+            if (!store.filtersOptions.hards.includes(hard.name)) {
+              store.filtersOptions.hards.push(hard.name);
+            }
+          });
+
+          candidate.employment_type.forEach((type) => {
+            if (!store.filtersOptions.employmentType.includes(type.name)) {
+              store.filtersOptions.employmentType.push(type.name);
+            }
+          });
+
+          candidate.work_schedule.forEach((type) => {
+            if (!store.filtersOptions.workSchedule.includes(type.name)) {
+              store.filtersOptions.workSchedule.push(type.name);
+            }
+          });
+
+          if (store.filtersOptions.specialization === null) {
+            store.filtersOptions.specialization = [candidate.specialization];
+          } else if (!store.filtersOptions.specialization.includes(candidate.specialization)) {
+            store.filtersOptions.specialization.push(candidate.specialization);
+          }
+
+          if (!store.filtersOptions.experience.includes(candidate.experience)) {
+            store.filtersOptions.experience.push(candidate.experience);
+          }
+
+          if (!store.filtersOptions.level.includes(candidate.level)) {
+            store.filtersOptions.level.push(candidate.level);
+          }
+
+          if (!store.filtersOptions.location.includes(candidate.location)) {
+            store.filtersOptions.location.push(candidate.location);
           }
         });
-
-        candidate.hards.forEach((hard) => {
-          if (!store.filtersOptions.hards.includes(hard.name)) {
-            store.filtersOptions.hards.push(hard.name);
-          }
-        });
-
-        candidate.employment_type.forEach((type) => {
-          if (!store.filtersOptions.employmentType.includes(type.name)) {
-            store.filtersOptions.employmentType.push(type.name);
-          }
-        });
-
-        candidate.work_schedule.forEach((type) => {
-          if (!store.filtersOptions.workSchedule.includes(type.name)) {
-            store.filtersOptions.workSchedule.push(type.name);
-          }
-        });
-
-        if (store.filtersOptions.specialization === null) {
-          store.filtersOptions.specialization = [candidate.specialization];
-        } else if (!store.filtersOptions.specialization.includes(candidate.specialization)) {
-          store.filtersOptions.specialization.push(candidate.specialization);
-        }
-
-        if (!store.filtersOptions.experience.includes(candidate.experience)) {
-          store.filtersOptions.experience.push(candidate.experience);
-        }
-
-        if (!store.filtersOptions.level.includes(candidate.level)) {
-          store.filtersOptions.level.push(candidate.level);
-        }
-
-        if (!store.filtersOptions.location.includes(candidate.location)) {
-          store.filtersOptions.location.push(candidate.location);
-        }
-      });
+      } else {
+        store.candidates = null;
+      }
     },
     clearCandidates: (store) => {
       store.candidates = null;
@@ -161,4 +164,4 @@ const foundCandidatesSlice = createSlice({
 
 export const { addCandidates, clearCandidates } = foundCandidatesSlice.actions;
 
-export default foundCandidatesSlice.reducer;
+export default foundCandidatesSlice;

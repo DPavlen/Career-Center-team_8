@@ -10,7 +10,7 @@ import userSlice from './user/user';
 
 export const store = configureStore({
   reducer: {
-    foundCandidates: foundCandidatesSlice,
+    foundCandidates: foundCandidatesSlice.reducer,
     candidateInfo: candidateInfoSlice,
     searchConfig: searchConfigSlice,
     selectedFilter: selectedFilterSlice,

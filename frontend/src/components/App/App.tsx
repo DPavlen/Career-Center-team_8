@@ -31,7 +31,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function setfailedToFetch(error: { detail : string}): void {
+  function setfailedToFetch(error: { detail: string }): void {
     console.log(error);
 
     if (error.detail.includes('Failed to fetch')) {
@@ -43,7 +43,6 @@ function App() {
 
   function searchCandidates(): void {
     const token = localStorage.getItem('token');
-
     if (token) {
       mainApi.getCandidates(token)
         .then((candidates) => dispatch(addCandidates({ candidates })))

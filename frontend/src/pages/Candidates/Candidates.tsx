@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Candidates.scss';
@@ -12,6 +13,10 @@ import { RootState } from '../../store/store';
 import { vacanciesFilterResetAllFilters, vacanciesFilterResetFilter, vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 import { IFiltersOptions } from '../../store/filter';
 
+import { addCandidates } from '../../store/foundCandidates/foundCandidates';
+
+import mainApi from '../../utils/MainApi';
+
 function Candidates() {
   const filterValue = useSelector((state: RootState) => state.vacanciesFilter);
   const filtersOptions: IFiltersOptions = useSelector(
@@ -19,6 +24,20 @@ function Candidates() {
   );
 
   const dispatch = useDispatch();
+
+  function filterCandidates() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      mainApi.getFilterCandidates(token, filterValue)
+        .then((foundCandidates) => {
+          dispatch(addCandidates({ candidates: foundCandidates }));
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  useEffect(() => filterCandidates(), [filterValue]);
 
   return (
     <main className="candidates">
