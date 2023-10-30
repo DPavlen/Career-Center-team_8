@@ -115,8 +115,8 @@ class CandidateViewSet(ModelViewSet):
         """Выбор сериализатора в зависимости от
         показа короткого или полной информации кандидата."""
         if self.action == 'retrieve':
-            return ShortCandidateSerializer
-        return CandidateSerializer
+            return CandidateSerializer
+        return ShortCandidateSerializer
 
     @action(
         detail=True,
