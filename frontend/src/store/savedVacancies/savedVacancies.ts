@@ -28,7 +28,7 @@ const savedVacanciesSlice = createSlice({
   reducers: {
     addVacancy: (
       store: TSavedVacancies[],
-      { payload }: PayloadAction<TSavedVacancies>,
+      { payload }: PayloadAction<Omit<TSavedVacancies, 'id'>>,
     ) => {
       console.log(payload);
       return store.concat({
