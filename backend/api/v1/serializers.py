@@ -296,12 +296,28 @@ class HardsInVacancySerializer(serializers.ModelSerializer):
     """
     Сериализатор для получения хард скиллов в вакансии.
     """
-    id = serializers.IntegerField(write_only=True)
-    name = serializers.CharField()
+    id = serializers.IntegerField()
 
     class Meta:
         model = HardsInVacancy
-        fields = ("id", "name")
+        fields = ("id",)
+
+        
+class EmploymentInVacancySerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
+    class Meta:
+        model = EmploymentType
+        fields = ("id",)
+
+
+class ScheduleInVacancySerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
+    class Meta:
+        model = WorkSchedule
+        fields = ("id",)
+        
 
 class VacancySerializer(serializers.ModelSerializer):
     """
@@ -406,18 +422,15 @@ class CreateVacancySerializer(serializers.ModelSerializer):
     level = serializers.PrimaryKeyRelatedField(
         queryset=Level.objects.all(), many=False
     )
-    hards = serializers.PrimaryKeyRelatedField(
-        queryset=HardsInVacancy.objects.all(), many=True
-    )
+    hards = HardsInVacancySerializer(many=True)
     experience = serializers.PrimaryKeyRelatedField(
         queryset=Experience.objects.all(), many=False
     )
-    employment_type = serializers.PrimaryKeyRelatedField(
-        queryset=EmploymentType.objects.all(), many=True
+    course = serializers.PrimaryKeyRelatedField(
+        queryset=Course.objects.all(), many=False
     )
-    work_schedule = serializers.PrimaryKeyRelatedField(
-        queryset=WorkSchedule.objects.all(), many=True
-    )
+    employment_type = EmploymentInVacancySerializer(many=True)
+    work_schedule = ScheduleInVacancySerializer(many=True)
    
     class Meta:
         model = Vacancy
@@ -443,52 +456,113 @@ class CreateVacancySerializer(serializers.ModelSerializer):
             "work_schedule"
         )
 
-#     def validate_hards(self, value):
-#         hards = value
-#         if not hards:
-#             raise ValidationError(
-#                 {"hards": "Необходим хотя бы один навык."}
-#             )
-#         hards_list = []
-#         for item in hards:
-#             hard = get_object_or_404(HardsInVacancy, id=item["id"])
-#             if hard in hards_list:
-#                 raise ValidationError(
-#                     {"hards": "Навыки должны быть уникальными."}
-#                 )
-#             hards_list.append(hard)
-#         return value
+    def validate_hards(self, value):
+        hards = value
+        hards_list = []
+        for item in hards:
+            hard = get_object_or_404(Hard, id=item["id"])
+            hards_list.append(hard)
+        return value
+    
+    def validate_employment_type(self, value):
+        employment_type = value
+        if not employment_type:
+            raise ValidationError(
+                {"employment_type": "Выберите хотябы один тип занятости"}
+            )
+        employment_type_list = []
+        for item in employment_type:
+            employment = get_object_or_404(EmploymentType, id=item["id"])
+            if employment in employment_type_list:
+                raise ValidationError(
+                    {"employment_type": "Тип занятости должен быть уникальным."}
+                )
+            employment_type_list.append(employment)
+        return value
+    
+    def validate_work_schedule(self, value):
+        work_schedule = value
+        if not work_schedule:
+            raise ValidationError(
+                {"work_schedule": "Выберите хотябы один график работы"}
+            )
+        work_schedule_list = []
+        for item in work_schedule:
+            schedule = get_object_or_404(WorkSchedule, id=item["id"])
+            if schedule in work_schedule_list:
+                raise ValidationError(
+                    {"work_schedule": "График работы должен быть уникальным."}
+                )
+            work_schedule_list.append(schedule)
+        return value
 
-#     def validate_specialization(self, value):
-#         specialization = value
-#         if not specialization:
-#             raise ValidationError({"specialization": "Выберите одно направление."})
-#         return value
+    def validate_specialization(self, value):
+        specialization = value
+        if not specialization:
+            raise ValidationError({"specialization": "Выберите одно направление."})
+        return value
 
-#     def validate_level(self, value):
-#         level = value
-#         if not level:
-#             raise ValidationError({"level": "Выберите уровень."})
-#         return value
+    def validate_level(self, value):
+        level = value
+        if not level:
+            raise ValidationError({"level": "Выберите уровень."})
+        return value
+    
+    def validate_experience(self, value):
+        experience = value
+        if not experience:
+            raise ValidationError({"experience": "Выберите опыт работы."})
+        return value
+    
+    def validate_course(self, value):
+        course = value
+        if not course:
+            raise ValidationError({"course": "Выберите курс ЯП."})
+        return value
 
-#     def create_hards(self, hards, vacancy):
-#         HardsInVacancy.objects.bulk_create(
-#             [
-#                 HardsInVacancy(
-#                     hard=Hard.objects.get(id=hards["id"]),
-#                     vacancy=vacancy
-#                 )
-#                 for hard in hards
-#             ]
-#         )
 
-#     def create(self, validated_data):
-#         specialization = validated_data.pop("specialization")
-#         hards = validated_data.pop("hards")
-#         vacancy = Vacancy.objects.create(**validated_data)
-#         vacancy.specialization.set(specialization)
-#         self.create_hards(vacancy=vacancy, hards=hards)
-#         return vacancy
+    def create_hards(self, hards, vacancy):
+        HardsInVacancy.objects.bulk_create(
+            [
+                HardsInVacancy(
+                    hard=Hard.objects.get(id=hards["id"]),
+                    vacancy=vacancy
+                )
+                for hard in hards
+            ]
+        )
+
+    # def create_employment(self, employment_type, vacancy):
+    #     EmploymentTypeInVacancy.objects.bulk_create(
+    #         [
+    #             EmploymentTypeInVacancy(
+    #                 employment=EmploymentType.objects.get(id=employment_type["id"]),
+    #                 vacancy=vacancy
+    #             )
+    #             for employment in employment_type
+    #         ]
+    #     )
+    
+    def create_schedule(self, work_schedule, vacancy):
+        WorkScheduleInVacancy.objects.bulk_create(
+            [
+                WorkScheduleInVacancy(
+                    schedule=WorkSchedule.objects.get(id= work_schedule["id"]),
+                    vacancy=vacancy
+                )
+                for  schedule in work_schedule
+            ]
+        )
+
+    def create(self, validated_data):
+        hards = validated_data.pop("hards")
+        employment_type = validated_data.pop("employment_type")
+        work_schedule = validated_data.pop("work_schedule")
+        vacancy = Vacancy.objects.create(**validated_data)
+        # self.create_employment(vacancy=vacancy, employment_type=employment_type)
+        self.create_schedule(vacancy=vacancy, work_schedule=work_schedule)
+        self.create_hards(vacancy=vacancy, hards=hards)
+        return vacancy
 
 #     def update(self, instance, validated_data):
 #         tags = validated_data.pop("tags")
@@ -501,9 +575,9 @@ class CreateVacancySerializer(serializers.ModelSerializer):
 #         instance.save()
 #         return instance
 
-#     def to_representation(self, instance):
-#         request = self.context.get("request")
-#         context = {"request": request}
-#         return VacancySerializer(instance, context=context).data
+    def to_representation(self, instance):
+        request = self.context.get("request")
+        context = {"request": request}
+        return VacancySerializer(instance, context=context).data
 
 
