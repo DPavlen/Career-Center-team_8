@@ -9,9 +9,8 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from django.shortcuts import get_object_or_404
 
+from api.v1.filters import CandidatesFilter
 from api.v1.serializers import (
-    # ExperienceDetailedSerializer,
-    # EducationSerializer,
     CandidateSerializer,
     ShortCandidateSerializer,
     SpecializationSerializer,
@@ -25,7 +24,7 @@ from api.v1.serializers import (
     VacancySerializer,
     CreateVacancySerializer 
     )
-from backend.core.services import candidate_resume_pdf
+from core.services import candidate_resume_pdf
 from candidates.models import (
     ExperienceDetailed,
     Education,
@@ -39,13 +38,9 @@ from candidates.models import (
     Track,
     HardCands
     )
-
 from vacancies.models import (
     Vacancy
 )
-
-from .filters import CandidatesFilter
-# from core.services import candidate_resume_pdf
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):

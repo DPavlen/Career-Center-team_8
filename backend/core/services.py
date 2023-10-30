@@ -30,12 +30,10 @@ from candidates.models import (
 def candidate_resume_pdf(candidate_id):
     # Получение данных кандидата
     candidate = Candidate.objects.get(id=candidate_id)
-    print(candidate)
     experience_in_candidate = ExperienceDetailedInCandidate.objects.filter(candidate=candidate)
     education_in_candidate = EducationInCandidate.objects.filter(candidate=candidate)
     workschedule_in_candidate = WorkScheduleInCandidate.objects.filter(candidate=candidate)
     employmenttype_in_candidate = EmploymentTypeInCandidate.objects.filter(candidate=candidate)
-    softs_in_candidate = SoftsInCandidate.objects.filter(candidate=candidate)
     hards_in_candidate = HardsInCandidate.objects.filter(candidate_id=candidate)
     course_in_candidate = CourseInCandidate.objects.filter(candidate=candidate)
 
