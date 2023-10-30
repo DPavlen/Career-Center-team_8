@@ -75,12 +75,9 @@ def candidate_resume_pdf(candidate_id):
 
     # Добавление фото
     elements.append(Spacer(1, 6))
-    # elements.append(Image({candidate.image}))
-    # for image_path in candidate.image:
-    #     elements.append(Image(image_path))
-
-    elements.append(Image(next(iter(candidate.image))))
-    # elements.append(Paragraph(f"<img src='{candidate.image}' width='100' height='100'>", getSampleStyleSheet()['Normal']))
+    # elements.append(Image(next(iter(candidate.image))))
+    # elements.append(Paragraph(f"<img src='{candidate.image}'
+    #  width='100' height='100'>", getSampleStyleSheet()['Normal']))
 
 
     # Добавление заголовка ФИО кандидата
