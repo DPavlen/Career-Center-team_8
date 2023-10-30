@@ -15,7 +15,7 @@ function Education() {
         {candidate?.specialization}
       </span>
 
-      <h3>Курс</h3>
+      <h3 className="title_courses">Курс</h3>
 
       <ul className="courses_list">
         {candidate
