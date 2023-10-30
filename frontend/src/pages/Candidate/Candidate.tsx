@@ -1,4 +1,4 @@
-import './Candidate.css';
+import './Candidate.scss';
 
 import CandidateHeader from '../../components/CandidateHeader/CandidateHeader';
 import CandidateInfo from '../../components/CandidateInfo/CandidateInfo';
