@@ -16,6 +16,7 @@
 
 + [HTML](https://html.spec.whatwg.org)
 + [Sass](https://sass-lang.com)
++ [React](https://ru.legacy.reactjs.org)
 + [Vite](https://vitejs.dev)
 + [TypeScript](https://www.typescriptlang.org)
 + [Redux Toolkit](https://redux-toolkit.js.org)
