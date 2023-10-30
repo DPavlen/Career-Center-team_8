@@ -21,7 +21,6 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-// import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
 
 function App() {
@@ -91,8 +90,6 @@ function App() {
   }
 
   useEffect(() => {
-    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
-
     const token = localStorage.getItem('token');
 
     if (token) {

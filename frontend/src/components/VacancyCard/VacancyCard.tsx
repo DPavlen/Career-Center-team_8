@@ -1,5 +1,5 @@
 import Avatar from '@mui/material/Avatar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -24,9 +24,19 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
     dispatch(addCandidateInfo(card));
     // navigate(`/candidates/${card.id}`);
   };
+
+  const location = useLocation();
+
+  function createLink(to: string) {
+    return {
+      pathname: to,
+      state: { from: location.pathname },
+    };
+  }
+
   return (
     <article className={`card ${checked ? 'card_checked' : ''}`}>
-      <Link to={`/candidates/${card.id}`} onClick={handlerCardClick}>
+      <Link to={createLink(`/candidates/${card.id}`)} onClick={handlerCardClick}>
         {/* <Checkbox
         disableRipple
         sx={{
