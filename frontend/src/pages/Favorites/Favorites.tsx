@@ -1,39 +1,48 @@
+/* eslint-disable no-nested-ternary */
+import { useDispatch, useSelector } from 'react-redux';
 import './Favorites.scss';
-// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // import React from 'react';
 import { Typography } from '@mui/material';
-// import Specialty from '../../components/Specialty/Specialty';
-// import { mockSpecialties } from '../../utils/mockData';
+import { RootState } from '../../store/store';
+import Specialty from '../../components/Specialty/Specialty';
 // import VacancySibtitle from '../../components/VacancySibtitle/VacancySibtitle';
+import { getFavoriteCandidates } from '../../store/favoriteCandidates/favoriteCandidates';
+import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 
 function Favorites() {
-/*   const [count, setCount] = useState(0);
-  let countFavorites; */
-/*   const countAvatars = (): void => {
-    countFavorites = document.getElementsByTagName('img').length;
-    setCount(countFavorites);
-  }; */
-  /* useEffect(() => {
-    // countFavorites = document.getElementsByTagName('img').length;
-    countAvatars();
-    // const counts = document.querySelectorAll('.candidate__card');
-    // setCount(counts.length);
-    // console.log(document.getElementsByTagName('img').length);
-  }, []); */
+  const dispatch = useDispatch<any>();
+
+  const favoritesList = useSelector((store: RootState) => {
+    const { candidates } = store.favoritesVacancies;
+
+    return candidates.reduce((rv: Record<string, ICandidate[]>, x: ICandidate) => {
+      // eslint-disable-next-line no-param-reassign
+      rv[x.specialization] = rv[x.specialization] || [];
+      rv[x.specialization].push(x);
+      return rv;
+    }, {});
+  });
+
+  const total = useSelector((store: RootState) => store.favoritesVacancies.total);
+
+  useEffect(() => {
+    dispatch(getFavoriteCandidates());
+  }, []);
 
   return (
-    <main style={{ padding: '0 0 0 32px' }} id="favorites__page" className="favorites__page">
+    <main id="favorites__page" className="favorites__page">
       <Typography variant="h1">
         Избранное
       </Typography>
       <Typography variant="subtitle1" sx={{ marginBottom: '40px' }}>
         <span className="favorites__total">
-          {`Показано ${0} кандидатов`}
+          {`Показано ${total || 0} ${total % 10 === 1 ? 'кандидат' : [2, 3, 4].includes(total % 10) ? 'кандидата' : 'кандидатов'}`}
         </span>
       </Typography>
-      {/* {mockSpecialties.map((specialty) => (
-        <Specialty key={Math.floor(Math.random() * 999)} title={specialty.label} />
-      ))} */}
+      {Object.entries(favoritesList).map(([key, value]) => (
+        <Specialty key={key} cards={value} title={key} />
+      ))}
     </main>
   );
 }
