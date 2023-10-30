@@ -59,7 +59,7 @@ function VacancyForm() {
     return false;
   }, [filterValue, setError, clearErrors]);
 
-  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters'>> = async (data) => {
+  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters' | 'id'>> = async (data) => {
     setFitlersCheckedOnce(true);
     const filterValidation: boolean = await validateFilter();
 
