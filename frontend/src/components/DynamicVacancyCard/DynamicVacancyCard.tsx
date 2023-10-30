@@ -41,7 +41,7 @@ function DynamicVacancyCard(props: VacancyCardProps) {
               color: 'var(--Blue)',
               width: 'fit-content',
               padding: 0,
-              marginBottom: '20px',
+              marginBottom: '16px',
             }}
             onClick={() => setIsShow(true)}
           >
