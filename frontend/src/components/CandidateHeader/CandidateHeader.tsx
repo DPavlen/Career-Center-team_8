@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './CandidateHeader.scss';
 import { Checkbox } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -10,9 +10,14 @@ import likeFilled from '../../assets/icons/Like filled.svg';
 
 function CandidateHeader() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   function goBack() {
-    navigate('/');
+    if (location.state && location.state.from) {
+      navigate(location.state.from);
+    } else {
+      navigate('/');
+    }
   }
 
   const candidate = useSelector((state: RootState) => state.candidateInfo.candidate);

@@ -102,6 +102,9 @@ function VacancyForm() {
           sx={{
             height: 'fit-content',
             width: '24px',
+            position: 'absolute',
+            top: 'center',
+            left: '-104px',
           }}
         >
           <img alt="Иконка вернуться" src={iconBack} />

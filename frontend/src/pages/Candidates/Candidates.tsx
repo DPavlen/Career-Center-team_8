@@ -29,7 +29,7 @@ function Candidates() {
     const token = localStorage.getItem('token');
 
     if (token) {
-      mainApi.getFilterCandidates(token, filterValue)
+      mainApi.getFilterCandidates(filterValue)
         .then((foundCandidates) => {
           dispatch(addCandidates({ candidates: foundCandidates }));
         })

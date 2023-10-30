@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useState, useRef } from 'react';
-import { ICandidate } from '../../store/foundCandidates/foundCandidates';
+import { useRef } from 'react';
+import { ICandidate, addCandidateToFavorites, removeCandidateFromFavorites } from '../../store/foundCandidates/foundCandidates';
 // import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
 // import checkbox from '../../assets/icons/checkbox.svg';
 import like from '../../assets/icons/Like.svg';
@@ -13,19 +13,19 @@ import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
 
 interface VacancyCardProps {
   card: ICandidate;
-  liked: boolean;
 }
 
-function VacancyCard({ card, liked = false }: VacancyCardProps) {
-  const [checked, setChecked] = useState(liked);
+function VacancyCard({ card }: VacancyCardProps) {
   const cardRef = useRef(null);
   const dispatch = useDispatch();
+  const asyncDispatch = useDispatch<any>();
   const handlerCardClick = () => {
     dispatch(addCandidateInfo(card));
     // navigate(`/candidates/${card.id}`);
   };
+
   return (
-    <article className={`card ${checked ? 'card_checked' : ''}`}>
+    <article className={`card ${card.is_tracked ? 'card_checked' : ''}`}>
       <Link to={`/candidates/${card.id}`} onClick={handlerCardClick}>
         {/* <Checkbox
         disableRipple
@@ -50,7 +50,7 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
               <p className="card__candidate-name">{`${card?.first_name} ${card?.last_name}`}</p>
               <p className="card__city">{card?.location}</p>
             </div>
-            <h2 className="card__profession">{card?.location.split(', ')}</h2>
+            <h2 className="card__profession">{card?.specialization.split(', ')}</h2>
             <div className="card__experience">
               <p className="card__level">{card?.level}</p>
               <p className="card__attempt">
@@ -77,9 +77,13 @@ function VacancyCard({ card, liked = false }: VacancyCardProps) {
           }}
           icon={<img alt="checkbox-field" src={like} />}
           checkedIcon={<img alt="checkbox-field" src={likeFilled} />}
-          checked={checked}
+          checked={card.is_tracked}
           onChange={(e) => {
-            setChecked(e.target.checked);
+            if (e.target.checked) {
+              asyncDispatch(addCandidateToFavorites(card.id));
+            } else {
+              asyncDispatch(removeCandidateFromFavorites(card.id));
+            }
           }}
         />
         {/* <p className="card__status">

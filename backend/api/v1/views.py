@@ -9,9 +9,8 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from django.shortcuts import get_object_or_404
 
+from api.v1.filters import CandidatesFilter
 from api.v1.serializers import (
-    # ExperienceDetailedSerializer,
-    # EducationSerializer,
     CandidateSerializer,
     ShortCandidateSerializer,
     SpecializationSerializer,
@@ -25,6 +24,7 @@ from api.v1.serializers import (
     VacancySerializer,
     CreateVacancySerializer 
     )
+from core.services import candidate_resume_pdf
 from candidates.models import (
     ExperienceDetailed,
     Education,
@@ -38,13 +38,9 @@ from candidates.models import (
     Track,
     HardCands
     )
-
 from vacancies.models import (
     Vacancy
 )
-
-from .filters import CandidatesFilter
-# from core.services import candidate_resume_pdf
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
@@ -133,22 +129,23 @@ class CandidateViewSet(ModelViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
     
-    # @action(
-    #     detail=False,
-    #     methods=("post", "delete"),
-    #     permission_classes=(IsAuthenticated,),
-    # )
-    # @staticmethod
-    # def download_shopping_cart(self, request):
-    #     """
-    #     API endpoint для скачивания резюме кандидата в формате PDF.
-    #     GET:
-    #     Скачивание резюме кандидата в формате PDF.
-    #     Returns:
-    #     Response: PDF-файл резюме кандидата.
-    #     """
-    #     return candidate_resume_pdf(request.user)
 
+    @action(
+        detail=False,
+        methods=("get"),
+        url_path="download-candidate",
+        # permission_classes=(IsAuthenticated,),
+    )
+    def download_candidate(self, request, candidate_id):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(candidate_id)
+    
 
 class VacancyViewSet(ModelViewSet):
     queryset = Vacancy.objects.select_related("author")
