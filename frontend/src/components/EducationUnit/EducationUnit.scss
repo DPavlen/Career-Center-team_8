@@ -9,17 +9,19 @@
 .direction {
   margin: 0 0 16px 0;
 }
-
+h3 {
+  margin-bottom: 20px;
+}
 .courses_list {
   display: block;
   // padding: 16px 0 40px 0;
   margin: 16px 0 40px 0;
-
-  * {
-    margin-bottom: 8px;
-  }
 }
 
 .education_container {
   margin-bottom: 16px;
+}
+
+.courses_container {
+  padding-bottom: 1px;
 }
