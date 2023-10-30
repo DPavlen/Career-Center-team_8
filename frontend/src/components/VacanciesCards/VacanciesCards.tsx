@@ -11,17 +11,13 @@ function VacanciesCards() {
   const candidates: Partial<ICandidate[]> | null = useSelector(
     (state: RootState) => state.foundCandidates.candidates,
   );
-  /* useEffect(() => {
-    if (candidates) {
-      console.log(candidates[0]);
-    }
-  }, [candidates]); */
+
   return (
     <>
       <VacancySibtitle />
       <section className="cards">
         {candidates && candidates?.map((card) => (
-          card ? <VacancyCard key={uuid()} card={card} liked={false} /> : null
+          card ? <VacancyCard key={uuid()} card={card} /> : null
         ))}
       </section>
     </>

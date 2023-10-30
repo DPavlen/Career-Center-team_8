@@ -44,7 +44,7 @@ function App() {
   function searchCandidates(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      mainApi.getCandidates(token)
+      mainApi.getCandidates()
         .then((candidates) => dispatch(addCandidates({ candidates })))
         .catch((err) => setFailedToFetch(err));
     }
@@ -55,7 +55,7 @@ function App() {
       .then(({ auth_token }) => {
         localStorage.setItem('token', auth_token);
 
-        mainApi.getUser(auth_token)
+        mainApi.getUser()
           .then((user) => {
             dispatch(addUser({ user }));
 
@@ -91,12 +91,13 @@ function App() {
   }
 
   useEffect(() => {
+    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
     const token = localStorage.getItem('token');
 
     if (token) {
       const path = location.pathname;
 
-      mainApi.getUser(token)
+      mainApi.getUser()
         .then((user) => {
           dispatch(addUser({ user }));
 

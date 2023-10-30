@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import { IFilter } from '../store/filter';
+import { ICandidate } from '../store/foundCandidates/foundCandidates';
 
 /* eslint-disable class-methods-use-this */
 interface Data {
@@ -12,7 +13,7 @@ class MainApi {
     this.baseUrl = baseUrl;
   }
 
-  private async getResponseData(res: Response): Promise<never | Data> {
+  private async getResponseData<T>(res: Response): Promise<never | T> {
     if (res.ok) {
       return res.json();
     }
@@ -21,23 +22,41 @@ class MainApi {
     return Promise.reject(JSON.parse(error));
   }
 
-  private setPostOptions(body: Data) {
+  private setPostOptions(body: Data, withoutToken?: boolean): RequestInit {
+    const token = localStorage.getItem('token');
+
     return {
       method: 'POST',
       credentials: 'include' as RequestCredentials,
       headers: {
         'Content-Type': 'application/json',
+        ...(token && !withoutToken ? { Authorization: `Token ${token}` } : {}),
       },
       body: JSON.stringify(body),
     };
   }
 
-  private setGetOptions(token: string) {
+  private setGetOptions(): RequestInit {
+    const token = localStorage.getItem('token');
+
     return {
       method: 'GET',
       credentials: 'include' as RequestCredentials,
       headers: {
-        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Token ${token}` } : {}),
+      },
+    };
+  }
+
+  private setDeleteOptions() {
+    const token = localStorage.getItem('token');
+
+    return {
+      method: 'DELETE',
+      credentials: 'include' as RequestCredentials,
+      headers: {
+        ...(token ? { Authorization: `Token ${token}` } : {}),
       },
     };
   }
@@ -45,16 +64,16 @@ class MainApi {
   public async signIn(username: string, password: string): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/auth/token/login/`,
-      this.setPostOptions({ username, password }),
+      this.setPostOptions({ username, password }, true),
     );
 
     return this.getResponseData(res);
   }
 
-  public async getUser(token: string): Promise<never | Data> {
+  public async getUser(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/users/me/`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
@@ -75,43 +94,43 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getCandidates(token: string): Promise<never | Data> {
+  public async getCandidates(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
   }
 
-  public async getShortCandidates(token: string): Promise<never | Data> {
+  public async getShortCandidates(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/short_candidates/`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
   }
 
-  public async getCandidateExperience(token: string): Promise<never | Data> {
+  public async getCandidateExperience(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/experience_detailed/`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
   }
 
-  public async getCandidateEducation(token: string): Promise<never | Data> {
+  public async getCandidateEducation(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/education/`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
   }
 
-  public async getFilterCandidates(token: string, filterValue: IFilter): Promise<never | Data> {
+  public async getFilterCandidates(filterValue: IFilter): Promise<never | Data> {
     const filterTags: string[] = [];
 
     if (filterValue.specialization) {
@@ -148,10 +167,38 @@ class MainApi {
 
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/?${filterTags.join('&')}`,
-      this.setGetOptions(token),
+      this.setGetOptions(),
     );
 
     return this.getResponseData(res);
+  }
+
+  public async addCandidateToFavoriteList() {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates?is_tracked=true`,
+      this.setGetOptions(),
+    );
+
+    return this.getResponseData<ICandidate[]>(res);
+  }
+
+  // eslint-disable-next-line camelcase
+  public async addCandidateToFavorites(id: number) {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/track/`,
+      this.setPostOptions({}),
+    );
+
+    return this.getResponseData(res);
+  }
+
+  public async removeCandidateFromFavorites(id: number) {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/track/`,
+      this.setDeleteOptions(),
+    );
+
+    return res;
   }
 }
 
