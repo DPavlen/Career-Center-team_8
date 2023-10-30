@@ -20,7 +20,7 @@ function Sidebar({ onLogOut }: SidebarProps) {
   const user = useSelector((state: RootState) => state.user.user);
 
   function createStringName(firstName: string, lastName: string): string {
-    return `${firstName} ${lastName.slice(0, 1)}.`;
+    return `${firstName} ${lastName.slice(0, 1).toUpperCase()}.`;
   }
 
   useEffect(() => {
