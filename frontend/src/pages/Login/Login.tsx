@@ -46,9 +46,12 @@ function Login({ logIn }: LoginProps) {
             variant="contained"
             className="login__button"
             sx={{
+              fontFamily: 'YS Text',
               height: '52px',
               marginTop: '16px',
+              fontSize: '16px',
               color: 'var(--White)',
+              backgroundColor: 'var(--Blue)',
               fontWeight: 500,
             }}
           >
