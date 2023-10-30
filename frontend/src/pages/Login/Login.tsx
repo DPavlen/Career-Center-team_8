@@ -16,7 +16,7 @@ interface LoginProps {
 
 function Login({ logIn }: LoginProps) {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const { register, handleSubmit, formState: { errors } } = useForm<TForm>();
+  const { register, handleSubmit } = useForm<TForm>();
 
   const onSubmit: SubmitHandler<TForm> = ({ username, password }) => {
     logIn(username, password);

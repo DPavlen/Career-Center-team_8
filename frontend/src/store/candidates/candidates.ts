@@ -88,6 +88,7 @@ export interface ICandidate {
   experience: string;
   employment_type: EmploymentType[];
   work_schedule: WorkSchedule[];
+  is_tracked: boolean;
 }
 
 export interface InitialState {

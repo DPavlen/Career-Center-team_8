@@ -199,7 +199,7 @@ function VacancyForm() {
           </p>
           <AppliedFilters
             filterValue={filterValue}
-            alwaysShow
+            // alwaysShow
             onResetFilter={(filter) => dispatch(createVacancyResetFilter(filter))}
           />
         </div>
