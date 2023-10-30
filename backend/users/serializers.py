@@ -7,8 +7,10 @@ from users.models import MyUser
 
 
 class MyUserCreateSerializer(UserCreateSerializer):
-    """Сериализатор для просмотра переопределенного Usera и
-    проверки просмотра подписок."""
+    """
+    Сериализатор для просмотра переопределенного Usera и
+    проверки просмотра подписок.
+    """
 
     class Meta:
         model = MyUser

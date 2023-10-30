@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     "vacancies.apps.VacanciesConfig",
     "api.v1.apps.ApiConfig",
     "core",
-    # "corsheaders",
+    # required for serving swagger ui's css/js files
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,8 @@ DJOSER = {
     # Параметр отображения в сериализаторе и Djoser(Не скрытый)
     "HIDE_USERS": False,
 }
-
+SWAGGER_SETTINGS = { "DEFAULT_GENERATOR_CLASS": 
+                    "rest_framework.schemas.generators.BaseSchemaGenerator", }
 
 # Переопределенный Юзер
 AUTH_USER_MODEL = "users.MyUser"

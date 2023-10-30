@@ -111,12 +111,12 @@ class CandidateViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated,)
     pagination_class = None
 
-    def get_serializer_class(self):
-        """Выбор сериализатора в зависимости от
-        показа короткого или полной информации кандидата."""
-        if self.action == 'retrieve':
-            return CandidateSerializer
-        return ShortCandidateSerializer
+    # def get_serializer_class(self):
+    #     """Выбор сериализатора в зависимости от
+    #     показа короткого или полной информации кандидата."""
+    #     if self.action == 'retrieve':
+    #         return CandidateSerializer
+    #     return ShortCandidateSerializer
 
     @action(
         detail=True,
