@@ -26,12 +26,15 @@ class Command(BaseCommand):
                                             middle_name=row[2],
                                             sex=row[3],
                                             age=row[4],
-                                            contacts_phone=row[6],
-                                            contacts_email=row[7],
-                                            contacts_other=row[8],
-                                            activity=row[9],
-                                            location=row[10],
-                                            about_me=row[11],
+                                            contacts_phone=row[5],
+                                            contacts_email=row[6],
+                                            contacts_other=row[7],
+                                            activity=row[8],
+                                            location=row[9],
+                                            about_me=row[10],
+                                            experience_id=row[11],
+                                            level_id=row[12],
+                                            specialization_id=row[13],
                                             )
         except Exception:
             raise CandidateLoadingError(
