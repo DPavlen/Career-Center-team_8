@@ -16,20 +16,20 @@ function Navigation() {
       <ul className="navigation__menu list">
         <li>
           <NavLink
-            to="/vacancies"
-            className={({ isActive }) => checkLinkState(isActive)}
-          >
-            <img src={Suitcase} alt="Иконка чемодана" className="navigation__icon" />
-            Вакансии
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/"
             className={({ isActive }) => checkLinkState(isActive)}
           >
             <img src={Personal} alt="Иконка человека" className="navigation__icon" />
             Кандидаты
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/vacancies"
+            className={({ isActive }) => checkLinkState(isActive)}
+          >
+            <img src={Suitcase} alt="Иконка чемодана" className="navigation__icon" />
+            Вакансии
           </NavLink>
         </li>
         <li>
