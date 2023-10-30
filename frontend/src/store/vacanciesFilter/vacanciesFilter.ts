@@ -4,14 +4,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFilter } from '../filter';
 
 export const initialState: IFilter = {
-  profession: null,
+  specialization: null,
   course: [],
-  skills: [],
-  location: [],
+  hards: [],
   experience: [],
   level: [],
-  busyType: [],
-  workingType: [],
+  location: [],
+  employmentType: [],
+  workSchedule: [],
 };
 
 const reducers = {

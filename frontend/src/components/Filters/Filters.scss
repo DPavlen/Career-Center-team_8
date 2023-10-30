@@ -9,19 +9,19 @@
   padding-bottom: 32px;
   width: 388px;
 
- &__header {
-  padding: 24px 24px 16px 24px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
- }
+  &__header {
+    padding: 24px 24px 16px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 
- &__headline {
-  display: flex;
-  align-items: center;
-  box-sizing: content-box;
- }
+  &__headline {
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+  }
 
   &__img {
     width: 20px;
@@ -52,5 +52,18 @@
     background-color: var(--Black-100);
     margin-left: 24px;
     margin-right: 24px;
+  }
+}
+
+.scrollbar {
+  label {
+    margin-left: 15px;
+    width: 300px;
+    display: flex;
+    
+    span:last-child {
+      display: inline-block;
+      width: 240px;
+    }
   }
 }

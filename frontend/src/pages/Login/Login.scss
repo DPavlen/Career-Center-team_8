@@ -9,6 +9,12 @@
   justify-content: center;
   align-items: center;
 
+  &__logo {
+    position: absolute;
+    left: 65px;
+    top: 52px;
+  }
+
   &__container {
     width: 400px;
     height: 382px;

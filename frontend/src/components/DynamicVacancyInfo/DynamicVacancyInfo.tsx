@@ -1,7 +1,32 @@
 import Button from '@mui/material/Button';
+import { v4 as uuid } from 'uuid';
+import { useEffect, useState } from 'react';
 import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
 import './DynamicVacancyInfo.scss';
 import RequirementsList from '../RequirementsList/RequirementsList';
+
+function extractValue(object: object) {
+  const result: string[] = [];
+
+  if (!object) {
+    return [];
+  }
+
+  // eslint-disable-next-line consistent-return
+  Object.entries(object).forEach(([, value]) => {
+    if (typeof value === 'string') {
+      return result.push(value);
+    }
+    if (Array.isArray(value)) {
+      return result.push(...value);
+    }
+    if (typeof value === 'object') {
+      return result.push(...extractValue(value));
+    }
+  });
+
+  return result;
+}
 
 interface VacancyInfoProps {
   hide: () => void,
@@ -9,19 +34,18 @@ interface VacancyInfoProps {
 }
 
 function DynamicVacancyInfo({ hide, data }: VacancyInfoProps) {
+  const [chips, setChips] = useState<string[]>([]);
+
+  useEffect(() => {
+    setChips(extractValue(data?.filters || {}));
+  }, [setChips, data]);
+
   return (
     <section className="vacancy-info">
       <div className="vacancy-info__chips">
-        <span className="vacancy-info__skills">Дизайн</span>
-        <span className="vacancy-info__skills">Продуктовый дизайн</span>
-        <span className="vacancy-info__skills">Без опыта</span>
-        <span className="vacancy-info__skills">От 0 до 3 лет</span>
-        <span className="vacancy-info__skills">Дизайн</span>
-        <span className="vacancy-info__skills">Продуктовый дизайн</span>
-        <span className="vacancy-info__skills">Без опыта</span>
-        <span className="vacancy-info__skills">От 0 до 3 лет</span>
-        <span className="vacancy-info__skills">Дизайн</span>
-        <span className="vacancy-info__skills">Продуктовый дизайн</span>
+        {chips.map((chip) => (
+          <span key={uuid()} className="vacancy-info__skills">{chip}</span>
+        ))}
       </div>
       {(data.salary_from || data.salary_to) && (
         <h3 className="vacancy-info__cash">

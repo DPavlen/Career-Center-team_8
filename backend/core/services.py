@@ -185,3 +185,4 @@ def candidate_resume_pdf(candidate_id):
                                 content_type="application/pdf; charset=utf-8")
         response["Content-Disposition"] = "inline; filename=resume.pdf"
         return response
+

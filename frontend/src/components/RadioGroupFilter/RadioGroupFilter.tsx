@@ -1,18 +1,18 @@
-import './RadioGroupFilter.scss';
-import { RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Filter, { IFilterProps } from '../Filter/Filter';
+import { v4 as uuid } from 'uuid';
+
+import './RadioGroupFilter.scss';
+
+import { RadioGroup, FormControlLabel, Radio } from '@mui/material';
+
 import radioSelect from '../../assets/icons/radiobuttonSelect.svg';
 import radio from '../../assets/icons/radiobutton.svg';
-import { IFilter } from '../../store/filter';
 
-interface IOption {
-  id: number;
-  value: string;
-}
+import { IFilter } from '../../store/filter';
+import Filter, { IFilterProps } from '../Filter/Filter';
 
 interface IRadioFilterProps extends Partial<IFilterProps> {
-  data: IOption[];
+  data: string[];
   filter: keyof IFilter;
   filterValue: IFilter;
   // eslint-disable-next-line no-unused-vars
@@ -28,17 +28,17 @@ function RadioGroupFilter({
   }, [filter, filterValue]);
 
   return (
-    <Filter filter={filter} text="Направление" {...filterProps}>
+    <Filter filter={filter} text="Направление*" {...filterProps}>
       <RadioGroup
         value={value}
         onChange={(e) => onSetFilter({
           [filter]: e.target.value,
         })}
       >
-        {data.map((option : IOption) => (
+        {data.map((option) => (
           <FormControlLabel
-            key={option.id}
-            value={option.value}
+            key={uuid()}
+            value={option}
             control={(
               <Radio
                 icon={<img alt="radio-field" src={radio} />}
@@ -46,7 +46,7 @@ function RadioGroupFilter({
                 sx={{ padding: 0, margin: '12px 12px 12px 24px', '&:hover': { backgroundColor: 'white' } }}
               />
               )}
-            label={option.value}
+            label={option}
             sx={{
               marginLeft: 0,
             }}

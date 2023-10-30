@@ -20,7 +20,10 @@ from api.v1.serializers import (
     ExperienceSerializer,
     WorkScheduleSerializer,
     EmploymentTypeSerializer,
-    HardCandsSerializer
+    HardCandsSerializer,
+    LocationSerializer,
+    VacancySerializer,
+    CreateVacancySerializer 
     )
 from candidates.models import (
     ExperienceDetailed,
@@ -35,8 +38,13 @@ from candidates.models import (
     Track,
     HardCands
     )
+
+from vacancies.models import (
+    Vacancy
+)
+
 from .filters import CandidatesFilter
-from core.services import candidate_resume_pdf
+# from core.services import candidate_resume_pdf
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
@@ -67,6 +75,10 @@ class HardCandsViewSet(ReadOnlyModelViewSet):
     queryset=HardCands.objects.all()
     serializer_class = HardCandsSerializer
 
+class LocationViewSet(ReadOnlyModelViewSet):
+    queryset=Candidate.objects.all()
+    serializer_class = LocationSerializer    
+
 class ShortCandidateViewSet(ModelViewSet):
     """View для отображения сокращенной информации о кандидатах."""
 
@@ -85,7 +97,7 @@ class CandidateViewSet(ModelViewSet):
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    # permission_classes = [IsAuthenticated]
+    # permission_classes = (IsAuthenticated,)
     pagination_class = None
 
     @action(
@@ -100,8 +112,9 @@ class CandidateViewSet(ModelViewSet):
                 user=request.user, candidate=candidate
             )
             if created:
-                serializer = CandidateSerializer(candidate)
+                serializer = ShortCandidateSerializer(candidate)
                 return Response(
+                    
                     serializer.data, status=status.HTTP_201_CREATED
                 )
             return Response(
@@ -120,6 +133,7 @@ class CandidateViewSet(ModelViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
     
+
     @action(
         detail=False,
         methods=("get"),
@@ -135,3 +149,32 @@ class CandidateViewSet(ModelViewSet):
         Response: PDF-файл резюме кандидата.
         """
         return candidate_resume_pdf(candidate_id)
+
+    @action(
+        detail=False,
+        methods=("post", "delete"),
+        permission_classes=(IsAuthenticated,),
+    )
+    @staticmethod
+    def download_shopping_cart(self, request):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(request.user)
+
+
+class VacancyViewSet(ModelViewSet):
+    queryset = Vacancy.objects.select_related("author")
+    #permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return VacancySerializer
+        return CreateVacancySerializer

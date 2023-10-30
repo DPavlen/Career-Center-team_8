@@ -16,47 +16,52 @@ class HardsCandsFilter(FilterSet):
 
 class CandidatesFilter(FilterSet):
     specialization_id = filters.ModelMultipleChoiceFilter(
-        field_name="specialization__slug",
-        to_field_name="slug",
+        field_name="specialization_id__name",
+        to_field_name="name",
         queryset=Specialization.objects.all(),
     )
     course = filters.ModelMultipleChoiceFilter(
-        field_name="course__slug",
-        to_field_name="slug",
+        field_name="course__name",
+        to_field_name="name",
         queryset=Course.objects.all(),
     )
     level_id = filters.ModelMultipleChoiceFilter(
-        field_name="level__slug",
-        to_field_name="slug",
+        field_name="level_id__name",
+        to_field_name="name",
         queryset=Level.objects.all(),
     )
     experience_id = filters.ModelMultipleChoiceFilter(
-        field_name="experience__slug",
-        to_field_name="slug",
+        field_name="experience_id__name",
+        to_field_name="name",
         queryset=Experience.objects.all(),
     )
     work_schedule = filters.ModelMultipleChoiceFilter(
-        field_name="work_schedule__slug",
-        to_field_name="slug",
+        field_name="work_schedule__name",
+        to_field_name="name",
         queryset=WorkSchedule.objects.all()
     )
     employment_type = filters.ModelMultipleChoiceFilter(
-        field_name="employment_type__slug",
-        to_field_name="slug",
+        field_name="employment_type__name",
+        to_field_name="name",
         queryset=EmploymentType.objects.all(),
     )
 
     is_tracked = filters.BooleanFilter(method="is_tracked_filter")
 
     hards = filters.ModelMultipleChoiceFilter(
-        field_name = "hards__slug",
-        to_field_name="slug",
+        field_name = "hards__name",
+        to_field_name="name",
         queryset = HardCands.objects.all(),
     )
 
+    location = filters.ModelMultipleChoiceFilter(
+        field_name = "location",
+        to_field_name="location",
+        queryset = Candidate.objects.all(),
+    )
     class Meta:
         model = Candidate
-        fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked")
+        fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked", "location")
 
     def is_tracked_filter(self, queryset, name, value):
         user = self.request.user

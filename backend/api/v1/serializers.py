@@ -1,9 +1,15 @@
+from djoser.serializers import UserSerializer
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.forms import ValidationError
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.fields import IntegerField, SerializerMethodField
 from rest_framework.relations import PrimaryKeyRelatedField
 from drf_extra_fields.fields import Base64ImageField
+
+
+
+from users.models import MyUser
 
 from candidates.models import (
     # ExperienceDetailed,
@@ -19,6 +25,26 @@ from candidates.models import (
     HardCands, 
     Track)
 
+from vacancies.models import (
+    Hard,
+    Vacancy,
+    HardsInVacancy,
+    EmploymentTypeInVacancy,
+    WorkScheduleInVacancy,
+       
+)
+
+class UserSerializer(UserSerializer):
+
+    class Meta:
+        model = MyUser
+        fields = (
+            "email",
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+        )
 
 class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,6 +80,11 @@ class HardCandsSerializer(serializers.ModelSerializer):
     class Meta:
         model = HardCands 
         fields = ("id", "name", "slug")
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Candidate 
+        fields = ("location",)
 
 class CandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения полной 
@@ -163,14 +194,11 @@ class CandidateSerializer(serializers.ModelSerializer):
         return obj.work_schedule.values()
     
     def get_is_tracked(self, obj):
-        return (
-            self.context["request"].user.is_authenticated
-            and Track.objects.filter(
-                user=self.context["request"].user, candidate=obj
-            ).exists()
-        )
-
-
+        request = self.context.get("request")
+        print(request)
+        if request is None or request.user.is_anonymous:
+            return False
+        return Track.objects.filter(user=request.user, candidate=obj).exists()
 
 
 class ShortCandidateSerializer(CandidateSerializer):
@@ -210,3 +238,198 @@ class ShortCandidateSerializer(CandidateSerializer):
     def get_experience(self, obj):
         """Получаем опыт работы(в годах)."""
         return obj.experience.name
+
+
+class HardsInVacancySerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(write_only=True)
+    name = serializers.CharField()
+
+    class Meta:
+        model = HardsInVacancy
+        fields = ("id", "name")
+
+class VacancySerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    specialization = SerializerMethodField()        
+    course = SerializerMethodField()
+    level = SerializerMethodField()
+    hards = SerializerMethodField()
+    experience = SerializerMethodField()
+    employment_type = SerializerMethodField()
+    work_schedule = SerializerMethodField()
+
+    class Meta:
+        model = Vacancy
+        fields = (
+            "id",
+            "name",
+            "author",
+            "company",
+            "salary_low",
+            "salary_high",
+            "responsibilities",
+            "requirements",
+            "optional",
+            "conditions",
+            "stages",
+            "location",
+            "specialization",
+            "level",
+            "course",
+            "hards",
+            "experience",
+            "employment_type",
+            "work_schedule"
+        )
+
+    def get_level(self, obj):
+        """Получаем уровень(грейд) кандидата."""
+        return obj.level.name
+    
+    def get_specialization(self, obj):
+        """Получаем специализацию кандидата."""
+        return obj.specialization.name
+    
+    def get_course(self, obj):
+        """Получаем специализацию кандидата."""
+        return obj.course.name
+    
+    def get_hards(self, obj):
+        hards = obj.hards.values(
+            "id",
+            "name",
+            "slug",
+        )
+        return hards
+    
+    def get_experience(self, obj):
+        """Получаем опыт работы(в годах)."""
+        return obj.experience.name
+    
+    def get_employment_type(self, obj):
+        employment_type = obj.employment_type.values(
+            "id",
+            "name",
+            "slug",
+        )
+        return employment_type
+    
+    def get_work_schedule(self, obj):
+        work_schedule = obj.work_schedule.values(
+            "id",
+            "name",
+            "slug",
+        )
+        return work_schedule
+
+
+class CreateVacancySerializer(serializers.ModelSerializer):
+    specialization = serializers.PrimaryKeyRelatedField(
+        queryset=Specialization.objects.all(), many=False
+    )
+    author = UserSerializer(read_only=True)
+    level = serializers.PrimaryKeyRelatedField(
+        queryset=Level.objects.all(), many=False
+    )
+    hards = serializers.PrimaryKeyRelatedField(
+        queryset=HardsInVacancy.objects.all(), many=True
+    )
+    experience = serializers.PrimaryKeyRelatedField(
+        queryset=Experience.objects.all(), many=False
+    )
+    employment_type = serializers.PrimaryKeyRelatedField(
+        queryset=EmploymentType.objects.all(), many=True
+    )
+    work_schedule = serializers.PrimaryKeyRelatedField(
+        queryset=WorkSchedule.objects.all(), many=True
+    )
+   
+
+    class Meta:
+        model = Vacancy
+        fields = (
+            "id",
+            "name",
+            "author",
+            "company",
+            "salary_low",
+            "salary_high",
+            "responsibilities",
+            "requirements",
+            "optional",
+            "conditions",
+            "stages",
+            "location",
+            "specialization",
+            "level",
+            "course",
+            "hards",
+            "experience",
+            "employment_type",
+            "work_schedule"
+        )
+
+#     def validate_hards(self, value):
+#         hards = value
+#         if not hards:
+#             raise ValidationError(
+#                 {"hards": "Необходим хотя бы один навык."}
+#             )
+#         hards_list = []
+#         for item in hards:
+#             hard = get_object_or_404(HardsInVacancy, id=item["id"])
+#             if hard in hards_list:
+#                 raise ValidationError(
+#                     {"hards": "Навыки должны быть уникальными."}
+#                 )
+#             hards_list.append(hard)
+#         return value
+
+#     def validate_specialization(self, value):
+#         specialization = value
+#         if not specialization:
+#             raise ValidationError({"specialization": "Выберите одно направление."})
+#         return value
+
+#     def validate_level(self, value):
+#         level = value
+#         if not level:
+#             raise ValidationError({"level": "Выберите уровень."})
+#         return value
+
+#     def create_hards(self, hards, vacancy):
+#         HardsInVacancy.objects.bulk_create(
+#             [
+#                 HardsInVacancy(
+#                     hard=Hard.objects.get(id=hards["id"]),
+#                     vacancy=vacancy
+#                 )
+#                 for hard in hards
+#             ]
+#         )
+
+#     def create(self, validated_data):
+#         specialization = validated_data.pop("specialization")
+#         hards = validated_data.pop("hards")
+#         vacancy = Vacancy.objects.create(**validated_data)
+#         vacancy.specialization.set(specialization)
+#         self.create_hards(vacancy=vacancy, hards=hards)
+#         return vacancy
+
+#     def update(self, instance, validated_data):
+#         tags = validated_data.pop("tags")
+#         ingredients = validated_data.pop("ingredients")
+#         instance = super().update(instance, validated_data)
+#         instance.tags.clear()
+#         instance.tags.set(tags)
+#         instance.ingredients.clear()
+#         self.create_ingredients(recipe=instance, ingredients=ingredients)
+#         instance.save()
+#         return instance
+
+#     def to_representation(self, instance):
+#         request = self.context.get("request")
+#         context = {"request": request}
+#         return VacancySerializer(instance, context=context).data
+
+

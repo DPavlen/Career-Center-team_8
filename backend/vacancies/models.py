@@ -2,7 +2,7 @@ from candidates.models import (
     EmploymentType,
     Experience,
     Level,
-    Soft,
+    Course,
     Specialization,
     WorkSchedule,
 )
@@ -74,7 +74,8 @@ class Vacancy(CreatedModel):
     author - HR добвивший вакансию
     name - наименование вакансии (Должность)
     company - нанимающаяя компания
-    salary - запралата
+    salary_low - запралата нижний порог
+    salary_high - зарплата верхний порог
     responsibilities - обязанности
     requirements - обязательный требования
     optional - необязательные требования
@@ -84,7 +85,6 @@ class Vacancy(CreatedModel):
     specialization - Направление специальности
     level - уровень кандидата
     hards - хард скилы
-    softs - софт скилы
     experience - опыт работы
     employment_type - тип занятости
     work_schedule - график работы
@@ -105,8 +105,12 @@ class Vacancy(CreatedModel):
         "Компания",
         max_length=255,
     )
-    salary = models.PositiveIntegerField(
-        "Заработная плата",
+    salary_low = models.PositiveIntegerField(
+        "Уровень дохода мин.",
+        blank=True,
+    )
+    salary_high = models.PositiveIntegerField(
+        "Уровень дохода макс.",
         blank=True,
     )
     responsibilities = models.TextField(
@@ -129,14 +133,22 @@ class Vacancy(CreatedModel):
         max_length=150,
         blank=True,
     )
-    specialization = models.ManyToManyField(
+    specialization = models.ForeignKey(
         Specialization,
         related_name="vacancies",
+        on_delete=models.CASCADE,
         verbose_name="Специализация",
     )
-    level = models.ManyToManyField(
+    course = models.ForeignKey(
+        Course,
+        related_name="vacancies",
+        on_delete=models.CASCADE,
+        verbose_name="Курс ЯП",
+    )
+    level = models.ForeignKey(
         Level,
         related_name="vacancies",
+        on_delete=models.CASCADE,
         verbose_name="Уровень",
     )
     hards = models.ManyToManyField(
@@ -144,14 +156,10 @@ class Vacancy(CreatedModel):
         related_name="vacancies",
         verbose_name="Хард скиллы",
     )
-    softs = models.ManyToManyField(
-        Soft,
-        related_name="vacancies",
-        verbose_name="Soft скиллы",
-    )
-    experience = models.ManyToManyField(
+    experience = models.ForeignKey(
         Experience,
         related_name="vacancies",
+        on_delete=models.CASCADE,
         verbose_name="Опыт работы",
     )
     employment_type = models.ManyToManyField(

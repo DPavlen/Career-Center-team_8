@@ -7,8 +7,7 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser, clearUser } from '../../store/user/user';
-import { addCandidates, clearCandidates } from '../../store/candidates/candidates';
-import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
+import { addCandidates, clearCandidates } from '../../store/foundCandidates/foundCandidates';
 
 import './App.scss';
 
@@ -22,8 +21,9 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-import testResume from '../../utils/testResume.json';
+// import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
+import NotFound from '../../pages/NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -32,19 +32,18 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function setfailedToFetch(error: Error): void {
+  function setfailedToFetch(error: { detail: string }): void {
     console.log(error);
 
-    if (error.message.includes('Failed to fetch')) {
+    if (error.detail.includes('Failed to fetch')) {
       return alert('Ошибка при получении данных: Возможны проблемы с сетью или сервер может быть недоступен.');
     }
 
-    return alert(error.message);
+    return alert(error.detail);
   }
 
   function searchCandidates(): void {
     const token = localStorage.getItem('token');
-
     if (token) {
       mainApi.getCandidates(token)
         .then((candidates) => dispatch(addCandidates({ candidates })))
@@ -93,7 +92,7 @@ function App() {
   }
 
   useEffect(() => {
-    dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
+    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
 
     const token = localStorage.getItem('token');
 
@@ -127,7 +126,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route
-          path="/"
+          path="/vacancies"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
@@ -139,7 +138,7 @@ function App() {
           )}
         />
         <Route
-          path="/candidates"
+          path="/"
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
@@ -188,6 +187,10 @@ function App() {
               <CreateVacancy />
             </>
           )}
+        />
+        <Route
+          path="*"
+          element={(<NotFound />)}
         />
       </Routes>
     </div>

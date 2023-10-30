@@ -24,6 +24,15 @@ $style: normal;
     url('./YS/YS-Display-Medium.woff') format('woff'),
     url('./YS/YS-Display-Medium.ttf') format('truetype');
 }
+@font-face {
+  font-family: $familyDisplay;
+  font-weight: 700;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Display-Bold.woff2') format('woff2'),
+    url('./YS/YS-Display-Bold.woff') format('woff'),
+    url('./YS/YS-Display-Bold.ttf') format('truetype');
+}
 
 /* YS Text */
 
@@ -45,4 +54,14 @@ $style: normal;
   src: url('./YS/YS-Text-Medium.woff2') format('woff2'),
     url('./YS/YS-Text-Medium.woff') format('woff'),
     url('./YS/YS-Text-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: $familyText;
+  font-weight: 700;
+  font-style: $style;
+  font-display: $display;
+  src: url('./YS/YS-Text-Bold.woff2') format('woff2'),
+    url('./YS/YS-Text-Bold.woff') format('woff'),
+    url('./YS/YS-Text-Bold.ttf') format('truetype');
 }

@@ -503,6 +503,7 @@ class Candidate(models.Model):
          # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.WorkScheduleInCandidate",
+
     )
     experience_detailed = models.ManyToManyField(
         ExperienceDetailed,

@@ -17,6 +17,7 @@
   }
 
   &__description {
+    margin-top: 0;
     margin-bottom: 16px;
     font-family: $familyDisplay;
     font-size: 20px;
@@ -30,34 +31,16 @@
     justify-content: space-between;
   }
 
-  &__filter {
-    padding-top: 24px;
-  }
-
   &__choose-filter {
     margin: 0;
     padding-bottom: 16px;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.37;
+
+    &_error {
+      color: red;
+    }
   }
 
-
-}
-
-.vacancy-form__content {
-  input {
-    display: block;
-    height: 46px;
-    border-radius: 6px;
-    border: 1px solid var(--Black-100, #DDE0E4);
-    margin-bottom: 28px;
-    padding: 12px;
-  }
-}
-
-.vacancy-form__salary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 28px;
 }

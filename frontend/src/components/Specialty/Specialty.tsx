@@ -3,7 +3,7 @@ import Chip from '@mui/material/Chip';
 import { Typography, Box } from '@mui/material';
 import { RootState } from '../../store/store';
 import VacancyCard from '../VacancyCard/VacancyCard';
-import { ICandidate } from '../../store/candidates/candidates';
+import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 
 type TSpecialtyProps = {
   title: string

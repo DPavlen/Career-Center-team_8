@@ -2,8 +2,8 @@ import './Favorites.scss';
 // import { useEffect, useState } from 'react';
 // import React from 'react';
 import { Typography } from '@mui/material';
-import Specialty from '../../components/Specialty/Specialty';
-import { mockSpecialties } from '../../utils/mockData';
+// import Specialty from '../../components/Specialty/Specialty';
+// import { mockSpecialties } from '../../utils/mockData';
 // import VacancySibtitle from '../../components/VacancySibtitle/VacancySibtitle';
 
 function Favorites() {
@@ -31,9 +31,9 @@ function Favorites() {
           {`Показано ${0} кандидатов`}
         </span>
       </Typography>
-      {mockSpecialties.map((specialty) => (
+      {/* {mockSpecialties.map((specialty) => (
         <Specialty key={Math.floor(Math.random() * 999)} title={specialty.label} />
-      ))}
+      ))} */}
     </main>
   );
 }

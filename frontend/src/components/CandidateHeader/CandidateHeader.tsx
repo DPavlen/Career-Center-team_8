@@ -12,10 +12,10 @@ function CandidateHeader() {
   const navigate = useNavigate();
 
   function goBack() {
-    navigate(-1);
+    navigate('/');
   }
 
-  const candidate = useSelector((state: RootState) => state.candidateInfo.candidateInfo);
+  const candidate = useSelector((state: RootState) => state.candidateInfo.candidate);
 
   return (
     <header className="candidate-header">
