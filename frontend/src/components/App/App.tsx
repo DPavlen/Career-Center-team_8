@@ -21,8 +21,8 @@ import Favorites from '../../pages/Favorites/Favorites';
 import Login from '../../pages/Login/Login';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
-// import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
+import NotFound from '../../pages/NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -31,7 +31,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function setfailedToFetch(error: { detail: string }): void {
+  function setFailedToFetch(error: { detail: string }): void {
     console.log(error);
 
     if (error.detail.includes('Failed to fetch')) {
@@ -46,7 +46,7 @@ function App() {
     if (token) {
       mainApi.getCandidates()
         .then((candidates) => dispatch(addCandidates({ candidates })))
-        .catch((err) => setfailedToFetch(err));
+        .catch((err) => setFailedToFetch(err));
     }
   }
 
@@ -65,9 +65,9 @@ function App() {
 
             navigate('/', { replace: true });
           })
-          .catch((err) => setfailedToFetch(err));
+          .catch((err) => setFailedToFetch(err));
       })
-      .catch((err) => setfailedToFetch(err));
+      .catch((err) => setFailedToFetch(err));
   }
 
   function logOut(): void {
@@ -82,7 +82,7 @@ function App() {
       mainApi.logOut(token)
         .then(() => {
         })
-        .catch((err) => setfailedToFetch(err));
+        .catch((err) => setFailedToFetch(err));
     }
 
     navigate('/login', { replace: true });
@@ -108,7 +108,7 @@ function App() {
           navigate(path, { replace: true });
         })
         .catch((err) => {
-          setfailedToFetch(err);
+          setFailedToFetch(err);
 
           navigate('/login', { replace: true });
         });
@@ -185,6 +185,10 @@ function App() {
               <CreateVacancy />
             </>
           )}
+        />
+        <Route
+          path="*"
+          element={(<NotFound />)}
         />
       </Routes>
     </div>

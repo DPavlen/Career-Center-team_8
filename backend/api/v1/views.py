@@ -21,7 +21,9 @@ from api.v1.serializers import (
     WorkScheduleSerializer,
     EmploymentTypeSerializer,
     HardCandsSerializer,
-    LocationSerializer 
+    LocationSerializer,
+    VacancySerializer,
+    CreateVacancySerializer 
     )
 from candidates.models import (
     ExperienceDetailed,
@@ -36,6 +38,11 @@ from candidates.models import (
     Track,
     HardCands
     )
+
+from vacancies.models import (
+    Vacancy
+)
+
 from .filters import CandidatesFilter
 # from core.services import candidate_resume_pdf
 
@@ -126,18 +133,48 @@ class CandidateViewSet(ModelViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
     
-    # @action(
-    #     detail=False,
-    #     methods=("post", "delete"),
-    #     permission_classes=(IsAuthenticated,),
-    # )
-    # @staticmethod
-    # def download_shopping_cart(self, request):
-    #     """
-    #     API endpoint для скачивания резюме кандидата в формате PDF.
-    #     GET:
-    #     Скачивание резюме кандидата в формате PDF.
-    #     Returns:
-    #     Response: PDF-файл резюме кандидата.
-    #     """
-    #     return candidate_resume_pdf(request.user)
+
+    @action(
+        detail=False,
+        methods=("get"),
+        url_path="download-candidate",
+        # permission_classes=(IsAuthenticated,),
+    )
+    def download_candidate(self, request, candidate_id):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(candidate_id)
+
+    @action(
+        detail=False,
+        methods=("post", "delete"),
+        permission_classes=(IsAuthenticated,),
+    )
+    @staticmethod
+    def download_shopping_cart(self, request):
+        """
+        API endpoint для скачивания резюме кандидата в формате PDF.
+        GET:
+        Скачивание резюме кандидата в формате PDF.
+        Returns:
+        Response: PDF-файл резюме кандидата.
+        """
+        return candidate_resume_pdf(request.user)
+
+
+class VacancyViewSet(ModelViewSet):
+    queryset = Vacancy.objects.select_related("author")
+    #permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_serializer_class(self):
+        if self.request.method in SAFE_METHODS:
+            return VacancySerializer
+        return CreateVacancySerializer

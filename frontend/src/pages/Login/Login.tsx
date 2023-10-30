@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button } from '@mui/material';
+import Logo from '../../assets/icons/logo.svg';
 
 import './login.scss';
-
-import { Button } from '@mui/material';
 
 type TForm = {
   username: string;
@@ -25,6 +25,7 @@ function Login({ logIn }: LoginProps) {
   return (
     <main className="login">
       <div className="login__container">
+        <img className="login__logo" src={Logo} alt="логотип приложения" />
         <h1 className="login__title">Яндекс.Найм</h1>
         <h2 className="login__account">Войдите в аккаунт</h2>
         <form className="login__form" onSubmit={handleSubmit(onSubmit)}>

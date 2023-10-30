@@ -108,10 +108,6 @@ const candidatesSlice = createSlice({
       store.candidates = payload.candidates;
       store.total = payload.candidates.length;
     },
-    addMoreCandidates: (store, { payload }) => {
-      // store.candidates = store.candidates.concat(payload.candidates);
-      store.total += payload.candidates.length;
-    },
     clearCandidates: (store) => {
       store.candidates = null;
       store.total = 0;
@@ -119,6 +115,6 @@ const candidatesSlice = createSlice({
   },
 });
 
-export const { addCandidates, addMoreCandidates, clearCandidates } = candidatesSlice.actions;
+export const { addCandidates, clearCandidates } = candidatesSlice.actions;
 
 export default candidatesSlice.reducer;

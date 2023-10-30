@@ -15,6 +15,7 @@ from api.v1.views import (
     ShortCandidateViewSet,
     HardCandsViewSet,
     LocationViewSet,
+    VacancyViewSet
     )
 
 
@@ -34,6 +35,7 @@ router.register("employment_type", EmploymentTypeViewSet)
 router.register("work_schedule", WorkScheduleViewSet)
 router.register("hards_in_cands", HardCandsViewSet)
 router.register("location", LocationViewSet)
+router.register("vacancies", VacancyViewSet)
 
 # router.register("experience_detailed", 
 #                 ExperienceDetailedViewSet, "experience_detailed")
@@ -43,4 +45,7 @@ urlpatterns = [
     path("v1/", include(router.urls)),
     path("v1/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
+    path("v1/candidates/<int:candidate_id>/download-candidate/", 
+         CandidateViewSet.as_view({'get': 'download_candidate'})),
+
 ]
