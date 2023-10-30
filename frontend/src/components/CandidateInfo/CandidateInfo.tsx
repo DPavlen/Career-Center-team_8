@@ -37,30 +37,30 @@ function CandidateInfo() {
 
           //
 
-          // const file = window.URL.createObjectURL(resume);
-          // window.location.assign(file);
+          const file = window.URL.createObjectURL(resume);
+          window.location.assign(file);
 
-          // window.URL.revokeObjectURL(resume);
+          // window.URL.revokeObjectURL(file);
 
-          // Create blob link to download
-          const url = window.URL.createObjectURL(
-            new Blob([resume]),
-          );
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute(
-            'download',
-            'FileName.pdf',
-          );
+          // // Create blob link to download
+          // const url = window.URL.createObjectURL(
+          //   new Blob([resume]),
+          // );
+          // const link = document.createElement('a');
+          // link.href = url;
+          // link.setAttribute(
+          //   'download',
+          //   'FileName',
+          // );
 
-          // Append to html link element page
-          document.body.appendChild(link);
+          // // Append to html link element page
+          // document.body.appendChild(link);
 
-          // Start download
-          link.click();
+          // // Start download
+          // link.click();
 
-          // Clean up and remove the link
-          if (link.parentNode) link.parentNode.removeChild(link);
+          // // Clean up and remove the link
+          // if (link.parentNode) link.parentNode.removeChild(link);
         });
     }
   }

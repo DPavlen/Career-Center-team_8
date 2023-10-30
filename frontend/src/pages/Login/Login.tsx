@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 import Logo from '../../assets/icons/logo.svg';
 
-import './login.scss';
+import './Login.scss';
 
 type TForm = {
   username: string;
