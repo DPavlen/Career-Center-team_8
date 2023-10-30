@@ -27,7 +27,7 @@ function CandidateHeader() {
           marginLeft: '40px',
           position: 'absolute',
           top: 0,
-          left: '-150px',
+          left: '-135px',
         }}
       >
         <img alt="Иконка вернуться" src={iconBack} />
