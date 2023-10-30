@@ -1,16 +1,11 @@
 import io
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import Image
+# from reportlab.platypus import Image
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.styles import getSampleStyleSheet
-from tkinter import Canvas
-from reportlab.pdfgen import canvas
-
-
-
 from django.http import HttpResponse
 
 from candidates.models import (
