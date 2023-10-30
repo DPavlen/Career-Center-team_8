@@ -41,10 +41,12 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://example.com',
-    'https://example.com',
+    'http://84.201.133.88:5173',
     'http://localhost:5173'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
 
 ROOT_URLCONF = "hr_portal.urls"
 

@@ -528,7 +528,8 @@ class Candidate(models.Model):
         ordering = ["last_name"]
 
     def __str__(self):
-        return self.last_name
+        return (f"{self.last_name} + {self.first_name}"
+                f" {self.middle_name}")
 
 
 class ExperienceDetailedInCandidate(models.Model):
