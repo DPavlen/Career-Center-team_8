@@ -58,7 +58,6 @@ class HardCandsSerializer(serializers.ModelSerializer):
 class CandidateSerializer(serializers.ModelSerializer):
     """Сериализатор для получения полной 
     информации о кандидате(подробная страница кандидата)."""
-    # id = IntegerField(read_only=True)
     experience_detailed = SerializerMethodField()
     education = SerializerMethodField()
     specialization = SerializerMethodField()        
@@ -84,6 +83,7 @@ class CandidateSerializer(serializers.ModelSerializer):
             "image",
             "sex",
             "age",
+            "about_me",
             "contacts_phone",
             "contacts_email",
             "contacts_other",
@@ -111,7 +111,6 @@ class CandidateSerializer(serializers.ModelSerializer):
             "post",
             "responsibilities",
             "slug",
-            # amount=F("detailincandidate__amount"),
         )
         return experience_detailed
     
@@ -130,7 +129,7 @@ class CandidateSerializer(serializers.ModelSerializer):
             "slug",
         )
         return education
-    
+
     def get_course(self, obj):
         """Получаем список всех курсов Яндекса."""
         return obj.course.values()

@@ -341,6 +341,7 @@ class Education(models.Model):
         verbose_name_plural = "Образования"
         ordering = ["name"]
 
+
 class Candidate(models.Model):
     """Модель для резюме кандидатов.
 
@@ -453,6 +454,7 @@ class Candidate(models.Model):
         verbose_name="Курс",
         # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidates.CourseInCandidate",
     )
     level = models.ForeignKey(
         Level,
@@ -468,6 +470,7 @@ class Candidate(models.Model):
         verbose_name="Хард скиллы",
         # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidates.HardsInCandidate",
     )
     softs = models.ManyToManyField(
         Soft,
@@ -475,6 +478,7 @@ class Candidate(models.Model):
         verbose_name="Soft скиллы",
         # Поставлено необязательно для корректной загрузки
         blank=True,
+        through="candidates.SoftsInCandidate",
     )
     experience = models.ForeignKey(
         Experience,
@@ -490,7 +494,7 @@ class Candidate(models.Model):
         verbose_name="Тип занятости",
         # Поставлено необязательно для корректной загрузки
         blank=True,
-        through="candidated.EmploymentTypeInCandidate",
+        through="candidates.EmploymentTypeInCandidate",
     )
     work_schedule = models.ManyToManyField(
         WorkSchedule,
@@ -498,7 +502,7 @@ class Candidate(models.Model):
         verbose_name="График работы",
          # Поставлено необязательно для корректной загрузки
         blank=True,
-        through="candidated.WorkScheduleInCandidate",
+        through="candidates.WorkScheduleInCandidate",
     )
     experience_detailed = models.ManyToManyField(
         ExperienceDetailed,
@@ -506,7 +510,7 @@ class Candidate(models.Model):
         verbose_name="Детальный опыт работы",
          # Поставлено необязательно для корректной загрузки
         blank=True,
-        through="candidated.ExperienceDetailedInCandidate",
+        through="candidates.ExperienceDetailedInCandidate",
     )
     education = models.ManyToManyField(
         Education,
@@ -514,7 +518,7 @@ class Candidate(models.Model):
         verbose_name="Образование",
         # Поставлено необязательно для корректной загрузки
         blank=True,
-        through="candidated.EducationInCandidate",
+        through="candidates.EducationInCandidate",
     )
 
     class Meta:
@@ -532,7 +536,7 @@ class ExperienceDetailedInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="experience_in_candidate",
         verbose_name="Кандидат",
     )
     experience_detailed = models.ForeignKey(
@@ -548,7 +552,7 @@ class EducationInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="education_in_candidate",
         verbose_name="Кандидат",
     )
     education = models.ForeignKey(
@@ -564,7 +568,7 @@ class WorkScheduleInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="workschedule_in_candidate",
         verbose_name="Кандидат",
     )
     work_schedule = models.ForeignKey(
@@ -573,13 +577,14 @@ class WorkScheduleInCandidate(models.Model):
         verbose_name="График работы у кандидата."
     )
 
+
 class EmploymentTypeInCandidate(models.Model):
     """Детали типа занятости | Тип занятости у кандидата.
     """
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="employmenttype_in_candidate",
         verbose_name="Кандидат",
     )
     employment_type = models.ForeignKey(
@@ -595,7 +600,7 @@ class SoftsInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="softs_in_candidate",
         verbose_name="Кандидат",
     )
     softs = models.ForeignKey(
@@ -611,7 +616,7 @@ class HardsInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="hards_in_candidate",
         verbose_name="Кандидат",
     )
     hards = models.ForeignKey(
@@ -627,7 +632,7 @@ class CourseInCandidate(models.Model):
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
-        related_name="detail_in_candidate",
+        related_name="course_in_candidate",
         verbose_name="Кандидат",
     )
     course = models.ForeignKey(

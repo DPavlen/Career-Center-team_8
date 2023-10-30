@@ -122,11 +122,11 @@ class CandidateViewSet(ModelViewSet):
     
     @action(
         detail=False,
-        methods=("post", "delete"),
-        permission_classes=(IsAuthenticated,),
+        methods=("get"),
+        url_path="download-candidate",
+        # permission_classes=(IsAuthenticated,),
     )
-    @staticmethod
-    def download_shopping_cart(self, request):
+    def download_candidate(self, request, candidate_id):
         """
         API endpoint для скачивания резюме кандидата в формате PDF.
         GET:
@@ -134,4 +134,4 @@ class CandidateViewSet(ModelViewSet):
         Returns:
         Response: PDF-файл резюме кандидата.
         """
-        return candidate_resume_pdf(request.user)
+        return candidate_resume_pdf(candidate_id)
