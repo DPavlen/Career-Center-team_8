@@ -1,27 +1,56 @@
-# React + TypeScript + Vite
+# Яндекс.Найм
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="https://i.ibb.co/ZLHjJpJ/start.jpg" width="700px">
 
-Currently, two official plugins are available:
+## 📖Описание
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+"Яндекс.Найм" - это инновационный веб-сервис, разработанный для оптимизации процесса трудоустройства студентов и выпускников Яндекс Практикума. Сервис предназначен специально для HR и рекрутеров, работающих в партнерских компаниях, и стремится сделать процесс найма максимально эффективным и удобным.
 
-## Expanding the ESLint configuration
+## 💪Команда Front-end разработчиков.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
++ [Моисеева Анастасия](https://github.com/AnastasiaMoiseeva0)
++ [Алексеев Андрей](https://github.com/cipher24)
++ [Каптур Ростислав](https://github.com/rastereo)
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️Технологии:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
++ [HTML](https://html.spec.whatwg.org)
++ [Sass](https://sass-lang.com)
++ [Vite](https://vitejs.dev)
++ [TypeScript](https://www.typescriptlang.org)
++ [Redux Toolkit](https://redux-toolkit.js.org)
++ [Yup](https://github.com/jquense/yup)
++ [React Hook Form](https://github.com/jquense/yup)
++ [React Router](https://reactrouter.com/en/main)
++ [uuid](https://clerk.com/blog/generating-and-using-uuids-in-react?utm_source=www.google.com&utm_medium=referral&utm_campaign=none)
++ [ESLint](https://eslint.org/)
+
+## 📋Инструкция по запуску проекта:
+
+1. Склонируйте репозиторий на свой компьютер:
+```bash
+git git@github.com:DPavlen/Hackathon_team_8.git
+```
+2. Переидите в директорию frontend:
+```bash
+cd frontend
+```
+3. Установите зависимости
+```bash
+npm install
+```
+4. Запустите приложение
+```bash
+npm run dev
+```
+5. Создаст оптимизированную сборку приложения в папке build
+```bash
+npm run build
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 🌐Ссылки
+
++ Сайт: <ссылка>
++ Макет: https://clck.ru/36HCjX
++ Github репозиторий: https://github.com/DPavlen/Hackathon_team_8
++ Техническое задание: https://disk.yandex.ru/i/-lWaCpeq7D1oGA
