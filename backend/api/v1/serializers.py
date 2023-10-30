@@ -7,14 +7,7 @@ from rest_framework.fields import IntegerField, SerializerMethodField
 from rest_framework.relations import PrimaryKeyRelatedField
 from drf_extra_fields.fields import Base64ImageField
 
-
-
-from users.models import MyUser
-
 from candidates.models import (
-    # ExperienceDetailed,
-    # DetailInCandidate,
-    # Education,
     Candidate,
     Specialization,
     Course,
@@ -33,9 +26,13 @@ from vacancies.models import (
     WorkScheduleInVacancy,
        
 )
+from users.models import MyUser
+
 
 class UserSerializer(UserSerializer):
-
+    """
+    Сериализатор для создания(отображения) Usera.
+    """
     class Meta:
         model = MyUser
         fields = (
@@ -46,49 +43,83 @@ class UserSerializer(UserSerializer):
             "last_name",
         )
 
+
 class SpecializationSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения специализации у кандидата.
+    """
     class Meta:
         model = Specialization 
         fields = ("id", "name", "slug")
 
+
 class CourseSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения курсов у кандидата.
+    """
     class Meta:
         model = Course 
         fields = ("id", "name", "slug")
 
+
 class LevelSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения уровеня у кандидата.
+    """
     class Meta:
         model = Level 
         fields = ("id", "name", "slug")
 
+
 class ExperienceSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения графика работы у кандидата.
+    """
     class Meta:
         model = Experience 
         fields = ("id", "name", "slug")
 
+
 class WorkScheduleSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения графика работы у кандидата.
+    """
     class Meta:
         model = WorkSchedule 
         fields = ("id", "name", "slug")
 
+
 class EmploymentTypeSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения типа занятости у кандидата.
+    """
     class Meta:
         model = EmploymentType 
         fields = ("id", "name", "slug")
 
+
 class HardCandsSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения хард скиллов у кандидата.
+    """
     class Meta:
         model = HardCands 
         fields = ("id", "name", "slug")
 
 class LocationSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения местонахождения(локации)
+    о кандидате.
+    """
     class Meta:
         model = Candidate 
         fields = ("location",)
 
 class CandidateSerializer(serializers.ModelSerializer):
-    """Сериализатор для получения полной 
-    информации о кандидате(подробная страница кандидата)."""
+    """
+    Сериализатор для получения полной 
+    информации о кандидате(подробная страница кандидата).
+    """
     experience_detailed = SerializerMethodField()
     education = SerializerMethodField()
     specialization = SerializerMethodField()        
@@ -131,7 +162,6 @@ class CandidateSerializer(serializers.ModelSerializer):
             "is_tracked"
         )
 
-
     def get_experience_detailed(self, obj):
         """Получаем список детального опыта работы для кандидата."""
         experience_detailed= obj.experience_detailed.values(
@@ -145,7 +175,6 @@ class CandidateSerializer(serializers.ModelSerializer):
         )
         return experience_detailed
     
-
     def get_education(self, obj):
         """Получаем список данных об образовани для кандидата."""
         education= obj.education.values(
@@ -162,27 +191,39 @@ class CandidateSerializer(serializers.ModelSerializer):
         return education
 
     def get_course(self, obj):
-        """Получаем список всех курсов Яндекса."""
+        """
+        Получаем список всех курсов Яндекса.
+        """
         return obj.course.values()
     
     def get_level(self, obj):
-        """Получаем уровень(грейд) кандидата."""
+        """
+        Получаем уровень(грейд) кандидата.
+        """
         return obj.level.name
     
     def get_specialization(self, obj):
-        """Получаем специализацию кандидата."""
+        """
+        Получаем специализацию кандидата.
+        """
         return obj.specialization.name
     
     def get_hards(self, obj):
-        """Получаем список всех хард-скилов(ключевые навыки)."""
+        """
+        Получаем список всех хард-скилов(ключевые навыки).
+        """
         return obj.hards.values()
     
     def get_softs(self, obj):
-        """Получаем список soft skills(мягкие навыки)."""
+        """
+        Получаем список soft skills(мягкие навыки).
+        """
         return obj.softs.values()
     
     def get_experience(self, obj):
-        """Получаем опыт работы(в годах)."""
+        """
+        Получаем опыт работы(в годах).
+        """
         return obj.experience.name
     
     def get_employment_type(self, obj):
@@ -190,21 +231,26 @@ class CandidateSerializer(serializers.ModelSerializer):
         return obj.employment_type.values()
     
     def get_work_schedule(self, obj):
-        """Получаем список графика работы."""
+        """
+        Получаем список графика работы.
+        """
         return obj.work_schedule.values()
     
     def get_is_tracked(self, obj):
+        """Проверка - находится ли кандидад в 
+        списке отслеживаемых кандидато."""
         request = self.context.get("request")
-        print(request)
         if request is None or request.user.is_anonymous:
             return False
         return Track.objects.filter(user=request.user, candidate=obj).exists()
 
 
 class ShortCandidateSerializer(CandidateSerializer):
-    """Сериализатор для получения краткой
+    """
+    Сериализатор для получения краткой
     информации о кандидате на главной странице.
-    Необходимые поля: фото, фио, город, должность, уровень, опыт)."""
+    Необходимые поля: фото, фио, город, должность, уровень, опыт).
+    """
     experience_detailed = SerializerMethodField()
     level = SerializerMethodField()
     experience = SerializerMethodField()
@@ -225,22 +271,31 @@ class ShortCandidateSerializer(CandidateSerializer):
         ]
 
     def get_experience_detailed(self, obj):
-        """Получаем из детального опыта - должность."""
+        """
+        Получаем из детального опыта - должность.
+        """
         experience_detailed= obj.experience_detailed.values(
             "post",
         )
         return experience_detailed
     
     def get_level(self, obj):
-        """Получаем уровень(грейд) кандидата."""
+        """
+        Получаем уровень(грейд) кандидата.
+        """
         return obj.level.name
 
     def get_experience(self, obj):
-        """Получаем опыт работы(в годах)."""
+        """
+        Получаем опыт работы(в годах).
+        """
         return obj.experience.name
 
 
 class HardsInVacancySerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения хард скиллов в вакансии.
+    """
     id = serializers.IntegerField(write_only=True)
     name = serializers.CharField()
 
@@ -249,6 +304,9 @@ class HardsInVacancySerializer(serializers.ModelSerializer):
         fields = ("id", "name")
 
 class VacancySerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для просмотра информации о вакансии.
+    """
     author = UserSerializer(read_only=True)
     specialization = SerializerMethodField()        
     course = SerializerMethodField()
@@ -283,15 +341,21 @@ class VacancySerializer(serializers.ModelSerializer):
         )
 
     def get_level(self, obj):
-        """Получаем уровень(грейд) кандидата."""
+        """
+        Получаем уровень(грейд) кандидата.
+        """
         return obj.level.name
     
     def get_specialization(self, obj):
-        """Получаем специализацию кандидата."""
+        """
+        Получаем специализацию кандидата.
+        """
         return obj.specialization.name
     
     def get_course(self, obj):
-        """Получаем специализацию кандидата."""
+        """
+        Получаем специализацию кандидата.
+        """
         return obj.course.name
     
     def get_hards(self, obj):
@@ -303,10 +367,15 @@ class VacancySerializer(serializers.ModelSerializer):
         return hards
     
     def get_experience(self, obj):
-        """Получаем опыт работы(в годах)."""
+        """
+        Получаем опыт работы(в годах).
+        """
         return obj.experience.name
     
     def get_employment_type(self, obj):
+        """
+        Получаем тип занятости.
+        """
         employment_type = obj.employment_type.values(
             "id",
             "name",
@@ -315,6 +384,9 @@ class VacancySerializer(serializers.ModelSerializer):
         return employment_type
     
     def get_work_schedule(self, obj):
+        """
+        Получаем тип занятости.
+        """
         work_schedule = obj.work_schedule.values(
             "id",
             "name",
@@ -324,6 +396,9 @@ class VacancySerializer(serializers.ModelSerializer):
 
 
 class CreateVacancySerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для создании вакансии кандидата.
+    """
     specialization = serializers.PrimaryKeyRelatedField(
         queryset=Specialization.objects.all(), many=False
     )
@@ -344,7 +419,6 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         queryset=WorkSchedule.objects.all(), many=True
     )
    
-
     class Meta:
         model = Vacancy
         fields = (

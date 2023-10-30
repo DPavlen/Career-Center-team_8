@@ -1,13 +1,10 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-
-from django.shortcuts import get_object_or_404
 
 from api.v1.filters import CandidatesFilter
 from api.v1.serializers import (
@@ -26,8 +23,6 @@ from api.v1.serializers import (
     )
 from core.services import candidate_resume_pdf
 from candidates.models import (
-    ExperienceDetailed,
-    Education,
     Specialization,
     Candidate,
     Course,
@@ -44,62 +39,84 @@ from vacancies.models import (
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Специализации' кандидата.
+    """
     queryset=Specialization.objects.all()
     serializer_class = SpecializationSerializer
 
+
 class CourseViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Курсов ЯП' кандидата.
+    """
     queryset=Course.objects.all()
     serializer_class = CourseSerializer
 
+
 class LevelViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Образование для кандидата'.
+    """
     queryset=Level.objects.all()
     serializer_class = LevelSerializer
 
+
 class ExperienceViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Опыта работы
+    детальный для кандидата'.
+    """
     queryset=Experience.objects.all()
     serializer_class = ExperienceSerializer
 
 class WorkScheduleViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Графика работы' кандидата.
+    """
     queryset=WorkSchedule.objects.all()
     serializer_class = WorkScheduleSerializer
 
+
 class EmploymentTypeViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Типа занятости' кандидата.
+    """
     queryset=EmploymentType.objects.all()
     serializer_class = EmploymentTypeSerializer
 
 class HardCandsViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Хард скиллов' кандидата.
+    """
     queryset=HardCands.objects.all()
     serializer_class = HardCandsSerializer
+
 
 class LocationViewSet(ReadOnlyModelViewSet):
     queryset=Candidate.objects.all()
     serializer_class = LocationSerializer    
 
-class ShortCandidateViewSet(ModelViewSet):
-    """View для отображения сокращенной информации о кандидатах."""
-
-    queryset = Candidate.objects.all()
-    serializer_class = ShortCandidateSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = CandidatesFilter
-    # permission_classes = [IsAuthenticated]
-    pagination_class = None
-
 
 class CandidateViewSet(ModelViewSet):
-    """View для отображения полной информации о кандидате."""
+    """
+    View для отображения сокращенной информации о кандидатах.
+    View для отображения полной информации о кандидате.
+    """
 
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = None
 
-    # def get_serializer_class(self):
-    #     if self.action == 'retrieve':
-    #         return ShortCandidateSerializer
-    #     return CandidateSerializer
+    def get_serializer_class(self):
+        """Выбор сериализатора в зависимости от
+        показа короткого или полной информации кандидата."""
+        if self.action == 'retrieve':
+            return ShortCandidateSerializer
+        return CandidateSerializer
 
     @action(
         detail=True,
@@ -153,13 +170,24 @@ class CandidateViewSet(ModelViewSet):
     
 
 class VacancyViewSet(ModelViewSet):
+    """
+    View для отображения сокращенной информации о кандидатах.
+    View для отображения полной информации о кандидате.
+    """
     queryset = Vacancy.objects.select_related("author")
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
+        """
+        Post запрос создания вакансии для кандидата.
+        """
         serializer.save(author=self.request.user)
 
     def get_serializer_class(self):
+        """
+        Выбор сериализатора в зависимости от 
+        просмотра или создании вакансии.
+        """
         if self.request.method in SAFE_METHODS:
             return VacancySerializer
         return CreateVacancySerializer

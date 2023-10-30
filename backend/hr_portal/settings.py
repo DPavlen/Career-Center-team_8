@@ -8,7 +8,7 @@ SECRET_KEY = (
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["84.201.133.88", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["84.201.133.88", "localhost", "127.0.0.1", "infinity-team.ddns.net"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

@@ -1,3 +1,6 @@
+from django.contrib.auth import get_user_model
+from django.db import models
+
 from candidates.models import (
     EmploymentType,
     Experience,
@@ -6,10 +9,6 @@ from candidates.models import (
     Specialization,
     WorkSchedule,
 )
-
-from django.contrib.auth import get_user_model
-from django.db import models
-
 from core.models import CreatedModel
 from users.models import MyUser
 
