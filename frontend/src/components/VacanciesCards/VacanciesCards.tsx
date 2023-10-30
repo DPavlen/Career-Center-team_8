@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 // import { useEffect } from 'react';
 import VacancyCard from '../VacancyCard/VacancyCard';
 import type { RootState } from '../../store/store';
-import VacancySibtitle from '../VacancySubtitle/VacancySubtitle';
+import VacancySubtitle from '../VacancySubtitle/VacancySubtitle';
 import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 
 function VacanciesCards() {
@@ -14,7 +14,7 @@ function VacanciesCards() {
 
   return (
     <>
-      <VacancySibtitle />
+      <VacancySubtitle />
       <section className="cards">
         {candidates && candidates?.map((card) => (
           card ? <VacancyCard key={uuid()} card={card} /> : null

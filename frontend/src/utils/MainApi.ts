@@ -51,6 +51,19 @@ class MainApi {
     };
   }
 
+  private setGetPDFOptions(): RequestInit {
+    const token = localStorage.getItem('token');
+
+    return {
+      method: 'GET',
+      credentials: 'include' as RequestCredentials,
+      headers: {
+        'Content-Type': 'application/pdf',
+        ...(token ? { Authorization: `Token ${token}` } : {}),
+      },
+    };
+  }
+
   private setDeleteOptions() {
     const token = localStorage.getItem('token');
 
@@ -156,8 +169,7 @@ class MainApi {
     return this.getResponseData<ICandidate[]>(res);
   }
 
-  // eslint-disable-next-line camelcase
-  public async addCandidateToFavorites(id: number) {
+  public async addCandidateToFavorites(id: number): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/${id}/track/`,
       this.setPostOptions({}),
@@ -166,10 +178,19 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async removeCandidateFromFavorites(id: number) {
+  public async removeCandidateFromFavorites(id: number): Promise<Response> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/${id}/track/`,
       this.setDeleteOptions(),
+    );
+
+    return res;
+  }
+
+  public async getCandidateResume(id: string): Promise<Response> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/download-candidate/`,
+      this.setGetPDFOptions(),
     );
 
     return res;

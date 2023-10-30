@@ -23,8 +23,18 @@ function Navigation() {
             to="/"
             className={({ isActive }) => checkLinkState(isActive)}
           >
-            <img src={Personal} alt="Иконка человека" className="navigation__icon" />
-            Кандидаты
+            <img
+              src={
+                ((location.pathname.indexOf('/candidates') === 0) || (location.pathname === '/'))
+                  ? PersonalWhite
+                  : Personal
+              }
+              alt="Иконка человека"
+              className="navigation__icon"
+            />
+            <span className={(location.pathname.indexOf('/candidates') === 0) ? 'text-active' : ''}>
+              Кандидаты
+            </span>
           </NavLink>
         </li>
         <li>
@@ -42,25 +52,6 @@ function Navigation() {
               className="navigation__icon"
             />
             Вакансии
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => checkLinkState(isActive)}
-          >
-            <img
-              src={
-                ((location.pathname.indexOf('/candidates') === 0) || (location.pathname === '/'))
-                  ? PersonalWhite
-                  : Personal
-              }
-              alt="Иконка человека"
-              className="navigation__icon"
-            />
-            <span className={(location.pathname.indexOf('/candidates') === 0) ? 'text-active' : ''}>
-              Кандидаты
-            </span>
           </NavLink>
         </li>
         <li>

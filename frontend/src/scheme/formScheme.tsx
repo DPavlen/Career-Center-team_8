@@ -26,4 +26,6 @@ export const vacancyFormScheme = yup.object().shape({
     .string(),
   selection_stages: yup
     .string(),
+  id: yup
+    .string(),
 });
