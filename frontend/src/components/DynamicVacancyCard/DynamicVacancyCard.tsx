@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import './DynamicVacancyCard.scss';
 
 import Button from '@mui/material/Button';
-import deleteIcon from '../../assets/icons/delete-grey.svg';
 import DynamicVacancyInfo from '../DynamicVacancyInfo/DynamicVacancyInfo';
 import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
 import { vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
@@ -78,9 +77,6 @@ function DynamicVacancyCard(props: VacancyCardProps) {
                 color: 'var(--Blue-Main)',
               },
             }}
-            startIcon={
-              <img src={deleteIcon} alt="иконка мусорки" />
-            }
           >
             Удалить вакансию
           </Button>
