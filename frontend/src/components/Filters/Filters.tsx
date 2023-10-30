@@ -29,7 +29,7 @@ function Filters({
 }: IFiltersProps) {
   const [selectedAmount, setSelectedAmount] = useState(0);
 
-  // мы заранее не знаем к какому слайсу будет подключен нащ компонент,
+  // мы заранее не знаем к какому слайсу будет подключен наш компонент,
   // поэтому принимаем текущее значение в сторе через пропсы
   useEffect(() => {
     setSelectedAmount(Object.entries(filterValue)

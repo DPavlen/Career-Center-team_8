@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -6,15 +6,14 @@ import './DynamicVacancyCard.scss';
 
 import Button from '@mui/material/Button';
 import DynamicVacancyInfo from '../DynamicVacancyInfo/DynamicVacancyInfo';
-import { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
+import { TSavedVacancies, deleteVacancy } from '../../store/savedVacancies/savedVacancies';
 import { vacanciesFilterSetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 
 type VacancyCardProps = {
   data: TSavedVacancies;
 }
 
-function DynamicVacancyCard(props: VacancyCardProps) {
-  const { data } = props;
+function DynamicVacancyCard({ data }: VacancyCardProps) {
   const [isShow, setIsShow] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -25,6 +24,10 @@ function DynamicVacancyCard(props: VacancyCardProps) {
 
     navigate('/', { replace: true });
   }
+
+  const onDeleteVacancy = useCallback((id: TSavedVacancies['id']) => {
+    dispatch(deleteVacancy(id));
+  }, [dispatch]);
 
   return (
     <article className="vacancy-card">
@@ -77,6 +80,7 @@ function DynamicVacancyCard(props: VacancyCardProps) {
                 color: 'var(--Blue-Main)',
               },
             }}
+            onClick={() => onDeleteVacancy(data.id)}
           >
             Удалить вакансию
           </Button>
