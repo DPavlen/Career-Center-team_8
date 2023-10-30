@@ -1,7 +1,10 @@
+/* eslint-disable camelcase */
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { IFiltersOptions } from '../filter';
+import mainApi from '../../utils/MainApi';
 
 interface ExperienceDetailed {
   id: number;
@@ -77,6 +80,7 @@ export interface ICandidate {
   experience: string;
   employment_type: EmploymentType[];
   work_schedule: WorkSchedule[];
+  is_tracked: boolean;
 }
 
 export interface InitialState {
@@ -99,6 +103,32 @@ const initialState: InitialState = {
     workSchedule: [],
   },
 };
+
+export const addCandidateToFavorites = createAsyncThunk(
+  'found-candidates/addToFavorite',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      await mainApi.addCandidateToFavorites(id);
+
+      return id;
+    } catch (error) {
+      return rejectWithValue((error as { message : string}).message);
+    }
+  },
+);
+
+export const removeCandidateFromFavorites = createAsyncThunk(
+  'found-candidates/removeFromFavorite',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      await mainApi.removeCandidateFromFavorites(id);
+
+      return id;
+    } catch (error) {
+      return rejectWithValue((error as { message : string}).message);
+    }
+  },
+);
 
 const foundCandidatesSlice = createSlice({
   name: 'found-candidates',
@@ -159,7 +189,32 @@ const foundCandidatesSlice = createSlice({
       store.candidates = null;
       store.total = 0;
     },
+    addFavorite: (store, { payload }: PayloadAction<number>) => {
+      const candidate = store.candidates?.find((c) => c?.id === payload);
+
+      if (candidate) {
+        candidate.is_tracked = true;
+      }
+    },
   },
+  extraReducers: (builder) => {
+    // eslint-disable-next-line no-unused-expressions
+    builder.addCase(addCandidateToFavorites.fulfilled, (state, { payload }) => {
+      const candidate = state.candidates?.find((c) => c?.id === payload);
+
+      if (candidate) {
+        candidate.is_tracked = true;
+      }
+    });
+    builder.addCase(removeCandidateFromFavorites.fulfilled, (state, { payload }) => {
+      const candidate = state.candidates?.find((c) => c?.id === payload);
+
+      if (candidate) {
+        candidate.is_tracked = false;
+      }
+    });
+  },
+
 });
 
 export const { addCandidates, clearCandidates } = foundCandidatesSlice.actions;
