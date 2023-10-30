@@ -23,6 +23,7 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 // import testResume from '../../utils/testResume.json';
 import CreateVacancy from '../../pages/CreateVacancy/CreateVacancy';
+import NotFound from '../../pages/NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -186,6 +187,10 @@ function App() {
               <CreateVacancy />
             </>
           )}
+        />
+        <Route
+          path="*"
+          element={(<NotFound />)}
         />
       </Routes>
     </div>

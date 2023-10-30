@@ -1,0 +1,41 @@
+.not-found {
+  background: var(--Black-900);
+  background-image: url(../../assets/background.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__logo {
+    position: absolute;
+    left: 65px;
+    top: 52px;
+  }
+
+  &__title {
+    font-family: 'YS Display';
+    text-align: center;
+    color: var(--White);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.14;
+    padding-bottom: 32px;
+    margin: 0;
+  }
+
+  &__message {
+    font-family: 'YS Text';
+    text-align: center;
+    color: var(--White);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.33;
+    padding-bottom: 40px;
+    margin: 0;
+  }
+}
+
