@@ -193,6 +193,7 @@ class MainApi {
       this.setGetOptions(),
     );
     return this.getResponseData(res);
+  }
 
   public async getCandidateResume(id: string): Promise<Response> {
     const res = await fetch(
