@@ -2,15 +2,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Favorites.scss';
 import { useEffect } from 'react';
-// import React from 'react';
 import { Typography } from '@mui/material';
 import { RootState } from '../../store/store';
 import Specialty from '../../components/Specialty/Specialty';
-// import VacancySibtitle from '../../components/VacancySibtitle/VacancySibtitle';
 import { getFavoriteCandidates } from '../../store/favoriteCandidates/favoriteCandidates';
 import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 
 function Favorites() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dispatch = useDispatch<any>();
 
   const favoritesList = useSelector((store: RootState) => {
@@ -28,6 +27,7 @@ function Favorites() {
 
   useEffect(() => {
     dispatch(getFavoriteCandidates());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

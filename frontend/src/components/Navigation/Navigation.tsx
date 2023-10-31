@@ -1,5 +1,4 @@
 import { NavLink, useLocation } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import './Navigation.scss';
 
 import Suitcase from '../../assets/icons/suitcase.svg';

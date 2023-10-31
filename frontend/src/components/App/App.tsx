@@ -91,7 +91,6 @@ function App() {
   }
 
   useEffect(() => {
-    // dispatch(addCandidateInfo({ candidateInfo: testResume[0] }));
     const token = localStorage.getItem('token');
 
     if (token) {
@@ -117,7 +116,6 @@ function App() {
     }
 
     return undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -164,17 +162,11 @@ function App() {
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
-              <Candidate />
+              <ProtectedRouteElement
+                element={<Candidate />}
+                isLoggedIn={isLoggedIn}
+              />
             </>
-          )}
-        />
-        <Route
-          path="/login"
-          element={(
-            <Login
-              // eslint-disable-next-line react/jsx-no-bind
-              logIn={logIn}
-            />
           )}
         />
         <Route
@@ -182,8 +174,19 @@ function App() {
           element={(
             <>
               <Sidebar onLogOut={() => logOut()} />
-              <CreateVacancy />
+              <ProtectedRouteElement
+                element={<CreateVacancy />}
+                isLoggedIn={isLoggedIn}
+              />
             </>
+          )}
+        />
+        <Route
+          path="/login"
+          element={(
+            <Login
+              logIn={(username, password) => logIn(username, password)}
+            />
           )}
         />
         <Route
