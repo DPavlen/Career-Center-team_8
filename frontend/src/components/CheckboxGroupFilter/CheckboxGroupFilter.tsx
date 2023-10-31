@@ -32,7 +32,6 @@ function CheckboxGroupFilter({
   const [search, setSearch] = useState<string>('');
   const [filtered, setFiltered] = useState<string[]>([]);
 
-  // eslint-disable-next-line no-shadow
   const onValueChange = useCallback((name: string) => {
     if (value.some((d) => d === name)) {
       onSetFilter({

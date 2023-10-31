@@ -1,7 +1,6 @@
 import './VacanciesCards.scss';
 import { useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
-// import { useEffect } from 'react';
 import VacancyCard from '../VacancyCard/VacancyCard';
 import type { RootState } from '../../store/store';
 import VacancySubtitle from '../VacancySubtitle/VacancySubtitle';
