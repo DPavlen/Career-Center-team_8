@@ -69,12 +69,12 @@ function Filters({
           Сбросить
         </Button>
       </div>
-      {filtersOptions?.specialization && (
+      {filtersOptions?.specialization_id && (
         <RadioGroupFilter
-          filter="specialization"
+          filter="specialization_id"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
-          data={filtersOptions.specialization}
+          data={filtersOptions.specialization_id}
           withBorder={false}
         />
       )}

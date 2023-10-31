@@ -50,7 +50,7 @@ function VacancyForm() {
   }, [dispatch, navigate]);
 
   const validateFilter = useCallback(() => {
-    if (filterValue.specialization) {
+    if (filterValue.specialization_id) {
       clearErrors('root');
       return true;
     }

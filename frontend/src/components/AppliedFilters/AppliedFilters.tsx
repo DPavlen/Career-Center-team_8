@@ -102,7 +102,7 @@ function AppliedFilters({ filterValue, /* alwaysShow, */ onResetFilter }: IAppli
     if (stackRef.current) setStackHeight(stackRef.current.offsetHeight);
     if (stackHeight > 35) setIsShow(true);
     if (stackHeight < 35) setIsShow(false);
-    console.log(stackHeight);
+    // console.log(stackHeight);
   }, [stackHeight, filters]);
   if (appliedFilters.length > 0) {
     return (
