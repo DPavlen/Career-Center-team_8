@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "core",
     # required for serving swagger ui's css/js files
     "drf_yasg",
+    "rest_framework_swagger",
 ]
 
 MIDDLEWARE = [
