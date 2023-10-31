@@ -204,6 +204,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi('http://84.201.133.88:8000/api');
+const mainApi = new MainApi('https://84.201.133.88:8000/api');
 
 export default mainApi;
