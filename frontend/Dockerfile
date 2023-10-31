@@ -9,8 +9,6 @@ RUN npm install
 
 COPY . ./
 
-RUN npm run build
+RUN npm i && npm run build && rm -rf node_modules
 
 CMD cp -r build result_build
-
-
