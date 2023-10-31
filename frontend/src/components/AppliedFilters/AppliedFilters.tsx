@@ -98,11 +98,9 @@ function AppliedFilters({ filterValue, /* alwaysShow, */ onResetFilter }: IAppli
     setAppliedFilters(extractValues(filters));
   }, [extractValues, filters]);
   useEffect(() => {
-    // const stackHeight = stackRef.current?.clientHeight;
     if (stackRef.current) setStackHeight(stackRef.current.offsetHeight);
     if (stackHeight > 35) setIsShow(true);
     if (stackHeight < 35) setIsShow(false);
-    console.log(stackHeight);
   }, [stackHeight, filters]);
   if (appliedFilters.length > 0) {
     return (
@@ -126,9 +124,6 @@ function AppliedFilters({ filterValue, /* alwaysShow, */ onResetFilter }: IAppli
             flexWrap="wrap"
             direction="row"
             ref={stackRef}
-            sx={{
-              // width: '90%',
-            }}
           >
             {appliedFilters.map((filter) => (
               <Chip

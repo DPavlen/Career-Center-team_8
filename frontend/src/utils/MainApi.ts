@@ -200,6 +200,14 @@ class MainApi {
 
     return res;
   }
+
+  public async getCandidateInfo(id: number) {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/`,
+      this.setGetOptions(),
+    );
+    return this.getResponseData(res);
+  }
 }
 
 const mainApi = new MainApi('http://84.201.133.88:8000/api');

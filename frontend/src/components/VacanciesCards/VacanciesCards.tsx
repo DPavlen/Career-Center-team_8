@@ -1,11 +1,10 @@
 import './VacanciesCards.scss';
 import { useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
-// import { useEffect } from 'react';
 import VacancyCard from '../VacancyCard/VacancyCard';
 import type { RootState } from '../../store/store';
 import VacancySibtitle from '../VacancySubtitle/VacancySubtitle';
-import { ICandidate } from '../../store/candidates/candidates';
+import { ICandidate } from '../../store/foundCandidates/foundCandidates';
 
 function VacanciesCards() {
   const candidates: Partial<ICandidate[]> | null = useSelector(

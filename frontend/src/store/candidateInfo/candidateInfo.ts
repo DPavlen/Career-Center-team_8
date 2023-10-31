@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ICandidate } from '../candidates/candidates';
+import { ICandidate } from '../foundCandidates/foundCandidates';
 
 export interface Experience {
   id: number;

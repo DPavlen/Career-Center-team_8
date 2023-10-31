@@ -34,7 +34,7 @@ function App() {
   function setFailedToFetch(error: { detail: string }): void {
     console.log(error);
 
-    if (error.detail.includes('Failed to fetch')) {
+    if (error?.detail?.includes('Failed to fetch')) {
       return alert('Ошибка при получении данных: Возможны проблемы с сетью или сервер может быть недоступен.');
     }
 

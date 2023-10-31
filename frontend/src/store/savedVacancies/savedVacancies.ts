@@ -27,10 +27,7 @@ const savedVacanciesSlice = createSlice({
     addVacancy: (
       store: TSavedVacancies[],
       { payload }: PayloadAction<TSavedVacancies>,
-    ) => {
-      console.log(payload);
-      return store.concat(payload);
-    },
+    ) => store.concat(payload),
   },
 });
 
