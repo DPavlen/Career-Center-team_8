@@ -22,9 +22,9 @@ function CandidateInfo() {
     if (id) {
       mainApi.getCandidateResume(id)
         .then((res) => res.blob())
-        .then(() => {
-          // const file = window.URL.createObjectURL(resume);
-          // window.location.assign(file);
+        .then((resume) => {
+          const file = window.URL.createObjectURL(resume);
+          window.location.assign(file);
         })
         .catch((err) => console.log(err));
     }
