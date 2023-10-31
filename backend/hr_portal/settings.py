@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     "vacancies.apps.VacanciesConfig",
     "api.v1.apps.ApiConfig",
     "core",
-    # required for serving swagger ui's css/js files
     "drf_yasg",
 ]
 
@@ -44,13 +43,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "corsheaders.middleware.CorsMiddleware",
 ]
-
-# CORS_ALLOWED_ORIGINS = [
-#     'http://84.201.133.88:5173',
-#     'http://localhost:5173'
-# ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
@@ -123,10 +116,10 @@ DJOSER = {
         "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],
         "user_list": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
     },
-    # Параметр отображения в сериализаторе и Djoser(Не скрытый)
+    
     "HIDE_USERS": False,
 }
-# Для работы со свагером и authtoken
+
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
         "Bearer Token": {
@@ -141,7 +134,7 @@ SWAGGER_SETTINGS = {
 
 
 
-# Переопределенный Юзер
+
 AUTH_USER_MODEL = "users.MyUser"
 
 LANGUAGE_CODE = "en-ru"
@@ -159,7 +152,6 @@ STATIC_ROOT = BASE_DIR / "static"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Временная настройка для работы без Dockera!
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
