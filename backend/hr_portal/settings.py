@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     "core",
     # required for serving swagger ui's css/js files
     "drf_yasg",
-    "rest_framework_swagger",
 ]
 
 MIDDLEWARE = [
@@ -119,8 +118,20 @@ DJOSER = {
     # Параметр отображения в сериализаторе и Djoser(Не скрытый)
     "HIDE_USERS": False,
 }
-SWAGGER_SETTINGS = { "DEFAULT_GENERATOR_CLASS": 
-                    "rest_framework.schemas.generators.BaseSchemaGenerator", }
+# Для работы со свагером и authtoken
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer Token": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        }
+    },
+    "USE_SESSION_AUTH": False,
+}
+
+
+
 
 # Переопределенный Юзер
 AUTH_USER_MODEL = "users.MyUser"
