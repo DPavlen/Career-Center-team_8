@@ -1,0 +1,151 @@
+%flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+%font-text {
+  color: var(--Black-900);
+  margin: 0;
+}
+
+%font-description {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.23;
+  margin: 0;
+}
+
+.card {
+  padding: 20px 26px 22px 20px;
+  border: 1px solid var(--Black-100);
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr 32px;
+  width: 804px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 1752px) {
+    & {
+      max-width: 552px;
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--Black-500);
+  }
+
+  &:hover &__checkbox, &_checked &__checkbox {
+    opacity: 1;
+  }
+
+  &:hover &__candidate-name, &_checked &__candidate-name {
+    color: var(--Blue-Main);
+  }
+
+  &:hover &__profession, &_checked &__profession {
+    color: var(--Blue-Main);
+  }
+
+  &_checked {
+    background-color: var(--Blue-BG);
+  }
+
+  &__checkbox {
+    opacity: 0;
+  }
+
+  &__info {
+    @extend %flex-row;
+  }
+
+  &__avatar {
+    margin-left: 16px;
+    margin-right: 12px;
+  }
+
+  &__profession {
+    @extend %font-text;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+    padding-top: 4px;
+  }
+
+  &__description {
+    @extend %flex-column;
+    padding-top: 5px;
+  }
+
+  &__candidate-info {
+    @extend %flex-row;
+    column-gap: 12px;
+  }
+
+  &__experience {
+    @extend %flex-row;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  &__candidate-name {
+    @extend %font-text;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+  }
+
+  &__city {
+    color: var(--Black-500);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    margin: 0;
+  }
+
+  &__level {
+    @extend %font-description;
+    color: var(--Purple);
+    border-radius: 6px;
+    padding: 4px 8px 4px 8px;
+    background-color: rgba(204, 194, 237, 0.50);
+    width: fit-content;
+    margin-right: 20px;
+  }
+
+  &__attempt {
+    @extend %font-description;
+    color: var(--Grey-stroke);
+  }
+
+  &__period {
+    @extend %font-description;
+    color: var(--Black-900);
+    padding-left: 5px;
+  }
+
+  &__status {
+    @extend %font-description;
+    color: var(--Grey-stroke);
+    padding-bottom: 5px;
+  }
+
+  &__vacancy {
+    @extend %font-description;
+    color: var(--Black-900);
+  }
+
+  &__favorite {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+}

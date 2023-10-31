@@ -1,0 +1,15 @@
+.scrollbar {
+  overflow-y: scroll;
+  margin-right: 24px;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+    height: 24px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--Black-300);
+    border-radius: 6px;
+  }
+}

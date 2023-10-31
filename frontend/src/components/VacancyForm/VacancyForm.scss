@@ -1,0 +1,47 @@
+@import '../../vendor/fonts/fonts.scss';
+
+.vacancy-form {
+  margin-left: 137px;
+  max-width: 596px;
+  display: grid;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__description {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-family: $familyDisplay;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  &__salary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__choose-filter {
+    margin: 0;
+    padding-bottom: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.37;
+
+    &_error {
+      color: red;
+    }
+  }
+
+}

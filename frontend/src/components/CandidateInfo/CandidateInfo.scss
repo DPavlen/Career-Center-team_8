@@ -1,0 +1,84 @@
+@import '../../vendor/fonts/fonts.scss';
+
+.candidate-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  &__avatar {
+    display: block;
+    width: 284px;
+    height: 284px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 28px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-family: $familyDisplay;
+    font-weight: 500;
+    line-height: 1.33;
+    color: var(--Black-900);
+    margin: 0;
+    padding-bottom: 32px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    // display: grid;
+    // grid-template-columns: 516px 1fr;
+    /* display: flex;
+    flex-direction: row; */
+    column-gap: 28px;
+    padding-bottom: 40px;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.37;
+    color: var(--Black-500);
+    margin: 0;
+  }
+
+  &__span-accent {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.37;
+    color: var(--Black-900);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__icon-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 8px;
+  }
+
+  &__main-info {
+    display: grid;
+    grid-template-columns: 88px 290px;
+    gap: 8px;
+  }
+
+}
+
+.main-info {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+

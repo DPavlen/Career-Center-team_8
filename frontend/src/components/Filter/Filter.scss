@@ -1,0 +1,13 @@
+.filter {
+  &__name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  &__icon {
+    align-items: center;
+    padding-top: 3px;
+  }
+}

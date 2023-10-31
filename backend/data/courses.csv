@@ -1,0 +1,82 @@
+1,Фронтенд-разработчик,front_dev
+1,Фулстек-разработчик,full_dev
+1,Python-разработчик,python_dev
+1,Инженер по тестированию,test_eng
+1,Java-разработчик,java_dev
+1,Разработчик 1С,1c_dev
+1,Разработчик C++,c++_dev
+1,iOS-разработчик,ios_dev
+1,Android-разработчик,andr_dev
+1,DevOps для эксплуатации и разработки,devops
+1,Продвинутый Go-разработчик,adv_go_dev
+1,Автоматизатор тестирования на Java,java_auto_test
+1,React-разработчик,react_dev
+1,Инженер по тестированию: от новичка до автоматизатора,test_eng_full
+1,Асинхронное программирование на Python,python_asycno
+1,C++ для бэкенда,c++_back
+1,Мидл Python-разработчик + Асинхронное программирование,middle_python_dev_asynco
+1,Профессиональная вёрстка на HTML и CSS,prof_html_css
+1,Автоматизатор тестирования на Python,python_auto_test
+1,Python-разработчик буткемп,python_dev_boot
+1,Мидл Python-разработчик (расширенный), middle_python_dev_exp
+1,Go-разработчик с нуля,go_dev_zero
+1,Алгоритмы и структуры данных,alg_and_struct
+1,Веб-разработка (онлайн магистратура),web_dev_mag
+1,Фронтенд и мобильная разработка (Ускоренный онлайн-бакалавриат),front_and_mobile
+1,Специалист по информационной безопасности: веб-пентест,it_secure
+1,Бэкенд на Nodejs для фронтенд-разработчиков,nodejs_back_for_front
+1,Мидл фронтенд-разработчик + React,middle_front_plus
+2,Специалист по Data Science,ds_spec
+2,Аналитик данных,data_analyst
+2,Системный аналитик,sys_analyst
+2,Бизнес-аналитик,business_analyst
+2,1С-аналитик,1c_analyst
+2,SQL для работы с данными и аналитики,sql_data_analyst
+2,Математика для анализа данных,math_for_analize
+2,Инженер данных,data_eng
+2,Продуктовый аналитик,prod_analyst
+2,SQL для разработки,sql_dev
+2,Визуализация данных и введение в BI-инструменты,data_vis_bi_inst
+2,Excel для работы,excel_work
+2,Инженер машинного обучения,mach_learn
+2,Финансовый аналитик,fin_analyst
+2,Инженер данных с изучением SQL,data_eng_sql
+2,Дата-аналитика для бизнеса (Онлайн-магистратура),data_analize_business
+2,BI-аналитик,bi_analyst
+3,Дизайнер интерфейсов,ui_design
+3,Графический дизайнер,graph_design
+3,Веб-дизайнер,web_design
+3,Дизайн мобильных и кросс-платформенных приложений,mobile_cross_design
+3,Продуктовый подход для дизайнеров,product_for_design
+3,UX-исследования для дизайнеров,ux_for_design
+3,Моушн-дизайнер,motion_design
+3,Продуктовый дизайнер,product_design
+3,Дизайнер в IT,it_design
+3,Основы дизайна в Figma,figma_design
+3,Основы дизайна в Adobe Photoshop,ps_design
+3,Коммерческий иллюстратор,comm_illust
+3,Редактор в IT,it_editor
+4,Интернет-маркетолог,int_mark
+4,Трафик-менеджер,traff_manager
+4,Менеджер маркетплейсов,market_manager
+4,Бренд-менеджер,brand_manager
+4,SMM- и контент-маркетолог,smm_cont_mark
+4,Управление маркетингом для предпринимателей,mark_cntrl_for_entr
+4,SMM-продвижение в Телеграме,smm_in_tlgrm
+4,Анализ и оценка рынка,market_analize
+4,Маркетинговые исследования,market_stud
+5,Менеджер проектов,proj_manager
+5,IT-рекрутер,it_recruiter
+5,Критическое мышление,crit_think
+5,Финансовый менеджмент,fin_manag
+5,Продакт-менеджер,prod_manag
+5,Управление командой разработки,dev_team_ctrl
+5,Юнит-экономика,unit_econom
+5,HR-аналитика,hr_analitics
+5,Инструменты начинающего руководителя,start_execut_tools
+5,Навыки аргументации для руководителей,arg_skills_execut
+5,Основы продакт-менеджмента,prod_manag_basics
+5,HR-менеджер,hr_manag
+5,Основы управления проектами,proj_ctrl_basics
+5,Наставник в IT,it_mentor
+5,Управление командой,team_ctrl

@@ -1,0 +1,31 @@
+%font-text {
+  color: var(--Black-500);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  margin: 0;
+}
+
+.vacancy-subtitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-top: 32px;
+  margin-right: 28px;
+  align-items: center;
+
+  &__total {
+    @extend %font-text;
+  }
+
+  &__selected {
+    display: flex;
+    align-items: center;
+  }
+
+  &__choosen {
+    padding-right: 12px;
+    @extend %font-text;
+  }
+}

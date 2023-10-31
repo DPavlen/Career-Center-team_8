@@ -1,0 +1,469 @@
+1,1C,1c,1,0,0,0,0
+1,2D- и 3D-анимации,2d-and-3d-animations,1,0,0,0,0
+1,Адаптивная вёрстка,adaptive-layout,1,0,0,0,0
+1,Алгоритмы,algorithms,1,1,0,0,0
+1,Архитектура,architecture,1,0,0,0,0
+1,Базы данных,databases,1,1,0,0,0
+1,Безопасность,security,1,0,0,0,0
+1,Библиотеки,libraries,1,0,0,0,0
+1,БЭМ и Atomic CSS,bem-and-atomic-css,1,0,0,0,0
+1,Дебагинг,debugging,1,0,0,0,0
+1,Деплой,deploy,1,0,0,0,0
+1,Дженерики,generics,1,0,0,0,0
+1,Документация,documentation,1,0,0,1,0
+1,Кодогенерация,coding,1,0,0,0,0
+1,Консоль,console,1,0,0,0,0
+1,Многопоточность,multithreading,1,0,0,0,0
+1,ООП,oop,1,0,0,0,0
+1,Паттерны,patterns,1,0,0,0,0
+1,Профилирование,profiling,1,0,0,0,0
+1,Рефакторинг,refactoring,1,0,0,0,0
+1,Роутинг,routing,1,0,0,0,0
+1,Стилизация,styling,1,0,0,0,0
+1,Структуры данных,data-structures,1,0,0,0,0
+1,Сlean architecture,layout-architecture,1,0,0,0,0
+1,Типографика,typography,1,0,1,0,0
+1,Шаблонизаторы,templates,1,0,0,0,0
+1,Яндекс.Трекер,yandex-tracker,1,0,0,1,0
+1,A11y,a11y,1,0,0,0,0
+1,aiohttp,aiohttp,1,0,0,0,0
+1,aiopg,aiopg,1,0,0,0,0
+1,Allure,allure,1,0,0,0,0
+1,Amass,amass,1,0,0,0,0
+1,Android SDK,android-sdk,1,0,0,0,0
+1,Android Studio,android-studio,1,0,0,0,0
+1,Ansible,ansible,1,0,0,0,0
+1,Apache Kafka,apache-kafka,1,0,0,0,0
+1,BASH,bash,1,0,0,0,0
+1,Canvas API,canvas-api,1,0,0,0,0
+1,Censys,censys,1,0,0,0,0
+1,CI/CD,ci-cd,1,0,0,0,0
+1,Clickhouse,clickhouse,1,1,0,0,0
+1,CMake,cmake,1,0,0,0,0
+1,CocoaPods,cocoapods,1,0,0,0,0
+1,Coroutines,coroutines,1,0,0,0,0
+1,CSS,css,1,0,1,0,0
+1,CSS Layouts,css-layouts,1,0,0,0,0
+1,Custom Properties,custom-properties,1,0,0,0,0
+1,Cygwin/Terminal,cygwin-terminal,1,0,0,0,0
+1,Dirsearch,dirsearch,1,0,0,0,0
+1,Django,django,1,0,0,0,0
+1,Docker compose,docker-compose,1,0,0,0,0
+1,Docker Hub,docker-hub,1,0,0,0,0
+1,Elasticsearch,elasticsearch,1,0,0,0,0
+1,ETL,etl,1,0,0,0,0
+1,Express,express,1,0,0,0,0
+1,Express.js,express-js,1,0,0,0,0
+1,FastAPI,fastapi,1,1,0,0,0
+1,Figma,figma,1,1,1,1,1
+1,Flexbox,flexbox,1,0,0,0,0
+1,GCD,gcd,1,0,0,0,0
+1,Git,git,1,1,0,0,0
+1,GitBASH,gitbash,1,0,0,0,0
+1,GitHub,github,1,1,0,1,0
+1,GitLab CI,gitlab-ci,1,0,0,0,0
+1,Go,go,1,0,0,0,0
+1,Gradle,gradle,1,0,0,0,0
+1,Gunicorn,gunicorn,1,0,0,0,0
+1,Helm,helm,1,0,0,0,0
+1,HTML,html,1,1,1,0,0
+1,HTTP,http,1,0,0,0,0
+1,IDE,ide,1,0,0,0,0
+1,Infrastructure as Code,infrastructure-as-code,1,0,0,0,0
+1,IntelliJ IDEA,intellij-idea,1,0,0,0,0
+1,Java,java,1,0,0,0,0
+1,Java Core,java-core,1,0,0,0,0
+1,JavaScript,javascript,1,0,0,0,0
+1,Jenkins,jenkins,1,0,0,0,0
+1,Jest,jest,1,0,0,0,0
+1,JSON,json,1,0,0,0,0
+1,JSON XML и XSD,json-xml-xsd,1,0,0,0,0
+1,JSON/SOAP,json-soap,1,0,0,0,0
+1,JSON/XML,json-xml,1,0,0,0,0
+1,JVM Tests,jvm-tests,1,0,0,0,0
+1,JWT,jwt,1,0,0,0,0
+1,Katana,katana,1,0,0,0,0
+1,Keychain,keychain,1,0,0,0,0
+1,Koin,koin,1,0,0,0,0
+1,Kotlin,kotlin,1,0,0,0,0
+1,Kubernetes,kubernetes,1,0,0,0,0
+1,Linux,linux,1,0,0,0,0
+1,Linux cron job,linux-cron-job,1,0,0,0,0
+1,Load testing,load-testing,1,0,0,0,0
+1,Load-balancing,load-balancing,1,0,0,0,0
+1,Logging,logging,1,0,0,0,0
+1,Logical Properties,logical-properties,1,0,0,0,0
+1,Maven,maven,1,0,0,0,0
+1,Metasploit,metasploit,1,0,0,0,0
+1,MongoDB,mongodb,1,1,0,0,0
+1,Monitoring,monitoring,1,0,0,0,0
+1,Move-семантика,move-semantics,1,0,0,0,0
+1,MVVM,mvvm,1,0,0,0,0
+1,Naabu,naabu,1,0,0,0,0
+1,Nest.js,nest-js,1,0,0,0,0
+1,Network Load Balancer,network-load-balancer,1,0,0,0,0
+1,Nexus,nexus,1,0,0,0,0
+1,Nginx,nginx,1,0,0,0,0
+1,Nmap,nmap,1,0,0,0,0
+1,Node JS,node-js,1,0,0,0,0
+1,NodeJS и NPM,nodejs-and-npm,1,0,0,0,0
+1,OAuth2.0/OIDC,oauth2-0-oidc,1,0,0,0,0
+1,OkHttp,okhttp,1,0,0,0,0
+1,ORM,orm,1,0,0,0,0
+1,OWASP ZAP,owasp-zap,1,0,0,0,0
+1,Packer,packer,1,0,0,0,0
+1,Parcel,parcel,1,0,0,0,0
+1,PostCSS,postcss,1,0,0,0,0
+1,PostgreSQL,postgresql,1,1,0,0,0
+1,Postman,postman,1,1,0,0,0
+1,Prettier и Stylelint,prettier-and-stylelint,1,0,0,0,0
+1,Prometheus,prometheus,1,0,0,0,0
+1,Pug,pug,1,0,0,0,0
+1,PyCharm,pycharm,1,0,0,0,0
+1,pydantic,pydantic,1,0,0,0,0
+1,Pytest,pytest,1,0,0,0,0
+1,Python,python,1,1,0,0,0
+1,RabbitMQ,rabbitmq,1,0,0,0,0
+1,RAII,raii,1,0,0,0,0
+1,React,react,1,0,0,0,0
+1,React Router,react-router,1,0,0,0,0
+1,Redis,redis,1,1,0,0,0
+1,Redux,redux,1,0,0,0,0
+1,REST,rest,1,0,0,0,0
+1,REST API,rest-api,1,0,0,0,0
+1,REST Assured,rest-assured,1,0,0,0,0
+1,RestAssured,restassured,1,0,0,0,0
+1,Retrofit,retrofit,1,0,0,0,0
+1,Room,room,1,0,0,0,0
+1,RxJava,rxjava,1,0,0,0,0
+1,SASS и SCSS,sass-and-scss,1,0,0,0,0
+1,Selenide,selenide,1,0,0,0,0
+1,Selenium WebDriver,selenium-webdriver,1,0,0,0,0
+1,Server Side Rendering,server-side-rendering,1,0,0,0,0
+1,Shodan,shodan,1,0,0,0,0
+1,SonarQube,sonarqube,1,0,0,0,0
+1,Spring,spring,1,0,0,0,0
+1,Spring Boot,spring-boot,1,0,0,0,0
+1,Spring Data,spring-data,1,0,0,0,0
+1,Spring Security,spring-security,1,0,0,0,0
+1,SQL,sql,1,1,0,1,0
+1,SQLite,sqlite,1,0,0,0,0
+1,SQLMap,sqlmap,1,0,0,0,0
+1,SSL,ssl,1,0,0,0,0
+1,STL,stl,1,0,0,0,0
+1,SVG,svg,1,0,0,0,0
+1,Swagger,swagger,1,0,0,0,0
+1,Swift,swift,1,0,0,0,0
+1,TCP/IP,tcp-ip,1,0,0,0,0
+1,TCP/UDP,tcp-udp,1,0,0,0,0
+1,Terminal,terminal,1,0,0,0,0
+1,Terraform,terraform,1,0,0,0,0
+1,TMS,tms,1,0,0,0,0
+1,Tortoise,tortoise,1,0,0,0,0
+1,Troubleshooting,troubleshooting,1,0,0,0,0
+1,TypeScript,typescript,1,0,0,0,0
+1,Ubuntu,ubuntu,1,0,0,0,0
+1,UI Testing,ui-testing,1,0,0,0,0
+1,UICollectionView,uicollectionview,1,0,0,0,0
+1,UIKit,uikit,1,0,0,0,0
+1,UML-диаграммы,uml-diagrams,1,0,0,0,0
+1,Unit Testing,unit-testing,1,0,0,0,0
+1,UserDefaults,userdefaults,1,0,0,0,0
+1,Uvicorn,uvicorn,1,0,0,0,0
+1,UX/UI-дизайн,ux-ui-design,1,0,0,0,0
+1,Virtual Private Cloud,virtual-private-cloud,1,0,0,0,0
+1,VS Code,vs-code,1,0,0,0,0
+1,Web API,web-api,1,0,0,0,0
+1,Webpack,webpack,1,0,0,0,0
+1,WebSocket,websocket,1,0,0,0,0
+1,X8,x8,1,0,0,0,0
+1,XML,xml,1,0,0,0,0
+1,XML/XSD,xml-xsd,1,0,0,0,0
+1,XPath,xpath,1,0,0,0,0
+1,YAML,yaml,1,0,0,0,0
+1,Yandex Cloud,yandex-cloud,1,1,0,0,0
+1,YouTrack,youtrack,1,0,0,0,0
+1,Ysoserial,ysoserial,1,0,0,0,0
+2,А/В-тесты,a-b-tests,0,1,0,1,1
+2,Аналитика данных,data-analytics,0,1,0,0,0
+2,Бакетизация,bacterization,0,1,0,0,0
+2,Бюджетирование,budgeting,0,1,0,0,0
+2,ВПР,vrp,0,1,0,0,0
+2,Выборка,sampling,0,1,0,0,0
+2,Генеральная совокупность,general-population,0,1,0,0,0
+2,Гипотезы,hypotheses,0,1,1,0,0
+2,Дизайн A/B-теста,a-b-test-design,0,1,0,0,0
+2,Дисперсия,dispersion,0,1,0,0,0
+2,Зелёный тест,green-test,0,1,0,0,0
+2,Импорт данных,data-import,0,1,0,0,0
+2,Индексы,indexes,0,1,0,0,0
+2,Квантиль,quantile,0,1,0,0,0
+2,Ковариация,covariance,0,1,0,0,0
+2,Конверсия,conversion,0,1,0,0,0
+2,Консоль запросов,query-console,0,1,0,0,0
+2,Конфигуратор,configurator,0,1,0,0,0
+2,Корреляция,correlation,0,1,0,0,0
+2,Кредитный портфель,credit-portfolio,0,1,0,0,0
+2,Логические функции,logic-functions,0,1,0,0,0
+2,Машинное обучение,machine-learning,0,1,0,0,0
+2,Медиана,median,0,1,0,0,0
+2,Моделирование,modeling,0,1,0,0,0
+2,Нормальное распределение,normal-distribution,0,1,0,0,0
+2,Нулевая и альтернативная гипотезы,null-and-alternative-hypotheses,0,1,0,0,0
+2,Объём групп,group-size,0,1,0,0,0
+2,Ошибки,errors,0,1,0,0,0
+2,Переменные,variables,0,1,0,0,0
+2,Платёжный календарь,payment-calendar,0,1,0,0,0
+2,Продолжительность эксперимента,duration-of-experiment,0,1,0,0,0
+2,Продуктовые воронки,product-funnels,0,1,0,0,0
+2,РСБУ и МСФО,ras-and-ifrs,0,1,0,0,0
+2,Сводные таблицы,summary-tables,0,1,0,0,0
+2,Статистические тесты,statistical-tests,0,1,0,0,0
+2,Типовые решения 1С,typical-1c-solutions,0,1,0,0,0
+2,Типы данных,data-types,0,1,0,0,0
+2,Транзакции,transactions,0,1,0,0,0
+2,Тритмент,tritment,0,1,0,0,0
+2,Уровень значимости,significance-level,0,1,0,0,0
+2,Функция вероятности,probability-function,0,1,0,0,0
+2,Функция распределения,distribution-function,0,1,0,0,0
+2,Хранимые процедуры,stored-procedures,0,1,0,0,0
+2,ЦПТ,tsp,0,1,0,0,0
+2,Юнит-экономика,unit-economics,0,1,0,1,0
+2,Чтение графиков,graph-reading,0,1,0,0,0
+2,Alation,alation,0,1,0,0,0
+2,Amplitude,amplitude,0,1,0,0,0
+2,Apache Airflow,apache-airflow,0,1,0,0,0
+2,Apache Spark,apache-spark,0,1,0,0,0
+2,ARPU,arpu,0,1,0,0,0
+2,BDD,bdd,0,1,0,0,0
+2,BPMN,bpmn,0,1,0,0,0
+2,Catboost,catboost,0,1,0,0,0
+2,DataLens,datalens,0,1,0,1,0
+2,Datawrapper,datawrapper,0,1,0,0,0
+2,DATE TRUNC,date-trunc,0,1,0,0,0
+2,DBeaver,dbeaver,0,1,0,0,0
+2,DFD,dfd,0,1,0,0,0
+2,Docker,docker,0,1,0,0,0
+2,ER-диаграмма,er-diagram,0,1,0,0,0
+2,Evidently,evidently,0,1,0,0,0
+2,Excel,excel,0,1,1,1,1
+2,EXTRACT,extract,0,1,0,0,0
+2,GROUP BY,group-by,0,1,0,0,0
+2,GUI,gui,0,1,0,0,0
+2,Hadoop,hadoop,0,1,0,0,0
+2,HAVING,having,0,1,0,0,0
+2,implicit,implicit,0,1,0,0,0
+2,JSON / XML,json---xml,0,1,0,0,0
+2,Jupyter,jupyter,0,1,0,0,0
+2,Kafka,kafka,0,1,0,0,0
+2,Keras,keras,0,1,0,0,0
+2,LIMIT,limit,0,1,0,0,0
+2,Matplotlib,matplotlib,0,1,0,0,0
+2,MAX,max,0,1,0,0,0
+2,MDE,mde,0,1,0,0,0
+2,Metabase,metabase,0,1,0,0,0
+2,MIN,min,0,1,0,0,0
+2,MLflow,mlflow,0,1,0,0,0
+2,MS Excel,ms-excel,0,1,0,0,0
+2,MS PowerPoint,ms-powerpoint,0,1,0,0,0
+2,NoSQL,nosql,0,1,0,0,0
+2,Notebook,notebook,0,1,0,0,0
+2,OFFSET,offset,0,1,0,0,0
+2,OPEX и CAPEX,opex-and-capex,0,1,0,0,0
+2,Optuna,optuna,0,1,0,0,0
+2,ORDER BY,order-by,0,1,0,0,0
+2,P-value,p-value,0,1,0,0,0
+2,P&L BS CF,pl-bs-cf,0,1,0,0,0
+2,Pandas,pandas,0,1,0,0,0
+2,PCA,pca,0,1,0,0,0
+2,Personas,personas,0,1,0,0,0
+2,PgAdmin,pgadmin,0,1,0,0,0
+2,PL/pgSQL,pl-pgsql,0,1,0,0,0
+2,Power BI,power-bi,0,1,0,1,0
+2,psql,psql,0,1,0,0,0
+2,REST / SOAP API,rest-soap-api,0,1,0,0,0
+2,RFM-анализ,rfm-analysis,0,1,0,0,0
+2,S/T-learner,s-t-learner,0,1,0,0,0
+2,Scikit-learn,scikit-learn,0,1,0,0,0
+2,SciPy,scipy,0,1,0,0,0
+2,seaborn,seaborn,0,1,0,0,0
+2,SOL,sol,0,1,0,0,0
+2,Spark,spark,0,1,0,0,0
+2,Spark Streaming,spark-streaming,0,1,0,0,0
+2,SUM,sum,0,1,0,0,0
+2,SVD,svd,0,1,0,0,0
+2,Tableau,tableau,0,1,0,0,0
+2,Think-cell,think-cell,0,1,0,0,0
+2,U2U 121 ALS,u2u-121-als,0,1,0,0,0
+2,UML,uml,0,1,0,0,0
+2,Use case,use-case,0,1,0,0,0
+2,User / Job Story,user-job-story,0,1,0,0,0
+2,User Journey Map,user-journey-map,0,1,0,0,0
+2,Wiki,wiki,0,1,0,0,0
+3,Анализ аудитории,audience-analysis,0,0,1,0,0
+3,Аудит юзабилити,usability-audit,0,0,1,0,0
+3,Вайрфреймы,wireframes,0,0,1,0,0
+3,Верстка,layout,0,0,1,0,0
+3,Гайдлайны Android,android-guidlines,0,0,1,0,0
+3,Гайдлайны iOS,ios-guidlines,0,0,1,0,0
+3,Генерация идей,idea-generation,0,0,1,0,0
+3,Глубинные интервью,in-depth-interviews,0,0,1,0,0
+3,Дизайн-системы,design-systems,0,0,1,0,0
+3,Исследования,research,0,0,1,0,0
+3,Композиция,composition,0,0,1,0,0
+3,Конкурентный анализ,competitive-analysis,0,0,1,0,0
+3,Мерч,merch,0,0,1,0,0
+3,Метафора,metaphor,0,0,1,0,0
+3,Метрики,metrics,0,0,1,0,0
+3,Монтаж,montage,0,0,1,0,0
+3,Опросы,surveys,0,0,1,0,0
+3,Поиск идей,idea-search,0,0,1,0,0
+3,Презентации,presentations,0,0,1,0,0
+3,Презентация решений,solution-presentation,0,0,1,0,0
+3,Проектирование,designing,0,0,1,0,0
+3,Прототипирование,prototyping,0,0,1,0,0
+3,Рендеринг,rendering,0,0,1,0,0
+3,Сторителлинг,storytelling,0,0,1,0,0
+3,Формообразование,shaping,0,0,1,0,0
+3,Цвет,color,0,0,1,0,0
+3,Юзабилити-тесты,usability-tests,0,0,1,0,0
+3,Яндекс Взгляд,yandex-view,0,0,1,0,0
+3,Adobe After Effects,adobe-after-effects,0,0,1,0,0
+3,Adobe Illustrator,adobe-illustrator,0,0,1,0,0
+3,Adobe Photoshop,adobe-photoshop,0,0,1,0,0
+3,Adobe Premiere Pro,adobe-premiere-pro,0,0,1,0,0
+3,ChatGPT,chatgpt,0,0,1,1,0
+3,Cinema 4D,cinema-4d,0,0,1,0,0
+3,Google Slides,google-slides,0,0,1,0,0
+3,"JTBD
+",jtbd,0,0,1,1,0
+3,Lean Canvas,lean-canvas,0,0,1,0,0
+3,Miro,miro,0,0,1,1,1
+3,PMF,pmf,0,0,1,0,0
+3,Tilda,tilda,0,0,1,0,1
+3,Tone of Voice,tone-of-voice,0,0,1,0,0
+3,User Stories,user-stories,0,0,1,0,0
+3,UX,ux,0,0,1,0,0
+3,UX-копирайтинг,ux-copywriting,0,0,1,0,0
+3,UX-тестирование,ux-testing,0,0,1,0,0
+3,YandexGPT,yandexgpt,0,0,1,0,0
+4,48 вопросов,48-questions,0,0,0,1,0
+4,Алгоритм для выбора тактики в работе с критикой,an-algorithm-for-choosing-tactics-in-dealing-with-criticism,0,0,0,1,0
+4,Аргумент-карты,argument-cards,0,0,0,1,0
+4,Аутсорс,outsourcing,0,0,0,1,0
+4,Бриф,brief,0,0,0,1,0
+4,Воронка подбора,selection-funnel,0,0,0,1,0
+4,Делегирование,delegation,0,0,0,1,0
+4,Диаграммы сгорания,combustion-diagrams,0,0,0,1,0
+4,Исикава,ishikawa,0,0,0,1,0
+4,Карта поиска,search-map,0,0,0,1,0
+4,Кастдев,castdev,0,0,0,1,0
+4,Матрица Эйзенхауэра,eisenhower-matrix,0,0,0,1,0
+4,Матрица RACI,raci-matrix,0,0,0,1,0
+4,Модель построения убедительной речи RAS,ras-persuasive-speech-model,0,0,0,1,0
+4,Модель as is / as to be,as-is-as-to-be-model,0,0,0,1,0
+4,Модель OSKAR,oskar-model,0,0,0,1,0
+4,Модель PDSMI,pdsmi-model,0,0,0,1,0
+4,Модель PSB: Problem Solution Benefit,psb-model-problem-solution-benefit,0,0,0,1,0
+4,Набегающая волна,surging-wave,0,0,0,1,0
+4,Основы ТРИЗ,triz-fundamentals,0,0,0,1,0
+4,Пачка,tutu,0,0,0,1,0
+4,План коммуникаций,communication-plan,0,0,0,1,0
+4,План-фактный анализ,plan-fact-analysis,0,0,0,1,0
+4,Поиск в соцсетях,social-media-search,0,0,0,1,0
+4,Портфель продуктов,product-portfolio,0,0,0,1,0
+4,Продуктовые метрики,product-metrics,0,0,0,1,0
+4,Продуктовые процессы,product-processes,0,0,0,1,0
+4,Реестр доработок,development-register,0,0,0,1,0
+4,Реестр рисков,risk-register,0,0,0,1,0
+4,Стратегия продукта,product-strategy,0,0,0,1,0
+4,Технический долг,technical-debt,0,0,0,1,0
+4,Управление стеком,stack-management,0,0,0,1,0
+4,Фасилитация,facilitation,0,0,0,1,0
+4,Х-Ray-поиск,x-ray-search,0,0,0,1,0
+4,Яндекс Метрика,yandex-metrika,0,0,0,1,1
+4,Яндекс Формы,yandex-forms,0,0,0,1,0
+4,Agile,agile,0,0,0,1,0
+4,Boolean search,boolean-search,0,0,0,1,0
+4,CJM,cjm,0,0,0,1,1
+4,Empathy map,empathy-map,0,0,0,1,0
+4,Event Storming,event-storming,0,0,0,1,0
+4,Google Таблицы,google-sheets,0,0,0,1,1
+4,HADI,hadi,0,0,0,1,0
+4,HeadHunter,headhunter,0,0,0,1,0
+4,HR-дашборд,hr-dashboard,0,0,0,1,0
+4,Kaiten,kaiten,0,0,0,1,0
+4,Kakdela,kakdela,0,0,0,1,0
+4,Kanban,kanban,0,0,0,1,0
+4,LTV продукта,ltv-product,0,0,0,1,0
+4,MoSCoW,moscow,0,0,0,1,0
+4,NPV,npv,0,0,0,1,0
+4,PDC,pdc,0,0,0,1,0
+4,Performance review,performance-review,0,0,0,1,0
+4,PowerPoint,powerpoint,0,0,0,1,0
+4,Product growth,product-growth,0,0,0,1,0
+4,PSB,psb,0,0,0,1,0
+4,RAS,ras,0,0,0,1,0
+4,SCAMPER,scamper,0,0,0,1,0
+4,Scrum,scrum,0,0,0,1,0
+4,SExI,sexi,0,0,0,1,0
+4,SMART,smart,0,0,0,1,0
+4,Sourcing Extensions,sourcing-extensions,0,0,0,1,0
+4,Zoom,zoom,0,0,0,1,0
+5,Анализ данных,data-analysis,0,0,0,0,1
+5,Анализ рынка,market-analysis,0,0,0,0,1
+5,Архитектура бренда,brand-architecture,0,0,0,0,1
+5,Бренд и позиционирование,brand-and-positioning,0,0,0,0,1
+5,Брифинг подрядчика,contractor-briefing,0,0,0,0,1
+5,Бюджетирование бренда,brand-budgeting,0,0,0,0,1
+5,Виды логистики,types-of-logistics,0,0,0,0,1
+5,Главред,glavred,0,0,0,0,1
+5,Динамика рынка,market-dynamics,0,0,0,0,1
+5,Директ Коммандер,direct-commander,0,0,0,0,1
+5,Доля рынка,market-share,0,0,0,0,1
+5,Домашнее тестирование,home-testing,0,0,0,0,1
+5,Интервью,interviews,0,0,0,0,1
+5,Карта рынка,market-map,0,0,0,0,1
+5,Карточки товаров,product-cards,0,0,0,0,1
+5,Коммуникационная стратегия,communication-strategy,0,0,0,0,1
+5,Контент-маркетинг,content-marketing,0,0,0,0,1
+5,Мегамаркет,megamarket,0,0,0,0,1
+5,Модель SOSTAC,sostac-model,0,0,0,0,1
+5,Налогообложение,taxation,0,0,0,0,1
+5,Опрос,survey,0,0,0,0,1
+5,Оценка маржинальности,margin-assessment,0,0,0,0,1
+5,Планирование ассортимента бренда,brand-assortment-planning,0,0,0,0,1
+5,Платформа бренда: «Колесо бренда» и «Пирамида бренда»,brand-platform-brand-wheel-and-brand-pyramid,0,0,0,0,1
+5,Продвижение в digital,promotion-in-digital,0,0,0,0,1
+5,Продуктовые границы рынка,product-market-boundaries,0,0,0,0,1
+5,Работа с гипотезами,working-with-hypotheses,0,0,0,0,1
+5,Работа с текстом,working-with-text,0,0,0,0,1
+5,Разработка новых продуктов,new-product-development,0,0,0,0,1
+5,СhatGPT,hrcgp,0,0,0,0,1
+5,Управление проектом,project-management,0,0,0,0,1
+5,Фокус-группа,focus-group,0,0,0,0,1
+5,Холл-тест,hall-test,0,0,0,0,1
+5,Эксперимент,experiment,0,0,0,0,1
+5,ABC-анализ для работы с портфелем,abc-analysis-for-portfolio-management,0,0,0,0,1
+5,CRM,crm,0,0,0,0,1
+5,DBS,dbs,0,0,0,0,1
+5,Event-маркетинг,event-marketing,0,0,0,0,1
+5,FBS,fbs,0,0,0,0,1
+5,FBY,fby,0,0,0,0,1
+5,Google Analytics,google-analytics,0,0,0,0,1
+5,Google Docs,google-docs,0,0,0,0,1
+5,Google Tag Manager,google-tag-manager,0,0,0,0,1
+5,Jira,jira,0,0,0,0,1
+5,Looker Studio,looker-studio,0,0,0,0,1
+5,Ozon,ozon,0,0,0,0,1
+5,Perfomance-маркетинг,perfomance-marketing,0,0,0,0,1
+5,Power Point,power-point,0,0,0,0,1
+5,Sendsay,sendsay,0,0,0,0,1
+5,SMM,smm,0,0,0,0,1
+5,Telega.in,telega-in,0,0,0,0,1
+5,Telegram Ads,telegram-ads,0,0,0,0,1
+5,Telemetr,telemetr,0,0,0,0,1
+5,Videoleap,videoleap,0,0,0,0,1
+5,VK Реклама,vk-advertising,0,0,0,0,1
+5,Wildberries,wildberries,0,0,0,0,1
+5,Wordstat,wordstat,0,0,0,0,1

@@ -1,0 +1,31 @@
+.vacancy-input {
+  min-width: 284px;
+  padding: 12px 12px 13px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px solid var(--Black-100);
+  font-size: 16px;
+  margin-bottom: 28px;
+
+  &::placeholder {
+    color: var(--Black-500);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &_error {
+    border: 1px solid red;
+    margin-bottom: 0;
+  }
+
+  &__input-error {
+    color: red;
+    padding-top: 5px;
+    line-height: 1.42;
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 28px;
+  }
+}
