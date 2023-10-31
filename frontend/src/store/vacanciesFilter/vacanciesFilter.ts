@@ -1,10 +1,11 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFilter } from '../filter';
 
 export const initialState: IFilter = {
-  specialization: null,
+  specialization_id: null,
   course: [],
   hards: [],
   experience: [],
