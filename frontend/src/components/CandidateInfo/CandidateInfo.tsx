@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import './CandidateInfo.scss';
@@ -11,9 +12,59 @@ import telegram from '../../assets/icons/telegram.svg';
 // import avatar from '../../assets/candidatePhoto.png';
 
 import { RootState } from '../../store/store';
+import mainApi from '../../utils/MainApi';
 
 function CandidateInfo() {
   const candidate = useSelector((state: RootState) => state.candidateInfo.candidate);
+
+  const { id } = useParams();
+
+  function downloadResume() {
+    if (id) {
+      mainApi.getCandidateResume(id)
+        .then((res) => res.blob())
+        .then((resume) => {
+          // const url = window.URL.createObjectURL(resume);
+          // const anchor = document.createElement('a');
+
+          // anchor.style.display = 'none';
+          // anchor.href = url;
+          // anchor.download = 'resume';
+
+          // document.body.appendChild(anchor);
+
+          // anchor.click();
+
+          //
+
+          const file = window.URL.createObjectURL(resume);
+          window.location.assign(file);
+
+          // window.URL.revokeObjectURL(file);
+
+          // // Create blob link to download
+          // const url = window.URL.createObjectURL(
+          //   new Blob([resume]),
+          // );
+          // const link = document.createElement('a');
+          // link.href = url;
+          // link.setAttribute(
+          //   'download',
+          //   'FileName',
+          // );
+
+          // // Append to html link element page
+          // document.body.appendChild(link);
+
+          // // Start download
+          // link.click();
+
+          // // Clean up and remove the link
+          // if (link.parentNode) link.parentNode.removeChild(link);
+        });
+    }
+  }
+
   return (
     <section className="candidate-info">
       <div
@@ -106,6 +157,7 @@ function CandidateInfo() {
             boxShadow: 'none',
           }}
           variant="contained"
+          onClick={() => downloadResume()}
         >
           Скачать резюме
         </Button>

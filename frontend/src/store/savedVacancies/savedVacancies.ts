@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
 import { IFilter } from '../filter';
 
 // type TSalary = [number | null, number | null];
@@ -7,6 +8,7 @@ import { IFilter } from '../filter';
 // из textarea всегда возвращается строка
 
 export type TSavedVacancies = {
+  id: string;
   job_title: string;
   company: string;
   salary_from: string | undefined;
@@ -26,11 +28,20 @@ const savedVacanciesSlice = createSlice({
   reducers: {
     addVacancy: (
       store: TSavedVacancies[],
-      { payload }: PayloadAction<TSavedVacancies>,
-    ) => store.concat(payload),
+//       { payload }: PayloadAction<TSavedVacancies>,
+//     ) => store.concat(payload),
+      { payload }: PayloadAction<Omit<TSavedVacancies, 'id'>>,
+    ) => {
+      console.log(payload);
+      return store.concat({
+        ...payload,
+        id: uuid(),
+      });
+    },
+    deleteVacancy: (store: TSavedVacancies[], { payload }: PayloadAction<TSavedVacancies['id']>) => store.filter((v) => v.id !== payload),
   },
 });
 
-export const { addVacancy } = savedVacanciesSlice.actions;
+export const { addVacancy, deleteVacancy } = savedVacanciesSlice.actions;
 
 export default savedVacanciesSlice.reducer;

@@ -93,7 +93,7 @@ const initialState: InitialState = {
   total: 0,
   candidates: null,
   filtersOptions: {
-    specialization: [],
+    specialization_id: [],
     course: [],
     hards: [],
     experience: [],
@@ -163,10 +163,10 @@ const foundCandidatesSlice = createSlice({
             }
           });
 
-          if (store.filtersOptions.specialization === null) {
-            store.filtersOptions.specialization = [candidate.specialization];
-          } else if (!store.filtersOptions.specialization.includes(candidate.specialization)) {
-            store.filtersOptions.specialization.push(candidate.specialization);
+          if (store.filtersOptions.specialization_id === null) {
+            store.filtersOptions.specialization_id = [candidate.specialization];
+          } else if (!store.filtersOptions.specialization_id.includes(candidate.specialization)) {
+            store.filtersOptions.specialization_id.push(candidate.specialization);
           }
 
           if (!store.filtersOptions.experience.includes(candidate.experience)) {

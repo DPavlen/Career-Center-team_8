@@ -1,5 +1,5 @@
 export interface IFilter {
-  specialization: string | null,
+  specialization_id: string | null,
   course: string[],
   hards: string[],
   experience: string[],

@@ -1,6 +1,7 @@
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
 
+from core.constants import LenghtField
 from users.models import MyUser
 
 
@@ -16,12 +17,12 @@ class Specialization(models.Model):
     name = models.CharField(
         "Название",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_NAME.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_SLUG.value,
     )
 
     def __str__(self):
@@ -45,7 +46,7 @@ class Course(models.Model):
     name = models.CharField(
         "Название",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_NAME.value,
     )
     spec_id = models.PositiveIntegerField(
         "ID Специальности",
@@ -53,7 +54,7 @@ class Course(models.Model):
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_SLUG.value,
     )
 
     def __str__(self):
@@ -82,7 +83,7 @@ class Level(models.Model):
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=10,
+        max_length=LenghtField.MAX_LEVEL_NAME.value,
     )
 
     def __str__(self):
@@ -105,12 +106,12 @@ class HardCands(models.Model):
 
     name = models.CharField(
         "Название",
-        max_length=255,
+        max_length=LenghtField.MAX_NAME.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=False,
-        max_length=255,
+        max_length=LenghtField.MAX_SLUG.value,
     )
 
     def __str__(self):
@@ -134,12 +135,12 @@ class Soft(models.Model):
     name = models.CharField(
         "Название",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_NAME.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=255,
+        max_length=LenghtField.MAX_SLUG.value,
     )
 
     def __str__(self):
@@ -163,12 +164,12 @@ class Experience(models.Model):
     name = models.CharField(
         "Опыт работы",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_NAME_EXPERINCE.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_SLUG_EXPERINCE.value,
     )
 
     def __str__(self):
@@ -192,12 +193,12 @@ class EmploymentType(models.Model):
     name = models.CharField(
         "Тип занятости",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_EMPLOYMENT_NAME.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_EMPLOYMENT_SLUG.value,
     )
 
     def __str__(self):
@@ -221,12 +222,12 @@ class WorkSchedule(models.Model):
     name = models.CharField(
         "График работы",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_WORKSHEDULE_NAME.value,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_WORKSHEDULE_SLUG.value,
     )
 
     def __str__(self):
@@ -239,16 +240,16 @@ class WorkSchedule(models.Model):
 
 
 class ExperienceDetailed(models.Model):
-    """Модель Опыта работы детальный для кандидата."""
+    """Модель детального опыта работы детальный для кандидата."""
 
     name = models.CharField(
-        "Опыта работы детальный",
+        "Опыт работы детальный",
         unique=True,
-        max_length=255,   
+        max_length=LenghtField.MAX_EXPERIENCEDETAILED_NAME.value,   
     )
     post = models.CharField(
         "Должность", 
-        max_length=255,
+        max_length=LenghtField.MAX_EXPERIENCEDETAILED_POST.value,
     )
     date_start = models.IntegerField(
         "Дата начала работы",
@@ -266,7 +267,7 @@ class ExperienceDetailed(models.Model):
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_EXPERIENCEDETAILED_SLUG.value,
     )
 
     def __str__(self):
@@ -293,11 +294,11 @@ class Education(models.Model):
     name = models.CharField(
         "Образование детально",
         unique=True,
-        max_length=255,   
+        max_length=LenghtField.MAX_EDUCATION_NAME.value,  
     )
     education_level = models.CharField(
          "Уровень образования",
-        max_length=20,
+        max_length=LenghtField.MAX_EDUCATION_LEVEL.value,
         choices=EducationLevel.choices,
         default=EducationLevel.HIGHER,
     )
@@ -314,23 +315,23 @@ class Education(models.Model):
     )
     name_university = models.CharField(
         "Учебное заведение", 
-        max_length=255,
+        max_length=LenghtField.MAX_EDUCATION_NAME_UNIVERSITY.value,
         unique=True,
     )
     faculty = models.CharField(
         "Факультет", 
-        max_length=255,
+        max_length=LenghtField.MAX_EDUCATION_FACULTY.value,
         unique=True,
     )
     specialization = models.CharField(
         "Специализация", 
-        max_length=255,
+        max_length=LenghtField.MAX_EDUCATION_SPECIALIZATION.value,
         unique=True,
     )
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
-        max_length=20,
+        max_length=LenghtField.MAX_EDUCATION_SLUG.value,
     )
 
     def __str__(self):
@@ -383,27 +384,26 @@ class Candidate(models.Model):
     
     last_name = models.CharField(
         "Фамилия",
-        max_length=25,
+        max_length=LenghtField.MAX_CANDIDATE_LAST_NAME.value,
     )
     first_name = models.CharField(
         "Имя",
-        max_length=20,
+        max_length=LenghtField.MAX_CANDIDATE_FIRST_NAME.value,
     )
     middle_name = models.CharField(
         "Отчество",
-        max_length=25,
+        max_length=LenghtField.MAX_CANDIDATE_MIDDLE_NAME.value,
     )
     image = models.ImageField(
         "Фото", 
         upload_to="candidates/images/", 
         null=True, 
         default=None,
-        # Поставлено необязательно для корректной загрузки
         blank=True,
     )
     sex = models.CharField(
         "Пол кандидата",
-        max_length=10,
+        max_length=LenghtField.MAX_CANDIDATE_SEX.value,
         choices=Sex.choices,
         default=Sex.NOT_SELECTED
     )
@@ -414,16 +414,16 @@ class Candidate(models.Model):
     )
     contacts_phone = models.CharField(
         "Телефон",
-        max_length=20,
+        max_length=LenghtField.MAX_CANDIDATE_CONTACTS_PHONE.value,
     )
     contacts_email = models.EmailField(
         "Почта",
-        max_length=255,
+        max_length=LenghtField.MAX_CANDIDATE_CONTACTS_EMAIL.value,
         unique=True,
     )
     contacts_other = models.CharField(
         "Другой контакт",
-        max_length=150,
+        max_length=LenghtField.MAX_CANDIDATE_CONTACTS_OTHER.value,
         blank=True,
     )
     activity = models.CharField(
@@ -434,8 +434,7 @@ class Candidate(models.Model):
     )
     location =  models.CharField(
         "Местонахождение",
-        max_length=150,
-        # blank=True,
+        max_length=LenghtField.MAX_CANDIDATE_LOCATION.value,
     )
     about_me = models.TextField(
         "Обо мне",
@@ -445,14 +444,12 @@ class Candidate(models.Model):
         related_name="candidates",
         on_delete=models.CASCADE,
         verbose_name="Специализация",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
     )
     course = models.ManyToManyField(
         Course,
         related_name="candidates",
         verbose_name="Курс",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.CourseInCandidate",
     )
@@ -461,14 +458,12 @@ class Candidate(models.Model):
         related_name="candidates",
         on_delete=models.CASCADE,
         verbose_name="Уровень",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
     )
     hards = models.ManyToManyField(
         HardCands,
         related_name="candidates",
         verbose_name="Хард скиллы",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.HardsInCandidate",
     )
@@ -476,7 +471,6 @@ class Candidate(models.Model):
         Soft,
         related_name="candidates",
         verbose_name="Soft скиллы",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.SoftsInCandidate",
     )
@@ -485,14 +479,12 @@ class Candidate(models.Model):
         related_name="candidates",
         on_delete=models.CASCADE,
         verbose_name="Опыт работы",
-         # Поставлено необязательно для корректной загрузки
         blank=True,
     )
     employment_type = models.ManyToManyField(
         EmploymentType,
         related_name="candidates",
         verbose_name="Тип занятости",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.EmploymentTypeInCandidate",
     )
@@ -500,7 +492,6 @@ class Candidate(models.Model):
         WorkSchedule,
         related_name="candidates",
         verbose_name="График работы",
-         # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.WorkScheduleInCandidate",
 
@@ -509,7 +500,6 @@ class Candidate(models.Model):
         ExperienceDetailed,
         related_name="candidates",
         verbose_name="Детальный опыт работы",
-         # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.ExperienceDetailedInCandidate",
     )
@@ -517,7 +507,6 @@ class Candidate(models.Model):
         Education,
         related_name="candidates",
         verbose_name="Образование",
-        # Поставлено необязательно для корректной загрузки
         blank=True,
         through="candidates.EducationInCandidate",
     )
@@ -528,12 +517,14 @@ class Candidate(models.Model):
         ordering = ["last_name"]
 
     def __str__(self):
-        return (f"{self.last_name} + {self.first_name}"
+        return (f"{self.last_name} {self.first_name}"
                 f" {self.middle_name}")
 
 
 class ExperienceDetailedInCandidate(models.Model):
-    """Детали опыта работы | Опыт у кандидата.
+    """
+    Детали опыта работы у кандидата.
+    У одного кандидата может быть 1 и более мест работы.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -549,7 +540,9 @@ class ExperienceDetailedInCandidate(models.Model):
 
 
 class EducationInCandidate(models.Model):
-    """Детали образования | Образование у кандидата.
+    """
+    Детали образования у кандидата.
+    У одного кандидата может быть 1 и более образований.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -565,7 +558,9 @@ class EducationInCandidate(models.Model):
 
 
 class WorkScheduleInCandidate(models.Model):
-    """Детали график работы | график работы у кандидата.
+    """
+    Детали графика работы у кандидата.
+    У одного кандидата может быть 1 и более графиков работ.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -581,7 +576,8 @@ class WorkScheduleInCandidate(models.Model):
 
 
 class EmploymentTypeInCandidate(models.Model):
-    """Детали типа занятости | Тип занятости у кандидата.
+    """Детали типа занятости у кандидата.
+    У одного кандидата может быть 1 и более типов занятости.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -597,7 +593,8 @@ class EmploymentTypeInCandidate(models.Model):
 
 
 class SoftsInCandidate(models.Model):
-    """Детали софт скилы |софт скилы у кандидата.
+    """Детали софт скилов у кандидата.
+    У одного кандидата может быть 1 и более типов скиллов.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -613,7 +610,8 @@ class SoftsInCandidate(models.Model):
 
 
 class HardsInCandidate(models.Model):
-    """Детали Хард скилы| Хард скилы у кандидата.
+    """Детали хард скилы у кандидата.
+    У одного кандидата может быть 1 и более хард скилл.
     """
     candidate = models.ForeignKey(
         Candidate,
@@ -629,7 +627,8 @@ class HardsInCandidate(models.Model):
 
 
 class CourseInCandidate(models.Model):
-    """Детали курс ЯП| курс ЯП у кандидата.
+    """Детали курс ЯП у кандидата.
+    У одного кандидата может быть 1 и более курс ЯП.
     """
     candidate = models.ForeignKey(
         Candidate,

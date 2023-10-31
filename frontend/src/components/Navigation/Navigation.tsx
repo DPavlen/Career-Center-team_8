@@ -1,5 +1,4 @@
 import { NavLink, useLocation } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import './Navigation.scss';
 
 import Suitcase from '../../assets/icons/suitcase.svg';
@@ -20,23 +19,6 @@ function Navigation() {
       <ul className="navigation__menu list">
         <li>
           <NavLink
-            to="/vacancies"
-            className={({ isActive }) => checkLinkState(isActive)}
-          >
-            <img
-              src={
-                location.pathname === '/vacancies'
-                  ? SuitcaseWhite
-                  : Suitcase
-              }
-              alt="Иконка чемодана"
-              className="navigation__icon"
-            />
-            Вакансии
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/"
             className={({ isActive }) => checkLinkState(isActive)}
           >
@@ -52,6 +34,23 @@ function Navigation() {
             <span className={(location.pathname.indexOf('/candidates') === 0) ? 'text-active' : ''}>
               Кандидаты
             </span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/vacancies"
+            className={({ isActive }) => checkLinkState(isActive)}
+          >
+            <img
+              src={
+                location.pathname === '/vacancies'
+                  ? SuitcaseWhite
+                  : Suitcase
+              }
+              alt="Иконка чемодана"
+              className="navigation__icon"
+            />
+            Вакансии
           </NavLink>
         </li>
         <li>

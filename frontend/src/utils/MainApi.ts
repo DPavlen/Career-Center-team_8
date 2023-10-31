@@ -2,6 +2,8 @@
 
 import { IFilter } from '../store/filter';
 import { ICandidate } from '../store/foundCandidates/foundCandidates';
+import { User } from '../store/user/user';
+import extractValue from './extractValue';
 
 /* eslint-disable class-methods-use-this */
 interface Data {
@@ -49,6 +51,19 @@ class MainApi {
     };
   }
 
+  private setGetPDFOptions(): RequestInit {
+    const token = localStorage.getItem('token');
+
+    return {
+      method: 'GET',
+      credentials: 'include' as RequestCredentials,
+      headers: {
+        'Content-Type': 'application/pdf',
+        ...(token ? { Authorization: `Token ${token}` } : {}),
+      },
+    };
+  }
+
   private setDeleteOptions() {
     const token = localStorage.getItem('token');
 
@@ -70,7 +85,7 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getUser(): Promise<never | Data> {
+  public async getUser(): Promise<never | User> {
     const res = await fetch(
       `${this.baseUrl}/v1/users/me/`,
       this.setGetOptions(),
@@ -131,42 +146,14 @@ class MainApi {
   }
 
   public async getFilterCandidates(filterValue: IFilter): Promise<never | Data> {
-    const filterTags: string[] = [];
+    const searchParams = new URLSearchParams();
 
-    if (filterValue.specialization) {
-      filterTags.push(`specialization_id=${filterValue.specialization}`);
-    }
-
-    if (filterValue.course) {
-      filterValue.course.forEach((item) => filterTags.push(`course=${item}`));
-    }
-
-    if (filterValue.hards) {
-      filterValue.hards.forEach((item) => filterTags.push(`hards=${item}`));
-    }
-
-    if (filterValue.experience) {
-      filterValue.experience.forEach((item) => filterTags.push(`experience_id=${item}`));
-    }
-
-    if (filterValue.level) {
-      filterValue.level.forEach((item) => filterTags.push(`level_id=${item}`));
-    }
-
-    if (filterValue.location) {
-      filterValue.location.forEach((item) => filterTags.push(`location=${item}`));
-    }
-
-    if (filterValue.employmentType) {
-      filterValue.employmentType.forEach((item) => filterTags.push(`employment_type=${item}`));
-    }
-
-    if (filterValue.workSchedule) {
-      filterValue.workSchedule.forEach((item) => filterTags.push(`work_schedule=${item}`));
-    }
+    extractValue(filterValue).forEach((v) => {
+      searchParams.append(v.key, v.value);
+    });
 
     const res = await fetch(
-      `${this.baseUrl}/v1/candidates/?${filterTags.join('&')}`,
+      `${this.baseUrl}/v1/candidates/?${searchParams.toString()}`,
       this.setGetOptions(),
     );
 
@@ -182,8 +169,7 @@ class MainApi {
     return this.getResponseData<ICandidate[]>(res);
   }
 
-  // eslint-disable-next-line camelcase
-  public async addCandidateToFavorites(id: number) {
+  public async addCandidateToFavorites(id: number): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/${id}/track/`,
       this.setPostOptions({}),
@@ -192,7 +178,7 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async removeCandidateFromFavorites(id: number) {
+  public async removeCandidateFromFavorites(id: number): Promise<Response> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/${id}/track/`,
       this.setDeleteOptions(),
@@ -207,6 +193,14 @@ class MainApi {
       this.setGetOptions(),
     );
     return this.getResponseData(res);
+
+  public async getCandidateResume(id: string): Promise<Response> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/download-candidate/`,
+      this.setGetPDFOptions(),
+    );
+
+    return res;
   }
 }
 

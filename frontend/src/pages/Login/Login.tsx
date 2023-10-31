@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 import Logo from '../../assets/icons/logo.svg';
 
-import './login.scss';
+import './Login.scss';
 
 type TForm = {
   username: string;
@@ -15,8 +15,7 @@ interface LoginProps {
 }
 
 function Login({ logIn }: LoginProps) {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const { register, handleSubmit, formState: { errors } } = useForm<TForm>();
+  const { register, handleSubmit } = useForm<TForm>();
 
   const onSubmit: SubmitHandler<TForm> = ({ username, password }) => {
     logIn(username, password);
@@ -46,9 +45,12 @@ function Login({ logIn }: LoginProps) {
             variant="contained"
             className="login__button"
             sx={{
+              fontFamily: 'YS Text',
               height: '52px',
               marginTop: '16px',
+              fontSize: '16px',
               color: 'var(--White)',
+              backgroundColor: 'var(--Blue)',
               fontWeight: 500,
             }}
           >

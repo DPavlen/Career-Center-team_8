@@ -4,11 +4,11 @@
 
 /** Normalize **/
 
-@import url(./vendor/normalize.css);
+@import url(./vendor/normalize.scss);
 
 /** Variables **/
 
-@import url(./vendor/variables/variables.css);
+@import url(./vendor/variables/variables.scss);
 
 body {
   font-family: 'YS Text', 'Roboto', sans-serif;
@@ -63,9 +63,3 @@ body {
 .link_active {
   color: var(--Black-900);
 }
-
-// *,
-// *::before,
-// *::after {
-//   outline: 2px solid red;
-// }

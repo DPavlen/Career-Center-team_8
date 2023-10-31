@@ -24,7 +24,7 @@ function VacancyForm() {
 
   const initialData = localStorage.getItem('CREATE_VACANCY_FORM');
 
-  const methods = useForm<Omit<TSavedVacancies, 'filters'>>({
+  const methods = useForm<Omit<TSavedVacancies, 'filters' | 'id'>>({
     defaultValues: initialData ? JSON.parse(initialData) : {
       // eslint-disable-next-line camelcase
       job_title: '',
@@ -34,7 +34,7 @@ function VacancyForm() {
       responsibilities: '',
       conditions: '',
     },
-    resolver: yupResolver<Omit<TSavedVacancies, 'filters'>>(vacancyFormScheme) as Resolver<Omit<TSavedVacancies, 'filters'>>,
+    resolver: yupResolver<Omit<TSavedVacancies, 'filters' | 'id'>>(vacancyFormScheme) as Resolver<Omit<TSavedVacancies, 'filters' | 'id'>>,
   });
 
   const {
@@ -50,7 +50,7 @@ function VacancyForm() {
   }, [dispatch, navigate]);
 
   const validateFilter = useCallback(() => {
-    if (filterValue.specialization) {
+    if (filterValue.specialization_id) {
       clearErrors('root');
       return true;
     }
@@ -59,7 +59,7 @@ function VacancyForm() {
     return false;
   }, [filterValue, setError, clearErrors]);
 
-  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters'>> = async (data) => {
+  const submit: SubmitHandler<Omit<TSavedVacancies, 'filters' | 'id'>> = async (data) => {
     setFitlersCheckedOnce(true);
     const filterValidation: boolean = await validateFilter();
 
@@ -199,7 +199,7 @@ function VacancyForm() {
           </p>
           <AppliedFilters
             filterValue={filterValue}
-            alwaysShow
+            // alwaysShow
             onResetFilter={(filter) => dispatch(createVacancyResetFilter(filter))}
           />
         </div>

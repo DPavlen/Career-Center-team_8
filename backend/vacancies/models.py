@@ -1,3 +1,6 @@
+from django.contrib.auth import get_user_model
+from django.db import models
+
 from candidates.models import (
     EmploymentType,
     Experience,
@@ -6,10 +9,6 @@ from candidates.models import (
     Specialization,
     WorkSchedule,
 )
-
-from django.contrib.auth import get_user_model
-from django.db import models
-
 from core.models import CreatedModel
 from users.models import MyUser
 
@@ -138,39 +137,46 @@ class Vacancy(CreatedModel):
         related_name="vacancies",
         on_delete=models.CASCADE,
         verbose_name="Специализация",
+        blank=True,
     )
     course = models.ForeignKey(
         Course,
         related_name="vacancies",
         on_delete=models.CASCADE,
         verbose_name="Курс ЯП",
+        blank=True,
     )
     level = models.ForeignKey(
         Level,
         related_name="vacancies",
         on_delete=models.CASCADE,
         verbose_name="Уровень",
+        blank=True,
     )
     hards = models.ManyToManyField(
         Hard,
         related_name="vacancies",
         verbose_name="Хард скиллы",
+        blank=True,
     )
     experience = models.ForeignKey(
         Experience,
         related_name="vacancies",
         on_delete=models.CASCADE,
         verbose_name="Опыт работы",
+        blank=True,
     )
     employment_type = models.ManyToManyField(
         EmploymentType,
         related_name="vacancies",
         verbose_name="Тип занятости",
+        blank=True,
     )
     work_schedule = models.ManyToManyField(
         WorkSchedule,
         related_name="vacancies",
         verbose_name="График работы",
+        blank=True,
     )
 
     class Meta:

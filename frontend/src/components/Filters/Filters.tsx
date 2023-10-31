@@ -29,8 +29,6 @@ function Filters({
 }: IFiltersProps) {
   const [selectedAmount, setSelectedAmount] = useState(0);
 
-  // мы заранее не знаем к какому слайсу будет подключен нащ компонент,
-  // поэтому принимаем текущее значение в сторе через пропсы
   useEffect(() => {
     setSelectedAmount(Object.entries(filterValue)
       .filter(([key, value]) => {
@@ -69,12 +67,12 @@ function Filters({
           Сбросить
         </Button>
       </div>
-      {filtersOptions?.specialization && (
+      {filtersOptions?.specialization_id && (
         <RadioGroupFilter
-          filter="specialization"
+          filter="specialization_id"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
-          data={filtersOptions.specialization}
+          data={filtersOptions.specialization_id}
           withBorder={false}
         />
       )}
