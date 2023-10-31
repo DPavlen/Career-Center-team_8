@@ -1,7 +1,5 @@
-// import { useSelector } from 'react-redux';
 import Chip from '@mui/material/Chip';
 import { Typography, Box } from '@mui/material';
-// import { RootState } from '../../store/store';
 import { v4 as uuid } from 'uuid';
 import VacancyCard from '../VacancyCard/VacancyCard';
 import { ICandidate } from '../../store/foundCandidates/foundCandidates';

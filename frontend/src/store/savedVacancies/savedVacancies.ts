@@ -2,11 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuid } from 'uuid';
 import { IFilter } from '../filter';
 
-// type TSalary = [number | null, number | null];
-
-// вопрос по типу string salary_to, salary_from, как будет уходить на бек(string или number)?
-// из textarea всегда возвращается строка
-
 export type TSavedVacancies = {
   id: string;
   job_title: string;
@@ -28,8 +23,6 @@ const savedVacanciesSlice = createSlice({
   reducers: {
     addVacancy: (
       store: TSavedVacancies[],
-//       { payload }: PayloadAction<TSavedVacancies>,
-//     ) => store.concat(payload),
       { payload }: PayloadAction<Omit<TSavedVacancies, 'id'>>,
     ) => {
       console.log(payload);

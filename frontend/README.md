@@ -12,6 +12,11 @@
 + [Алексеев Андрей](https://github.com/cipher24)
 + [Каптур Ростислав](https://github.com/rastereo)
 
+## 🤝Команда Backend разработчиков.
+
++ [Бобков Константин](https://github.com/deltabobkov)
++ [Dmitry Pavlenko](https://github.com/DPavlen)
+
 ## 🛠️Технологии:
 
 + [HTML](https://html.spec.whatwg.org)
@@ -51,7 +56,7 @@ npm run build
 
 ## 🌐Ссылки
 
-+ Сайт: <ссылка>
++ Сайт: http://infinity-team.ddns.net
 + Макет: https://clck.ru/36HCjX
 + Github репозиторий: https://github.com/DPavlen/Hackathon_team_8
 + Техническое задание: https://disk.yandex.ru/i/-lWaCpeq7D1oGA

@@ -31,22 +31,12 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function setFailedToFetch(error: { detail: string }): void {
-    console.log(error);
-
-    if (error?.detail?.includes('Failed to fetch')) {
-      return alert('Ошибка при получении данных: Возможны проблемы с сетью или сервер может быть недоступен.');
-    }
-
-    return alert(error.detail);
-  }
-
   function searchCandidates(): void {
     const token = localStorage.getItem('token');
     if (token) {
       mainApi.getCandidates()
         .then((candidates) => dispatch(addCandidates({ candidates })))
-        .catch((err) => setFailedToFetch(err));
+        .catch((err) => console.log(err));
     }
   }
 
@@ -65,9 +55,9 @@ function App() {
 
             navigate('/', { replace: true });
           })
-          .catch((err) => setFailedToFetch(err));
+          .catch((err) => console.log(err));
       })
-      .catch((err) => setFailedToFetch(err));
+      .catch((err) => console.log(err));
   }
 
   function logOut(): void {
@@ -80,9 +70,7 @@ function App() {
 
     if (token) {
       mainApi.logOut(token)
-        .then(() => {
-        })
-        .catch((err) => setFailedToFetch(err));
+        .catch((err) => console.log(err));
     }
 
     navigate('/login', { replace: true });
@@ -107,7 +95,7 @@ function App() {
           navigate(path, { replace: true });
         })
         .catch((err) => {
-          setFailedToFetch(err);
+          console.log(err);
 
           navigate('/login', { replace: true });
         });

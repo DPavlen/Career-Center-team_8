@@ -12,13 +12,13 @@ import {
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
 
-
 interface VacancyCardProps {
   card: ICandidate;
 }
 
 function VacancyCard({ card }: VacancyCardProps) {
   const cardRef = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const asyncDispatch = useDispatch<any>();
 
   return (

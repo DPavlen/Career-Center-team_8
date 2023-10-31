@@ -16,6 +16,7 @@ function CandidateHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const asyncDispatch = useDispatch<any>();
   const { id } = useParams();
   function goBack() {

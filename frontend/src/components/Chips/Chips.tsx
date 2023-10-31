@@ -1,7 +1,5 @@
 import { v4 as uuid } from 'uuid';
 import { Chip } from '@mui/material';
-// import Icon from '@mui/material/Icon';
-// import closeIcon from '../../assets/icons/xmark.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import type { HardSkill } from '../../store/candidateInfo/candidateInfo';
 import './Chips.scss';
@@ -22,6 +20,7 @@ function Chips({ ...props }: TChipsProps) {
     itemStyle,
     xmark,
   } = props;
+
   return (
     <ul className={`${listStyle} chips-list`}>
       {data.map((item) => (
@@ -30,16 +29,11 @@ function Chips({ ...props }: TChipsProps) {
             <Chip
               label={item.name}
               onDelete={handleDelete}
-              /* deleteIcon={<Icon>
-                <img className="close-icon" src={closeIcon} alt="delete svg" />
-              </Icon>
-              } */
               deleteIcon={<CloseIcon />}
             />
           ) : (
             <Chip
               label={item.name}
-
             />
           )}
         </li>

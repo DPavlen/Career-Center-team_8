@@ -1,16 +1,25 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  Controller,
+  FormProvider,
+  Resolver,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import './VacancyForm.scss';
+
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  Controller, FormProvider, Resolver, SubmitHandler, useForm,
-} from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+
 import iconBack from '../../assets/icons/ic_back.svg';
-import './VacancyForm.scss';
+
 import VacancyInput from '../VacancyInput/VacancyInput';
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
+
 import { RootState } from '../../store/store';
 import { createVacancyResetAllFilters, createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
 import { addVacancy } from '../../store/savedVacancies/savedVacancies';

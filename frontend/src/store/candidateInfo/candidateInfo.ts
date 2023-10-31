@@ -64,35 +64,6 @@ export interface WorkSchedule {
   slug: string;
 }
 
-/* export interface Candidate {
-  id: number;
-  last_name: string;
-  first_name: string;
-  middle_name: string;
-  experience_detailed: Experience[];
-  education: Education[];
-  image: string;
-  sex: string;
-  age: number;
-  contacts_phone: string;
-  contacts_email: string;
-  contacts_other: string;
-  activity: string;
-  location: string;
-  specialization: string;
-  course: Course[];
-  level: SkillLevel[];
-  hards: HardSkill[];
-  softs: SoftSkill[];
-  experience: ExperienceLevel[];
-  employment_type: EmploymentType[];
-  work_schedule: WorkSchedule[];
-} */
-
-/* interface InitialState {
-  candidateInfo: Partial<ICandidate> | null;
-} */
-
 const initialState: { candidate: Partial<ICandidate> | null } = {
   candidate: null,
 };

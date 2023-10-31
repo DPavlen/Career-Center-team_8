@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
-/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { IFiltersOptions } from '../filter';
 import mainApi from '../../utils/MainApi';

@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-
 import { IFilter } from '../store/filter';
 import { ICandidate } from '../store/foundCandidates/foundCandidates';
 import { User } from '../store/user/user';

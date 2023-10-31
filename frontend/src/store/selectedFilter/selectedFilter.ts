@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFilter } from '../filter';
 

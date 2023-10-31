@@ -2,8 +2,6 @@ import {
   useState, useEffect, useRef, useCallback,
 } from 'react';
 
-import './AppliedFilters.scss';
-
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
