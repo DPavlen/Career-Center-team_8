@@ -187,6 +187,13 @@ class MainApi {
     return res;
   }
 
+  public async getCandidateInfo(id: number) {
+    const res = await fetch(
+      `${this.baseUrl}/v1/candidates/${id}/`,
+      this.setGetOptions(),
+    );
+    return this.getResponseData(res);
+
   public async getCandidateResume(id: string): Promise<Response> {
     const res = await fetch(
       `${this.baseUrl}/v1/candidates/${id}/download-candidate/`,

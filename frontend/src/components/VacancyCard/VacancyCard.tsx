@@ -4,12 +4,14 @@ import './VacancyCard.scss';
 import { Checkbox } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
-import { ICandidate, addCandidateToFavorites, removeCandidateFromFavorites } from '../../store/foundCandidates/foundCandidates';
-// import checkboxChecked from '../../assets/icons/checkboxChecked.svg';
-// import checkbox from '../../assets/icons/checkbox.svg';
+import {
+  ICandidate,
+  addCandidateToFavorites,
+  removeCandidateFromFavorites,
+} from '../../store/foundCandidates/foundCandidates';
 import like from '../../assets/icons/Like.svg';
 import likeFilled from '../../assets/icons/Like filled.svg';
-import { addCandidateInfo } from '../../store/candidateInfo/candidateInfo';
+
 
 interface VacancyCardProps {
   card: ICandidate;
@@ -17,16 +19,13 @@ interface VacancyCardProps {
 
 function VacancyCard({ card }: VacancyCardProps) {
   const cardRef = useRef(null);
-  const dispatch = useDispatch();
   const asyncDispatch = useDispatch<any>();
-  const handlerCardClick = () => {
-    dispatch(addCandidateInfo(card));
-    // navigate(`/candidates/${card.id}`);
-  };
 
   return (
     <article className={`card ${card.is_tracked ? 'card_checked' : ''}`}>
-      <Link to={`/candidates/${card.id}`} onClick={handlerCardClick}>
+      <Link
+        to={`/candidates/${card.id}`}
+      >
         {/* <Checkbox
         disableRipple
         sx={{
