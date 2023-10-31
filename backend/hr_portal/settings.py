@@ -1,14 +1,18 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = (
-    "django-insecure-%kj+6qdcr&c@gt^9j-w(%4_7e*72f6ua9sk@f1os(qyu47vy8+"
-)
+SECRET_KEY = os.getenv("SECRET_KEY", "")
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["84.201.133.88", "localhost", "127.0.0.1", "infinity-team.ddns.net"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -73,9 +77,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "hr_portal.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'USER': os.getenv('POSTGRES_USER', 'django'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', 5432)
     }
 }
 
