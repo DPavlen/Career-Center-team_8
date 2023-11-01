@@ -41,7 +41,7 @@
 статус соискателя, Направление специальности, уровень кандидата, опыт работы и обо мне(может быть только одно значение)
 
 ## 3. Стек технологий проекта <a id=3></a>
-[![Django](https://img.shields.io/badge/Django-4.2.1-6495ED)](https://www.djangoproject.com) [![Djangorestframework](https://img.shields.io/badge/djangorestframework-3.14.0-6495ED)](https://www.django-rest-framework.org/) [![Django Authentication with Djoser](https://img.shields.io/badge/Django_Authentication_with_Djoser-2.2.0-6495ED)](https://djoser.readthedocs.io/en/latest/getting_started.html) [![Nginx](https://img.shields.io/badge/Nginx-1.21.3-green)](https://nginx.org/ru/) [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://react.dev/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/)
+[![Django](https://img.shields.io/badge/Django-4.2.1-6495ED)](https://www.djangoproject.com) [![Djangorestframework](https://img.shields.io/badge/djangorestframework-3.14.0-6495ED)](https://www.django-rest-framework.org/) [![Django Authentication with Djoser](https://img.shields.io/badge/Django_Authentication_with_Djoser-2.2.0-6495ED)](https://djoser.readthedocs.io/en/latest/getting_started.html) [![Nginx](https://img.shields.io/badge/Nginx-1.21.3-green)](https://nginx.org/ru/) [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://react.dev/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/) [![YandexCloud](https://img.shields.io/badge/yandex-cloud-5282FF?logo=yandexcloud)](https://www.cloud.yandex.com/)
 
 - Веб-сервер: nginx (контейнер nginx)  
 - Frontend фреймворк: React.js (контейнер frontend)  
@@ -115,6 +115,7 @@ sudo docker compose -f docker-compose.yml down
 
 ## 5. Автор проекта: <a id=5></a> 
 **Павленко Дмитрий**
-- Ссылка на мой профиль в GitHub [Dmitry Pavlenko](https://github.com/DPavlen)
+- Ссылка на мой профиль в GitHub [Dmitry Pavlenko](https://github.com/DPavlen)  
+
 **Бобков Константин**
-- Ссылка на мой профиль в GitHub [Konstantin Bobkov](https://github.com/deltabobkovn)
+- Ссылка на мой профиль в GitHub [Konstantin Bobkov](https://github.com/deltabobkov)
