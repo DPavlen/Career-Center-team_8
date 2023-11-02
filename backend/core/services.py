@@ -31,7 +31,7 @@ def candidate_resume_pdf(candidate_id):
     course_in_candidate = CourseInCandidate.objects.filter(candidate=candidate)
 
     
-    pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
+    pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
     # Создание документа PDF с правильной кодировкой
     doc = SimpleDocTemplate("resume.pdf", pagesize=letter, encoding='utf-8')
     elements = []
@@ -41,29 +41,29 @@ def candidate_resume_pdf(candidate_id):
     russian_text_h2 = ParagraphStyle(
         name='RussianTextH2', 
         fontName='Arial', 
-        fontSize=22, 
-        leading=22)
+        fontSize=20, 
+        leading=20)
     styles.add(russian_text_h2)
 
     russian_text_text = ParagraphStyle(
         name='RussianTextText', 
         fontName='Arial', 
-        fontSize=14, 
-        leading=14)
+        fontSize=12, 
+        leading=12)
     styles.add(russian_text_text)
 
     russian_text_h3 = ParagraphStyle(
         name='RussianTextH3',
         fontName='Arial',
-        fontSize=20,
-        leading=16)
+        fontSize=18,
+        leading=14)
     styles.add(russian_text_h3)
 
 
     # Добавление заголовка ФИО кандидата
     styles = getSampleStyleSheet()
     russian_text_style = ParagraphStyle(name='RussianText', 
-                                        fontName='Arial', fontSize=24, leading=28)
+                                        fontName='Arial', fontSize=22, leading=26)
     elements.append(Paragraph(f"<h1>{candidate.last_name}" 
                               f" {candidate.first_name}"
                               f" {candidate.middle_name}"
@@ -139,6 +139,7 @@ def candidate_resume_pdf(candidate_id):
             elements.append(Paragraph(f"{experience.experience_detailed.date_start} - "
                                       f"{experience.experience_detailed.date_end}", 
                                     russian_text_text))
+            elements.append(Spacer(1, 6))
             elements.append(Paragraph(f"{experience.experience_detailed.post}", 
                                       russian_text_h3))
             elements.append(Spacer(1, 6))
@@ -162,6 +163,7 @@ def candidate_resume_pdf(candidate_id):
             elements.append(Spacer(1, 6))
             elements.append(Paragraph(f"{education.education.education_level}", 
                                       russian_text_text))
+            elements.append(Spacer(1, 6))
             elements.append(Paragraph("Название вуза", russian_text_h3))
             elements.append(Spacer(1, 6))
             elements.append(Paragraph(f"{education.education.name_university}", 
