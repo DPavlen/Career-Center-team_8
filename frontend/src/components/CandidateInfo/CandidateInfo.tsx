@@ -23,8 +23,24 @@ function CandidateInfo() {
       mainApi.getCandidateResume(id)
         .then((res) => res.blob())
         .then((resume) => {
-          const file = window.URL.createObjectURL(resume);
-          window.location.assign(file);
+          const url = window.URL.createObjectURL(
+            new Blob([resume]),
+          );
+
+          const link = document.createElement('a');
+
+          link.href = url;
+
+          link.setAttribute(
+            'download',
+            `${candidate?.last_name} ${candidate?.first_name} ${candidate?.middle_name}.pdf`,
+          );
+
+          document.body.appendChild(link);
+
+          link.click();
+
+          if (link.parentNode) link.parentNode.removeChild(link);
         })
         .catch((err) => console.log(err));
     }
