@@ -161,7 +161,7 @@ class MainApi {
 
   public async addCandidateToFavoriteList() {
     const res = await fetch(
-      `${this.baseUrl}/v1/candidates?is_tracked=true`,
+      `${this.baseUrl}/v1/candidates/?is_tracked=true`,
       this.setGetOptions(),
     );
 
