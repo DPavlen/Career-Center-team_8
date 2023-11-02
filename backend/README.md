@@ -114,8 +114,9 @@ sudo docker compose -f docker-compose.yml down
 
 
 ## 5. Автор проекта: <a id=5></a> 
-**Павленко Дмитрий**
+
+**Павленко Дмитрий**  
 - Ссылка на мой профиль в GitHub [Dmitry Pavlenko](https://github.com/DPavlen)  
 
-**Бобков Константин**
+**Бобков Константин**  
 - Ссылка на мой профиль в GitHub [Konstantin Bobkov](https://github.com/deltabobkov)
