@@ -1,20 +1,22 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+from decouple import config
 
 
-load_dotenv()
+# # Загрузка переменных среды из файла .env
+# config.config()
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY", "")
+SECRET_KEY = config("SECRET_KEY", "")
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = config("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", "*").split(" ")
 
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF", "*").split(" ")
+
+CSRF_TRUSTED_ORIGINS = config("CSRF", "*").split(" ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -47,7 +49,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED", "").split(" ")
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", "").split(" ")
 # CORS_ALLOW_ALL_ORIGINS = True
 #CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ALLOW_CREDENTIALS = True
@@ -75,11 +77,11 @@ WSGI_APPLICATION = "hr_portal.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'django'),
-        'USER': os.getenv('POSTGRES_USER', 'django'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'NAME': config('POSTGRES_DB', 'django'),
+        'USER': config('POSTGRES_USER', 'django'),
+        'PASSWORD': config('POSTGRES_PASSWORD', ''),
+        'HOST': config('DB_HOST', ''),
+        'PORT': config('DB_PORT', 5432)
     }
 }
 
@@ -149,13 +151,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
-
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = '/backend_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = BASE_DIR / "static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/backend_media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
