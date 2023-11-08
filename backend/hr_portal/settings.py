@@ -3,10 +3,6 @@ import os
 from decouple import config
 
 
-# # Загрузка переменных среды из файла .env
-# config.config()
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY", "")
@@ -15,8 +11,9 @@ DEBUG = config("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", "*").split(" ")
 
-
 CSRF_TRUSTED_ORIGINS = config("CSRF", "*").split(" ")
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", "").split(" ")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -49,10 +46,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", "").split(" ")
-# CORS_ALLOW_ALL_ORIGINS = True
-#CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "hr_portal.urls"
 
@@ -153,7 +146,6 @@ USE_TZ = True
 
 STATIC_URL = '/backend_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = BASE_DIR / "static"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
