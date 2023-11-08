@@ -204,6 +204,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi('https://infinity-team.ddns.net/api');
+const mainApi = new MainApi('https://infinity-team-8.ru/api');
 
 export default mainApi;
