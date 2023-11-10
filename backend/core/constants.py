@@ -18,8 +18,8 @@ class LenghtField(IntEnum):
     # Максимальная длина поля role User.role
     MAX_LENGHT_ROLE = 150
 
-    # page_size = 6 for API PaginationCust.page_size
-    PAGE_SIZE = 6
+    # page_size = 10 for API PaginationCust.page_size
+    PAGE_SIZE = 10
 
     # Минимальная длина логина пользователя
     MIN_LENGHT_LOGIN_USER = 1

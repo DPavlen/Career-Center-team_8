@@ -1,5 +1,7 @@
 from djoser.views import UserViewSet
 
+from api.v1.pagination import PaginationCust
+from api.v1.permissions import IsAdminOrHr
 from users.models import MyUser
 from users.serializers import MyUserCreateSerializer
 
@@ -13,3 +15,5 @@ class CustomUserViewSet(UserViewSet):
 
     queryset = MyUser.objects.all()
     serializer_class = MyUserCreateSerializer
+    permission_classes = (IsAdminOrHr)
+    pagination_class = PaginationCust

@@ -67,15 +67,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "hr_portal.wsgi.application"
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('POSTGRES_DB', 'django'),
+#         'USER': config('POSTGRES_USER', 'django'),
+#         'PASSWORD': config('POSTGRES_PASSWORD', ''),
+#         'HOST': config('DB_HOST', ''),
+#         'PORT': config('DB_PORT', 5432)
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB', 'django'),
-        'USER': config('POSTGRES_USER', 'django'),
-        'PASSWORD': config('POSTGRES_PASSWORD', ''),
-        'HOST': config('DB_HOST', ''),
-        'PORT': config('DB_PORT', 5432)
-    }
+  'default': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+  }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -109,7 +116,7 @@ DJOSER = {
         "user": "users.serializers.MyUserCreateSerializer",
         "current_user": "users.serializers.MyUserCreateSerializer",
         "token": "djoser.serializers.TokenSerializer",
-        "set_password": "djoser.serializers.SetPasswordSerializer",
+        "set_password": "users.serializers.ChangePasswordSerializer",
     },
     "PERMISSIONS": {
         "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],

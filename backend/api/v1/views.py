@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from api.v1.filters import CandidatesFilter
+from api.v1.pagination import PaginationCust
 from api.v1.serializers import (
     CandidateSerializer,
     ShortCandidateSerializer,
@@ -94,29 +95,25 @@ class HardCandsViewSet(ReadOnlyModelViewSet):
 
 
 class LocationViewSet(ReadOnlyModelViewSet):
+    """
+    View для отображения 'Местоположения' кандидата.
+    """
     queryset=Candidate.objects.all()
     serializer_class = LocationSerializer    
 
 
 class CandidateViewSet(ModelViewSet):
     """
+    Основная View о кандидатах.
     View для отображения сокращенной информации о кандидатах.
     View для отображения полной информации о кандидате.
     """
-
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    permission_classes = (IsAuthenticated,)
-    pagination_class = None
-
-    # def get_serializer_class(self):
-    #     """Выбор сериализатора в зависимости от
-    #     показа короткого или полной информации кандидата."""
-    #     if self.action == 'retrieve':
-    #         return CandidateSerializer
-    #     return ShortCandidateSerializer
+    # permission_classes = (IsAuthenticated,)
+    pagination_class = PaginationCust
 
     @action(
         detail=True,
@@ -151,12 +148,11 @@ class CandidateViewSet(ModelViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
     
-
     @action(
         detail=False,
         methods=("get"),
         url_path="download-candidate",
-        # permission_classes=(IsAuthenticated,),
+        permission_classes=(IsAuthenticated,),
     )
     def download_candidate(self, request, candidate_id):
         """
@@ -176,6 +172,7 @@ class VacancyViewSet(ModelViewSet):
     """
     queryset = Vacancy.objects.select_related("author")
     permission_classes = (IsAuthenticated,)
+    pagination_class = PaginationCust
 
     def perform_create(self, serializer):
         """
