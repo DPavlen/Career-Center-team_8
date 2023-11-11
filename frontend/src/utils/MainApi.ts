@@ -1,10 +1,12 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
+/* eslint-disable class-methods-use-this */
+import axios, { AxiosResponse } from 'axios';
 import { IFilter } from '../store/filter';
 import { ICandidate } from '../store/foundCandidates/foundCandidates';
 import { User } from '../store/user/user';
 import extractValue from './extractValue';
 
-/* eslint-disable class-methods-use-this */
 interface Data {
   [key: string]: string;
 }
@@ -75,13 +77,37 @@ class MainApi {
     };
   }
 
-  public async signIn(username: string, password: string): Promise<never | Data> {
-    const res = await fetch(
+  public async signIn(username: string, password: string): Promise<AxiosResponse> {
+    const res = await axios.post(
       `${this.baseUrl}/auth/token/login/`,
-      this.setPostOptions({ username, password }, true),
+      {
+        username,
+        password,
+      },
     );
 
-    return this.getResponseData(res);
+    return res;
+  }
+
+  public async signUp(
+    firstName: string,
+    lastName: string,
+    email: string,
+    username: string,
+    password: string,
+  ): Promise<AxiosResponse> {
+    const res = await axios.post(
+      `${this.baseUrl}/v1/users/`,
+      {
+        email,
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        password,
+      },
+    );
+
+    return res;
   }
 
   public async getUser(): Promise<never | User> {

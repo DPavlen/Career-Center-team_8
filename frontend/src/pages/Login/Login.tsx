@@ -1,64 +1,63 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from '@mui/material';
-import Logo from '../../assets/icons/logo.svg';
+import { FormEvent, useState } from 'react';
 
 import './Login.scss';
 
-type TForm = {
-  username: string;
-  password: string;
-}
+import { TextField } from '@mui/material';
+
+import MainForm from '../../components/MainForm/MainForm';
 
 interface LoginProps {
   // eslint-disable-next-line no-unused-vars
   logIn: (username: string, password: string) => void
+  errorMessage: string,
 }
 
-function Login({ logIn }: LoginProps) {
-  const { register, handleSubmit } = useForm<TForm>();
+function Login({ logIn, errorMessage }: LoginProps) {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-  const onSubmit: SubmitHandler<TForm> = ({ username, password }) => {
-    logIn(username, password);
-  };
+  function onSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+
+    if (username && password) logIn(username, password);
+  }
 
   return (
-    <main className="login">
-      <div className="login__container">
-        <img className="login__logo" src={Logo} alt="логотип приложения" />
-        <h1 className="login__title">Яндекс.Найм</h1>
-        <h2 className="login__account">Войдите в аккаунт</h2>
-        <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="text"
-            placeholder="Логин"
-            className="login__input"
-            {...register('username', { required: true })}
-          />
-          <input
-            type="password"
-            className="login__input"
-            placeholder="Пароль"
-            {...register('password', { required: true, max: 20, min: 6 })}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            className="login__button"
-            sx={{
-              fontFamily: 'YS Text',
-              height: '52px',
-              marginTop: '16px',
-              fontSize: '16px',
-              color: 'var(--White)',
-              backgroundColor: 'var(--Blue)',
-              fontWeight: 500,
-            }}
-          >
-            Войти
-          </Button>
-        </form>
-      </div>
-    </main>
+    <MainForm
+      title="Войдите в аккаунт"
+      buttonName="Войти"
+      onSubmit={(evt) => onSubmit(evt)}
+      isDisabled={!username || !password}
+      errorMessage={errorMessage}
+      isLogin
+    >
+      <TextField
+        variant="outlined"
+        type="text"
+        label="Логин"
+        name="username"
+        value={username}
+        onChange={(evt) => setUsername(evt.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        fullWidth
+        required
+      />
+      <TextField
+        variant="outlined"
+        type="password"
+        label="Пароль"
+        name="password"
+        value={password}
+        onChange={(evt) => setPassword(evt.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        fullWidth
+        required
+      />
+    </MainForm>
   );
 }
 
