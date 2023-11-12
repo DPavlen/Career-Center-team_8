@@ -170,7 +170,7 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getFilterCandidates(filterValue: IFilter): Promise<AxiosResponse> {
+  public async getFilterCandidates(filterValue: IFilter): Promise<never | Data> {
     const searchParams = new URLSearchParams();
 
     extractValue(filterValue).forEach((v) => {
@@ -183,7 +183,6 @@ class MainApi {
     );
 
     return this.getResponseData(res);
-    // return res;
   }
 
   public async addCandidateToFavoriteList() {
