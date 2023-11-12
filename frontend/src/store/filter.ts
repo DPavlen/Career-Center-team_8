@@ -2,7 +2,7 @@ export interface IFilter {
   specialization_id: string | null,
   course: string[],
   hards: string[],
-  experience: string[],
+  experience_id: string[],
   level_id: string[],
   location: string[],
   employment_type: string[],

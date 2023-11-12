@@ -94,7 +94,7 @@ const initialState: InitialState = {
     specialization_id: [],
     course: [],
     hards: [],
-    experience: [],
+    experience_id: [],
     level_id: [],
     location: [],
     employment_type: [],
@@ -167,8 +167,8 @@ const foundCandidatesSlice = createSlice({
             store.filtersOptions.specialization_id.push(candidate.specialization);
           }
 
-          if (!store.filtersOptions.experience.includes(candidate.experience)) {
-            store.filtersOptions.experience.push(candidate.experience);
+          if (!store.filtersOptions.experience_id.includes(candidate.experience)) {
+            store.filtersOptions.experience_id.push(candidate.experience);
           }
 
           if (!store.filtersOptions.level_id.includes(candidate.level)) {

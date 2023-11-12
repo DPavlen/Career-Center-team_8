@@ -96,13 +96,13 @@ function Filters({
           data={filtersOptions.hards}
         />
       )}
-      {filtersOptions?.experience?.length > 0 && (
+      {filtersOptions?.experience_id?.length > 0 && (
         <CheckboxGroupFilter
-          filter="experience"
+          filter="experience_id"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Опыт работы"
-          data={filtersOptions.experience}
+          data={filtersOptions.experience_id}
         />
       )}
       {filtersOptions?.level_id.length > 0 && (
