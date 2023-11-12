@@ -96,7 +96,7 @@ function Filters({
           data={filtersOptions.hards}
         />
       )}
-      {filtersOptions?.experience.length > 0 && (
+      {filtersOptions?.experience?.length > 0 && (
         <CheckboxGroupFilter
           filter="experience"
           filterValue={filterValue}
@@ -105,13 +105,13 @@ function Filters({
           data={filtersOptions.experience}
         />
       )}
-      {filtersOptions?.level.length > 0 && (
+      {filtersOptions?.level_id.length > 0 && (
         <CheckboxGroupFilter
-          filter="level"
+          filter="level_id"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Уровень"
-          data={filtersOptions.level}
+          data={filtersOptions.level_id}
         />
       )}
       {filtersOptions?.location.length > 0 && (
@@ -125,22 +125,22 @@ function Filters({
           data={filtersOptions.location}
         />
       )}
-      {filtersOptions?.employmentType.length > 0 && (
+      {filtersOptions?.employment_type.length > 0 && (
         <CheckboxGroupFilter
-          filter="employmentType"
+          filter="employment_type"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="Тип занятости"
-          data={filtersOptions.employmentType}
+          data={filtersOptions.employment_type}
         />
       )}
-      {filtersOptions?.workSchedule.length > 0 && (
+      {filtersOptions?.work_schedule.length > 0 && (
         <CheckboxGroupFilter
-          filter="workSchedule"
+          filter="work_schedule"
           filterValue={filterValue}
           onSetFilter={onSetFilter}
           title="График работы"
-          data={filtersOptions.workSchedule}
+          data={filtersOptions.work_schedule}
         />
       )}
       <div className="filters__separator" />

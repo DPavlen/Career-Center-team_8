@@ -3,10 +3,10 @@ export interface IFilter {
   course: string[],
   hards: string[],
   experience: string[],
-  level: string[],
+  level_id: string[],
   location: string[],
-  employmentType: string[],
-  workSchedule: string[],
+  employment_type: string[],
+  work_schedule: string[],
 }
 
 export type IFiltersOptions = Record<keyof IFilter, string[]>;

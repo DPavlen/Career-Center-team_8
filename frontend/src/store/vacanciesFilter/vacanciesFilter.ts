@@ -8,10 +8,10 @@ export const initialState: IFilter = {
   course: [],
   hards: [],
   experience: [],
-  level: [],
+  level_id: [],
   location: [],
-  employmentType: [],
-  workSchedule: [],
+  employment_type: [],
+  work_schedule: [],
 };
 
 const reducers = {
