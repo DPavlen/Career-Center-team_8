@@ -95,10 +95,10 @@ const initialState: InitialState = {
     course: [],
     hards: [],
     experience: [],
-    level: [],
+    level_id: [],
     location: [],
-    employmentType: [],
-    workSchedule: [],
+    employment_type: [],
+    work_schedule: [],
   },
 };
 
@@ -150,14 +150,14 @@ const foundCandidatesSlice = createSlice({
           });
 
           candidate.employment_type.forEach((type) => {
-            if (!store.filtersOptions.employmentType.includes(type.name)) {
-              store.filtersOptions.employmentType.push(type.name);
+            if (!store.filtersOptions.employment_type.includes(type.name)) {
+              store.filtersOptions.employment_type.push(type.name);
             }
           });
 
           candidate.work_schedule.forEach((type) => {
-            if (!store.filtersOptions.workSchedule.includes(type.name)) {
-              store.filtersOptions.workSchedule.push(type.name);
+            if (!store.filtersOptions.work_schedule.includes(type.name)) {
+              store.filtersOptions.work_schedule.push(type.name);
             }
           });
 
@@ -171,8 +171,8 @@ const foundCandidatesSlice = createSlice({
             store.filtersOptions.experience.push(candidate.experience);
           }
 
-          if (!store.filtersOptions.level.includes(candidate.level)) {
-            store.filtersOptions.level.push(candidate.level);
+          if (!store.filtersOptions.level_id.includes(candidate.level)) {
+            store.filtersOptions.level_id.push(candidate.level);
           }
 
           if (!store.filtersOptions.location.includes(candidate.location)) {
