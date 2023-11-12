@@ -170,19 +170,15 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getFilterCandidates(filterValue: IFilter): Promise<never | Data> {
+  public async getFilterCandidates(filterValue: IFilter): Promise<AxiosResponse> {
     const searchParams = new URLSearchParams();
 
     extractValue(filterValue).forEach((v) => {
       searchParams.append(v.key, v.value);
     });
+    const res = await axios.get(`${this.baseUrl}/v1/candidates/?${searchParams.toString()}`);
 
-    const res = await fetch(
-      `${this.baseUrl}/v1/candidates/?${searchParams.toString()}`,
-      this.setGetOptions(),
-    );
-
-    return this.getResponseData(res);
+    return res;
   }
 
   public async addCandidateToFavoriteList() {

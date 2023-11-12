@@ -30,8 +30,8 @@ function Candidates() {
 
     if (token) {
       mainApi.getFilterCandidates(filterValue)
-        .then((foundCandidates) => {
-          dispatch(addCandidates({ candidates: foundCandidates }));
+        .then((response) => {
+          dispatch(addCandidates({ candidates: response.data }));
         })
         .catch((err) => console.log(err));
     }
