@@ -7,7 +7,7 @@ export const initialState: IFilter = {
   specialization_id: null,
   course: [],
   hards: [],
-  experience: [],
+  experience_id: [],
   level_id: [],
   location: [],
   employment_type: [],
