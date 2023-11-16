@@ -112,8 +112,8 @@ class CandidateViewSet(ModelViewSet):
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    # permission_classes = (IsAuthenticated,)
-    # pagination_class = PaginationCust
+    permission_classes = (IsAuthenticated,)
+    pagination_class = PaginationCust
 
     @action(
         detail=True,
@@ -172,7 +172,7 @@ class VacancyViewSet(ModelViewSet):
     """
     queryset = Vacancy.objects.select_related("author")
     permission_classes = (IsAuthenticated,)
-    # pagination_class = PaginationCust
+    pagination_class = PaginationCust
 
     def perform_create(self, serializer):
         """
