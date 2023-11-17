@@ -20,7 +20,9 @@ from api.v1.serializers import (
     HardCandsSerializer,
     LocationSerializer,
     VacancySerializer,
-    CreateVacancySerializer 
+    CreateVacancySerializer,
+    ExperienceDetailedSerializer,
+    EducationSerializer
     )
 from core.services import candidate_resume_pdf
 from candidates.models import (
@@ -32,7 +34,9 @@ from candidates.models import (
     WorkSchedule,
     EmploymentType,
     Track,
-    HardCands
+    HardCands,
+    ExperienceDetailed,
+    Education
     )
 from vacancies.models import (
     Vacancy
@@ -100,6 +104,25 @@ class LocationViewSet(ReadOnlyModelViewSet):
     """
     queryset=Candidate.objects.all()
     serializer_class = LocationSerializer    
+
+class ExperienceDetailedViewSet(ModelViewSet):
+    """
+    View для отображения детального опыта работы кандидата.
+    """
+    queryset = ExperienceDetailed.objects.all()
+    serializer_class = ExperienceDetailedSerializer
+    pagination_class = None
+
+
+
+class EducationViewSet(ModelViewSet):
+    """
+    View для отображения информации об образовании кандидата.
+    """
+    queryset = Education.objects.all()
+    serializer_class = EducationSerializer
+    # permission_classes = [IsAuthenticated]
+    pagination_class = None
 
 
 class CandidateViewSet(ModelViewSet):
