@@ -12,7 +12,9 @@ from api.v1.views import (
     CandidateViewSet,
     HardCandsViewSet,
     LocationViewSet,
-    VacancyViewSet
+    VacancyViewSet,
+    ExperienceDetailedViewSet,
+    EducationViewSet
     )
 
 
@@ -23,6 +25,9 @@ router = routers.DefaultRouter()
 
 router.register("users", CustomUserViewSet, "users")
 router.register("candidates", CandidateViewSet, "candidates")
+router.register("experience_detailed", 
+                ExperienceDetailedViewSet, "experience_detailed")
+router.register("education", EducationViewSet, "education")
 router.register("specialization_id", SpecializationViewSet)
 router.register("course", CourseViewSet)
 router.register("level_id", LevelViewSet)

@@ -16,7 +16,9 @@ from candidates.models import (
     WorkSchedule,
     EmploymentType,
     HardCands, 
-    Track)
+    Track,
+    ExperienceDetailed,
+    Education,)
 
 from vacancies.models import (
     Hard,
@@ -114,6 +116,46 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate 
         fields = ("location",)
+
+
+class ExperienceDetailedSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения 
+    детального опыта работы кандидата.
+    """
+
+    class Meta:
+        model = ExperienceDetailed
+        fields = (
+            "id",
+            "name",
+            "date_start",
+            "date_end",
+            "post",
+            "responsibilities",
+        )
+        read_only_fields = ("__all__",)
+
+
+class EducationSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для получения информации об 
+    образовании кандидата.
+    """
+    class Meta:
+        model = Education
+        fields = (
+            "id",
+            "name",
+            "level",
+            "date_start",
+            "date_graduation",
+            "name_university",
+            "faculty",
+            "specialization",
+        )
+        read_only_fields = ("__all__",)
+
 
 class CandidateSerializer(serializers.ModelSerializer):
     """
