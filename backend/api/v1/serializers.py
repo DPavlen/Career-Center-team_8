@@ -147,7 +147,7 @@ class EducationSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
-            "level",
+            "education_level",
             "date_start",
             "date_graduation",
             "name_university",
