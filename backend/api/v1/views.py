@@ -22,7 +22,8 @@ from api.v1.serializers import (
     VacancySerializer,
     CreateVacancySerializer,
     ExperienceDetailedSerializer,
-    EducationSerializer
+    EducationSerializer,
+    HardSerializer,
     )
 from core.services import candidate_resume_pdf
 from candidates.models import (
@@ -39,7 +40,8 @@ from candidates.models import (
     Education
     )
 from vacancies.models import (
-    Vacancy
+    Vacancy,
+    Hard
 )
 
 
@@ -187,6 +189,12 @@ class CandidateViewSet(ModelViewSet):
         """
         return candidate_resume_pdf(candidate_id)
     
+class HardViewSet(ReadOnlyModelViewSet):
+    pagination_class = None
+    queryset = Hard.objects.all()
+    serializer_class = HardSerializer
+    permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
 
 class VacancyViewSet(ModelViewSet):
     """
@@ -206,7 +214,7 @@ class VacancyViewSet(ModelViewSet):
     def get_serializer_class(self):
         """
         Выбор сериализатора в зависимости от 
-        просмотра или создании вакансии.
+        просмотра или создания вакансии.
         """
         if self.request.method in SAFE_METHODS:
             return VacancySerializer
