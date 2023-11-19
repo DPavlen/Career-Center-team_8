@@ -51,6 +51,7 @@ class SpecializationViewSet(ReadOnlyModelViewSet):
     """
     queryset=Specialization.objects.all()
     serializer_class = SpecializationSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class CourseViewSet(ReadOnlyModelViewSet):
@@ -59,6 +60,7 @@ class CourseViewSet(ReadOnlyModelViewSet):
     """
     queryset=Course.objects.all()
     serializer_class = CourseSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class LevelViewSet(ReadOnlyModelViewSet):
@@ -67,6 +69,7 @@ class LevelViewSet(ReadOnlyModelViewSet):
     """
     queryset=Level.objects.all()
     serializer_class = LevelSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class ExperienceViewSet(ReadOnlyModelViewSet):
@@ -76,6 +79,8 @@ class ExperienceViewSet(ReadOnlyModelViewSet):
     """
     queryset=Experience.objects.all()
     serializer_class = ExperienceSerializer
+    permission_classes = (IsAuthenticated,)
+
 
 class WorkScheduleViewSet(ReadOnlyModelViewSet):
     """
@@ -83,6 +88,7 @@ class WorkScheduleViewSet(ReadOnlyModelViewSet):
     """
     queryset=WorkSchedule.objects.all()
     serializer_class = WorkScheduleSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class EmploymentTypeViewSet(ReadOnlyModelViewSet):
@@ -91,6 +97,8 @@ class EmploymentTypeViewSet(ReadOnlyModelViewSet):
     """
     queryset=EmploymentType.objects.all()
     serializer_class = EmploymentTypeSerializer
+    permission_classes = (IsAuthenticated,) 
+
 
 class HardCandsViewSet(ReadOnlyModelViewSet):
     """
@@ -98,6 +106,7 @@ class HardCandsViewSet(ReadOnlyModelViewSet):
     """
     queryset=HardCands.objects.all()
     serializer_class = HardCandsSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class LocationViewSet(ReadOnlyModelViewSet):
@@ -105,7 +114,9 @@ class LocationViewSet(ReadOnlyModelViewSet):
     View для отображения 'Местоположения' кандидата.
     """
     queryset=Candidate.objects.all()
-    serializer_class = LocationSerializer    
+    serializer_class = LocationSerializer
+    permission_classes = (IsAuthenticated,)    
+
 
 class ExperienceDetailedViewSet(ModelViewSet):
     """
@@ -113,8 +124,8 @@ class ExperienceDetailedViewSet(ModelViewSet):
     """
     queryset = ExperienceDetailed.objects.all()
     serializer_class = ExperienceDetailedSerializer
+    permission_classes = (IsAuthenticated,)
     pagination_class = None
-
 
 
 class EducationViewSet(ModelViewSet):
@@ -123,7 +134,7 @@ class EducationViewSet(ModelViewSet):
     """
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
     pagination_class = None
 
 
@@ -132,6 +143,9 @@ class CandidateViewSet(ModelViewSet):
     Основная View о кандидатах.
     View для отображения сокращенной информации о кандидатах.
     View для отображения полной информации о кандидате.
+    Attributes:
+        - queryset: Запрос, возвращающий все объекты Candidates.
+        - pagination_class: Кастомный класс пагинации.
     """
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
@@ -189,12 +203,14 @@ class CandidateViewSet(ModelViewSet):
         """
         return candidate_resume_pdf(candidate_id)
     
+
 class HardViewSet(ReadOnlyModelViewSet):
     pagination_class = None
     queryset = Hard.objects.all()
     serializer_class = HardSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (DjangoFilterBackend,)
+
 
 class VacancyViewSet(ModelViewSet):
     """

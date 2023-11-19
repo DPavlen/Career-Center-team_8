@@ -52,6 +52,7 @@
 ## 5. Авторы проекта: <a id=5></a>
 
 ## 👑Product Manager👉
++ [Linda Korenevskaya](https://www.linkedin.com/in/linda-korenevskaya-4445a5296/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 
 ## 🤝Команда Backend разработчиков🚀
 + [Бобков Константин](https://github.com/deltabobkov)
@@ -63,4 +64,6 @@
 + [Каптур Ростислав](https://github.com/rastereo)
  
 ## 💎Команда UX/UI📊
++ [Olesya Safronova](https://www.behance.net/olesyasafr9e3b)
++ [Дарья Звонкова](https://product-designer-daria.notion.site/4785ad3d62d248cb959f5e807d191b79)
 
