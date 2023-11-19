@@ -361,6 +361,22 @@ class ScheduleInVacancySerializer(serializers.ModelSerializer):
         fields = ("id",)
         
 
+class HardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hard
+        fields = (
+            "id",
+            "name",
+            "slug",
+            "spec_id",
+            "develop",
+            "data_sc",
+            "design",
+            "manager",
+            "marketing",
+        )
+
+
 class VacancySerializer(serializers.ModelSerializer):
     """
     Сериализатор для просмотра информации о вакансии.
@@ -500,9 +516,17 @@ class CreateVacancySerializer(serializers.ModelSerializer):
 
     def validate_hards(self, value):
         hards = value
+        if not hards:
+            raise ValidationError(
+                {"hards": "Необходим хотя бы один скилл."}
+            )
         hards_list = []
         for item in hards:
             hard = get_object_or_404(Hard, id=item["id"])
+            if hard in hards_list:
+                raise ValidationError(
+                    {"hards": "Скиллы должны быть уникальными."}
+                )
             hards_list.append(hard)
         return value
     
@@ -567,29 +591,29 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         HardsInVacancy.objects.bulk_create(
             [
                 HardsInVacancy(
-                    hard=Hard.objects.get(id=hards["id"]),
-                    vacancy=vacancy
+                    hard=Hard.objects.get(id=hard["id"]),
+                    vacancy=vacancy,
                 )
                 for hard in hards
             ]
         )
 
-    # def create_employment(self, employment_type, vacancy):
-    #     EmploymentTypeInVacancy.objects.bulk_create(
-    #         [
-    #             EmploymentTypeInVacancy(
-    #                 employment=EmploymentType.objects.get(id=employment_type["id"]),
-    #                 vacancy=vacancy
-    #             )
-    #             for employment in employment_type
-    #         ]
-    #     )
+    def create_employment(self, employment_type, vacancy):
+        EmploymentTypeInVacancy.objects.bulk_create(
+            [
+                EmploymentTypeInVacancy(
+                    employment=EmploymentType.objects.get(id=employment["id"]),
+                    vacancy=vacancy
+                )
+                for employment in employment_type
+            ]
+        )
     
     def create_schedule(self, work_schedule, vacancy):
         WorkScheduleInVacancy.objects.bulk_create(
             [
                 WorkScheduleInVacancy(
-                    schedule=WorkSchedule.objects.get(id= work_schedule["id"]),
+                    schedule=WorkSchedule.objects.get(id=schedule["id"]),
                     vacancy=vacancy
                 )
                 for  schedule in work_schedule
@@ -601,7 +625,7 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         employment_type = validated_data.pop("employment_type")
         work_schedule = validated_data.pop("work_schedule")
         vacancy = Vacancy.objects.create(**validated_data)
-        # self.create_employment(vacancy=vacancy, employment_type=employment_type)
+        self.create_employment(vacancy=vacancy, employment_type=employment_type)
         self.create_schedule(vacancy=vacancy, work_schedule=work_schedule)
         self.create_hards(vacancy=vacancy, hards=hards)
         return vacancy
@@ -621,5 +645,3 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         context = {"request": request}
         return VacancySerializer(instance, context=context).data
-
-

@@ -14,7 +14,8 @@ from api.v1.views import (
     LocationViewSet,
     VacancyViewSet,
     ExperienceDetailedViewSet,
-    EducationViewSet
+    EducationViewSet,
+    HardViewSet,
     )
 
 
@@ -37,6 +38,7 @@ router.register("work_schedule", WorkScheduleViewSet)
 router.register("hards_in_cands", HardCandsViewSet)
 router.register("location", LocationViewSet)
 router.register("vacancies", VacancyViewSet)
+router.register("hard", HardViewSet)
 
 urlpatterns = [
     path("v1/", include(router.urls)),
