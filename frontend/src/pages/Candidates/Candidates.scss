@@ -1,5 +1,10 @@
 .candidates {
   padding-left: 32px;
+  padding-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr  minmax(auto, 382px);
+
+  &__pagination {
+    margin: auto;
+  }
 }

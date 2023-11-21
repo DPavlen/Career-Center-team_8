@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { IFilter } from '../store/filter';
 import { ICandidate } from '../store/foundCandidates/foundCandidates';
 import { User } from '../store/user/user';
@@ -39,12 +39,12 @@ class MainApi {
     };
   }
 
-  private setGetOptions(): RequestInit {
+  private setGetOptions(): AxiosRequestConfig {
     const token = localStorage.getItem('token');
 
     return {
       method: 'GET',
-      credentials: 'include' as RequestCredentials,
+      // credentials: 'include' as RequestCredentials,
       headers: {
         'Content-Type': 'application/json',
         ...(token ? { Authorization: `Token ${token}` } : {}),
@@ -143,16 +143,7 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getShortCandidates(): Promise<never | Data> {
-    const res = await fetch(
-      `${this.baseUrl}/v1/short_candidates/`,
-      this.setGetOptions(),
-    );
-
-    return this.getResponseData(res);
-  }
-
-  public async getCandidateExperience(): Promise<never | Data> {
+  public async getCandidateExperienceDetailed(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/experience_detailed/`,
       this.setGetOptions(),
@@ -161,7 +152,16 @@ class MainApi {
     return this.getResponseData(res);
   }
 
-  public async getCandidateEducation(): Promise<never | Data> {
+  /*  public async getShortCandidates(): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/short_candidates/`,
+      this.setGetOptions(),
+    );
+
+    return this.getResponseData(res);
+  } */
+
+  /* public async getCandidateEducation(): Promise<never | Data> {
     const res = await fetch(
       `${this.baseUrl}/v1/education/`,
       this.setGetOptions(),
@@ -170,24 +170,50 @@ class MainApi {
     return this.getResponseData(res);
   }
 
+  public async getCandidateSpecialization(): Promise<never | Data> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/specialization_id/`,
+      this.setGetOptions(),
+    );
+
+    return this.getResponseData(res);
+  }
+
+  public async getCandidateCourse(): Promise<AxiosResponse> {
+    const res = await axios.get(`${this.baseUrl}/v1/course/`);
+    return res;
+  } */
+
+  public async getFilterValues(field: string): Promise<AxiosResponse> {
+    const res = await axios.get(`${this.baseUrl}/v1/${field}/`);
+    return res;
+  }
+
+  public async getParticularPage(number: number): Promise<AxiosResponse> {
+    const res = await axios.get(`${this.baseUrl}/v1/candidates/?page=${number}`, this.setGetOptions());
+    return res;
+  }
+
   public async getFilterCandidates(filterValue: IFilter): Promise<AxiosResponse> {
     const searchParams = new URLSearchParams();
 
     extractValue(filterValue).forEach((v) => {
       searchParams.append(v.key, v.value);
     });
-    const res = await axios.get(`${this.baseUrl}/v1/candidates/?${searchParams.toString()}`);
-
+    const res = await axios.get(
+      `${this.baseUrl}/v1/candidates/?${searchParams.toString()}`,
+      this.setGetOptions(),
+    );
     return res;
   }
 
-  public async addCandidateToFavoriteList() {
-    const res = await fetch(
+  public async addCandidateToFavoriteList(): Promise<AxiosResponse> {
+    const res = await axios.get(
       `${this.baseUrl}/v1/candidates/?is_tracked=true`,
       this.setGetOptions(),
     );
 
-    return this.getResponseData<ICandidate[]>(res);
+    return res;
   }
 
   public async addCandidateToFavorites(id: number): Promise<never | Data> {
