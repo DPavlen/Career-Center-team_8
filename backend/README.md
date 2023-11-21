@@ -24,21 +24,23 @@
 
 ## 2. API, эндпойнты для интеграции с фронтендом и другие технические моменты <a id=2></a>
 
-- http://84.201.133.88:8000/api/v1/users/  Работа с пользователями. Регистрация пользователей.
+- http://infinity-team-8.ru/api/v1/users/  Работа с пользователями. Регистрация пользователей.
 Вывод пользователей. У авторизованных HR пользователей. POST и GET запросы.
 возможность добавления кандидата в отслеживаемые.
-- http://84.201.133.88:8000/api/v1/candidates/ Просмотр всех кандидатов(короткий список атрибутов кандидата)
+- http://infinity-team-8.ru/api/v1/candidates/ Просмотр всех кандидатов(короткий список атрибутов кандидата)
   GET запрос.  
-- http://84.201.133.88:8000/api/v1/candidates/{id} Подробное резюме о конкретнос кандидате. GET запрос.  
-- http://84.201.133.88:8000/api/v1/vacancies/ Просмотр списка вакансий кандидатов. GET запрос. 
-- http://84.201.133.88:8000/api/v1/vacancies/ Создание вакансии кандидата. POST запрос.
-- http://127.0.0.1:8000/api/v1/candidates/?specialization_id=Программирование фильтр по полю специализации.
-Также предусмотрены и другие аналогичные фильтры по "Направлению", "Курсам практикума", "Ключевые навыки".
+- http://infinity-team-8.ru/api/v1/candidates/{id} Подробное резюме о конкретнос кандидате. GET запрос.  
+- http://infinity-team-8.ru/api/v1/vacancies/ Просмотр списка вакансий кандидатов. GET запрос. 
+- http://infinity-team-8.ru/api/v1/vacancies/ Создание вакансии кандидата. POST запрос.
+- http://infinity-team-8.ru/api/v1/candidates/?specialization_id=Программирование фильтр по полю специализации.
+Предусмотрены и другие аналогичные фильтры по "Направлению", "Курсам практикума", "Ключевые навыки".
 - Реализован загрузчик данных общий candidates_rest, который включает в себя загрузчики: Курсов ЯП, Типов занятости,
 Опыт работы(в годах), Направление специализации, Ключевые навыки, Софт скиллы, Уровень кандидата, График работы, 
 Детальный опыт работы, Образование кандидата. Также реализован загрузчик candidates_main, который включает в себя
 загрузку следующий полей: Имя, Отчество, Фамилия соискателя, пол, возраст, телефон, почта, другой контакт,
 статус соискателя, Направление специальности, уровень кандидата, опыт работы и обо мне(может быть только одно значение)
+- https://infinity-team-8.ru/api/v1/ Просмотр всех эндпойнтов, которые реализованы.
+- https://infinity-team-8.ru/swagger/ реализована возможность автоматической генерации документации для вашего API, с помощью Swagger
 
 ## 3. Стек технологий проекта <a id=3></a>
 [![Django](https://img.shields.io/badge/Django-4.2.1-6495ED)](https://www.djangoproject.com) [![Djangorestframework](https://img.shields.io/badge/djangorestframework-3.14.0-6495ED)](https://www.django-rest-framework.org/) [![Django Authentication with Djoser](https://img.shields.io/badge/Django_Authentication_with_Djoser-2.2.0-6495ED)](https://djoser.readthedocs.io/en/latest/getting_started.html) [![Nginx](https://img.shields.io/badge/Nginx-1.21.3-green)](https://nginx.org/ru/) [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://react.dev/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/) [![YandexCloud](https://img.shields.io/badge/yandex-cloud-5282FF?logo=yandexcloud)](https://www.cloud.yandex.com/)
@@ -86,6 +88,7 @@ docker compose -f docker-compose.production.yml up
 Команда описанная выше, сбилдит Docker образы и запустит backend, frontend, СУБД и Nginx в отдельных Docker контей.
 Выполните миграции в контейнере с backend и необходимо собрать статику backend'a, поочередно выполните 2 команды:
 ```bash
+sudo docker compose -f docker-compose.yml exec careerhub-backend python manage.py makemigrations
 sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
 sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
 ```
@@ -110,7 +113,7 @@ sudo docker compose -f docker-compose.yml down
 ```
 
 ## 4. Ссылка на развернутый проектe <a id=4></a>
-Ссылка на развернутый проектe http://84.201.133.88:8000/ или http://infinity-team.ddns.net/
+Ссылка на развернутый проект https://infinity-team-8.ru/admin/
 
 
 ## 5. Автор проекта: <a id=5></a> 
