@@ -11,7 +11,6 @@ interface ExperienceDetailed {
   date_end: number;
   post: string;
   responsibilities: string;
-  slug: string;
 }
 
 interface Education {
@@ -23,10 +22,9 @@ interface Education {
   name_university: string;
   faculty: string;
   specialization: string;
-  slug: string;
 }
 
-export interface Course {
+interface Course {
   id: number;
   name: string;
   spec_id: number;
@@ -88,10 +86,7 @@ export interface InitialState {
   candidates: Partial<ICandidate[]> | null,
   filtersOptions: IFiltersOptions,
 }
-type TPayload = {
-  name: string;
-  data: string[];
-}
+
 const initialState: InitialState = {
   total: 0,
   candidates: null,
@@ -138,10 +133,11 @@ const foundCandidatesSlice = createSlice({
   initialState,
   reducers: {
     addCandidates: (store, { payload }) => {
-      if (payload.results) {
-        store.candidates = payload.results;
-        store.total = payload.count;
-        /* payload.results.forEach((candidate: ICandidate) => {
+      if (payload.candidates) {
+        store.candidates = payload.candidates;
+        store.total = payload.candidates.length;
+
+        payload.candidates.forEach((candidate: ICandidate) => {
           candidate.course.forEach((courseItem) => {
             if (!store.filtersOptions.course.includes(courseItem.name)) {
               store.filtersOptions.course.push(courseItem.name);
@@ -182,7 +178,7 @@ const foundCandidatesSlice = createSlice({
           if (!store.filtersOptions.location.includes(candidate.location)) {
             store.filtersOptions.location.push(candidate.location);
           }
-        }); */
+        });
       } else {
         store.candidates = null;
       }
@@ -196,11 +192,6 @@ const foundCandidatesSlice = createSlice({
 
       if (candidate) {
         candidate.is_tracked = true;
-      }
-    },
-    saveFilters: (store: InitialState, { payload }: PayloadAction<TPayload>) => {
-      if (payload) {
-        store.filtersOptions[payload.name as keyof IFiltersOptions] = payload.data;
       }
     },
   },
@@ -224,6 +215,6 @@ const foundCandidatesSlice = createSlice({
 
 });
 
-export const { addCandidates, clearCandidates, saveFilters } = foundCandidatesSlice.actions;
+export const { addCandidates, clearCandidates } = foundCandidatesSlice.actions;
 
 export default foundCandidatesSlice;

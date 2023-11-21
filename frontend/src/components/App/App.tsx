@@ -49,7 +49,7 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       mainApi.getCandidates()
-        .then((response) => dispatch(addCandidates(response)))
+        .then((candidates) => dispatch(addCandidates({ candidates })))
         .catch((err) => console.log(err));
     }
   }
