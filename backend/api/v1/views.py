@@ -51,7 +51,7 @@ class SpecializationViewSet(ReadOnlyModelViewSet):
     """
     queryset=Specialization.objects.all()
     serializer_class = SpecializationSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class CourseViewSet(ReadOnlyModelViewSet):
@@ -60,7 +60,7 @@ class CourseViewSet(ReadOnlyModelViewSet):
     """
     queryset=Course.objects.all()
     serializer_class = CourseSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class LevelViewSet(ReadOnlyModelViewSet):
@@ -69,7 +69,7 @@ class LevelViewSet(ReadOnlyModelViewSet):
     """
     queryset=Level.objects.all()
     serializer_class = LevelSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class ExperienceViewSet(ReadOnlyModelViewSet):
@@ -79,7 +79,7 @@ class ExperienceViewSet(ReadOnlyModelViewSet):
     """
     queryset=Experience.objects.all()
     serializer_class = ExperienceSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class WorkScheduleViewSet(ReadOnlyModelViewSet):
@@ -88,7 +88,7 @@ class WorkScheduleViewSet(ReadOnlyModelViewSet):
     """
     queryset=WorkSchedule.objects.all()
     serializer_class = WorkScheduleSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class EmploymentTypeViewSet(ReadOnlyModelViewSet):
@@ -97,7 +97,7 @@ class EmploymentTypeViewSet(ReadOnlyModelViewSet):
     """
     queryset=EmploymentType.objects.all()
     serializer_class = EmploymentTypeSerializer
-    permission_classes = (IsAuthenticated,) 
+    # permission_classes = (IsAuthenticated,) 
 
 
 class HardCandsViewSet(ReadOnlyModelViewSet):
@@ -106,7 +106,7 @@ class HardCandsViewSet(ReadOnlyModelViewSet):
     """
     queryset=HardCands.objects.all()
     serializer_class = HardCandsSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
 class LocationViewSet(ReadOnlyModelViewSet):
@@ -115,7 +115,7 @@ class LocationViewSet(ReadOnlyModelViewSet):
     """
     queryset=Candidate.objects.all()
     serializer_class = LocationSerializer
-    permission_classes = (IsAuthenticated,)    
+    # permission_classes = (IsAuthenticated,)    
 
 
 class ExperienceDetailedViewSet(ModelViewSet):
@@ -124,8 +124,8 @@ class ExperienceDetailedViewSet(ModelViewSet):
     """
     queryset = ExperienceDetailed.objects.all()
     serializer_class = ExperienceDetailedSerializer
-    permission_classes = (IsAuthenticated,)
-    pagination_class = None
+    # permission_classes = (IsAuthenticated,)
+    # pagination_class = None
 
 
 class EducationViewSet(ModelViewSet):
@@ -134,8 +134,8 @@ class EducationViewSet(ModelViewSet):
     """
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
-    permission_classes = (IsAuthenticated,)
-    pagination_class = None
+    # permission_classes = (IsAuthenticated,)
+    # pagination_class = None
 
 
 class CandidateViewSet(ModelViewSet):
@@ -151,7 +151,7 @@ class CandidateViewSet(ModelViewSet):
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CandidatesFilter
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     # pagination_class = PaginationCust
 
     @action(
