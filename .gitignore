@@ -46,3 +46,4 @@ venv.bak/
 # lint
 # .sort.cfg
 # pyproject.toml
+infra/nginx.conf
