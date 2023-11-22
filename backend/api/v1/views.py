@@ -214,8 +214,7 @@ class HardViewSet(ReadOnlyModelViewSet):
 
 class VacancyViewSet(ModelViewSet):
     """
-    View для отображения сокращенной информации о кандидатах.
-    View для отображения полной информации о кандидате.
+    View для отображения информации о вакансии.
     """
     queryset = Vacancy.objects.select_related("author")
     permission_classes = (IsAuthenticated,)
