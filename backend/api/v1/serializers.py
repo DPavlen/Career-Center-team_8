@@ -474,21 +474,34 @@ class CreateVacancySerializer(serializers.ModelSerializer):
     Сериализатор для создании вакансии кандидата.
     """
     specialization = serializers.PrimaryKeyRelatedField(
-        queryset=Specialization.objects.all(), many=False
-    )
+        queryset=Specialization.objects.all(),
+        many=False
+        )
     author = UserSerializer(read_only=True)
     level = serializers.PrimaryKeyRelatedField(
-        queryset=Level.objects.all(), many=False
-    )
-    hards = HardsInVacancySerializer(many=True)
+        queryset=Level.objects.all(),
+        many=False
+        )
+    hards = HardsInVacancySerializer(
+        many=True,
+        queryset=Hard.objects.all()
+        )
     experience = serializers.PrimaryKeyRelatedField(
-        queryset=Experience.objects.all(), many=False
-    )
+        queryset=Experience.objects.all(),
+        many=False
+        )
     course = serializers.PrimaryKeyRelatedField(
-        queryset=Course.objects.all(), many=False
-    )
-    employment_type = EmploymentInVacancySerializer(many=True)
-    work_schedule = ScheduleInVacancySerializer(many=True)
+        queryset=Course.objects.all(),
+        many=False
+        )
+    employment_type = EmploymentInVacancySerializer(
+        many=True,
+        queryset=EmploymentType.objects.all()
+        )
+    work_schedule = ScheduleInVacancySerializer(
+        many=True,
+        queryset=WorkSchedule.objects.all()
+        )
    
     class Meta:
         model = Vacancy
