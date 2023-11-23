@@ -2,10 +2,10 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from candidates.models import (
+    Course,
     EmploymentType,
     Experience,
     Level,
-    Course,
     Specialization,
     WorkSchedule,
 )
@@ -158,6 +158,7 @@ class Vacancy(CreatedModel):
         related_name="vacancies",
         verbose_name="Хард скиллы",
         blank=True,
+        through="HardsInVacancy",
     )
     experience = models.ForeignKey(
         Experience,
@@ -171,12 +172,14 @@ class Vacancy(CreatedModel):
         related_name="vacancies",
         verbose_name="Тип занятости",
         blank=True,
+        through="EmploymentTypeInVacancy",
     )
     work_schedule = models.ManyToManyField(
         WorkSchedule,
         related_name="vacancies",
         verbose_name="График работы",
         blank=True,
+        through="WorkScheduleInVacancy",
     )
 
     class Meta:
@@ -262,7 +265,7 @@ class WorkScheduleInVacancy(models.Model):
     )
 
     schedule = models.ForeignKey(
-        EmploymentType,
+        WorkSchedule,
         on_delete=models.CASCADE,
         related_name="schedulesinvacancy",
     )
@@ -271,5 +274,5 @@ class WorkScheduleInVacancy(models.Model):
         return f"{self.schedule.name}"
 
     class Meta:
-        verbose_name = "Графики в вакансии"
-        verbose_name_plural = "Графики в вакансиях"
+        verbose_name = "Графики работ в вакансии"
+        verbose_name_plural = "Графики работ в вакансиях"

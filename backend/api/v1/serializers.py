@@ -1,34 +1,22 @@
 from djoser.serializers import UserSerializer
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.forms import ValidationError
-from django.shortcuts import get_object_or_404
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.fields import IntegerField, SerializerMethodField
 from rest_framework.relations import PrimaryKeyRelatedField
-from drf_extra_fields.fields import Base64ImageField
+
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.forms import ValidationError
+from django.shortcuts import get_object_or_404
 
 from candidates.models import (
-    Candidate,
-    Specialization,
-    Course,
-    Level,
-    Experience,
-    WorkSchedule,
-    EmploymentType,
-    HardCands, 
-    Track,
-    ExperienceDetailed,
-    Education,)
-
-from vacancies.models import (
-    Hard,
-    Vacancy,
-    HardsInVacancy,
-    EmploymentTypeInVacancy,
-    WorkScheduleInVacancy,
-       
+    Candidate, Course, Education, EmploymentType, Experience,
+    ExperienceDetailed, HardCands, Level, Specialization, Track, WorkSchedule,
 )
 from users.models import MyUser
+from vacancies.models import (
+    EmploymentTypeInVacancy, Hard, HardsInVacancy, Vacancy,
+    WorkScheduleInVacancy,
+)
 
 
 class UserSerializer(UserSerializer):
@@ -482,7 +470,7 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         queryset=Level.objects.all(),
         many=False
         )
-    hards = HardsInVacancySerializer(
+    hards = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Hard.objects.all()
         )
@@ -494,17 +482,16 @@ class CreateVacancySerializer(serializers.ModelSerializer):
         queryset=Course.objects.all(),
         many=False
         )
-    employment_type = EmploymentInVacancySerializer(
+    employment_type = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=EmploymentType.objects.all()
         )
-    work_schedule = ScheduleInVacancySerializer(
+    work_schedule = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=WorkSchedule.objects.all()
         )
    
-    class Meta:
-        model = Vacancy
+    class Meta(VacancySerializer.Meta):
         fields = (
             "id",
             "name",
@@ -526,133 +513,6 @@ class CreateVacancySerializer(serializers.ModelSerializer):
             "employment_type",
             "work_schedule"
         )
-
-    def validate_hards(self, value):
-        hards = value
-        if not hards:
-            raise ValidationError(
-                {"hards": "Необходим хотя бы один скилл."}
-            )
-        hards_list = []
-        for item in hards:
-            hard = get_object_or_404(Hard, id=item["id"])
-            if hard in hards_list:
-                raise ValidationError(
-                    {"hards": "Скиллы должны быть уникальными."}
-                )
-            hards_list.append(hard)
-        return value
-    
-    def validate_employment_type(self, value):
-        employment_type = value
-        if not employment_type:
-            raise ValidationError(
-                {"employment_type": "Выберите хотябы один тип занятости"}
-            )
-        employment_type_list = []
-        for item in employment_type:
-            employment = get_object_or_404(EmploymentType, id=item["id"])
-            if employment in employment_type_list:
-                raise ValidationError(
-                    {"employment_type": "Тип занятости должен быть уникальным."}
-                )
-            employment_type_list.append(employment)
-        return value
-    
-    def validate_work_schedule(self, value):
-        work_schedule = value
-        if not work_schedule:
-            raise ValidationError(
-                {"work_schedule": "Выберите хотябы один график работы"}
-            )
-        work_schedule_list = []
-        for item in work_schedule:
-            schedule = get_object_or_404(WorkSchedule, id=item["id"])
-            if schedule in work_schedule_list:
-                raise ValidationError(
-                    {"work_schedule": "График работы должен быть уникальным."}
-                )
-            work_schedule_list.append(schedule)
-        return value
-
-    def validate_specialization(self, value):
-        specialization = value
-        if not specialization:
-            raise ValidationError({"specialization": "Выберите одно направление."})
-        return value
-
-    def validate_level(self, value):
-        level = value
-        if not level:
-            raise ValidationError({"level": "Выберите уровень."})
-        return value
-    
-    def validate_experience(self, value):
-        experience = value
-        if not experience:
-            raise ValidationError({"experience": "Выберите опыт работы."})
-        return value
-    
-    def validate_course(self, value):
-        course = value
-        if not course:
-            raise ValidationError({"course": "Выберите курс ЯП."})
-        return value
-
-
-    def create_hards(self, hards, vacancy):
-        HardsInVacancy.objects.bulk_create(
-            [
-                HardsInVacancy(
-                    hard=Hard.objects.get(id=hard["id"]),
-                    vacancy=vacancy,
-                )
-                for hard in hards
-            ]
-        )
-
-    def create_employment(self, employment_type, vacancy):
-        EmploymentTypeInVacancy.objects.bulk_create(
-            [
-                EmploymentTypeInVacancy(
-                    employment=EmploymentType.objects.get(id=employment["id"]),
-                    vacancy=vacancy
-                )
-                for employment in employment_type
-            ]
-        )
-    
-    def create_schedule(self, work_schedule, vacancy):
-        WorkScheduleInVacancy.objects.bulk_create(
-            [
-                WorkScheduleInVacancy(
-                    schedule=WorkSchedule.objects.get(id=schedule["id"]),
-                    vacancy=vacancy
-                )
-                for  schedule in work_schedule
-            ]
-        )
-
-    def create(self, validated_data):
-        hards = validated_data.pop("hards")
-        employment_type = validated_data.pop("employment_type")
-        work_schedule = validated_data.pop("work_schedule")
-        vacancy = Vacancy.objects.create(**validated_data)
-        self.create_employment(vacancy=vacancy, employment_type=employment_type)
-        self.create_schedule(vacancy=vacancy, work_schedule=work_schedule)
-        self.create_hards(vacancy=vacancy, hards=hards)
-        return vacancy
-
-#     def update(self, instance, validated_data):
-#         tags = validated_data.pop("tags")
-#         ingredients = validated_data.pop("ingredients")
-#         instance = super().update(instance, validated_data)
-#         instance.tags.clear()
-#         instance.tags.set(tags)
-#         instance.ingredients.clear()
-#         self.create_ingredients(recipe=instance, ingredients=ingredients)
-#         instance.save()
-#         return instance
 
     def to_representation(self, instance):
         request = self.context.get("request")
