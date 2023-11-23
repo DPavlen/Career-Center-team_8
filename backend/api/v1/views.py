@@ -1,48 +1,28 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
+from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+
+from django.shortcuts import get_object_or_404
 
 from api.v1.filters import CandidatesFilter
 from api.v1.pagination import PaginationCust
 from api.v1.serializers import (
-    CandidateSerializer,
-    ShortCandidateSerializer,
-    SpecializationSerializer,
-    CourseSerializer,
-    LevelSerializer,
-    ExperienceSerializer,
+    CandidateSerializer, CourseSerializer, CreateVacancySerializer,
+    EducationSerializer, EmploymentTypeSerializer,
+    ExperienceDetailedSerializer, ExperienceSerializer, HardCandsSerializer,
+    HardSerializer, LevelSerializer, LocationSerializer,
+    ShortCandidateSerializer, SpecializationSerializer, VacancySerializer,
     WorkScheduleSerializer,
-    EmploymentTypeSerializer,
-    HardCandsSerializer,
-    LocationSerializer,
-    VacancySerializer,
-    CreateVacancySerializer,
-    ExperienceDetailedSerializer,
-    EducationSerializer,
-    HardSerializer,
-    )
-from core.services import candidate_resume_pdf
-from candidates.models import (
-    Specialization,
-    Candidate,
-    Course,
-    Level,
-    Experience,
-    WorkSchedule,
-    EmploymentType,
-    Track,
-    HardCands,
-    ExperienceDetailed,
-    Education
-    )
-from vacancies.models import (
-    Vacancy,
-    Hard
 )
+from candidates.models import (
+    Candidate, Course, Education, EmploymentType, Experience,
+    ExperienceDetailed, HardCands, Level, Specialization, Track, WorkSchedule,
+)
+from core.services import candidate_resume_pdf
+from vacancies.models import Hard, Vacancy
 
 
 class SpecializationViewSet(ReadOnlyModelViewSet):
