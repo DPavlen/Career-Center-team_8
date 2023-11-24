@@ -1,6 +1,6 @@
 import { TSavedVacancies, TVacancyDto } from '../../store/savedVacancies/savedVacancies';
 
-export default function createVacancyMapperFromBackend(vacancy: TVacancyDto): TSavedVacancies {
+export default function createVacancyMapperBackend(vacancy: TVacancyDto): TSavedVacancies {
   return {
     id: vacancy.id,
     name: vacancy.name,
@@ -16,13 +16,12 @@ export default function createVacancyMapperFromBackend(vacancy: TVacancyDto): TS
       // eslint-disable-next-line camelcase
       specialization_id: vacancy.specialization_id,
       course: vacancy.course,
-      hards: vacancy.hards,
+      hards: vacancy.hards.map((x) => x.name),
       experience: vacancy.experience,
       level: vacancy.level,
       location: vacancy.location,
-      employmentType: vacancy.employment_type,
-      workSchedule: vacancy.work_schedule,
+      employmentType: vacancy.employment_type.map((x) => x.name),
+      workSchedule: vacancy.work_schedule.map((x) => x.name),
     },
-
   };
 }
