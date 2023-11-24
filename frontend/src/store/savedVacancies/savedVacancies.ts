@@ -4,6 +4,12 @@ import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { IFilter } from '../filter';
 import mainApi from '../../utils/MainApi';
 
+export type TDictionaryItem = {
+  id: number,
+  name: string,
+  slug: string,
+}
+
 export type TSavedVacancies = {
   id: string;
   name: string;
@@ -31,12 +37,12 @@ export type TVacancyDto = {
   responsibilities: string,
   specialization_id: string | null,
   course: string[],
-  hards: string[],
+  hards: TDictionaryItem[],
   experience: string[],
   level: string[],
   location: string[],
-  employment_type: string[],
-  work_schedule: string[],
+  employment_type: TDictionaryItem[],
+  work_schedule: TDictionaryItem[],
 }
 
 export const getVacancies = createAsyncThunk(
