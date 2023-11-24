@@ -3,9 +3,9 @@ from django.db import models
 
 from core.constants import LenghtField
 from core.validators import (
-    username_validator,
     first_name_validator,
     last_name_validator,
+    username_validator,
 )
 
 
@@ -19,6 +19,7 @@ class MyUser(AbstractUser):
         """
         Определение роли юзера.
         """
+
         USER = "user"
         HR = "hr"
         ADMIN = "admin"

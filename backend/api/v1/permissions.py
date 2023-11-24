@@ -8,7 +8,9 @@ class IsAdminOrHr(permissions.BasePermission):
     или пользователь с ролью HR."""
 
     def has_permission(self, request, view, obj):
-        return (request.method in permissions.SAFE_METHODS
-                or request.user.is_authenticated
-                and request.user.is_admin 
-                or request.user.role == MyUser.RoleChoises.HR)
+        return (
+            request.method in permissions.SAFE_METHODS
+            or request.user.is_authenticated
+            and request.user.is_admin
+            or request.user.role == MyUser.RoleChoises.HR
+        )

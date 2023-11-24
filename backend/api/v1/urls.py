@@ -1,23 +1,23 @@
-from django.urls import include, path
 from rest_framework import routers
 
-from users.views import CustomUserViewSet
-from api.v1.views import (
-    SpecializationViewSet,
-    CourseViewSet,
-    LevelViewSet,
-    ExperienceViewSet,
-    EmploymentTypeViewSet,
-    WorkScheduleViewSet,
-    CandidateViewSet,
-    HardCandsViewSet,
-    LocationViewSet,
-    VacancyViewSet,
-    ExperienceDetailedViewSet,
-    EducationViewSet,
-    HardViewSet,
-    )
+from django.urls import include, path
 
+from api.v1.views import (
+    CandidateViewSet,
+    CourseViewSet,
+    EducationViewSet,
+    EmploymentTypeViewSet,
+    ExperienceDetailedViewSet,
+    ExperienceViewSet,
+    HardCandsViewSet,
+    HardViewSet,
+    LevelViewSet,
+    LocationViewSet,
+    SpecializationViewSet,
+    VacancyViewSet,
+    WorkScheduleViewSet,
+)
+from users.views import CustomUserViewSet
 
 app_name = "api.v1"
 
@@ -26,8 +26,9 @@ router = routers.DefaultRouter()
 
 router.register("users", CustomUserViewSet, "users")
 router.register("candidates", CandidateViewSet, "candidates")
-router.register("experience_detailed", 
-                ExperienceDetailedViewSet, "experience_detailed")
+router.register(
+    "experience_detailed", ExperienceDetailedViewSet, "experience_detailed"
+)
 router.register("education", EducationViewSet, "education")
 router.register("specialization_id", SpecializationViewSet)
 router.register("course", CourseViewSet)
@@ -44,6 +45,8 @@ urlpatterns = [
     path("v1/", include(router.urls)),
     path("v1/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
-    path("v1/candidates/<int:candidate_id>/download-candidate/", 
-         CandidateViewSet.as_view({'get': 'download_candidate'})),
+    path(
+        "v1/candidates/<int:candidate_id>/download-candidate/",
+        CandidateViewSet.as_view({"get": "download_candidate"}),
+    ),
 ]

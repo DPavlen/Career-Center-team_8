@@ -1,7 +1,7 @@
-from pathlib import Path
 import os
-from decouple import config
+from pathlib import Path
 
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,13 +68,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "hr_portal.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB', 'django'),
-        'USER': config('POSTGRES_USER', 'django'),
-        'PASSWORD': config('POSTGRES_PASSWORD', ''),
-        'HOST': config('DB_HOST', ''),
-        'PORT': config('DB_PORT', 5432)
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DB", "django"),
+        "USER": config("POSTGRES_USER", "django"),
+        "PASSWORD": config("POSTGRES_PASSWORD", ""),
+        "HOST": config("DB_HOST", ""),
+        "PORT": config("DB_PORT", 5432),
     }
 }
 
@@ -107,7 +107,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
 }
 
 DJOSER = {
@@ -122,7 +124,6 @@ DJOSER = {
         "user": ["djoser.permissions.CurrentUserOrAdminOrReadOnly"],
         "user_list": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
     },
-    
     "HIDE_USERS": False,
 }
 
@@ -137,8 +138,7 @@ SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False,
 }
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 AUTH_USER_MODEL = "users.MyUser"
@@ -151,11 +151,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/backend_static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = "/backend_static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-MEDIA_URL = '/backend_media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/backend_media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

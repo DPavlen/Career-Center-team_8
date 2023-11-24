@@ -6,8 +6,9 @@ from candidates.models import WorkSchedule
 
 
 class Command(BaseCommand):
-    """Загрузка 'График работы' в базу из csv файла, 
+    """Загрузка 'График работы' в базу из csv файла,
     который располагается в директории /data/... ."""
+
     def handle(self, *args, **kwargs):
         try:
             with open("data/schedule.csv", encoding="utf-8-sig") as f:
@@ -15,7 +16,8 @@ class Command(BaseCommand):
                 for name, slug in reader:
                     WorkSchedule.objects.update_or_create(name=name, slug=slug)
         except Exception:
-            raise ("Ошибка при загрузке 'График работы':") 
-        return ("Загрузка 'График работы' произошла успешно!"
-                " Обработка файла schedule.csv завершена.")
-
+            raise ("Ошибка при загрузке 'График работы':")
+        return (
+            "Загрузка 'График работы' произошла успешно!"
+            " Обработка файла schedule.csv завершена."
+        )

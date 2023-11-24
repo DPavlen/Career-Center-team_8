@@ -6,8 +6,9 @@ from candidates.models import Course
 
 
 class Command(BaseCommand):
-    """Загрузка 'Курсов Яндекса' в базу из csv файла, 
+    """Загрузка 'Курсов Яндекса' в базу из csv файла,
     который располагается в директории /data/... ."""
+
     def handle(self, *args, **kwargs):
         try:
             with open("data/courses.csv", encoding="utf-8-sig") as f:
@@ -17,6 +18,8 @@ class Command(BaseCommand):
                         spec_id=spec_id, name=name, slug=slug
                     )
         except Exception:
-            raise ("Ошибка при загрузке 'Курсов Яндекса':") 
-        return ("Загрузка 'Курсов Яндекса' произошла успешно!"
-                " Обработка файла courses.csv завершена.")
+            raise ("Ошибка при загрузке 'Курсов Яндекса':")
+        return (
+            "Загрузка 'Курсов Яндекса' произошла успешно!"
+            " Обработка файла courses.csv завершена."
+        )

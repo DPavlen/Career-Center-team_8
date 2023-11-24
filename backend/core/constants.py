@@ -28,9 +28,8 @@ class LenghtField(IntEnum):
     # Минимальная длина поля last_name
     MIN_LENGHT_LAST_NAME = 1
 
-
     # Атрибуты приложения Кандидатов
-     # Максимальная длина поля slug для моделей общий
+    # Максимальная длина поля slug для моделей общий
     MAX_SLUG = 150
     # Максимальная длина поля name для моделей общий
     MAX_NAME = 150
@@ -91,4 +90,3 @@ class LenghtField(IntEnum):
     MAX_CANDIDATE_CONTACTS_OTHER = 150
     # Максимальная длина поля location для Candidate
     MAX_CANDIDATE_LOCATION = 150
-

@@ -1,5 +1,5 @@
-from django.core.management.base import BaseCommand
 from django.core.management import call_command
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -17,4 +17,3 @@ class Command(BaseCommand):
         call_command("add_softs")
         call_command("add_education")
         call_command("add_exp_detail")
-    

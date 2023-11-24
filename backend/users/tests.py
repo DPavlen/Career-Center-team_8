@@ -1,8 +1,12 @@
-from django.test import TestCase
-from core.validators import (username_validator, 
-                             first_name_validator, 
-                             last_name_validator)
 from rest_framework.exceptions import ValidationError
+
+from django.test import TestCase
+
+from core.validators import (
+    first_name_validator,
+    last_name_validator,
+    username_validator,
+)
 from users.models import MyUser
 from users.serializers import MyUserCreateSerializer
 

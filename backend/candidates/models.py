@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from core.constants import LenghtField
@@ -245,25 +245,21 @@ class ExperienceDetailed(models.Model):
     name = models.CharField(
         "Опыт работы детальный",
         unique=True,
-        max_length=LenghtField.MAX_EXPERIENCEDETAILED_NAME.value,   
+        max_length=LenghtField.MAX_EXPERIENCEDETAILED_NAME.value,
     )
     post = models.CharField(
-        "Должность", 
+        "Должность",
         max_length=LenghtField.MAX_EXPERIENCEDETAILED_POST.value,
     )
     date_start = models.IntegerField(
         "Дата начала работы",
-        validators=[MinValueValidator(1000), 
-                    MaxValueValidator(9999)],
+        validators=[MinValueValidator(1000), MaxValueValidator(9999)],
     )
     date_end = models.IntegerField(
         "Дата окончания работы",
-        validators=[MinValueValidator(1000), 
-                    MaxValueValidator(9999)],
+        validators=[MinValueValidator(1000), MaxValueValidator(9999)],
     )
-    responsibilities = models.TextField(
-        "Обязанности на рабочем месте"
-    )
+    responsibilities = models.TextField("Обязанности на рабочем месте")
     slug = models.SlugField(
         "Уникальный слаг",
         unique=True,
@@ -272,7 +268,7 @@ class ExperienceDetailed(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name = "Опыт работы детальный"
         verbose_name_plural = "Опыт работы детальный"
@@ -281,50 +277,49 @@ class ExperienceDetailed(models.Model):
 
 class Education(models.Model):
     """Модель Образование для кандидата."""
+
     class EducationLevel(models.TextChoices):
         """Уровень образования."""
-        HIGHER = 'Высшее', ('Высшее')
-        MASTER = 'Магистр', ('Магистр')
-        BACHELOR = 'Бакалавр', ('Бакалавр')
-        UNFINISHED_HIGHER = 'Неоконченное', ('Неоконченное высшее')
-        CANDIDATE_SCIENS = 'Кандидат', ('Кандидат наук')
-        DOCTOR_SCIENS = 'Доктор наук', ('Доктор наук')
-        NOT_SELECTED = 'Не выбрано', ('Не выбрано')
+
+        HIGHER = "Высшее", ("Высшее")
+        MASTER = "Магистр", ("Магистр")
+        BACHELOR = "Бакалавр", ("Бакалавр")
+        UNFINISHED_HIGHER = "Неоконченное", ("Неоконченное высшее")
+        CANDIDATE_SCIENS = "Кандидат", ("Кандидат наук")
+        DOCTOR_SCIENS = "Доктор наук", ("Доктор наук")
+        NOT_SELECTED = "Не выбрано", ("Не выбрано")
 
     name = models.CharField(
         "Образование детально",
         unique=True,
-        max_length=LenghtField.MAX_EDUCATION_NAME.value,  
+        max_length=LenghtField.MAX_EDUCATION_NAME.value,
     )
     education_level = models.CharField(
-         "Уровень образования",
+        "Уровень образования",
         max_length=LenghtField.MAX_EDUCATION_LEVEL.value,
         choices=EducationLevel.choices,
         default=EducationLevel.HIGHER,
     )
     date_start = models.IntegerField(
         "Дата начала учебы",
-        validators=[MinValueValidator(1000), 
-                    MaxValueValidator(9999)],
-
+        validators=[MinValueValidator(1000), MaxValueValidator(9999)],
     )
     date_graduation = models.IntegerField(
         "Дата окончания учебы",
-        validators=[MinValueValidator(1000), 
-                    MaxValueValidator(9999)],
+        validators=[MinValueValidator(1000), MaxValueValidator(9999)],
     )
     name_university = models.CharField(
-        "Учебное заведение", 
+        "Учебное заведение",
         max_length=LenghtField.MAX_EDUCATION_NAME_UNIVERSITY.value,
         unique=True,
     )
     faculty = models.CharField(
-        "Факультет", 
+        "Факультет",
         max_length=LenghtField.MAX_EDUCATION_FACULTY.value,
         unique=True,
     )
     specialization = models.CharField(
-        "Специализация", 
+        "Специализация",
         max_length=LenghtField.MAX_EDUCATION_SPECIALIZATION.value,
         unique=True,
     )
@@ -336,7 +331,7 @@ class Education(models.Model):
 
     def __str__(self):
         return f"Образование: {self.education_level}"
-    
+
     class Meta:
         verbose_name = "Образование"
         verbose_name_plural = "Образования"
@@ -368,20 +363,23 @@ class Candidate(models.Model):
     work_schedule - график работы
     experience_detailed - детальный опыт работы
     about_me - обо мне
-    education - образование 
+    education - образование
     """
+
     class Activity(models.TextChoices):
         """Статус соискателя."""
-        ACTIVE = 'AC', ('Активный')
-        ON_HOLD = 'OH', ('В ожидании')
-        NOT_ACTIVE = 'NA', ('Не доступен')
+
+        ACTIVE = "AC", ("Активный")
+        ON_HOLD = "OH", ("В ожидании")
+        NOT_ACTIVE = "NA", ("Не доступен")
 
     class Sex(models.TextChoices):
         """Выбор пола соискателя."""
-        MALE = 'М', ('Мужской')
-        FEMALE = 'Ж', ('Женский')
-        NOT_SELECTED = 'Не выбран', ('Не выбран')
-    
+
+        MALE = "М", ("Мужской")
+        FEMALE = "Ж", ("Женский")
+        NOT_SELECTED = "Не выбран", ("Не выбран")
+
     last_name = models.CharField(
         "Фамилия",
         max_length=LenghtField.MAX_CANDIDATE_LAST_NAME.value,
@@ -395,9 +393,9 @@ class Candidate(models.Model):
         max_length=LenghtField.MAX_CANDIDATE_MIDDLE_NAME.value,
     )
     image = models.ImageField(
-        "Фото", 
-        upload_to="candidates/images/", 
-        null=True, 
+        "Фото",
+        upload_to="candidates/images/",
+        null=True,
         default=None,
         blank=True,
     )
@@ -405,12 +403,11 @@ class Candidate(models.Model):
         "Пол кандидата",
         max_length=LenghtField.MAX_CANDIDATE_SEX.value,
         choices=Sex.choices,
-        default=Sex.NOT_SELECTED
+        default=Sex.NOT_SELECTED,
     )
     age = models.PositiveIntegerField(
         "Возраст",
-        validators=[MinValueValidator(18), 
-                    MaxValueValidator(90)],
+        validators=[MinValueValidator(18), MaxValueValidator(90)],
     )
     contacts_phone = models.CharField(
         "Телефон",
@@ -432,7 +429,7 @@ class Candidate(models.Model):
         default=Activity.NOT_ACTIVE,
         verbose_name="Статус соискателя",
     )
-    location =  models.CharField(
+    location = models.CharField(
         "Местонахождение",
         max_length=LenghtField.MAX_CANDIDATE_LOCATION.value,
     )
@@ -494,7 +491,6 @@ class Candidate(models.Model):
         verbose_name="График работы",
         blank=True,
         through="candidates.WorkScheduleInCandidate",
-
     )
     experience_detailed = models.ManyToManyField(
         ExperienceDetailed,
@@ -517,8 +513,7 @@ class Candidate(models.Model):
         ordering = ["last_name"]
 
     def __str__(self):
-        return (f"{self.last_name} {self.first_name}"
-                f" {self.middle_name}")
+        return f"{self.last_name} {self.first_name}" f" {self.middle_name}"
 
 
 class ExperienceDetailedInCandidate(models.Model):
@@ -526,6 +521,7 @@ class ExperienceDetailedInCandidate(models.Model):
     Детали опыта работы у кандидата.
     У одного кандидата может быть 1 и более мест работы.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -535,7 +531,7 @@ class ExperienceDetailedInCandidate(models.Model):
     experience_detailed = models.ForeignKey(
         ExperienceDetailed,
         on_delete=models.CASCADE,
-        verbose_name="Детальный опыт работы"
+        verbose_name="Детальный опыт работы",
     )
 
 
@@ -544,6 +540,7 @@ class EducationInCandidate(models.Model):
     Детали образования у кандидата.
     У одного кандидата может быть 1 и более образований.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -553,7 +550,7 @@ class EducationInCandidate(models.Model):
     education = models.ForeignKey(
         Education,
         on_delete=models.CASCADE,
-        verbose_name="Образование кандидата"
+        verbose_name="Образование кандидата",
     )
 
 
@@ -562,6 +559,7 @@ class WorkScheduleInCandidate(models.Model):
     Детали графика работы у кандидата.
     У одного кандидата может быть 1 и более графиков работ.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -571,7 +569,7 @@ class WorkScheduleInCandidate(models.Model):
     work_schedule = models.ForeignKey(
         WorkSchedule,
         on_delete=models.CASCADE,
-        verbose_name="График работы у кандидата."
+        verbose_name="График работы у кандидата.",
     )
 
 
@@ -579,6 +577,7 @@ class EmploymentTypeInCandidate(models.Model):
     """Детали типа занятости у кандидата.
     У одного кандидата может быть 1 и более типов занятости.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -588,7 +587,7 @@ class EmploymentTypeInCandidate(models.Model):
     employment_type = models.ForeignKey(
         EmploymentType,
         on_delete=models.CASCADE,
-        verbose_name="Тип занятости кандидата."
+        verbose_name="Тип занятости кандидата.",
     )
 
 
@@ -596,6 +595,7 @@ class SoftsInCandidate(models.Model):
     """Детали софт скилов у кандидата.
     У одного кандидата может быть 1 и более типов скиллов.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -603,9 +603,7 @@ class SoftsInCandidate(models.Model):
         verbose_name="Кандидат",
     )
     softs = models.ForeignKey(
-        Soft,
-        on_delete=models.CASCADE,
-        verbose_name="Cофт скилы кандидата."
+        Soft, on_delete=models.CASCADE, verbose_name="Cофт скилы кандидата."
     )
 
 
@@ -613,6 +611,7 @@ class HardsInCandidate(models.Model):
     """Детали хард скилы у кандидата.
     У одного кандидата может быть 1 и более хард скилл.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -622,7 +621,7 @@ class HardsInCandidate(models.Model):
     hards = models.ForeignKey(
         HardCands,
         on_delete=models.CASCADE,
-        verbose_name="Хард скилы кандидата."
+        verbose_name="Хард скилы кандидата.",
     )
 
 
@@ -630,6 +629,7 @@ class CourseInCandidate(models.Model):
     """Детали курс ЯП у кандидата.
     У одного кандидата может быть 1 и более курс ЯП.
     """
+
     candidate = models.ForeignKey(
         Candidate,
         on_delete=models.CASCADE,
@@ -637,9 +637,7 @@ class CourseInCandidate(models.Model):
         verbose_name="Кандидат",
     )
     course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        verbose_name="Курсы ЯП кандидата."
+        Course, on_delete=models.CASCADE, verbose_name="Курсы ЯП кандидата."
     )
 
 

@@ -20,7 +20,7 @@ class UsersAdmin(BaseAdminSettings):
         "username",
         "email",
         "first_name",
-        "last_name"
+        "last_name",
     )
     list_display_links = ("id", "username")
     search_fields = ("username", "role")

@@ -1,6 +1,15 @@
 from django_filters.rest_framework import FilterSet, filters
 
-from candidates.models import Specialization, Candidate, Course, Level, Experience, WorkSchedule, EmploymentType, HardCands 
+from candidates.models import (
+    Candidate,
+    Course,
+    EmploymentType,
+    Experience,
+    HardCands,
+    Level,
+    Specialization,
+    WorkSchedule,
+)
 
 
 class HardsCandsFilter(FilterSet):
@@ -38,7 +47,7 @@ class CandidatesFilter(FilterSet):
     work_schedule = filters.ModelMultipleChoiceFilter(
         field_name="work_schedule__name",
         to_field_name="name",
-        queryset=WorkSchedule.objects.all()
+        queryset=WorkSchedule.objects.all(),
     )
     employment_type = filters.ModelMultipleChoiceFilter(
         field_name="employment_type__name",
@@ -49,24 +58,33 @@ class CandidatesFilter(FilterSet):
     is_tracked = filters.BooleanFilter(method="is_tracked_filter")
 
     hards = filters.ModelMultipleChoiceFilter(
-        field_name = "hards__name",
+        field_name="hards__name",
         to_field_name="name",
-        queryset = HardCands.objects.all(),
+        queryset=HardCands.objects.all(),
     )
 
     location = filters.ModelMultipleChoiceFilter(
-        field_name = "location",
+        field_name="location",
         to_field_name="location",
-        queryset = Candidate.objects.all(),
+        queryset=Candidate.objects.all(),
     )
+
     class Meta:
         model = Candidate
-        fields = ("specialization_id", "course", "level_id", "experience_id", "work_schedule", "employment_type", "hards", "is_tracked", "location")
+        fields = (
+            "specialization_id",
+            "course",
+            "level_id",
+            "experience_id",
+            "work_schedule",
+            "employment_type",
+            "hards",
+            "is_tracked",
+            "location",
+        )
 
     def is_tracked_filter(self, queryset, name, value):
         user = self.request.user
         if value and not user.is_anonymous:
             return queryset.filter(tracks__user=user)
         return queryset
-
-

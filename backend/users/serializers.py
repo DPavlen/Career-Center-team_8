@@ -1,5 +1,4 @@
-from djoser.serializers import (
-    UserCreateSerializer, SetPasswordSerializer)
+from djoser.serializers import SetPasswordSerializer, UserCreateSerializer
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import SerializerMethodField
@@ -30,8 +29,8 @@ class MyUserCreateSerializer(UserCreateSerializer):
             "username": {"required": True},
             "first_name": {"required": True},
             "last_name": {"required": True},
-            "password": {"write_only": True}}
-    
+            "password": {"write_only": True},
+        }
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -43,14 +42,14 @@ class ChangePasswordSerializer(serializers.Serializer):
     current_password = serializers.CharField(required=True)
 
     class Meta:
-           model = MyUser
-           fields = ('new_password', 'current_password')
+        model = MyUser
+        fields = ("new_password", "current_password")
 
     def validate(self, data):
         """
         Проверка что старый пароль должен отличаться от нового.
         """
-        if data.get('current_password') == data.get('new_password'):
+        if data.get("current_password") == data.get("new_password"):
             raise serializers.ValidationError(
                 "Новый пароль не должен совпадать со старым!"
             )

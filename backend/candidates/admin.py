@@ -2,26 +2,26 @@ from django.contrib import admin
 from django.db.models import Count
 
 from candidates.models import (
-    Specialization,
-    Course,
-    Level,
-    HardCands,
-    Soft,
-    Experience,
-    EmploymentType,
-    WorkSchedule,
     Candidate,
     Contact,
-    Track,
-    ExperienceDetailed,
+    Course,
+    CourseInCandidate,
     Education,
-    ExperienceDetailedInCandidate,
     EducationInCandidate,
-    WorkScheduleInCandidate,
+    EmploymentType,
     EmploymentTypeInCandidate,
-    SoftsInCandidate,
+    Experience,
+    ExperienceDetailed,
+    ExperienceDetailedInCandidate,
+    HardCands,
     HardsInCandidate,
-    CourseInCandidate
+    Level,
+    Soft,
+    SoftsInCandidate,
+    Specialization,
+    Track,
+    WorkSchedule,
+    WorkScheduleInCandidate,
 )
 
 
@@ -36,6 +36,7 @@ class SpecializationAdmin(admin.ModelAdmin):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     """Вывести Название специальности."""
+
     list_display = ("pk", "spec_id", "name", "slug")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -104,15 +105,14 @@ class CandidateAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        queryset = (
-            queryset.
-            prefetch_related("specialization", "course")
-            .annotate(favorited=Count("tracks"))
-        )
+        queryset = queryset.prefetch_related(
+            "specialization", "course"
+        ).annotate(favorited=Count("tracks"))
         return queryset
 
     def tracks(self, obj):
         return obj.favorited
+
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
@@ -127,8 +127,7 @@ class ContactAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = (
-            super().get_queryset(request).
-            select_related("user", "candidate")
+            super().get_queryset(request).select_related("user", "candidate")
         )
         return queryset
 
@@ -160,9 +159,11 @@ class ExperienceDetailedAdmin(admin.ModelAdmin):
 
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
-    list_display = ("pk", "name", 
-                    "name_university", "specialization")
-    list_display_links = ("name", "name_university",)
+    list_display = ("pk", "name", "name_university", "specialization")
+    list_display_links = (
+        "name",
+        "name_university",
+    )
     search_fields = ("name",)
     empty_value_display = "-пусто-"
 
@@ -181,8 +182,9 @@ class EducationInCandidateAdmin(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'education')
-    list_filter = ('candidate', 'education')
+
+    list_display = ("id", "candidate", "education")
+    list_filter = ("candidate", "education")
     # search_fields = (
     #     'candidate__first_name',
     #     'candidate__last_name',
@@ -204,11 +206,13 @@ class ExperienceDetailedInCandidateAdmin(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'experience_detailed')
-    list_filter = ('candidate', 'experience_detailed')
+
+    list_display = ("id", "candidate", "experience_detailed")
+    list_filter = ("candidate", "experience_detailed")
     # search_fields = (
     #     'сandidate'
     # )
+
 
 @admin.register(WorkScheduleInCandidate)
 class WorkScheduleInCandidateAdmin(admin.ModelAdmin):
@@ -224,8 +228,9 @@ class WorkScheduleInCandidateAdmin(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'work_schedule')
-    list_filter = ('candidate', 'work_schedule')
+
+    list_display = ("id", "candidate", "work_schedule")
+    list_filter = ("candidate", "work_schedule")
     # search_fields = (
     #     'сandidate'
     # )
@@ -245,8 +250,9 @@ class EmploymentTypeInCandidate(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'employment_type')
-    list_filter = ('candidate', 'employment_type')
+
+    list_display = ("id", "candidate", "employment_type")
+    list_filter = ("candidate", "employment_type")
     # search_fields = (
     #     'сandidate'
     # )
@@ -266,11 +272,13 @@ class SoftsInCandidate(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'softs')
-    list_filter = ('candidate', 'softs')
+
+    list_display = ("id", "candidate", "softs")
+    list_filter = ("candidate", "softs")
     # search_fields = (
     #     'сandidate'
     # )
+
 
 @admin.register(HardsInCandidate)
 class HardsInCandidate(admin.ModelAdmin):
@@ -286,8 +294,9 @@ class HardsInCandidate(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'hards')
-    list_filter = ('candidate', 'hards')
+
+    list_display = ("id", "candidate", "hards")
+    list_filter = ("candidate", "hards")
     # search_fields = (
     #     'сandidate'
     # )
@@ -307,8 +316,9 @@ class CourseInCandidate(admin.ModelAdmin):
     Модель:
         - .
     """
-    list_display = ('id', 'candidate', 'course')
-    list_filter = ('candidate', 'course')
+
+    list_display = ("id", "candidate", "course")
+    list_filter = ("candidate", "course")
     # search_fields = (
     #     'сandidate'
     # )

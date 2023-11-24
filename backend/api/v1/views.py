@@ -10,16 +10,34 @@ from django.shortcuts import get_object_or_404
 from api.v1.filters import CandidatesFilter
 from api.v1.pagination import PaginationCust
 from api.v1.serializers import (
-    CandidateSerializer, CourseSerializer, CreateVacancySerializer,
-    EducationSerializer, EmploymentTypeSerializer,
-    ExperienceDetailedSerializer, ExperienceSerializer, HardCandsSerializer,
-    HardSerializer, LevelSerializer, LocationSerializer,
-    ShortCandidateSerializer, SpecializationSerializer, VacancySerializer,
+    CandidateSerializer,
+    CourseSerializer,
+    CreateVacancySerializer,
+    EducationSerializer,
+    EmploymentTypeSerializer,
+    ExperienceDetailedSerializer,
+    ExperienceSerializer,
+    HardCandsSerializer,
+    HardSerializer,
+    LevelSerializer,
+    LocationSerializer,
+    ShortCandidateSerializer,
+    SpecializationSerializer,
+    VacancySerializer,
     WorkScheduleSerializer,
 )
 from candidates.models import (
-    Candidate, Course, Education, EmploymentType, Experience,
-    ExperienceDetailed, HardCands, Level, Specialization, Track, WorkSchedule,
+    Candidate,
+    Course,
+    Education,
+    EmploymentType,
+    Experience,
+    ExperienceDetailed,
+    HardCands,
+    Level,
+    Specialization,
+    Track,
+    WorkSchedule,
 )
 from core.services import candidate_resume_pdf
 from vacancies.models import Hard, Vacancy
@@ -29,7 +47,8 @@ class SpecializationViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Специализации' кандидата.
     """
-    queryset=Specialization.objects.all()
+
+    queryset = Specialization.objects.all()
     serializer_class = SpecializationSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -38,7 +57,8 @@ class CourseViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Курсов ЯП' кандидата.
     """
-    queryset=Course.objects.all()
+
+    queryset = Course.objects.all()
     serializer_class = CourseSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -47,7 +67,8 @@ class LevelViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Образование для кандидата'.
     """
-    queryset=Level.objects.all()
+
+    queryset = Level.objects.all()
     serializer_class = LevelSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -57,7 +78,8 @@ class ExperienceViewSet(ReadOnlyModelViewSet):
     View для отображения 'Опыта работы
     детальный для кандидата'.
     """
-    queryset=Experience.objects.all()
+
+    queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -66,7 +88,8 @@ class WorkScheduleViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Графика работы' кандидата.
     """
-    queryset=WorkSchedule.objects.all()
+
+    queryset = WorkSchedule.objects.all()
     serializer_class = WorkScheduleSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -75,16 +98,18 @@ class EmploymentTypeViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Типа занятости' кандидата.
     """
-    queryset=EmploymentType.objects.all()
+
+    queryset = EmploymentType.objects.all()
     serializer_class = EmploymentTypeSerializer
-    # permission_classes = (IsAuthenticated,) 
+    # permission_classes = (IsAuthenticated,)
 
 
 class HardCandsViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Хард скиллов' кандидата.
     """
-    queryset=HardCands.objects.all()
+
+    queryset = HardCands.objects.all()
     serializer_class = HardCandsSerializer
     # permission_classes = (IsAuthenticated,)
 
@@ -93,15 +118,17 @@ class LocationViewSet(ReadOnlyModelViewSet):
     """
     View для отображения 'Местоположения' кандидата.
     """
-    queryset=Candidate.objects.all()
+
+    queryset = Candidate.objects.all()
     serializer_class = LocationSerializer
-    # permission_classes = (IsAuthenticated,)    
+    # permission_classes = (IsAuthenticated,)
 
 
 class ExperienceDetailedViewSet(ModelViewSet):
     """
     View для отображения детального опыта работы кандидата.
     """
+
     queryset = ExperienceDetailed.objects.all()
     serializer_class = ExperienceDetailedSerializer
     # permission_classes = (IsAuthenticated,)
@@ -112,6 +139,7 @@ class EducationViewSet(ModelViewSet):
     """
     View для отображения информации об образовании кандидата.
     """
+
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
     # permission_classes = (IsAuthenticated,)
@@ -127,6 +155,7 @@ class CandidateViewSet(ModelViewSet):
         - queryset: Запрос, возвращающий все объекты Candidates.
         - pagination_class: Кастомный класс пагинации.
     """
+
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -148,7 +177,6 @@ class CandidateViewSet(ModelViewSet):
             if created:
                 serializer = ShortCandidateSerializer(candidate)
                 return Response(
-                    
                     serializer.data, status=status.HTTP_201_CREATED
                 )
             return Response(
@@ -166,7 +194,7 @@ class CandidateViewSet(ModelViewSet):
             {"Ошибка": "Кандидата нет в отслеживаемых"},
             status=status.HTTP_400_BAD_REQUEST,
         )
-    
+
     @action(
         detail=False,
         methods=("get"),
@@ -182,7 +210,7 @@ class CandidateViewSet(ModelViewSet):
         Response: PDF-файл резюме кандидата.
         """
         return candidate_resume_pdf(candidate_id)
-    
+
 
 class HardViewSet(ReadOnlyModelViewSet):
     pagination_class = None
@@ -196,6 +224,7 @@ class VacancyViewSet(ModelViewSet):
     """
     View для отображения информации о вакансии.
     """
+
     queryset = Vacancy.objects.select_related("author")
     permission_classes = (IsAuthenticated,)
     # pagination_class = PaginationCust
@@ -208,7 +237,7 @@ class VacancyViewSet(ModelViewSet):
 
     def get_serializer_class(self):
         """
-        Выбор сериализатора в зависимости от 
+        Выбор сериализатора в зависимости от
         просмотра или создания вакансии.
         """
         if self.request.method in SAFE_METHODS:
