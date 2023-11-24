@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { TSavedVacancies, TVacancyDto } from '../../store/savedVacancies/savedVacancies';
 
 export default function createVacancyMapperBackend(vacancy: TVacancyDto): TSavedVacancies {
@@ -17,11 +18,11 @@ export default function createVacancyMapperBackend(vacancy: TVacancyDto): TSaved
       specialization_id: vacancy.specialization_id,
       course: vacancy.course,
       hards: vacancy.hards.map((x) => x.name),
-      experience: vacancy.experience,
-      level: vacancy.level,
+      experience_id: vacancy.experience,
+      level_id: vacancy.level,
       location: vacancy.location,
-      employmentType: vacancy.employment_type.map((x) => x.name),
-      workSchedule: vacancy.work_schedule.map((x) => x.name),
+      employment_type: vacancy.employment_type.map((x) => x.name),
+      work_schedule: vacancy.work_schedule.map((x) => x.name),
     },
   };
 }
