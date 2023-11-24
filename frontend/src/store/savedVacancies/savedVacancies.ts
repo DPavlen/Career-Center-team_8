@@ -1,40 +1,97 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
+/* eslint-disable no-param-reassign */
+
+import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { IFilter } from '../filter';
+import mainApi from '../../utils/MainApi';
 
 export type TSavedVacancies = {
   id: string;
-  job_title: string;
+  name: string;
   company: string;
-  salary_from: string | undefined;
-  salary_to: string | undefined;
-  required_requirements: string;
-  optional_requirements: string | undefined;
+  salaryLow: number | undefined;
+  salaryHigh: number | undefined;
+  requirements: string;
+  optional: string | undefined;
   responsibilities: string;
   conditions: string;
-  selection_stages: string | undefined;
+  stages: string | undefined;
   filters: IFilter;
 }
-const initialState: TSavedVacancies[] | [] = [];
+
+export type TVacancyDto = {
+  id: string;
+  name: string,
+  company: string,
+  salary_low: number,
+  salary_high: number,
+  requirements: string,
+  optional: string,
+  conditions: string,
+  stages: string,
+  responsibilities: string,
+  specialization_id: string | null,
+  course: string[],
+  hards: string[],
+  experience: string[],
+  level: string[],
+  location: string[],
+  employment_type: string[],
+  work_schedule: string[],
+}
+
+export const getVacancies = createAsyncThunk(
+  'vacancies/getVacancies',
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await mainApi.getVacancies();
+
+      return result;
+    } catch (error) {
+      return rejectWithValue((error as { message : string}).message);
+    }
+  },
+);
+
+export const createVacancy = createAsyncThunk(
+  'vacancies/createVacancy',
+  async (vacancy: Omit<TSavedVacancies, 'id'>, { rejectWithValue }) => {
+    try {
+      return mainApi.createVacancy(vacancy);
+    } catch (error) {
+      return rejectWithValue((error as { message : string}).message);
+    }
+  },
+);
+
+interface InitialState {
+  vacancies: TSavedVacancies[]
+}
+
+const initialState: InitialState = {
+  vacancies: [],
+};
 
 const savedVacanciesSlice = createSlice({
   name: 'saved-vacancies',
   initialState,
   reducers: {
-    addVacancy: (
-      store: TSavedVacancies[],
-      { payload }: PayloadAction<Omit<TSavedVacancies, 'id'>>,
-    ) => {
-      console.log(payload);
-      return store.concat({
-        ...payload,
-        id: uuid(),
-      });
+    deleteVacancy: (store, { payload }: PayloadAction<TSavedVacancies['id']>) => {
+      store.vacancies = store.vacancies.filter((v) => v.id !== payload);
+
+      return store;
     },
-    deleteVacancy: (store: TSavedVacancies[], { payload }: PayloadAction<TSavedVacancies['id']>) => store.filter((v) => v.id !== payload),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getVacancies.fulfilled, (state, { payload }) => ({
+      ...state,
+      vacancies: payload,
+    }));
+    builder.addCase(createVacancy.fulfilled, (state, { payload }) => {
+      state.vacancies.unshift(payload);
+    });
   },
 });
 
-export const { addVacancy, deleteVacancy } = savedVacanciesSlice.actions;
+export const { deleteVacancy } = savedVacanciesSlice.actions;
 
 export default savedVacanciesSlice.reducer;

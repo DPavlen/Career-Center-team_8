@@ -47,17 +47,17 @@ function DynamicVacancyInfo({ hide, data }: VacancyInfoProps) {
           <span key={uuid()} className="vacancy-info__skills">{chip}</span>
         ))}
       </div>
-      {(data.salary_from || data.salary_to) && (
+      {(data.salaryLow || data.salaryHigh) && (
         <h3 className="vacancy-info__cash">
           Заработная плата
-          {data.salary_from && (
+          {data.salaryLow && (
             <span className="vacancy-info__wages">
-              {`от ${data.salary_from}`}
+              {`от ${data.salaryLow}`}
             </span>
           )}
-          {data.salary_to && (
+          {data.salaryHigh && (
             <span className="vacancy-info__wages">
-              {`до ${data.salary_to}`}
+              {`до ${data.salaryHigh}`}
             </span>
           )}
           <span>рублей</span>
@@ -69,13 +69,13 @@ function DynamicVacancyInfo({ hide, data }: VacancyInfoProps) {
       </ul>
       <h3 className="vacancy-info__title">Требования обязательные</h3>
       <ul>
-        <RequirementsList data={data.required_requirements} />
+        <RequirementsList data={data.requirements} />
       </ul>
-      {data.optional_requirements && (
+      {data.optional && (
         <>
           <h3 className="vacancy-info__title">Требования необязательные</h3>
           <ul>
-            <RequirementsList data={data.optional_requirements} />
+            <RequirementsList data={data.optional} />
           </ul>
         </>
       )}
@@ -83,11 +83,11 @@ function DynamicVacancyInfo({ hide, data }: VacancyInfoProps) {
       <ul>
         <RequirementsList data={data.conditions} />
       </ul>
-      {data.selection_stages && (
+      {data.stages && (
         <>
           <h3 className="vacancy-info__title">Этапы отбора</h3>
           <ol>
-            <RequirementsList data={data.selection_stages} ordered />
+            <RequirementsList data={data.stages} ordered />
           </ol>
         </>
       )}

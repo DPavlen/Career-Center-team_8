@@ -6,9 +6,11 @@ import { IFilter } from '../store/filter';
 import { ICandidate } from '../store/foundCandidates/foundCandidates';
 import { User } from '../store/user/user';
 import extractValue from './extractValue';
+import { TSavedVacancies, TVacancyDto } from '../store/savedVacancies/savedVacancies';
+import createVacancyMapperFromBackend from './mappers/createVacancy';
 
 interface Data {
-  [key: string]: string;
+  [key: string]: unknown;
 }
 
 class MainApi {
@@ -223,6 +225,28 @@ class MainApi {
     );
 
     return res;
+  }
+
+  public async getVacancies(): Promise<TSavedVacancies[]> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/vacancies/`,
+      this.setGetOptions(),
+    );
+
+    const backendRes = await this.getResponseData<TVacancyDto[]>(res);
+
+    return backendRes.map((r) => createVacancyMapperFromBackend(r));
+  }
+
+  public async createVacancy(vacancy: Omit<TSavedVacancies, 'id'>): Promise<TSavedVacancies> {
+    const res = await fetch(
+      `${this.baseUrl}/v1/vacancies/`,
+      this.setPostOptions(vacancy),
+    );
+
+    const backendRes = await this.getResponseData<TVacancyDto>(res);
+
+    return createVacancyMapperFromBackend(backendRes);
   }
 }
 
