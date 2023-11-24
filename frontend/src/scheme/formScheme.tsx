@@ -3,13 +3,13 @@ import * as yup from 'yup';
 
 // eslint-disable-next-line import/prefer-default-export
 export const vacancyFormScheme = yup.object().shape({
-  job_title: yup
+  name: yup
     .string()
     .required('Обязательное поле'),
   company: yup
     .string()
     .required('Обязательное поле'),
-  required_requirements: yup
+  requirements: yup
     .string()
     .required('Обязательное поле'),
   responsibilities: yup
@@ -18,13 +18,13 @@ export const vacancyFormScheme = yup.object().shape({
   conditions: yup
     .string()
     .required('Обязательное поле'),
-  salary_from: yup
+  salaryLow: yup
+    .number(),
+  salaryHigh: yup
+    .number(),
+  optional: yup
     .string(),
-  salary_to: yup
-    .string(),
-  optional_requirements: yup
-    .string(),
-  selection_stages: yup
+  stages: yup
     .string(),
   id: yup
     .string(),

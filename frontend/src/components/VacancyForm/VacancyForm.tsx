@@ -14,7 +14,6 @@ import './VacancyForm.scss';
 
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-
 import iconBack from '../../assets/icons/ic_back.svg';
 
 import VacancyInput from '../VacancyInput/VacancyInput';
@@ -22,24 +21,23 @@ import AppliedFilters from '../AppliedFilters/AppliedFilters';
 
 import { RootState } from '../../store/store';
 import { createVacancyResetAllFilters, createVacancyResetFilter } from '../../store/vacanciesFilter/vacanciesFilter';
-import { addVacancy } from '../../store/savedVacancies/savedVacancies';
+import { createVacancy } from '../../store/savedVacancies/savedVacancies';
 import type { TSavedVacancies } from '../../store/savedVacancies/savedVacancies';
 import { vacancyFormScheme } from '../../scheme/formScheme';
 
 function VacancyForm() {
   const navigate = useNavigate();
   const filterValue = useSelector((state: RootState) => state.createVacancyFilter);
-  const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = useDispatch<any>();
 
   const initialData = localStorage.getItem('CREATE_VACANCY_FORM');
 
   const methods = useForm<Omit<TSavedVacancies, 'filters' | 'id'>>({
     defaultValues: initialData ? JSON.parse(initialData) : {
-      // eslint-disable-next-line camelcase
-      job_title: '',
+      name: '',
       company: '',
-      // eslint-disable-next-line camelcase
-      required_requirements: '',
+      requirements: '',
       responsibilities: '',
       conditions: '',
     },
@@ -73,7 +71,7 @@ function VacancyForm() {
     const filterValidation: boolean = await validateFilter();
 
     if (filterValidation) {
-      dispatch(addVacancy({
+      dispatch(createVacancy({
         ...data,
         filters: filterValue,
       }));
@@ -125,11 +123,11 @@ function VacancyForm() {
       <FormProvider {...methods}>
         <label className="vacancy-form__description">Должность*</label>
         <Controller
-          name="job_title"
+          name="name"
           control={control}
           rules={{ required: true }}
           render={({ field: { value, onChange } }) => (
-            <VacancyInput errorMessage={errors.job_title?.message} value={value} onChange={onChange} placeholder="Дизайнер интерфейсов" />
+            <VacancyInput errorMessage={errors.name?.message} value={value} onChange={onChange} placeholder="Дизайнер интерфейсов" />
           )}
         />
         <label className="vacancy-form__description">Компания*</label>
@@ -144,35 +142,35 @@ function VacancyForm() {
         <label className="vacancy-form__description">Уровень дохода</label>
         <div className="vacancy-form__salary">
           <Controller
-            name="salary_from"
+            name="salaryLow"
             control={control}
             render={({ field: { value, onChange } }) => (
-              <VacancyInput errorMessage={errors.salary_from?.message} value={value || ''} onChange={onChange} placeholder="от 40000" />
+              <VacancyInput errorMessage={errors.salaryLow?.message} value={value || ''} onChange={(v) => onChange(Number(v))} placeholder="от 40000" />
             )}
           />
           <Controller
-            name="salary_to"
+            name="salaryHigh"
             control={control}
             render={({ field: { value, onChange } }) => (
-              <VacancyInput errorMessage={errors.salary_to?.message} value={value || ''} onChange={onChange} placeholder="до 60000" />
+              <VacancyInput errorMessage={errors.salaryHigh?.message} value={value || ''} onChange={(v) => onChange(Number(v))} placeholder="до 60000" />
             )}
           />
         </div>
         <label className="vacancy-form__description">Обязательные требования*</label>
         <Controller
-          name="required_requirements"
+          name="requirements"
           rules={{ required: true }}
           control={control}
           render={({ field: { value, onChange } }) => (
-            <VacancyInput value={value} errorMessage={errors.required_requirements?.message} onChange={onChange} placeholder="Обязательные требования, которыми должен обладать кандидат" />
+            <VacancyInput value={value} errorMessage={errors.requirements?.message} onChange={onChange} placeholder="Обязательные требования, которыми должен обладать кандидат" />
           )}
         />
         <label className="vacancy-form__description">Необязательные требования</label>
         <Controller
-          name="optional_requirements"
+          name="optional"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <VacancyInput value={value || ''} errorMessage={errors.optional_requirements?.message} onChange={onChange} placeholder="Необязательные навыки и требования, которые будут преимуществом" />
+            <VacancyInput value={value || ''} errorMessage={errors.optional?.message} onChange={onChange} placeholder="Необязательные навыки и требования, которые будут преимуществом" />
           )}
         />
         <label className="vacancy-form__description">Обязанности*</label>
@@ -195,10 +193,10 @@ function VacancyForm() {
         />
         <label className="vacancy-form__description">Этапы отбора</label>
         <Controller
-          name="selection_stages"
+          name="stages"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <VacancyInput value={value || ''} errorMessage={errors.selection_stages?.message} onChange={onChange} placeholder="Собеседования, тестовые, VCV" />
+            <VacancyInput value={value || ''} errorMessage={errors.stages?.message} onChange={onChange} placeholder="Собеседования, тестовые, VCV" />
           )}
         />
         <div className="vacancy-form__filter">
