@@ -32,7 +32,7 @@ function DynamicVacancyCard({ data }: VacancyCardProps) {
   return (
     <article className="vacancy-card">
       <div className="vacancy-card__content">
-        <h2 className="vacancy-card__title">{data.job_title}</h2>
+        <h2 className="vacancy-card__title">{data.name}</h2>
         <p className="vacancy-card__subtitle">{data.company}</p>
         {!isShow && (
           <Button
